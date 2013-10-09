@@ -4,4 +4,4 @@ Requirements: .NET 4, bitcoind/qt RPC server with transaction indexing enabled (
 
 Initial commit of the Masterchest Wallet.
 
-Please see bitcointalkurl for details.
+Please see https://bitcointalk.org/index.php?topic=265488.msg3305960#msg3305960 for details.
