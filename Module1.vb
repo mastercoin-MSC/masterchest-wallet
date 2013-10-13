@@ -209,6 +209,8 @@ Module Module1
         'handle text selection
         Form1.txtdebug.Focus()
         Form1.txtdebug.SelectionStart = Form1.txtdebug.Text.Length
+        Form1.txtdebug.ScrollToCaret()
+        Application.DoEvents()
         Form1.lnknofocus.Focus()
     End Sub
 End Module

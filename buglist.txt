@@ -1,4 +1,5 @@
-# Wallet password is displayed cleartext in send panel
-# settings show 'unconfigured' in settings panel after introduction of getting started
-# debug auto scrolling not 100% after switching panels
+# FIXED: Wallet password is displayed cleartext in send panel
+# FIXED: settings show 'unconfigured' in settings panel after introduction of getting started
+# FIXED: debug auto scrolling not 100% after switching panels
+# debug needs to be on disk
 

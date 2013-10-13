@@ -908,6 +908,11 @@ Public Class Form1
                         objWriter.WriteLine("bitcoinrpcport=" & txtstartport.Text)
                         objWriter.WriteLine("bitcoinrpcuser=" & txtstartuser.Text)
                         objWriter.WriteLine("bitcoinrpcpass=" & txtstartpass.Text)
+                        txtrpcserver.Text = bitcoin_con.bitcoinrpcserver
+                        txtrpcport.Text = bitcoin_con.bitcoinrpcport.ToString
+                        txtrpcuser.Text = bitcoin_con.bitcoinrpcuser
+                        txtrpcpassword.Text = "********************"
+
                         objWriter.Close()
                         'Application.Restart()
                     Else
@@ -916,7 +921,7 @@ Public Class Form1
                     End If
                 End If
             Catch ex As Exception
-                ltestinfo.Text = "Failed to connect to Bitcoin."
+                ltestinfo.Text = "Failed to connect to Bitcoin or could not locate seed wallet."
                 ltestinfo.ForeColor = Color.Red
                 Exit Sub
             End Try
