@@ -32,7 +32,7 @@ Public Class Form1
     End Function
     <DllImportAttribute("user32.dll")> Public Shared Function ReleaseCapture() As Boolean
     End Function
-    Private Sub Form1_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles MyBase.MouseDown, RectangleShape1.MouseDown, psetup.MouseDown, pwelcome.MouseDown, paddresses.MouseDown, pdebug.MouseDown, poverview.MouseDown, psend.MouseDown, psettings.MouseDown
+    Private Sub Form1_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles MyBase.MouseDown, RectangleShape1.MouseDown, psetup.MouseDown, pwelcome.MouseDown, pcurrencies.MouseDown, paddresses.MouseDown, pdebug.MouseDown, poverview.MouseDown, psend.MouseDown, psettings.MouseDown
         If e.Button = MouseButtons.Left Then
             ReleaseCapture()
             SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0)
@@ -100,8 +100,10 @@ Public Class Form1
         'handle send currency buttons
         rsendmsc.Checked = True
         rsendtmsc.Checked = False
+        rsendbtc.Checked = False
         'show welcome panel
         pwelcome.Visible = True
+        Me.ActiveControl = txtwalpass
     End Sub
     Private Sub updateui()
         Me.Refresh()
@@ -119,7 +121,8 @@ Public Class Form1
                 workthread.ReportProgress(0, "ERROR: Connection to bitcoin RPC seems to be established but responses are not as expected." & vbCrLf & "STATUS: UI thread will remain but blockchain scanning thread will now exit.")
                 Exit Sub
             End If
-        Catch
+        Catch ex2 As Exception
+            MsgBox("Exception testing connection to bitcoin rpc : " & ex2.Message)
             Exit Sub
         End Try
 
@@ -139,19 +142,24 @@ Public Class Form1
 
         'enumarate bitcoin addresses
         If debuglevel > 0 Then workthread.ReportProgress(0, "DEBUG: Enumerating addresses...")
+        balubtc = 0
         Try
             Dim addresses As List(Of btcaddressbal) = mlib.getaddresses(bitcoin_con)
+            taddresslist.Clear()
             For Each address In addresses
-                addresslist.Rows.Add(address.address, address.amount, 0, 0)
+                taddresslist.Rows.Add(address.address, address.amount, 0, 0)
+                balubtc = balubtc + address.uamount
             Next
-
-            'Dim balbitcoin As getbal = JsonConvert.DeserializeObject(Of getbal)(rpccall("getbalance", 0, 0, True))
-            'balbtc = balbitcoin.result
         Catch ex As Exception
             MsgBox(ex.Message)
             workthread.ReportProgress(0, "ERROR: Enumerating addresses did not complete properly." & vbCrLf & "STATUS: UI thread will remain but blockchain scanning thread will now exit.")
             Exit Sub
         End Try
+        balbtc = 0
+        For Each row In taddresslist.Rows
+            balbtc = balbtc + row.item(1)
+        Next
+
         startup = False
     End Sub
     Private Sub bback_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bback.MouseUp
@@ -448,11 +456,13 @@ Public Class Form1
             'update address balances
             'enumarate bitcoin addresses
             If debuglevel > 0 Then workthread.ReportProgress(0, "DEBUG: Enumerating addresses...")
+            balubtc = 0
             Try
                 Dim addresses As List(Of btcaddressbal) = mlib.getaddresses(bitcoin_con)
                 taddresslist.Clear()
                 For Each address In addresses
                     taddresslist.Rows.Add(address.address, address.amount, 0, 0)
+                    balubtc = balubtc + address.uamount
                 Next
             Catch ex As Exception
                 MsgBox(ex.Message)
@@ -486,7 +496,6 @@ Public Class Form1
                 Dim addutbal As Long = SQLGetSingleVal(sqlquery)
                 balutmsc = balutmsc + addutbal
 
-                If hrtbal <> row.Item(2) Then row.Item(2) = hrtbal
                 balbtc = balbtc + row.item(1)
             Next
 
@@ -566,6 +575,14 @@ Public Class Form1
     End Function
 
     Private Sub workthread_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles workthread.RunWorkerCompleted
+        If e.Error IsNot Nothing Then
+            txtdebug.AppendText(vbCrLf & "ERROR: Blockchain scanning thread threw exception : " & e.Error.Message)
+            txtdebug.AppendText(vbCrLf & "DEBUG: Thread exited with error condition.")
+            poversync.Image = My.Resources.redcross
+            loversync.Text = "Not Syncronized."
+            Exit Sub
+        End If
+
         txtdebug.AppendText(vbCrLf & "DEBUG: Thread exited.")
         UIrefresh.Enabled = True
         If varsyncronized = True Then
@@ -575,9 +592,9 @@ Public Class Form1
             poversync.Image = My.Resources.redcross
             loversync.Text = "Not Syncronized."
         End If
-        
+
         'update addresses
-        For Each row In addresslist.Rows
+        For Each row In taddresslist.Rows
             If Not comsendaddress.Items.Contains(row.item(0).ToString) Then
                 comsendaddress.Items.Add(row.item(0).ToString)
             End If
@@ -631,7 +648,7 @@ Public Class Form1
             currencylist.Clear()
             currencylist.Rows.Add("Mastercoin", hrbalmsc.ToString, hrbalumsc.ToString)
             currencylist.Rows.Add("Test Mastercoin", hrbaltmsc.ToString, hrbalutmsc.ToString)
-            currencylist.Rows.Add("Bitcoin", balbtc.ToString, 0)
+            currencylist.Rows.Add("Bitcoin", balbtc.ToString, balubtc.ToString)
             dgvcurrencies.DataSource = currencylist
             Dim dgvcolumn As New DataGridViewColumn
             dgvcolumn = dgvcurrencies.Columns(0)
@@ -798,6 +815,9 @@ Public Class Form1
     End Sub
 
     Private Sub lnkwcont_LinkClicked(sender As System.Object, e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lnkwcont.LinkClicked
+        lcontinue()
+    End Sub
+    Public Sub lcontinue()
         'check passphrase against db
         walpass = txtwalpass.Text
         'test connection to database
@@ -810,7 +830,6 @@ Public Class Form1
             Exit Sub
         End If
         lwelpass.Visible = False
-        Application.DoEvents()
 
         'do some initial setup
         showlabels()
@@ -819,10 +838,18 @@ Public Class Form1
         activateoverview()
         lastscreen = "1"
         updateui()
-
+        Me.Refresh()
+        Application.DoEvents()
         'kick off the background worker thread
         If workthread.IsBusy <> True Then
             workthread.RunWorkerAsync()
+        End If
+    End Sub
+
+    Private Sub txtwalpass_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtwalpass.KeyPress
+        If Asc(e.KeyChar) = 13 Then
+            e.Handled = True
+            lcontinue()
         End If
     End Sub
 
@@ -874,6 +901,8 @@ Public Class Form1
 
     Private Sub bfinish_Click(sender As System.Object, e As System.EventArgs) Handles bfinish.Click
         If txtstartsrv.Text <> "" And txtstartport.Text <> "" And txtstartuser.Text <> "" And txtstartpass.Text <> "" And (Len(txtstartwalpass.Text) > 11) Then
+            bfinish.Enabled = False
+            btest.Enabled = False
             bitcoin_con.bitcoinrpcserver = txtstartsrv.Text
             bitcoin_con.bitcoinrpcport = Val(txtstartport.Text)
             bitcoin_con.bitcoinrpcuser = txtstartuser.Text
@@ -882,7 +911,19 @@ Public Class Form1
             Try
                 Dim checkhash As blockhash = mlib.getblockhash(bitcoin_con, 2)
                 If checkhash.result.ToString = "000000006a625f06636b8bb6ac7b960a8d03705d1ace08b1a19da3fdcc99ddbd" Then 'we've got a correct response
-                    
+                    'also check for txindex
+                    Try
+                        Dim testtxn As txn = mlib.gettransaction(bitcoin_con, "4aa9f31f798ab1bde53b232b1039ee512f241dc24946ce990272d85fbd765b64")
+                        If testtxn.result.txid <> "4aa9f31f798ab1bde53b232b1039ee512f241dc24946ce990272d85fbd765b64" Then
+                            ltestinfo.Text = "Bitcoin connection OK but transaction index appears disabled."
+                            ltestinfo.ForeColor = Color.Red
+                            Exit Sub
+                        End If
+                    Catch
+                        ltestinfo.Text = "Bitcoin connection OK but transaction index appears disabled."
+                        ltestinfo.ForeColor = Color.Red
+                        Exit Sub
+                    End Try
                     ltestinfo.Text = "Bitcoin connection OK and transaction index is enabled."
                     ltestinfo.ForeColor = Color.Lime
                     walpass = txtstartwalpass.Text
@@ -923,11 +964,19 @@ Public Class Form1
             Catch ex As Exception
                 ltestinfo.Text = "Failed to connect to Bitcoin or could not locate seed wallet."
                 ltestinfo.ForeColor = Color.Red
+                bfinish.Enabled = True
+                btest.Enabled = True
+                MsgBox(ex.Message)
                 Exit Sub
             End Try
         Else
             ltestinfo.Text = "Please complete all fields"
+            bfinish.Enabled = True
+            btest.Enabled = True
+            Exit Sub
         End If
+        bfinish.Enabled = True
+        btest.Enabled = True
         hidepanels()
         pwelcome.Visible = True
     End Sub
@@ -966,16 +1015,32 @@ Public Class Form1
     Private Sub rsendmsc_CheckedClicked(sender As System.Object, e As System.EventArgs) Handles rsendmsc.Click
         rsendmsc.Checked = True
         rsendtmsc.Checked = False
+        rsendbtc.Checked = False
+        bdebugsend.Enabled = True
+        comsendaddress.Enabled = True
         updateavail()
     End Sub
 
     Private Sub rsendtmsc_CheckedClicked(sender As System.Object, e As System.EventArgs) Handles rsendtmsc.Click
         rsendmsc.Checked = False
         rsendtmsc.Checked = True
+        rsendbtc.Checked = False
+        bdebugsend.Enabled = True
+        comsendaddress.Enabled = True
+        updateavail()
+    End Sub
+
+    Private Sub rsendbtc_CheckedClicked(sender As System.Object, e As System.EventArgs) Handles rsendbtc.Click
+        rsendmsc.Checked = False
+        rsendtmsc.Checked = False
+        rsendbtc.Checked = True
+        bdebugsend.Enabled = False
+        comsendaddress.Enabled = False
         updateavail()
     End Sub
     Private Sub updateavail()
         Dim denom As String = ""
+        avail = 0
         If rsendmsc.Checked = True Then
             denom = " MSC"
             For Each row In addresslist.Rows
@@ -987,6 +1052,10 @@ Public Class Form1
             For Each row In addresslist.Rows
                 If row.item(0) = comsendaddress.SelectedItem Then avail = row.item(2)
             Next
+        End If
+        If rsendbtc.Checked = True Then
+            denom = " BTC (TOTAL)"
+            avail = balbtc
         End If
         If denom = "" Then lsendavail.Text = "Select a sending address"
         lsendavail.Text = "Available: " & avail.ToString & denom
@@ -1001,10 +1070,12 @@ Public Class Form1
             Dim fromadd As String = comsendaddress.SelectedItem.ToString
             Dim toadd As String = txtsenddest.Text
             Dim curtype As Integer
-            If rsendmsc.Checked = True Then curtype = 1
-            If rsendtmsc.Checked = True Then curtype = 2
             Dim amount As Double = Val(txtsendamount.Text)
             Dim amountlong As Long = amount * 100000000
+            If rsendmsc.Checked = True Then curtype = 1
+            If rsendtmsc.Checked = True Then curtype = 2
+            If rsendbtc.Checked = True Then Exit Sub
+            'handle mastercoin sends
             Try
                 Dim validater As validate = JsonConvert.DeserializeObject(Of validate)(mlib.rpccall(bitcoin_con, "validateaddress", 1, txtsenddest.Text, 0, 0))
                 If validater.result.isvalid = True Then 'address is valid
@@ -1078,6 +1149,47 @@ Public Class Form1
             If rsendtmsc.Checked = True Then curtype = 2
             Dim amount As Double = Val(txtsendamount.Text)
             Dim amountlong As Long = amount * 100000000
+
+            'handle bitcoin sends
+            If rsendbtc.Checked = True Then
+                Try
+                    Dim validater As validate = JsonConvert.DeserializeObject(Of validate)(mlib.rpccall(bitcoin_con, "validateaddress", 1, txtsenddest.Text, 0, 0))
+                    If validater.result.isvalid = True Then 'address is valid
+                        txtviewer.Text = "Recipient address is valid."
+                        'push out to bitcoin rpc to send the tx since we can use sendtoaddress for simple bitcoin tx
+                        'attempt to unlock wallet, if it's not locked these will error out but we'll pick up the error on signing instead
+                        Dim dontcareresponse = mlib.rpccall(bitcoin_con, "walletlock", 0, 0, 0, 0)
+                        Dim dontcareresponse2 = mlib.rpccall(bitcoin_con, "walletpassphrase", 2, Trim(txtbtcpass.Text.ToString), 15, 0)
+                        txtbtcpass.Text = ""
+                        Dim txref As broadcasttx = JsonConvert.DeserializeObject(Of broadcasttx)(mlib.rpccall(bitcoin_con, "sendtoaddress", 2, txtsenddest.Text, amount, 0))
+                        'check txref is not empty and display txref
+                        If txref.result <> "" Then
+                            txtviewer.AppendText(vbCrLf & "Transaction sent, ID: " & txref.result)
+                            lsendtxinfo.Text = "Transaction sent, check viewer for TXID."
+                            lsendtxinfo.ForeColor = Color.Lime
+                            bsignsend.Enabled = False
+                            Application.DoEvents()
+                            If workthread.IsBusy <> True Then
+                                UIrefresh.Enabled = False
+                                poversync.Image = My.Resources.sync
+                                loversync.Text = "Syncronizing..."
+                                ' Start the workthread for the blockchain scanner
+                                workthread.RunWorkerAsync()
+                            End If
+                            Exit Sub
+                        Else
+                            txtviewer.AppendText(vbCrLf & "Failed to send transaction.")
+                        End If
+                    Else
+                        txtviewer.Text = "Build transaction failed.  Recipient address is not valid."
+                    End If
+                Catch ex As Exception
+                    MsgBox("Exeption thrown : " & ex.Message)
+                    Exit Sub
+                End Try
+                Exit Sub
+            End If
+
             Try
                 Dim validater As validate = JsonConvert.DeserializeObject(Of validate)(mlib.rpccall(bitcoin_con, "validateaddress", 1, txtsenddest.Text, 0, 0))
                 If validater.result.isvalid = True Then 'address is valid
@@ -1152,6 +1264,12 @@ Public Class Form1
 
     Private Sub dgvaddresses_DataError(sender As Object, e As System.Windows.Forms.DataGridViewDataErrorEventArgs) Handles dgvaddresses.DataError
         'trap error when we clear list bound to dgv temporarily
+    End Sub
+
+    Private Sub Form1_Shown(sender As Object, e As System.EventArgs) Handles Me.Shown
+        rsendmsc.Checked = True
+        rsendtmsc.Checked = False
+        rsendbtc.Checked = False
     End Sub
 End Class
 
