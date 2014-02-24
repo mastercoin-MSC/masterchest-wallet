@@ -89,10 +89,10 @@ Public Class Form1
                     If Len(line) > 7 Then
                         Select Case line.ToLower.Substring(0, 7)
                             Case "rpcport"
-                                bitcoin_con.bitcoinrpcport = Val(line.ToLower.Substring(7, Len(line) - 7))
+                                bitcoin_con.bitcoinrpcport = Val(line.Substring(7, Len(line) - 7))
                                 txtrpcport.Text = bitcoin_con.bitcoinrpcport.ToString
                             Case "rpcuser"
-                                bitcoin_con.bitcoinrpcuser = line.ToLower.Substring(8, Len(line) - 8)
+                                bitcoin_con.bitcoinrpcuser = line.Substring(8, Len(line) - 8)
                                 txtrpcuser.Text = bitcoin_con.bitcoinrpcuser
                             Case "rpcpass"
                                 bitcoin_con.bitcoinrpcpassword = line.Substring(12, Len(line) - 12)
@@ -129,16 +129,16 @@ Public Class Form1
                             If Len(line) > 14 Then
                                 Select Case line.ToLower.Substring(0, 15)
                                     Case "bitcoinrpcserv="
-                                        bitcoin_con.bitcoinrpcserver = line.ToLower.Substring(15, Len(line) - 15)
+                                        bitcoin_con.bitcoinrpcserver = line.Substring(15, Len(line) - 15)
                                         txtrpcserver.Text = bitcoin_con.bitcoinrpcserver
                                     Case "bitcoinrpcport="
-                                        bitcoin_con.bitcoinrpcport = Val(line.ToLower.Substring(15, Len(line) - 15))
+                                        bitcoin_con.bitcoinrpcport = Val(line.Substring(15, Len(line) - 15))
                                         txtrpcport.Text = bitcoin_con.bitcoinrpcport.ToString
                                     Case "bitcoinrpcuser="
-                                        bitcoin_con.bitcoinrpcuser = line.ToLower.Substring(15, Len(line) - 15)
+                                        bitcoin_con.bitcoinrpcuser = line.Substring(15, Len(line) - 15)
                                         txtrpcuser.Text = bitcoin_con.bitcoinrpcuser
                                     Case "bitcoinrpcpass="
-                                        bitcoin_con.bitcoinrpcpassword = line.ToLower.Substring(15, Len(line) - 15)
+                                        bitcoin_con.bitcoinrpcpassword = line.Substring(15, Len(line) - 15)
                                         txtrpcpassword.Text = "********************"
                                 End Select
                             End If
