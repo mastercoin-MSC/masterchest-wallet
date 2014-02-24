@@ -89,7 +89,7 @@ Public Class Form1
                     If Len(line) > 7 Then
                         Select Case line.ToLower.Substring(0, 7)
                             Case "rpcport"
-                                bitcoin_con.bitcoinrpcport = Val(line.Substring(7, Len(line) - 7))
+                                bitcoin_con.bitcoinrpcport = Val(line.Substring(8, Len(line) - 8))
                                 txtrpcport.Text = bitcoin_con.bitcoinrpcport.ToString
                             Case "rpcuser"
                                 bitcoin_con.bitcoinrpcuser = line.Substring(8, Len(line) - 8)
