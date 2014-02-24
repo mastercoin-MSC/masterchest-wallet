@@ -2,6 +2,6 @@ Disclaimer:  Please use it as you see fit, but remember this is very, very alpha
 
 Requirements: .NET 4, bitcoind/qt RPC server with transaction indexing enabled (disabled by default in 0.8+, add txindex=1 in bitcoin.conf and then start with -reindex to readd transaction index).
 
-Initial commit of the Masterchest Wallet.
+Initial public alpha of the Masterchest Wallet.
 
-Please see https://bitcointalk.org/index.php?topic=265488.msg3305960#msg3305960 for details.
+Please see https://bitcointalk.org/index.php?topic=484025.0 for details.
