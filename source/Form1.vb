@@ -545,7 +545,7 @@ Public Class Form1
         ' Try
         'dev sends temp
         Dim maxtime As Long = SQLGetSingleVal("SELECT MAX(BLOCKTIME) FROM processedblocks")
-        Dim devmsc As Double = ((1 - (0.5 ^ ((maxtime - 1377993874) / 31556926))) * 56316.23576222)
+        Dim devmsc As Double = Math.Round(((1 - (0.5 ^ ((maxtime - 1377993874) / 31556926))) * 56316.23576222), 8)
         'do all generate transactions and calculate initial balances
         Dim con As New SqlCeConnection("data source=" & Application.StartupPath & "\wallet.sdf; password=" & walpass)
         Dim cmd As New SqlCeCommand()
