@@ -40,7 +40,8 @@ Partial Class passfrm
         Me.boverview.Name = "boverview"
         Me.boverview.Size = New System.Drawing.Size(334, 30)
         Me.boverview.TabIndex = 57
-        Me.boverview.Text = "enter your bitcoin wallet passhrase"
+        Me.boverview.Tag = "localizedtext"
+        Me.boverview.Text = My.Resources.enterbtcpassphrase
         '
         'TextBox1
         '
@@ -65,7 +66,8 @@ Partial Class passfrm
         Me.bok.Name = "bok"
         Me.bok.Size = New System.Drawing.Size(58, 23)
         Me.bok.TabIndex = 67
-        Me.bok.Text = "OK"
+        Me.boverview.Tag = "localizedText"
+        Me.bok.Text = My.Resources.ok
         Me.bok.UseVisualStyleBackColor = False
         '
         'RectangleShape1

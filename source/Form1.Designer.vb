@@ -23,15 +23,15 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle28 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle29 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle30 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle34 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle35 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle36 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.boverview = New System.Windows.Forms.Label()
         Me.bsend = New System.Windows.Forms.Label()
@@ -167,6 +167,7 @@ Partial Class Form1
         Me.bclose = New System.Windows.Forms.PictureBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.bback = New System.Windows.Forms.PictureBox()
+        Me.cbLocale = New System.Windows.Forms.ComboBox()
         Me.poverview.SuspendLayout()
         CType(Me.poversync, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.psend.SuspendLayout()
@@ -190,6 +191,22 @@ Partial Class Form1
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.bback, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
+        'cbLocale
+        '
+        Me.cbLocale.BackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(38, Byte), Integer))
+        Me.cbLocale.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbLocale.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cbLocale.Font = New System.Drawing.Font("Segoe UI", 8.25!)
+        Me.cbLocale.ForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
+        Me.cbLocale.FormattingEnabled = True
+        Me.cbLocale.Location = New System.Drawing.Point(706, 51)
+        Me.cbLocale.Name = "cbLocale"
+        Me.cbLocale.Size = New System.Drawing.Size(121, 21)
+        Me.cbLocale.Sorted = True
+        Me.cbLocale.TabIndex = 44
+
+
+
         '
         'boverview
         '
@@ -200,6 +217,7 @@ Partial Class Form1
         Me.boverview.Name = "boverview"
         Me.boverview.Size = New System.Drawing.Size(94, 30)
         Me.boverview.TabIndex = 0
+        Me.boverview.Tag = "localizedtext"
         Me.boverview.Text = "overview"
         '
         'bsend
@@ -211,6 +229,7 @@ Partial Class Form1
         Me.bsend.Name = "bsend"
         Me.bsend.Size = New System.Drawing.Size(57, 30)
         Me.bsend.TabIndex = 1
+        Me.bsend.Tag = "localizedtext"
         Me.bsend.Text = "send"
         '
         'bhistory
@@ -222,6 +241,7 @@ Partial Class Form1
         Me.bhistory.Name = "bhistory"
         Me.bhistory.Size = New System.Drawing.Size(75, 30)
         Me.bhistory.TabIndex = 2
+        Me.bhistory.Tag = "localizedtext"
         Me.bhistory.Text = "history"
         '
         'ShapeContainer1
@@ -260,6 +280,7 @@ Partial Class Form1
         Me.lpoweredby.Name = "lpoweredby"
         Me.lpoweredby.Size = New System.Drawing.Size(70, 13)
         Me.lpoweredby.TabIndex = 13
+        Me.lpoweredby.Tag = "localizedtext"
         Me.lpoweredby.Text = "Powered by "
         '
         'lmasterchest
@@ -282,6 +303,7 @@ Partial Class Form1
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(162, 13)
         Me.Label10.TabIndex = 15
+        Me.Label10.Tag = "localizedtext"
         Me.Label10.Text = "TOTAL MASTERCOIN BALANCE:"
         '
         'loverviewmscbal
@@ -293,6 +315,7 @@ Partial Class Form1
         Me.loverviewmscbal.Name = "loverviewmscbal"
         Me.loverviewmscbal.Size = New System.Drawing.Size(166, 30)
         Me.loverviewmscbal.TabIndex = 16
+        Me.loverviewmscbal.Tag = "localizednumeric"
         Me.loverviewmscbal.Text = "0.00000000 MSC"
         '
         'Label14
@@ -303,6 +326,7 @@ Partial Class Form1
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(126, 13)
         Me.Label14.TabIndex = 19
+        Me.Label14.Tag = "localizedtext"
         Me.Label14.Text = "CONFIRMED BALANCE:"
         '
         'Label15
@@ -323,6 +347,7 @@ Partial Class Form1
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(142, 13)
         Me.Label16.TabIndex = 21
+        Me.Label16.Tag = "localizedtext"
         Me.Label16.Text = "UNCONFIRMED BALANCE:"
         '
         'loverviewsmallmscbal
@@ -334,6 +359,7 @@ Partial Class Form1
         Me.loverviewsmallmscbal.Name = "loverviewsmallmscbal"
         Me.loverviewsmallmscbal.Size = New System.Drawing.Size(105, 17)
         Me.loverviewsmallmscbal.TabIndex = 22
+        Me.loverviewsmallmscbal.Tag = "localizednumeric"
         Me.loverviewsmallmscbal.Text = "0.00000000 MSC"
         '
         'loverviewsmallunconfmsc
@@ -345,6 +371,7 @@ Partial Class Form1
         Me.loverviewsmallunconfmsc.Name = "loverviewsmallunconfmsc"
         Me.loverviewsmallunconfmsc.Size = New System.Drawing.Size(105, 17)
         Me.loverviewsmallunconfmsc.TabIndex = 23
+        Me.loverviewsmallunconfmsc.Tag = "localizednumeric"
         Me.loverviewsmallunconfmsc.Text = "0.00000000 MSC"
         '
         'Label19
@@ -355,6 +382,7 @@ Partial Class Form1
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(112, 13)
         Me.Label19.TabIndex = 24
+        Me.Label19.Tag = "localizedtext"
         Me.Label19.Text = "NETWORK STATUS:"
         '
         'loversync
@@ -366,11 +394,13 @@ Partial Class Form1
         Me.loversync.Name = "loversync"
         Me.loversync.Size = New System.Drawing.Size(111, 17)
         Me.loversync.TabIndex = 25
+        Me.loversync.Tag = "localizedtext"
         Me.loversync.Text = "Not Syncronized. "
         '
         'poverview
         '
         Me.poverview.Controls.Add(Me.poversync)
+        Me.poverview.Controls.Add(Me.psend)
         Me.poverview.Controls.Add(Me.loversync)
         Me.poverview.Controls.Add(Me.Label19)
         Me.poverview.Controls.Add(Me.loverviewsmallunconfmsc)
@@ -380,7 +410,7 @@ Partial Class Form1
         Me.poverview.Controls.Add(Me.Label14)
         Me.poverview.Controls.Add(Me.loverviewmscbal)
         Me.poverview.Controls.Add(Me.Label10)
-        Me.poverview.Location = New System.Drawing.Point(774, 365)
+        Me.poverview.Location = New System.Drawing.Point(231, 444)
         Me.poverview.Name = "poverview"
         Me.poverview.Size = New System.Drawing.Size(668, 372)
         Me.poverview.TabIndex = 27
@@ -397,6 +427,7 @@ Partial Class Form1
         'psend
         '
         Me.psend.Controls.Add(Me.rsendbtc)
+        Me.psend.Controls.Add(Me.pwelcome)
         Me.psend.Controls.Add(Me.bsendnew)
         Me.psend.Controls.Add(Me.lsendtxinfo)
         Me.psend.Controls.Add(Me.lsendamver)
@@ -412,7 +443,7 @@ Partial Class Form1
         Me.psend.Controls.Add(Me.Label26)
         Me.psend.Controls.Add(Me.Label27)
         Me.psend.Controls.Add(Me.Label29)
-        Me.psend.Location = New System.Drawing.Point(640, 455)
+        Me.psend.Location = New System.Drawing.Point(384, 235)
         Me.psend.Name = "psend"
         Me.psend.Size = New System.Drawing.Size(752, 396)
         Me.psend.TabIndex = 28
@@ -430,6 +461,215 @@ Partial Class Form1
         Me.rsendbtc.Text = "Bitcoin"
         Me.rsendbtc.UseVisualStyleBackColor = True
         '
+        'pwelcome
+        '
+        Me.pwelcome.Controls.Add(Me.lwelstartup)
+        Me.pwelcome.Controls.Add(Me.PictureBox1)
+        Me.pwelcome.Controls.Add(Me.Label28)
+        Me.pwelcome.Controls.Add(Me.Label45)
+        Me.pwelcome.Controls.Add(Me.pcurrencies)
+        Me.pwelcome.Location = New System.Drawing.Point(440, 393)
+        Me.pwelcome.Name = "pwelcome"
+        Me.pwelcome.Size = New System.Drawing.Size(668, 384)
+        Me.pwelcome.TabIndex = 42
+        '
+        'lwelstartup
+        '
+        Me.lwelstartup.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lwelstartup.ForeColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lwelstartup.Location = New System.Drawing.Point(190, 197)
+        Me.lwelstartup.Name = "lwelstartup"
+        Me.lwelstartup.Size = New System.Drawing.Size(393, 116)
+        Me.lwelstartup.TabIndex = 43
+        Me.lwelstartup.Tag = "localizedtext"
+        Me.lwelstartup.Text = "Please wait..."
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(172, 41)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(431, 94)
+        Me.PictureBox1.TabIndex = 40
+        Me.PictureBox1.TabStop = False
+        '
+        'Label28
+        '
+        Me.Label28.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label28.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.Label28.Location = New System.Drawing.Point(174, 138)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(431, 37)
+        Me.Label28.TabIndex = 39
+        Me.Label28.Text = "Masterchest Wallet ALPHA 0.1a"
+        Me.Label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label45
+        '
+        Me.Label45.AutoSize = True
+        Me.Label45.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label45.ForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
+        Me.Label45.Location = New System.Drawing.Point(53, 160)
+        Me.Label45.Name = "Label45"
+        Me.Label45.Size = New System.Drawing.Size(0, 17)
+        Me.Label45.TabIndex = 20
+        '
+        'pcurrencies
+        '
+        Me.pcurrencies.Controls.Add(Me.Label30)
+        Me.pcurrencies.Controls.Add(Me.Label31)
+        Me.pcurrencies.Controls.Add(Me.LinkLabel4)
+        Me.pcurrencies.Controls.Add(Me.dgvcurrencies)
+        Me.pcurrencies.Controls.Add(Me.Label32)
+        Me.pcurrencies.Controls.Add(Me.LinkLabel5)
+        Me.pcurrencies.Controls.Add(Me.Label35)
+        Me.pcurrencies.Controls.Add(Me.Label37)
+        Me.pcurrencies.Controls.Add(Me.Label42)
+        Me.pcurrencies.Location = New System.Drawing.Point(404, 225)
+        Me.pcurrencies.Name = "pcurrencies"
+        Me.pcurrencies.Size = New System.Drawing.Size(750, 395)
+        Me.pcurrencies.TabIndex = 36
+        '
+        'Label30
+        '
+        Me.Label30.AutoSize = True
+        Me.Label30.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.Label30.Location = New System.Drawing.Point(596, 5)
+        Me.Label30.Name = "Label30"
+        Me.Label30.Size = New System.Drawing.Size(142, 13)
+        Me.Label30.TabIndex = 38
+        Me.Label30.Tag = "localizedtext"
+        Me.Label30.Text = "UNCONFIRMED BALANCE:"
+        '
+        'Label31
+        '
+        Me.Label31.AutoSize = True
+        Me.Label31.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.Label31.Location = New System.Drawing.Point(435, 5)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(126, 13)
+        Me.Label31.TabIndex = 37
+        Me.Label31.Tag = "localizedtext"
+        Me.Label31.Text = "CONFIRMED BALANCE:"
+        '
+        'LinkLabel4
+        '
+        Me.LinkLabel4.ActiveLinkColor = System.Drawing.Color.PaleTurquoise
+        Me.LinkLabel4.AutoSize = True
+        Me.LinkLabel4.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LinkLabel4.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
+        Me.LinkLabel4.LinkColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LinkLabel4.Location = New System.Drawing.Point(505, 368)
+        Me.LinkLabel4.Name = "LinkLabel4"
+        Me.LinkLabel4.Size = New System.Drawing.Size(90, 13)
+        Me.LinkLabel4.TabIndex = 36
+        Me.LinkLabel4.TabStop = True
+        Me.LinkLabel4.Tag = "localizedtext"
+        Me.LinkLabel4.Text = "Highest Balance"
+        Me.LinkLabel4.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
+        '
+        'dgvcurrencies
+        '
+        Me.dgvcurrencies.AllowUserToAddRows = False
+        Me.dgvcurrencies.AllowUserToDeleteRows = False
+        Me.dgvcurrencies.AllowUserToResizeColumns = False
+        Me.dgvcurrencies.AllowUserToResizeRows = False
+        Me.dgvcurrencies.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(38, Byte), Integer))
+        Me.dgvcurrencies.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.dgvcurrencies.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvcurrencies.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        Me.dgvcurrencies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvcurrencies.ColumnHeadersVisible = False
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(38, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(38, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvcurrencies.DefaultCellStyle = DataGridViewCellStyle2
+        Me.dgvcurrencies.EnableHeadersVisualStyles = False
+        Me.dgvcurrencies.Location = New System.Drawing.Point(37, 21)
+        Me.dgvcurrencies.Name = "dgvcurrencies"
+        Me.dgvcurrencies.ReadOnly = True
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvcurrencies.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
+        Me.dgvcurrencies.RowHeadersVisible = False
+        Me.dgvcurrencies.Size = New System.Drawing.Size(700, 335)
+        Me.dgvcurrencies.TabIndex = 35
+        '
+        'Label32
+        '
+        Me.Label32.AutoSize = True
+        Me.Label32.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.Label32.Location = New System.Drawing.Point(450, 368)
+        Me.Label32.Name = "Label32"
+        Me.Label32.Size = New System.Drawing.Size(57, 13)
+        Me.Label32.TabIndex = 34
+        Me.Label32.Tag = "localizedtext"
+        Me.Label32.Text = "SORT BY:"
+        '
+        'LinkLabel5
+        '
+        Me.LinkLabel5.ActiveLinkColor = System.Drawing.Color.PaleTurquoise
+        Me.LinkLabel5.AutoSize = True
+        Me.LinkLabel5.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LinkLabel5.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
+        Me.LinkLabel5.LinkColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.LinkLabel5.Location = New System.Drawing.Point(662, 368)
+        Me.LinkLabel5.Name = "LinkLabel5"
+        Me.LinkLabel5.Size = New System.Drawing.Size(77, 13)
+        Me.LinkLabel5.TabIndex = 32
+        Me.LinkLabel5.TabStop = True
+        Me.LinkLabel5.Tag = "localizedtext"
+        Me.LinkLabel5.Text = "All Currencies"
+        Me.LinkLabel5.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
+        '
+        'Label35
+        '
+        Me.Label35.AutoSize = True
+        Me.Label35.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label35.ForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
+        Me.Label35.Location = New System.Drawing.Point(53, 160)
+        Me.Label35.Name = "Label35"
+        Me.Label35.Size = New System.Drawing.Size(0, 17)
+        Me.Label35.TabIndex = 20
+        '
+        'Label37
+        '
+        Me.Label37.AutoSize = True
+        Me.Label37.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.Label37.Location = New System.Drawing.Point(601, 368)
+        Me.Label37.Name = "Label37"
+        Me.Label37.Size = New System.Drawing.Size(63, 13)
+        Me.Label37.TabIndex = 19
+        Me.Label37.Tag = "localizedtext"
+        Me.Label37.Text = "SHOWING:"
+        '
+        'Label42
+        '
+        Me.Label42.AutoSize = True
+        Me.Label42.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.Label42.Location = New System.Drawing.Point(38, 5)
+        Me.Label42.Name = "Label42"
+        Me.Label42.Size = New System.Drawing.Size(70, 13)
+        Me.Label42.TabIndex = 17
+        Me.Label42.Tag = "localizedtext"
+        Me.Label42.Text = "CURRENCY:"
+        '
         'bsendnew
         '
         Me.bsendnew.BackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(38, Byte), Integer))
@@ -441,6 +681,7 @@ Partial Class Form1
         Me.bsendnew.Name = "bsendnew"
         Me.bsendnew.Size = New System.Drawing.Size(53, 23)
         Me.bsendnew.TabIndex = 44
+        Me.bsendnew.Tag = "localizedtext"
         Me.bsendnew.Text = "New"
         Me.bsendnew.UseVisualStyleBackColor = False
         '
@@ -473,6 +714,7 @@ Partial Class Form1
         Me.txtsendamount.Name = "txtsendamount"
         Me.txtsendamount.Size = New System.Drawing.Size(184, 26)
         Me.txtsendamount.TabIndex = 35
+        Me.txtsendamount.Tag = "localizednumeric"
         Me.txtsendamount.Text = "0.00000000"
         Me.txtsendamount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -484,17 +726,19 @@ Partial Class Form1
         Me.Label54.Name = "Label54"
         Me.Label54.Size = New System.Drawing.Size(57, 13)
         Me.Label54.TabIndex = 34
+        Me.Label54.Tag = "localizedtext"
         Me.Label54.Text = "AMOUNT:"
         Me.Label54.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'lsendavail
         '
-        Me.lsendavail.Font = New System.Drawing.Font("Arial Narrow", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lsendavail.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lsendavail.ForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
         Me.lsendavail.Location = New System.Drawing.Point(219, 4)
         Me.lsendavail.Name = "lsendavail"
         Me.lsendavail.Size = New System.Drawing.Size(151, 15)
         Me.lsendavail.TabIndex = 33
+        Me.lsendavail.Tag = "localizedtext"
         Me.lsendavail.Text = "Select a sending address"
         Me.lsendavail.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
@@ -531,6 +775,7 @@ Partial Class Form1
         Me.rsendtmsc.Size = New System.Drawing.Size(101, 17)
         Me.rsendtmsc.TabIndex = 28
         Me.rsendtmsc.TabStop = True
+        Me.rsendtmsc.Tag = "localizedtext"
         Me.rsendtmsc.Text = "Test Mastercoin"
         Me.rsendtmsc.UseVisualStyleBackColor = True
         '
@@ -544,6 +789,7 @@ Partial Class Form1
         Me.rsendmsc.Size = New System.Drawing.Size(77, 17)
         Me.rsendmsc.TabIndex = 27
         Me.rsendmsc.TabStop = True
+        Me.rsendmsc.Tag = "localizedtext"
         Me.rsendmsc.Text = "Mastercoin"
         Me.rsendmsc.UseVisualStyleBackColor = True
         '
@@ -558,6 +804,7 @@ Partial Class Form1
         Me.bsignsend.Name = "bsignsend"
         Me.bsignsend.Size = New System.Drawing.Size(53, 23)
         Me.bsignsend.TabIndex = 26
+        Me.bsignsend.Tag = "localizedtext"
         Me.bsignsend.Text = "Send"
         Me.bsignsend.UseVisualStyleBackColor = False
         '
@@ -569,6 +816,7 @@ Partial Class Form1
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(70, 13)
         Me.Label22.TabIndex = 24
+        Me.Label22.Tag = "localizedtext"
         Me.Label22.Text = "CURRENCY:"
         '
         'Label26
@@ -589,6 +837,7 @@ Partial Class Form1
         Me.Label27.Name = "Label27"
         Me.Label27.Size = New System.Drawing.Size(122, 13)
         Me.Label27.TabIndex = 19
+        Me.Label27.Tag = "localizedtext"
         Me.Label27.Text = "RECIPIENT ADDRESS:"
         '
         'Label29
@@ -599,6 +848,7 @@ Partial Class Form1
         Me.Label29.Name = "Label29"
         Me.Label29.Size = New System.Drawing.Size(114, 13)
         Me.Label29.TabIndex = 17
+        Me.Label29.Tag = "localizedtext"
         Me.Label29.Text = "SENDING ADDRESS:"
         '
         'paddresses
@@ -613,7 +863,7 @@ Partial Class Form1
         Me.paddresses.Controls.Add(Me.lnkaddfilter)
         Me.paddresses.Controls.Add(Me.Label21)
         Me.paddresses.Controls.Add(Me.Label25)
-        Me.paddresses.Location = New System.Drawing.Point(678, 441)
+        Me.paddresses.Location = New System.Drawing.Point(122, 129)
         Me.paddresses.Name = "paddresses"
         Me.paddresses.Size = New System.Drawing.Size(757, 391)
         Me.paddresses.TabIndex = 29
@@ -626,6 +876,7 @@ Partial Class Form1
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(83, 13)
         Me.Label12.TabIndex = 41
+        Me.Label12.Tag = "localizedtext"
         Me.Label12.Text = "BTC BALANCE:"
         '
         'Label36
@@ -636,6 +887,7 @@ Partial Class Form1
         Me.Label36.Name = "Label36"
         Me.Label36.Size = New System.Drawing.Size(85, 13)
         Me.Label36.TabIndex = 39
+        Me.Label36.Tag = "localizedtext"
         Me.Label36.Text = "MSC BALANCE:"
         '
         'Label24
@@ -646,6 +898,7 @@ Partial Class Form1
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(116, 13)
         Me.Label24.TabIndex = 38
+        Me.Label24.Tag = "localizedtext"
         Me.Label24.Text = "TEST MSC BALANCE:"
         '
         'lnkaddsort
@@ -660,6 +913,7 @@ Partial Class Form1
         Me.lnkaddsort.Size = New System.Drawing.Size(81, 13)
         Me.lnkaddsort.TabIndex = 36
         Me.lnkaddsort.TabStop = True
+        Me.lnkaddsort.Tag = "localizedtext"
         Me.lnkaddsort.Text = "Address Alpha"
         Me.lnkaddsort.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
         '
@@ -672,36 +926,36 @@ Partial Class Form1
         Me.dgvaddresses.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(38, Byte), Integer))
         Me.dgvaddresses.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.dgvaddresses.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
-        DataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle28.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle28.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle28.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle28.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle28.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvaddresses.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle28
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvaddresses.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
         Me.dgvaddresses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvaddresses.ColumnHeadersVisible = False
-        DataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle29.BackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(38, Byte), Integer))
-        DataGridViewCellStyle29.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle29.ForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
-        DataGridViewCellStyle29.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(38, Byte), Integer))
-        DataGridViewCellStyle29.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
-        DataGridViewCellStyle29.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvaddresses.DefaultCellStyle = DataGridViewCellStyle29
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(38, Byte), Integer))
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(38, Byte), Integer))
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvaddresses.DefaultCellStyle = DataGridViewCellStyle5
         Me.dgvaddresses.EnableHeadersVisualStyles = False
         Me.dgvaddresses.Location = New System.Drawing.Point(35, 21)
         Me.dgvaddresses.Name = "dgvaddresses"
         Me.dgvaddresses.ReadOnly = True
-        DataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle30.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle30.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle30.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle30.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle30.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvaddresses.RowHeadersDefaultCellStyle = DataGridViewCellStyle30
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvaddresses.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
         Me.dgvaddresses.RowHeadersVisible = False
         Me.dgvaddresses.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.dgvaddresses.Size = New System.Drawing.Size(719, 345)
@@ -715,6 +969,7 @@ Partial Class Form1
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(57, 13)
         Me.Label6.TabIndex = 34
+        Me.Label6.Tag = "localizedtext"
         Me.Label6.Text = "SORT BY:"
         '
         'Label5
@@ -725,6 +980,7 @@ Partial Class Form1
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(47, 13)
         Me.Label5.TabIndex = 33
+        Me.Label5.Tag = "localizedtext"
         Me.Label5.Text = "FILTER:"
         '
         'lnkaddfilter
@@ -739,6 +995,7 @@ Partial Class Form1
         Me.lnkaddfilter.Size = New System.Drawing.Size(84, 13)
         Me.lnkaddfilter.TabIndex = 31
         Me.lnkaddfilter.TabStop = True
+        Me.lnkaddfilter.Tag = "localizedtext"
         Me.lnkaddfilter.Text = "No Filter Active"
         Me.lnkaddfilter.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
         '
@@ -760,6 +1017,7 @@ Partial Class Form1
         Me.Label25.Name = "Label25"
         Me.Label25.Size = New System.Drawing.Size(62, 13)
         Me.Label25.TabIndex = 17
+        Me.Label25.Tag = "localizedtext"
         Me.Label25.Text = "ADDRESS:"
         '
         'bcontracts
@@ -771,6 +1029,7 @@ Partial Class Form1
         Me.bcontracts.Name = "bcontracts"
         Me.bcontracts.Size = New System.Drawing.Size(98, 30)
         Me.bcontracts.TabIndex = 3
+        Me.bcontracts.Tag = "localizedtext"
         Me.bcontracts.Text = "contracts"
         '
         'baddresses
@@ -782,6 +1041,7 @@ Partial Class Form1
         Me.baddresses.Name = "baddresses"
         Me.baddresses.Size = New System.Drawing.Size(104, 30)
         Me.baddresses.TabIndex = 31
+        Me.baddresses.Tag = "localizedtext"
         Me.baddresses.Text = "addresses"
         '
         'bcurrencies
@@ -793,6 +1053,7 @@ Partial Class Form1
         Me.bcurrencies.Name = "bcurrencies"
         Me.bcurrencies.Size = New System.Drawing.Size(107, 30)
         Me.bcurrencies.TabIndex = 32
+        Me.bcurrencies.Tag = "localizedtext"
         Me.bcurrencies.Text = "currencies"
         '
         'bdebug
@@ -804,6 +1065,7 @@ Partial Class Form1
         Me.bdebug.Name = "bdebug"
         Me.bdebug.Size = New System.Drawing.Size(72, 30)
         Me.bdebug.TabIndex = 33
+        Me.bdebug.Tag = "localizedtext"
         Me.bdebug.Text = "debug"
         '
         'pdebug
@@ -844,6 +1106,7 @@ Partial Class Form1
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(79, 13)
         Me.Label8.TabIndex = 28
+        Me.Label8.Tag = "localizedtext"
         Me.Label8.Text = "DEBUG LEVEL:"
         '
         'checkdebugscroll
@@ -855,6 +1118,7 @@ Partial Class Form1
         Me.checkdebugscroll.Name = "checkdebugscroll"
         Me.checkdebugscroll.Size = New System.Drawing.Size(129, 17)
         Me.checkdebugscroll.TabIndex = 27
+        Me.checkdebugscroll.Tag = "localizedtext"
         Me.checkdebugscroll.Text = "SHOW SCROLLBARS"
         Me.checkdebugscroll.UseVisualStyleBackColor = True
         '
@@ -888,6 +1152,7 @@ Partial Class Form1
         Me.Label44.Name = "Label44"
         Me.Label44.Size = New System.Drawing.Size(73, 13)
         Me.Label44.TabIndex = 17
+        Me.Label44.Tag = "localizedtext"
         Me.Label44.Text = "DEBUG LOG:"
         '
         'lnknofocus
@@ -936,6 +1201,7 @@ Partial Class Form1
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(40, 13)
         Me.Label7.TabIndex = 30
+        Me.Label7.Tag = "localizedtext"
         Me.Label7.Text = "PORT:"
         '
         'bupdatesettings
@@ -949,6 +1215,7 @@ Partial Class Form1
         Me.bupdatesettings.Name = "bupdatesettings"
         Me.bupdatesettings.Size = New System.Drawing.Size(111, 28)
         Me.bupdatesettings.TabIndex = 29
+        Me.bupdatesettings.Tag = "localizedtext"
         Me.bupdatesettings.Text = "Update Settings"
         Me.bupdatesettings.UseVisualStyleBackColor = False
         '
@@ -994,6 +1261,7 @@ Partial Class Form1
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(98, 13)
         Me.Label13.TabIndex = 24
+        Me.Label13.Tag = "localizedtext"
         Me.Label13.Text = "RPC PASSWORD:"
         '
         'Label38
@@ -1014,6 +1282,7 @@ Partial Class Form1
         Me.Label39.Name = "Label39"
         Me.Label39.Size = New System.Drawing.Size(65, 13)
         Me.Label39.TabIndex = 19
+        Me.Label39.Tag = "localizedtext"
         Me.Label39.Text = "RPC USER:"
         '
         'Label40
@@ -1024,160 +1293,12 @@ Partial Class Form1
         Me.Label40.Name = "Label40"
         Me.Label40.Size = New System.Drawing.Size(125, 13)
         Me.Label40.TabIndex = 17
+        Me.Label40.Tag = "localizedtext"
         Me.Label40.Text = "BITCOIN RPC SERVER:"
         '
         'workthread
         '
         Me.workthread.WorkerReportsProgress = True
-        '
-        'pcurrencies
-        '
-        Me.pcurrencies.Controls.Add(Me.Label30)
-        Me.pcurrencies.Controls.Add(Me.Label31)
-        Me.pcurrencies.Controls.Add(Me.LinkLabel4)
-        Me.pcurrencies.Controls.Add(Me.dgvcurrencies)
-        Me.pcurrencies.Controls.Add(Me.Label32)
-        Me.pcurrencies.Controls.Add(Me.LinkLabel5)
-        Me.pcurrencies.Controls.Add(Me.Label35)
-        Me.pcurrencies.Controls.Add(Me.Label37)
-        Me.pcurrencies.Controls.Add(Me.Label42)
-        Me.pcurrencies.Location = New System.Drawing.Point(590, 515)
-        Me.pcurrencies.Name = "pcurrencies"
-        Me.pcurrencies.Size = New System.Drawing.Size(750, 395)
-        Me.pcurrencies.TabIndex = 36
-        '
-        'Label30
-        '
-        Me.Label30.AutoSize = True
-        Me.Label30.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label30.Location = New System.Drawing.Point(596, 5)
-        Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(142, 13)
-        Me.Label30.TabIndex = 38
-        Me.Label30.Text = "UNCONFIRMED BALANCE:"
-        '
-        'Label31
-        '
-        Me.Label31.AutoSize = True
-        Me.Label31.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label31.Location = New System.Drawing.Point(435, 5)
-        Me.Label31.Name = "Label31"
-        Me.Label31.Size = New System.Drawing.Size(126, 13)
-        Me.Label31.TabIndex = 37
-        Me.Label31.Text = "CONFIRMED BALANCE:"
-        '
-        'LinkLabel4
-        '
-        Me.LinkLabel4.ActiveLinkColor = System.Drawing.Color.PaleTurquoise
-        Me.LinkLabel4.AutoSize = True
-        Me.LinkLabel4.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LinkLabel4.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
-        Me.LinkLabel4.LinkColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LinkLabel4.Location = New System.Drawing.Point(505, 368)
-        Me.LinkLabel4.Name = "LinkLabel4"
-        Me.LinkLabel4.Size = New System.Drawing.Size(90, 13)
-        Me.LinkLabel4.TabIndex = 36
-        Me.LinkLabel4.TabStop = True
-        Me.LinkLabel4.Text = "Highest Balance"
-        Me.LinkLabel4.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
-        '
-        'dgvcurrencies
-        '
-        Me.dgvcurrencies.AllowUserToAddRows = False
-        Me.dgvcurrencies.AllowUserToDeleteRows = False
-        Me.dgvcurrencies.AllowUserToResizeColumns = False
-        Me.dgvcurrencies.AllowUserToResizeRows = False
-        Me.dgvcurrencies.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(38, Byte), Integer))
-        Me.dgvcurrencies.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.dgvcurrencies.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
-        DataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle31.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle31.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle31.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle31.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle31.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvcurrencies.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle31
-        Me.dgvcurrencies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvcurrencies.ColumnHeadersVisible = False
-        DataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle32.BackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(38, Byte), Integer))
-        DataGridViewCellStyle32.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle32.ForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
-        DataGridViewCellStyle32.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(38, Byte), Integer))
-        DataGridViewCellStyle32.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
-        DataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvcurrencies.DefaultCellStyle = DataGridViewCellStyle32
-        Me.dgvcurrencies.EnableHeadersVisualStyles = False
-        Me.dgvcurrencies.Location = New System.Drawing.Point(37, 21)
-        Me.dgvcurrencies.Name = "dgvcurrencies"
-        Me.dgvcurrencies.ReadOnly = True
-        DataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle33.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle33.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle33.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle33.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle33.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle33.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvcurrencies.RowHeadersDefaultCellStyle = DataGridViewCellStyle33
-        Me.dgvcurrencies.RowHeadersVisible = False
-        Me.dgvcurrencies.Size = New System.Drawing.Size(700, 335)
-        Me.dgvcurrencies.TabIndex = 35
-        '
-        'Label32
-        '
-        Me.Label32.AutoSize = True
-        Me.Label32.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label32.Location = New System.Drawing.Point(450, 368)
-        Me.Label32.Name = "Label32"
-        Me.Label32.Size = New System.Drawing.Size(57, 13)
-        Me.Label32.TabIndex = 34
-        Me.Label32.Text = "SORT BY:"
-        '
-        'LinkLabel5
-        '
-        Me.LinkLabel5.ActiveLinkColor = System.Drawing.Color.PaleTurquoise
-        Me.LinkLabel5.AutoSize = True
-        Me.LinkLabel5.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LinkLabel5.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
-        Me.LinkLabel5.LinkColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LinkLabel5.Location = New System.Drawing.Point(662, 368)
-        Me.LinkLabel5.Name = "LinkLabel5"
-        Me.LinkLabel5.Size = New System.Drawing.Size(77, 13)
-        Me.LinkLabel5.TabIndex = 32
-        Me.LinkLabel5.TabStop = True
-        Me.LinkLabel5.Text = "All Currencies"
-        Me.LinkLabel5.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
-        '
-        'Label35
-        '
-        Me.Label35.AutoSize = True
-        Me.Label35.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label35.ForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
-        Me.Label35.Location = New System.Drawing.Point(53, 160)
-        Me.Label35.Name = "Label35"
-        Me.Label35.Size = New System.Drawing.Size(0, 17)
-        Me.Label35.TabIndex = 20
-        '
-        'Label37
-        '
-        Me.Label37.AutoSize = True
-        Me.Label37.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label37.Location = New System.Drawing.Point(601, 368)
-        Me.Label37.Name = "Label37"
-        Me.Label37.Size = New System.Drawing.Size(63, 13)
-        Me.Label37.TabIndex = 19
-        Me.Label37.Text = "SHOWING:"
-        '
-        'Label42
-        '
-        Me.Label42.AutoSize = True
-        Me.Label42.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label42.Location = New System.Drawing.Point(38, 5)
-        Me.Label42.Name = "Label42"
-        Me.Label42.Size = New System.Drawing.Size(70, 13)
-        Me.Label42.TabIndex = 17
-        Me.Label42.Text = "CURRENCY:"
         '
         'UIrefresh
         '
@@ -1216,6 +1337,7 @@ Partial Class Form1
         Me.Label57.Name = "Label57"
         Me.Label57.Size = New System.Drawing.Size(67, 13)
         Me.Label57.TabIndex = 49
+        Me.Label57.Tag = "localizedtext"
         Me.Label57.Text = "Unconfirmed"
         '
         'Label56
@@ -1226,6 +1348,7 @@ Partial Class Form1
         Me.Label56.Name = "Label56"
         Me.Label56.Size = New System.Drawing.Size(38, 13)
         Me.Label56.TabIndex = 48
+        Me.Label56.Tag = "localizedtext"
         Me.Label56.Text = "Invalid"
         '
         'Label55
@@ -1236,6 +1359,7 @@ Partial Class Form1
         Me.Label55.Name = "Label55"
         Me.Label55.Size = New System.Drawing.Size(30, 13)
         Me.Label55.TabIndex = 47
+        Me.Label55.Tag = "localizedtext"
         Me.Label55.Text = "Valid"
         '
         'PictureBox6
@@ -1273,6 +1397,7 @@ Partial Class Form1
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(31, 13)
         Me.Label20.TabIndex = 43
+        Me.Label20.Tag = "localizedtext"
         Me.Label20.Text = "KEY:"
         '
         'Label2
@@ -1283,6 +1408,7 @@ Partial Class Form1
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(41, 13)
         Me.Label2.TabIndex = 42
+        Me.Label2.Tag = "localizedtext"
         Me.Label2.Text = "FROM:"
         '
         'Label18
@@ -1293,6 +1419,7 @@ Partial Class Form1
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(80, 13)
         Me.Label18.TabIndex = 41
+        Me.Label18.Tag = "localizedtext"
         Me.Label18.Text = "TO ADDRESS:"
         '
         'Label1
@@ -1303,6 +1430,7 @@ Partial Class Form1
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(57, 13)
         Me.Label1.TabIndex = 39
+        Me.Label1.Tag = "localizedtext"
         Me.Label1.Text = "AMOUNT:"
         '
         'Label3
@@ -1313,6 +1441,7 @@ Partial Class Form1
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(70, 13)
         Me.Label3.TabIndex = 37
+        Me.Label3.Tag = "localizedtext"
         Me.Label3.Text = "CURRENCY:"
         '
         'lnkhistorysort
@@ -1327,6 +1456,7 @@ Partial Class Form1
         Me.lnkhistorysort.Size = New System.Drawing.Size(67, 13)
         Me.lnkhistorysort.TabIndex = 36
         Me.lnkhistorysort.TabStop = True
+        Me.lnkhistorysort.Tag = "localizedtext"
         Me.lnkhistorysort.Text = "Recent First"
         Me.lnkhistorysort.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
         '
@@ -1339,37 +1469,37 @@ Partial Class Form1
         Me.dgvhistory.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(38, Byte), Integer))
         Me.dgvhistory.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.dgvhistory.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
-        DataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle34.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle34.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle34.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle34.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle34.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle34.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvhistory.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle34
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvhistory.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
         Me.dgvhistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvhistory.ColumnHeadersVisible = False
-        DataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle35.BackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(38, Byte), Integer))
-        DataGridViewCellStyle35.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle35.ForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
-        DataGridViewCellStyle35.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(38, Byte), Integer))
-        DataGridViewCellStyle35.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
-        DataGridViewCellStyle35.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvhistory.DefaultCellStyle = DataGridViewCellStyle35
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(38, Byte), Integer))
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(38, Byte), Integer))
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvhistory.DefaultCellStyle = DataGridViewCellStyle8
         Me.dgvhistory.EnableHeadersVisualStyles = False
         Me.dgvhistory.Location = New System.Drawing.Point(5, 21)
         Me.dgvhistory.MultiSelect = False
         Me.dgvhistory.Name = "dgvhistory"
         Me.dgvhistory.ReadOnly = True
-        DataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle36.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle36.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle36.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle36.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle36.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle36.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvhistory.RowHeadersDefaultCellStyle = DataGridViewCellStyle36
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvhistory.RowHeadersDefaultCellStyle = DataGridViewCellStyle9
         Me.dgvhistory.RowHeadersVisible = False
         Me.dgvhistory.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.dgvhistory.Size = New System.Drawing.Size(778, 336)
@@ -1383,6 +1513,7 @@ Partial Class Form1
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(57, 13)
         Me.Label4.TabIndex = 34
+        Me.Label4.Tag = "localizedtext"
         Me.Label4.Text = "SORT BY:"
         '
         'Label9
@@ -1393,6 +1524,7 @@ Partial Class Form1
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(47, 13)
         Me.Label9.TabIndex = 33
+        Me.Label9.Tag = "localizedtext"
         Me.Label9.Text = "FILTER:"
         '
         'lnkhistoryfilter
@@ -1407,6 +1539,7 @@ Partial Class Form1
         Me.lnkhistoryfilter.Size = New System.Drawing.Size(84, 13)
         Me.lnkhistoryfilter.TabIndex = 31
         Me.lnkhistoryfilter.TabStop = True
+        Me.lnkhistoryfilter.Tag = "localizedtext"
         Me.lnkhistoryfilter.Text = "No Filter Active"
         Me.lnkhistoryfilter.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
         '
@@ -1428,58 +1561,8 @@ Partial Class Form1
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(39, 13)
         Me.Label17.TabIndex = 17
+        Me.Label17.Tag = "localizedtext"
         Me.Label17.Text = "DATE:"
-        '
-        'pwelcome
-        '
-        Me.pwelcome.Controls.Add(Me.lwelstartup)
-        Me.pwelcome.Controls.Add(Me.PictureBox1)
-        Me.pwelcome.Controls.Add(Me.Label28)
-        Me.pwelcome.Controls.Add(Me.Label45)
-        Me.pwelcome.Location = New System.Drawing.Point(798, 331)
-        Me.pwelcome.Name = "pwelcome"
-        Me.pwelcome.Size = New System.Drawing.Size(668, 384)
-        Me.pwelcome.TabIndex = 42
-        '
-        'lwelstartup
-        '
-        Me.lwelstartup.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lwelstartup.ForeColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.lwelstartup.Location = New System.Drawing.Point(190, 197)
-        Me.lwelstartup.Name = "lwelstartup"
-        Me.lwelstartup.Size = New System.Drawing.Size(393, 116)
-        Me.lwelstartup.TabIndex = 43
-        Me.lwelstartup.Text = "Please wait..."
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(172, 41)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(431, 94)
-        Me.PictureBox1.TabIndex = 40
-        Me.PictureBox1.TabStop = False
-        '
-        'Label28
-        '
-        Me.Label28.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label28.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label28.Location = New System.Drawing.Point(174, 138)
-        Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(431, 37)
-        Me.Label28.TabIndex = 39
-        Me.Label28.Text = "Masterchest Wallet ALPHA 0.1a"
-        Me.Label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label45
-        '
-        Me.Label45.AutoSize = True
-        Me.Label45.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label45.ForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
-        Me.Label45.Location = New System.Drawing.Point(53, 160)
-        Me.Label45.Name = "Label45"
-        Me.Label45.Size = New System.Drawing.Size(0, 17)
-        Me.Label45.TabIndex = 20
         '
         'psetup
         '
@@ -1540,6 +1623,7 @@ Partial Class Form1
         Me.Label53.Name = "Label53"
         Me.Label53.Size = New System.Drawing.Size(384, 13)
         Me.Label53.TabIndex = 41
+        Me.Label53.Tag = "localizedtext"
         Me.Label53.Text = "Only use this option if you downloaded this wallet from a trusted source"
         '
         'chkpreseed
@@ -1550,6 +1634,7 @@ Partial Class Form1
         Me.chkpreseed.Name = "chkpreseed"
         Me.chkpreseed.Size = New System.Drawing.Size(161, 17)
         Me.chkpreseed.TabIndex = 40
+        Me.chkpreseed.Tag = "localizedtext"
         Me.chkpreseed.Text = "Use a preseeded database"
         Me.chkpreseed.UseVisualStyleBackColor = True
         '
@@ -1561,9 +1646,10 @@ Partial Class Form1
         Me.Label52.Name = "Label52"
         Me.Label52.Size = New System.Drawing.Size(528, 38)
         Me.Label52.TabIndex = 39
+        Me.Label52.Tag = "localizedtext"
         Me.Label52.Text = "To speed up initial seeding, you can choose to use a preseeded database.  This wi" & _
-            "ll reduce the number of blocks to catchup, but requires that the preseeded datab" & _
-            "ase is trusted."
+    "ll reduce the number of blocks to catchup, but requires that the preseeded datab" & _
+    "ase is trusted."
         '
         'bfinish
         '
@@ -1576,6 +1662,7 @@ Partial Class Form1
         Me.bfinish.Name = "bfinish"
         Me.bfinish.Size = New System.Drawing.Size(69, 22)
         Me.bfinish.TabIndex = 38
+        Me.bfinish.Tag = "localizedtext"
         Me.bfinish.Text = "FINISH"
         Me.bfinish.UseVisualStyleBackColor = False
         '
@@ -1588,6 +1675,7 @@ Partial Class Form1
         Me.Label51.Name = "Label51"
         Me.Label51.Size = New System.Drawing.Size(117, 13)
         Me.Label51.TabIndex = 37
+        Me.Label51.Tag = "localizedtext"
         Me.Label51.Text = "WALLET PASSPHRASE:"
         '
         'txtstartwalpass
@@ -1610,9 +1698,10 @@ Partial Class Form1
         Me.Label50.Name = "Label50"
         Me.Label50.Size = New System.Drawing.Size(528, 38)
         Me.Label50.TabIndex = 35
+        Me.Label50.Tag = "localizedtext"
         Me.Label50.Text = "You'll also need to choose a passphrase to encrypt the wallet database.  Note, yo" & _
-            "ur private keys are not stored in your Masterchest wallet database; transactions" & _
-            " are signed using your bitcoin wallet."
+    "ur private keys are not stored in your Masterchest wallet database; transactions" & _
+    " are signed using your bitcoin wallet."
         '
         'Label46
         '
@@ -1622,6 +1711,7 @@ Partial Class Form1
         Me.Label46.Name = "Label46"
         Me.Label46.Size = New System.Drawing.Size(547, 49)
         Me.Label46.TabIndex = 34
+        Me.Label46.Tag = "localizedtext"
         Me.Label46.Text = resources.GetString("Label46.Text")
         '
         'Label48
@@ -1633,6 +1723,7 @@ Partial Class Form1
         Me.Label48.Name = "Label48"
         Me.Label48.Size = New System.Drawing.Size(193, 30)
         Me.Label48.TabIndex = 32
+        Me.Label48.Tag = "localizedtext"
         Me.Label48.Text = "GETTING STARTED:"
         '
         'Label47
@@ -1644,6 +1735,7 @@ Partial Class Form1
         Me.Label47.Name = "Label47"
         Me.Label47.Size = New System.Drawing.Size(49, 13)
         Me.Label47.TabIndex = 31
+        Me.Label47.Tag = "localizedtext"
         Me.Label47.Text = "SERVER:"
         '
         'txtstartport
@@ -1666,6 +1758,7 @@ Partial Class Form1
         Me.Label23.Name = "Label23"
         Me.Label23.Size = New System.Drawing.Size(37, 13)
         Me.Label23.TabIndex = 30
+        Me.Label23.Tag = "localizedtext"
         Me.Label23.Text = "PORT:"
         '
         'btest
@@ -1679,6 +1772,7 @@ Partial Class Form1
         Me.btest.Name = "btest"
         Me.btest.Size = New System.Drawing.Size(69, 22)
         Me.btest.TabIndex = 60
+        Me.btest.Tag = "localizedtext"
         Me.btest.Text = "TEST"
         Me.btest.UseVisualStyleBackColor = False
         '
@@ -1725,6 +1819,7 @@ Partial Class Form1
         Me.Label33.Name = "Label33"
         Me.Label33.Size = New System.Drawing.Size(70, 13)
         Me.Label33.TabIndex = 24
+        Me.Label33.Tag = "localizedtext"
         Me.Label33.Text = "PASSWORD:"
         '
         'Label34
@@ -1746,6 +1841,7 @@ Partial Class Form1
         Me.Label43.Name = "Label43"
         Me.Label43.Size = New System.Drawing.Size(37, 13)
         Me.Label43.TabIndex = 19
+        Me.Label43.Tag = "localizedtext"
         Me.Label43.Text = "USER:"
         '
         'bexchange
@@ -1757,7 +1853,22 @@ Partial Class Form1
         Me.bexchange.Name = "bexchange"
         Me.bexchange.Size = New System.Drawing.Size(102, 30)
         Me.bexchange.TabIndex = 43
+        Me.bexchange.Tag = "localizedtext"
         Me.bexchange.Text = "exchange"
+        '
+        'cbLocale
+        '
+        Me.cbLocale.BackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(38, Byte), Integer))
+        Me.cbLocale.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbLocale.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cbLocale.Font = New System.Drawing.Font("Segoe UI", 8.25!)
+        Me.cbLocale.ForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
+        Me.cbLocale.FormattingEnabled = True
+        Me.cbLocale.Location = New System.Drawing.Point(706, 51)
+        Me.cbLocale.Name = "cbLocale"
+        Me.cbLocale.Size = New System.Drawing.Size(121, 21)
+        Me.cbLocale.Sorted = True
+        Me.cbLocale.TabIndex = 44
         '
         'PictureBox5
         '
@@ -1836,6 +1947,7 @@ Partial Class Form1
         Me.Controls.Add(Me.boverview)
         Me.Controls.Add(Me.bexchange)
         Me.Controls.Add(Me.ShapeContainer1)
+        Me.Controls.Add(Me.cbLocale)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "Form1"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -2009,5 +2121,6 @@ Partial Class Form1
     Friend WithEvents bsendnew As System.Windows.Forms.Button
     Friend WithEvents rsendbtc As System.Windows.Forms.RadioButton
     Friend WithEvents bexchange As System.Windows.Forms.Label
+    Friend WithEvents cbLocale As System.Windows.Forms.ComboBox
 
 End Class
