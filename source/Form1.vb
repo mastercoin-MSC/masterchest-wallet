@@ -1532,7 +1532,7 @@ Public Class Form1
     Private Sub LocalizeTextControls(ByVal control As Control, ByVal rm As System.Resources.ResourceManager)
         For Each control In Controls
             If control.Tag IsNot Nothing Then
-                If control.Tag.ToString.ToLower() = "localizedtext" Then
+                If control.Tag = LocaleTag.Text Then
                     control.Text = rm.GetString(control.Name)
                 End If
             End If
@@ -1544,7 +1544,7 @@ Public Class Form1
 
     Private Sub LocalizeNumericControls(ByVal control As Control, ByVal style As NumberStyles, ByVal newCulture As CultureInfo)
         If control.Tag IsNot Nothing Then
-            If control.Tag.ToString.ToLower() = "localizednumeric" Then
+            If control.Tag = LocaleTag.Numeric Then
                 Dim amount As Decimal
                 Dim vals = control.Text.Trim.Split(" ")
                 If Decimal.TryParse(vals(0), style, Thread.CurrentThread.CurrentUICulture, amount) Then
@@ -1561,10 +1561,5 @@ Public Class Form1
             LocalizeNumericControls(child, style, newCulture)
         Next
     End Sub
-
-    Private Function DataGridViewCellStyle4() As Object
-        Throw New NotImplementedException
-    End Function
-
 End Class
 

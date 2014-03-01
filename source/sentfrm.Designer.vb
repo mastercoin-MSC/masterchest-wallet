@@ -93,7 +93,7 @@ Partial Class sentfrm
         Me.lnkcopy.Size = New System.Drawing.Size(36, 13)
         Me.lnkcopy.TabIndex = 61
         Me.lnkcopy.TabStop = True
-        Me.lnkcopy.Tag = "localizedtext"
+        Me.lnkcopy.Tag = LocaleTag.Text
         Me.lnkcopy.Text = My.Resources.copypar
         Me.lnkcopy.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
         '
@@ -105,7 +105,7 @@ Partial Class sentfrm
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(153, 13)
         Me.Label3.TabIndex = 62
-        Me.Label3.Tag = "localizedtext"
+        Me.Label3.Tag = LocaleTag.Text
         Me.Label3.Text = My.Resources.additionalinformation
         '
         'bcancel
@@ -119,7 +119,7 @@ Partial Class sentfrm
         Me.bcancel.Name = "bcancel"
         Me.bcancel.Size = New System.Drawing.Size(58, 23)
         Me.bcancel.TabIndex = 68
-        Me.bcancel.Tag = "localizedtext"
+        Me.bcancel.Tag = LocaleTag.Text
         Me.bcancel.Text = My.Resources.ok
         Me.bcancel.UseVisualStyleBackColor = False
         '
