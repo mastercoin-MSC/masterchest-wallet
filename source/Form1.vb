@@ -824,7 +824,9 @@ Public Class Form1
                                     End If
                                     If tmpvalid = True Then
                                         'put in exchange & processed tables
-                                        cmd.CommandText = "UPDATE exchange_temp SET TXID='" & .Item(0) & "',SALEAMOUNT=" & tmpsaleam & ",OFFERAMOUNT=" & .Item(11) & ",MINFEE=" & .Item(12) & ",TIMELIMIT=" & .Item(13) & ",BLOCKTIME=" & .Item(5) & ",BLOCKNUM=" & .Item(6) & ",UNITPRICE=" & (.Item(11) / (tmpsaleam / 100000000)) & " WHERE FROMADD='" & .Item(1) & "'"
+                                        Dim tmpunitprice As Long
+                                        tmpunitprice = (.Item(11) / (tmpsaleam / 100000000))
+                                        cmd.CommandText = "UPDATE exchange_temp SET TXID='" & .Item(0) & "',SALEAMOUNT=" & tmpsaleam & ",OFFERAMOUNT=" & .Item(11) & ",MINFEE=" & .Item(12) & ",TIMELIMIT=" & .Item(13) & ",BLOCKTIME=" & .Item(5) & ",BLOCKNUM=" & .Item(6) & ",UNITPRICE=" & tmpunitprice & " WHERE FROMADD='" & .Item(1) & "'"
                                         If debuglevel > 1 Then workthread.ReportProgress(0, "DEBUG: SQL: " & cmd.CommandText)
                                         returnval = cmd.ExecuteScalar
                                         cmd.CommandText = "INSERT INTO transactions_processed_temp (TXID,FROMADD,SALEAMOUNT,OFFERAMOUNT,MINFEE,TIMELIMIT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE) VALUES ('" & .Item(0) & "','" & .Item(1) & "'," & tmpsaleam & "," & .Item(11) & "," & .Item(12) & "," & .Item(13) & ",'" & "updatesell" & "'," & .Item(5) & "," & .Item(6) & ",1," & curtype & ")"
@@ -860,7 +862,9 @@ Public Class Form1
                                             If debuglevel > 1 Then workthread.ReportProgress(0, "DEBUG: SQL: " & cmd.CommandText)
                                             returnval = cmd.ExecuteScalar
                                             'put in exchange & processed tables
-                                            cmd.CommandText = "INSERT INTO exchange_temp (TXID,FROMADD,SALEAMOUNT,OFFERAMOUNT,MINFEE,TIMELIMIT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE,UNITPRICE,RESERVED) VALUES ('" & .Item(0) & "','" & .Item(1) & "'," & .Item(10) & "," & .Item(11) & "," & .Item(12) & "," & .Item(13) & ",'" & "selloffer" & "'," & .Item(5) & "," & .Item(6) & ",1," & curtype & "," & (.Item(11) / (saleamount / 100000000)) & ",0)"
+                                            Dim tmpunitprice As Long
+                                            tmpunitprice = (.Item(11) / (saleamount / 100000000))
+                                            cmd.CommandText = "INSERT INTO exchange_temp (TXID,FROMADD,SALEAMOUNT,OFFERAMOUNT,MINFEE,TIMELIMIT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE,UNITPRICE,RESERVED) VALUES ('" & .Item(0) & "','" & .Item(1) & "'," & .Item(10) & "," & .Item(11) & "," & .Item(12) & "," & .Item(13) & ",'" & "selloffer" & "'," & .Item(5) & "," & .Item(6) & ",1," & curtype & "," & tmpunitprice & ",0)"
                                             If debuglevel > 1 Then workthread.ReportProgress(0, "DEBUG: SQL: " & cmd.CommandText)
                                             returnval = cmd.ExecuteScalar
                                             cmd.CommandText = "INSERT INTO transactions_processed_temp (TXID,FROMADD,SALEAMOUNT,OFFERAMOUNT,MINFEE,TIMELIMIT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE) VALUES ('" & .Item(0) & "','" & .Item(1) & "'," & .Item(10) & "," & .Item(11) & "," & .Item(12) & "," & .Item(13) & ",'" & "selloffer" & "'," & .Item(5) & "," & .Item(6) & ",1," & curtype & ")"
@@ -2410,10 +2414,10 @@ Public Class Form1
                 Dim ht As DataGridView.HitTestInfo
             ht = Me.dgvopenorders.HitTest(e.X, e.Y)
             If ht.Type = DataGridViewHitTestType.Cell Then
-                If Me.dgvopenorders.Rows(0).Cells(0).Value.ToString = "N/A" Then
-                    dgvopenorders.ClearSelection()
-                    Exit Sub
-                End If
+                    If Me.dgvopenorders.Rows(0).Cells(1).Value.ToString = "N/A" Then
+                        dgvopenorders.ClearSelection()
+                        Exit Sub
+                    End If
                 'MsgBox(ht.RowIndex)
                 Me.dgvopenorders.Rows(ht.RowIndex).Selected = True
                 Dim mnusell As New ContextMenuStrip
@@ -2451,7 +2455,7 @@ Public Class Form1
                 Dim ht As DataGridView.HitTestInfo
                 ht = Me.dgvopenorders.HitTest(e.X, e.Y)
                 If ht.Type = DataGridViewHitTestType.Cell Then
-                    If Me.dgvopenorders.Rows(0).Cells(0).Value.ToString = "N/A" Then
+                    If Me.dgvopenorders.Rows(0).Cells(1).Value.ToString = "N/A" Then
                         dgvopenorders.ClearSelection()
                         Exit Sub
                     End If
