@@ -118,6 +118,12 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="buyfrm.designer.vb">
+      <DependentUpon>buyfrm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="buyfrm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -147,6 +153,24 @@
     <Compile Include="passfrm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="paybuyfrm.Designer.vb">
+      <DependentUpon>paybuyfrm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="paybuyfrm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sellcancelfrm.Designer.vb">
+      <DependentUpon>sellcancelfrm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sellcancelfrm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sellfrm.designer.vb">
+      <DependentUpon>sellfrm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sellfrm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sentfrm.Designer.vb">
       <DependentUpon>sentfrm.vb</DependentUpon>
     </Compile>
@@ -155,6 +179,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="buyfrm.resx">
+      <DependentUpon>buyfrm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
@@ -163,6 +190,15 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="paybuyfrm.resx">
+      <DependentUpon>paybuyfrm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sellcancelfrm.resx">
+      <DependentUpon>sellcancelfrm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sellfrm.resx">
+      <DependentUpon>sellfrm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sentfrm.resx">
       <DependentUpon>sentfrm.vb</DependentUpon>

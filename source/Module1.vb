@@ -54,12 +54,13 @@ Module Module1
     Public balmsc As Double
     Public balumsc As Double
     Public balbtc As Double
+    Public balrestmsc As Double
     Public balubtc As Double
     Public baltmsc As Double
     Public balutmsc As Double
     Public openorders, selloffers As New DataTable
     Public rpcuser, rpcpassword, rpcport, rpcserver As String
-    Public btcpass, txsummary, senttxid, buyreltxid As String
+    Public btcpass, txsummary, senttxid, sellrefadd, paybuytxid As String
     Public errorcnt As Integer = 0
     '///////////////////////////
     '///// INIT & CLEAR ROUTINES
@@ -75,7 +76,7 @@ Module Module1
         Form1.psettings.Location = New Point(27, 125)
         Form1.phistory.Location = New Point(27, 125)
         Form1.pwelcome.Location = New Point(27, 125)
-        'Form1.pexchange.Location = New Point(27, 125)
+        Form1.pexchange.Location = New Point(27, 125)
 
         Form1.psetup.Location = New Point(27, 55)
         addresslist.Columns.Add("Address", GetType(String))
@@ -96,6 +97,7 @@ Module Module1
         historylist.Columns.Add("blocktime", GetType(Date))
         historylist.Columns.Add("fromadd", GetType(String))
         historylist.Columns.Add("toadd", GetType(String))
+        historylist.Columns.Add("type", GetType(String))
         historylist.Columns.Add("currency", GetType(String))
         historylist.Columns.Add("amount", GetType(Double))
         thistorylist.Columns.Add("valid", GetType(Image))
@@ -103,19 +105,32 @@ Module Module1
         thistorylist.Columns.Add("blocktime", GetType(Date))
         thistorylist.Columns.Add("fromadd", GetType(String))
         thistorylist.Columns.Add("toadd", GetType(String))
+        thistorylist.Columns.Add("type", GetType(String))
         thistorylist.Columns.Add("currency", GetType(String))
         thistorylist.Columns.Add("amount", GetType(Double))
         Form1.dgvhistory.RowTemplate.Height = 18
-
-
+        Form1.dgvselloffer.RowTemplate.Height = 18
+        Form1.dgvopenorders.RowTemplate.Height = 18
+        selloffers.Columns.Add("Seller")
+        selloffers.Columns.Add("Amount")
+        selloffers.Columns.Add("Unit Price")
+        selloffers.Columns.Add("Total Price")
+        openorders.Columns.Add("TXID")
+        openorders.Columns.Add("Seller")
+        openorders.Columns.Add("Buyer")
+        openorders.Columns.Add("Available")
+        openorders.Columns.Add("Reserved")
+        openorders.Columns.Add("Purchased")
+        openorders.Columns.Add("Unit Price")
+        openorders.Columns.Add("Total Price")
+        openorders.Columns.Add("Type")
+        openorders.Columns.Add("Status")
+        Form1.dgvopenorders.RowTemplate.DefaultCellStyle.Padding = New Padding(0)
         Dim mnu As New ContextMenuStrip
         Dim mnucopy As New ToolStripMenuItem("Copy")
         AddHandler mnucopy.Click, AddressOf mnucopy_click
         mnu.Items.AddRange(New ToolStripItem() {mnucopy})
         Form1.dgvaddresses.ContextMenuStrip = mnu
-
-
-
     End Sub
     Public Sub mnucopy_click()
         If mrow >= 0 And mcol >= 0 Then
@@ -136,7 +151,7 @@ Module Module1
         Form1.phistory.Visible = False
         Form1.psetup.Visible = False
         Form1.pwelcome.Visible = False
-        'Form1.pexchange.Visible = False
+        Form1.pexchange.Visible = False
     End Sub
     Public Sub hidelabels()
         Form1.boverview.Visible = False
@@ -166,7 +181,7 @@ Module Module1
         Form1.bhistory.ForeColor = Color.FromArgb(100, 100, 100)
         Form1.bcontracts.ForeColor = Color.FromArgb(65, 65, 65)
         Form1.bdebug.ForeColor = Color.FromArgb(100, 100, 100)
-        Form1.bexchange.ForeColor = Color.FromArgb(65, 65, 65)
+        Form1.bexchange.ForeColor = Color.FromArgb(100, 100, 100)
     End Sub
 
     '////////////////////
@@ -218,8 +233,11 @@ Module Module1
         deselectlabels()
         Form1.bexchange.ForeColor = Color.FromArgb(209, 209, 209)
         hidepanels()
-        'Form1.pexchange.Visible = True
+        Form1.pexchange.Visible = True
         curscreen = "8"
+        Form1.dgvselloffer.CurrentCell = Nothing
+        Form1.dgvopenorders.CurrentCell = Nothing
+        Form1.bbuy.ForeColor = Color.FromArgb(100, 100, 100)
     End Sub
     Public Sub activatedebug()
         deselectlabels()
