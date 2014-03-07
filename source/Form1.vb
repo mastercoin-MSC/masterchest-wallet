@@ -407,6 +407,12 @@ Public Class Form1
     End Sub
 
     Private Sub workthread_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles workthread.DoWork
+        'declare globalization to make sure we use a . for decimal only
+        Dim customCulture As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture.Clone()
+        customCulture.NumberFormat.NumberDecimalSeparator = "."
+        System.Threading.Thread.CurrentThread.CurrentCulture = customCulture
+        System.Threading.Thread.CurrentThread.CurrentUICulture = customCulture
+
         varsyncronized = False
         workthread.ReportProgress(0, "DEBUG: Thread 'workthread' starting...")
         'test connection to bitcoind
