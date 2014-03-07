@@ -17,7 +17,6 @@ Imports Microsoft.Win32
 Imports System.Configuration
 Imports Masterchest.mlib
 
-
 Module Module1
     Public Class broadcasttx
         Public result As String

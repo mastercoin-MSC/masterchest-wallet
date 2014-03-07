@@ -16,14 +16,16 @@ Imports System.Configuration
 Imports System.Security.Cryptography
 Imports Masterchest.mlib
 Imports Org.BouncyCastle.Math.EC
+Imports System.Globalization
 
 Public Class Form1
+
+
     Public startup As Boolean = True
     Public asyncjump As Boolean = True
     Const WM_NCLBUTTONDOWN As Integer = &HA1
     Const HT_CAPTION As Integer = &H2
     Public mlib As New Masterchest.mlib
-
 
     '////////////////////////
     '///HANDLE FORM FUNCTIONS
@@ -42,7 +44,7 @@ Public Class Form1
     Private Sub bclose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bclose.Click
         Application.Exit()
     End Sub
-    Private Sub bmin_Click(sender As System.Object, e As System.EventArgs) Handles bmin.Click
+    Private Sub bmin_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bmin.Click
         Me.WindowState = FormWindowState.Minimized
     End Sub
 
@@ -58,6 +60,12 @@ Public Class Form1
         'Label61.Visible = False
         'lnkpricehistory.Visible = False
         'Label49.Text = "            Distributed Exchange is disabled in this build."
+
+        'declare globalization to make sure we use a . for decimal only
+        Dim customCulture As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture.Clone()
+        customCulture.NumberFormat.NumberDecimalSeparator = "."
+        System.Threading.Thread.CurrentThread.CurrentCulture = customCulture
+        System.Threading.Thread.CurrentThread.CurrentUICulture = customCulture
 
         'disclaimer
         MsgBox("DISCLAIMER: " & vbCrLf & vbCrLf & "This software is pre-release software for testing only." & vbCrLf & vbCrLf & "The protocol and transaction processing rules for Mastercoin are still under active development and are subject to change in future." & vbCrLf & vbCrLf & "DO NOT USE IT WITH A LARGE AMOUNT OF MASTERCOINS AND/OR BITCOINS.  IT IS ENTIRELY POSSIBLE YOU MAY LOSE ALL YOUR COINS.  INFORMATION DISPLAYED MAY BE INCORRECT.  MASTERCHEST OFFERS ABSOLUTELY NO GUARANTEES OF ANY KIND." & vbCrLf & vbCrLf & "A fraction of a bitcoin and a fraction of a mastercoin are the suggested testing amounts.  Preferably use a fresh bitcoin wallet.dat." & vbCrLf & vbCrLf & "This software is provided open-source at no cost.  You are responsible for knowing the law in your country and determining if your use of this software contravenes any local laws.")
@@ -237,15 +245,15 @@ Public Class Form1
                 balubtc = balubtc + address.uamount
             Next
 
-                dgvaddresses.DataSource = Nothing
-                dgvaddresses.Refresh()
-                'load addresslist with taddresslist
-                addresslist.Clear()
-                For Each row In taddresslist.Rows
-                    addresslist.Rows.Add(row.item(0), row.item(1), row.item(2), row.item(3))
-                Next
-                dgvaddresses.DataSource = addresslist
-                Dim dgvcolumn As New DataGridViewColumn
+            dgvaddresses.DataSource = Nothing
+            dgvaddresses.Refresh()
+            'load addresslist with taddresslist
+            addresslist.Clear()
+            For Each row In taddresslist.Rows
+                addresslist.Rows.Add(row.item(0), row.item(1), row.item(2), row.item(3))
+            Next
+            dgvaddresses.DataSource = addresslist
+            Dim dgvcolumn As New DataGridViewColumn
             dgvcolumn = dgvaddresses.Columns(0)
             dgvcolumn.Width = 370
             dgvcolumn = dgvaddresses.Columns(1)
@@ -260,16 +268,16 @@ Public Class Form1
             'dgvcolumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             dgvcolumn.DefaultCellStyle.Format = "########0.00######" '"########0.00######"
             dgvcolumn.Width = 130
-                If lnkaddsort.Text = "Address Alpha" Then dgvaddresses.Sort(dgvaddresses.Columns(0), System.ComponentModel.ListSortDirection.Ascending)
-                If lnkaddsort.Text = "BTC Balance" Then dgvaddresses.Sort(dgvaddresses.Columns(1), System.ComponentModel.ListSortDirection.Descending)
-                If lnkaddsort.Text = "MSC Balance" Then dgvaddresses.Sort(dgvaddresses.Columns(3), System.ComponentModel.ListSortDirection.Descending)
-                If lnkaddfilter.Text = "No Filter Active" Then addresslist.DefaultView.RowFilter = ""
-                If lnkaddfilter.Text = "Empty Balances" Then addresslist.DefaultView.RowFilter = "btcamount > 0 or mscamount > 0 or tmscamount > 0"
+            If lnkaddsort.Text = "Address Alpha" Then dgvaddresses.Sort(dgvaddresses.Columns(0), System.ComponentModel.ListSortDirection.Ascending)
+            If lnkaddsort.Text = "BTC Balance" Then dgvaddresses.Sort(dgvaddresses.Columns(1), System.ComponentModel.ListSortDirection.Descending)
+            If lnkaddsort.Text = "MSC Balance" Then dgvaddresses.Sort(dgvaddresses.Columns(3), System.ComponentModel.ListSortDirection.Descending)
+            If lnkaddfilter.Text = "No Filter Active" Then addresslist.DefaultView.RowFilter = ""
+            If lnkaddfilter.Text = "Empty Balances" Then addresslist.DefaultView.RowFilter = "btcamount > 0 or mscamount > 0 or tmscamount > 0"
 
-            Catch ex As Exception
-                MsgBox(ex.Message)
-                lwelstartup.Text &= vbCrLf & "Startup ERROR: Enumerating addresses did not complete properly.  Aborting startup."
-                Exit Sub
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            lwelstartup.Text &= vbCrLf & "Startup ERROR: Enumerating addresses did not complete properly.  Aborting startup."
+            Exit Sub
         End Try
         balbtc = 0
         For Each row In taddresslist.Rows
@@ -1088,9 +1096,9 @@ Public Class Form1
                                     If debuglevel > 1 Then workthread.ReportProgress(0, "DEBUG: SQL: " & cmd.CommandText)
                                     returnval = cmd.ExecuteScalar
                                 End If
-                                End If
                             End If
                         End If
+                    End If
                 End With
             Next
         End With
@@ -1138,7 +1146,7 @@ Public Class Form1
             MsgBox(ex.Message)
             workthread.ReportProgress(0, "ERROR: Enumerating addresses did not complete properly." & vbCrLf & "STATUS: UI thread will remain but blockchain scanning thread will now exit.")
             Exit Sub
-            End Try
+        End Try
 
         balmsc = 0
         baltmsc = 0
@@ -1270,10 +1278,10 @@ Public Class Form1
                     End With
                 Next
 
-                End With
+            End With
         Next
 
-            'perform bug check
+        'perform bug check
         workthread.ReportProgress(0, "DEBUG: Sanity checking balances table...")
         sqlquery = "select count(address) from balances group by ADDRESS HAVING COUNT(*) > 1"
         cmd.CommandText = sqlquery
@@ -1284,8 +1292,8 @@ Public Class Form1
         If ds3.Tables(0).Rows.Count > 0 Then
             MsgBox("ERROR:" & vbCrLf & vbCrLf & "Sanity checking has detected addresses with multiple balance entries in the database.  It is not safe to continue.  The wallet will now exit.")
             Application.Exit()
-            End If
-            'done
+        End If
+        'done
 
         con.Close()
 
@@ -1386,6 +1394,7 @@ Public Class Form1
         If lowrg < 0.001 Then lowrg = 0
         highrg = (highrg / 10) + highrg
         Dim gcurl = "http://chart.googleapis.com/chart?cht=lc&" & chd & "&chm=F,,0,-1,10&chs=426x205&chf=bg,s,252526&chxt=x,y&chds=" & lowrg & "," & highrg & "&chxr=1," & lowrg & "," & highrg & "&chxs=1N*F4*,D1D1D1,11,0,lt|0,D1D1D1,11,0,lt&" & chxl
+        'Dim ignore = InputBox("URL", "URL", gcurl)
         Dim gcimg As Bitmap = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(gcurl)))
         'flip black pixels to white to make up for charts api colour control
         For y As Integer = 0 To gcimg.Height - 1
@@ -2381,7 +2390,7 @@ Public Class Form1
     End Sub
 
     Private Sub dgvopenorders_CellMouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvopenorders.CellMouseDown
-       
+
     End Sub
 
 
@@ -2407,44 +2416,44 @@ Public Class Form1
         'trap error when we clear list bound to dgv temporarily
     End Sub
 
-   
+
     Private Sub dgvopenorders_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvopenorders.MouseDown
         If e.Button = MouseButtons.Right Then
             Try
                 Dim ht As DataGridView.HitTestInfo
-            ht = Me.dgvopenorders.HitTest(e.X, e.Y)
-            If ht.Type = DataGridViewHitTestType.Cell Then
+                ht = Me.dgvopenorders.HitTest(e.X, e.Y)
+                If ht.Type = DataGridViewHitTestType.Cell Then
                     If Me.dgvopenorders.Rows(0).Cells(1).Value.ToString = "N/A" Then
                         dgvopenorders.ClearSelection()
                         Exit Sub
                     End If
-                'MsgBox(ht.RowIndex)
-                Me.dgvopenorders.Rows(ht.RowIndex).Selected = True
-                Dim mnusell As New ContextMenuStrip
-                Dim mnusendpay As New ToolStripMenuItem("Send Payment")
-                Dim mnucancel As New ToolStripMenuItem("Cancel")
-                AddHandler mnusendpay.Click, AddressOf sendpay_click
-                AddHandler mnucancel.Click, AddressOf cancel_click
-                mnusell.Items.AddRange(New ToolStripItem() {mnusendpay})
-                mnusell.Items.AddRange(New ToolStripItem() {mnucancel})
-                Dim tmptype As String = dgvopenorders.Rows(ht.RowIndex).Cells(8).Value.ToString
-                If tmptype = "Sell" Then
-                    mnusell.Items(0).Enabled = False
-                    mnusell.Items(1).Enabled = True
-                End If
-                If tmptype = "Buy" Then
-                    mnusell.Items(0).Enabled = True
-                    mnusell.Items(1).Enabled = False
-                End If
-                Dim tmppending As String = dgvopenorders.Rows(ht.RowIndex).Cells(9).Value.ToString
-                If tmppending = "Pending" Then
-                    mnusell.Items(0).Enabled = False
-                    mnusell.Items(1).Enabled = False
-                End If
-                dgvopenorders.ContextMenuStrip = mnusell
-            Else
-                dgvopenorders.ClearSelection()
-                dgvopenorders.ContextMenuStrip = Nothing
+                    'MsgBox(ht.RowIndex)
+                    Me.dgvopenorders.Rows(ht.RowIndex).Selected = True
+                    Dim mnusell As New ContextMenuStrip
+                    Dim mnusendpay As New ToolStripMenuItem("Send Payment")
+                    Dim mnucancel As New ToolStripMenuItem("Cancel")
+                    AddHandler mnusendpay.Click, AddressOf sendpay_click
+                    AddHandler mnucancel.Click, AddressOf cancel_click
+                    mnusell.Items.AddRange(New ToolStripItem() {mnusendpay})
+                    mnusell.Items.AddRange(New ToolStripItem() {mnucancel})
+                    Dim tmptype As String = dgvopenorders.Rows(ht.RowIndex).Cells(8).Value.ToString
+                    If tmptype = "Sell" Then
+                        mnusell.Items(0).Enabled = False
+                        mnusell.Items(1).Enabled = True
+                    End If
+                    If tmptype = "Buy" Then
+                        mnusell.Items(0).Enabled = True
+                        mnusell.Items(1).Enabled = False
+                    End If
+                    Dim tmppending As String = dgvopenorders.Rows(ht.RowIndex).Cells(9).Value.ToString
+                    If tmppending = "Pending" Then
+                        mnusell.Items(0).Enabled = False
+                        mnusell.Items(1).Enabled = False
+                    End If
+                    dgvopenorders.ContextMenuStrip = mnusell
+                Else
+                    dgvopenorders.ClearSelection()
+                    dgvopenorders.ContextMenuStrip = Nothing
                 End If
             Catch ex As Exception
                 MsgBox("DGV Open Orders Exception")
