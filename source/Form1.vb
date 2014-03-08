@@ -787,7 +787,7 @@ Public Class Form1
                                             If debuglevel > 1 Then workthread.ReportProgress(0, "DEBUG: SQL: " & cmd.CommandText)
                                             returnval = cmd.ExecuteScalar
                                         Else 'funds reserved, zero saleamount but do not remove sell as still active
-                                            cmd.CommandText = "UPDATE exchange_temp SET SALEAMOUNT=0 where ADDRESS='" & .Item(1).ToString & "'"
+                                            cmd.CommandText = "UPDATE exchange_temp SET SALEAMOUNT=0 where FROMADD='" & .Item(1).ToString & "'"
                                             If debuglevel > 1 Then workthread.ReportProgress(0, "DEBUG: SQL: " & cmd.CommandText)
                                             returnval = cmd.ExecuteScalar
                                         End If
