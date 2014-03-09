@@ -2163,10 +2163,13 @@ Public Class Form1
             'nothing to send
             Exit Sub
         End If
+        txtdebug.AppendText(vbCrLf & "DEBUG: Beginning simple send transaction")
+        txtdebug.AppendText(vbCrLf & "===================================================================================")
         txsummary = ""
         senttxid = "Transaction not sent"
         'first validate recipient address
         If txtsenddest.Text <> "" Then
+            txtdebug.AppendText(vbCrLf & "DEBUG: Requesting passphrase")
             'get wallet passphrase
             passfrm.ShowDialog()
             If btcpass = "" Then Exit Sub 'cancelled
@@ -2227,70 +2230,83 @@ Public Class Form1
 
             If rsendbtc.Checked = False Then
                 Try
+                    txtdebug.AppendText(vbCrLf & "DEBUG: Validating recipient address")
                     Dim validater As validate = JsonConvert.DeserializeObject(Of validate)(mlib.rpccall(bitcoin_con, "validateaddress", 1, txtsenddest.Text, 0, 0))
                     If validater.result.isvalid = True Then 'address is valid
                         txsummary = "Recipient address is valid."
                         'push out to masterchest lib to encode the tx
+                        txtdebug.AppendText(vbCrLf & "DEBUG: Calling library: mlib.encodetx, bitcoin_con, " & fromadd & ", " & toadd & ", " & curtype & ", " & amountlong.ToString)
                         Dim rawtx As String = mlib.encodetx(bitcoin_con, fromadd, toadd, curtype, amountlong)
                         'is rawtx empty
                         If rawtx = "" Then
-                            txsummary = txsummary & vbCrLf & "Raw transaction is empty - stopping."
+                            txtdebug.AppendText(vbCrLf & "ERROR: Raw transaction is empty - stopping")
+                            txtdebug.AppendText(vbCrLf & "===================================================================================")
+                            txtdebug.AppendText(vbCrLf & "DEBUG: Ending send payment transaction")
                             Exit Sub
                         End If
                         'decode the tx in the viewer
+                        txtdebug.AppendText(vbCrLf & "DEBUG: Raw transaction hex: " & vbCrLf & rawtx)
                         txsummary = txsummary & vbCrLf & "Raw transaction hex:" & vbCrLf & rawtx & vbCrLf & "Raw transaction decode:" & vbCrLf & mlib.rpccall(bitcoin_con, "decoderawtransaction", 1, rawtx, 0, 0)
                         'attempt to unlock wallet, if it's not locked these will error out but we'll pick up the error on signing instead
+                        txtdebug.AppendText(vbCrLf & "DEUBG: Unlocking wallet")
                         Dim dontcareresponse = mlib.rpccall(bitcoin_con, "walletlock", 0, 0, 0, 0)
                         Dim dontcareresponse2 = mlib.rpccall(bitcoin_con, "walletpassphrase", 2, Trim(btcpass.ToString), 15, 0)
                         btcpass = ""
                         'try and sign transaction
-                        Try
-                            Dim signedtxn As signedtx = JsonConvert.DeserializeObject(Of signedtx)(mlib.rpccall(bitcoin_con, "signrawtransaction", 1, rawtx, 0, 0))
-                            If signedtxn.result.complete = True Then
-                                txsummary = txsummary & vbCrLf & "Signing appears successful."
-                                Dim broadcasttx As broadcasttx = JsonConvert.DeserializeObject(Of broadcasttx)(mlib.rpccall(bitcoin_con, "sendrawtransaction", 1, signedtxn.result.hex, 0, 0))
-                                If broadcasttx.result <> "" Then
-                                    txsummary = txsummary & vbCrLf & "Transaction sent, ID: " & broadcasttx.result.ToString
-                                    sentfrm.lsent.Text = "transaction sent"
-                                    senttxid = broadcasttx.result.ToString
-                                    'lsendtxinfo.Text = "Transaction sent, check viewer for TXID."
-                                    'lsendtxinfo.ForeColor = Color.Lime
-                                    bsignsend.Enabled = False
-                                    Application.DoEvents()
-                                    If workthread.IsBusy <> True Then
-                                        UIrefresh.Enabled = False
-                                        syncicon.Visible = True
-                                        lsyncing.Visible = True
-                                        poversync.Image = My.Resources.sync
-                                        loversync.Text = "Synchronizing..."
-                                        lsyncing.Text = "Synchronizing..."
-                                        ' Start the workthread for the blockchain scanner
-                                        workthread.RunWorkerAsync()
-                                    End If
-                                    Application.DoEvents()
-                                    sentfrm.ShowDialog()
-                                    Exit Sub
-                                Else
-                                    txsummary = txsummary & vbCrLf & "Error sending transaction."
-                                    sentfrm.ShowDialog()
-                                    lsendtxinfo.Text = "Error sending transaction."
-                                    lsendtxinfo.ForeColor = Color.FromArgb(255, 192, 128)
-                                    Exit Sub
+                        txtdebug.AppendText(vbCrLf & "DEUBG: Attempting signing")
+                        Dim signedtxn As signedtx = JsonConvert.DeserializeObject(Of signedtx)(mlib.rpccall(bitcoin_con, "signrawtransaction", 1, rawtx, 0, 0))
+                        If signedtxn.result.complete = True Then
+                            txsummary = txsummary & vbCrLf & "Signing appears successful."
+                            txtdebug.AppendText(vbCrLf & "DEUBG: Attempting broadcast")
+                            Dim broadcasttx As broadcasttx = JsonConvert.DeserializeObject(Of broadcasttx)(mlib.rpccall(bitcoin_con, "sendrawtransaction", 1, signedtxn.result.hex, 0, 0))
+                            If broadcasttx.result <> "" Then
+                                txtdebug.AppendText(vbCrLf & "DEUBG: Transaction sent - " & broadcasttx.result.ToString)
+                                txtdebug.AppendText(vbCrLf & "===================================================================================")
+                                txtdebug.AppendText(vbCrLf & "DEBUG: Ending simple send transaction")
+                                txsummary = txsummary & vbCrLf & "Transaction sent, ID: " & broadcasttx.result.ToString
+                                sentfrm.lsent.Text = "transaction sent"
+                                senttxid = broadcasttx.result.ToString
+                                'lsendtxinfo.Text = "Transaction sent, check viewer for TXID."
+                                'lsendtxinfo.ForeColor = Color.Lime
+                                bsignsend.Enabled = False
+                                Application.DoEvents()
+                                If workthread.IsBusy <> True Then
+                                    UIrefresh.Enabled = False
+                                    syncicon.Visible = True
+                                    lsyncing.Visible = True
+                                    poversync.Image = My.Resources.sync
+                                    loversync.Text = "Synchronizing..."
+                                    lsyncing.Text = "Synchronizing..."
+                                    ' Start the workthread for the blockchain scanner
+                                    workthread.RunWorkerAsync()
                                 End If
-                            Else
-                                txsummary = txsummary & vbCrLf & "Failed to sign transaction.  Ensure wallet passphrase is correct."
-                                sentfrm.lsent.Text = "transaction failed"
+                                Application.DoEvents()
                                 sentfrm.ShowDialog()
                                 Exit Sub
+                            Else
+                                txsummary = txsummary & vbCrLf & "Error sending transaction."
+                                sentfrm.ShowDialog()
+                                lsendtxinfo.Text = "Error sending transaction."
+                                lsendtxinfo.ForeColor = Color.FromArgb(255, 192, 128)
+                                txtdebug.AppendText(vbCrLf & "ERROR: Unknown error sending transaction")
+                                txtdebug.AppendText(vbCrLf & "===================================================================================")
+                                txtdebug.AppendText(vbCrLf & "DEBUG: Ending simple send transaction")
+                                Exit Sub
                             End If
-                        Catch ex As Exception
-                            txsummary = txsummary & vbCrLf & "Failed to sign transaction.  Ensure wallet passphrase is correct.  " & ex.Message
+                        Else
+                            txsummary = txsummary & vbCrLf & "Failed to sign transaction.  Ensure wallet passphrase is correct."
+                            txtdebug.AppendText(vbCrLf & "ERROR: Failed to sign transaction.  Ensure wallet passphrase is correct")
+                            txtdebug.AppendText(vbCrLf & "===================================================================================")
+                            txtdebug.AppendText(vbCrLf & "DEBUG: Ending simple send transaction")
                             sentfrm.lsent.Text = "transaction failed"
                             sentfrm.ShowDialog()
                             Exit Sub
-                        End Try
+                        End If
                     Else
                         txsummary = "Build transaction failed.  Recipient address is not valid."
+                        txtdebug.AppendText(vbCrLf & "ERROR: Build transaction failed.  Recipient address is not valid")
+                        txtdebug.AppendText(vbCrLf & "===================================================================================")
+                        txtdebug.AppendText(vbCrLf & "DEBUG: Ending simple send transaction")
                         sentfrm.lsent.Text = "transaction failed"
                         sentfrm.ShowDialog()
                         Exit Sub
@@ -2298,6 +2314,9 @@ Public Class Form1
                     sentfrm.ShowDialog()
                 Catch ex As Exception
                     MsgBox("Exeption thrown : " & ex.Message)
+                    txtdebug.AppendText(vbCrLf & "ERROR: Exception thrown: " & ex.Message)
+                    txtdebug.AppendText(vbCrLf & "===================================================================================")
+                    txtdebug.AppendText(vbCrLf & "DEBUG: Ending simple send transaction")
                     sentfrm.ShowDialog()
                 End Try
             End If

@@ -24,7 +24,7 @@ Partial Class paybuyfrm
     Private Sub InitializeComponent()
         Me.boverview = New System.Windows.Forms.Label()
         Me.bcancel = New System.Windows.Forms.Button()
-        Me.bsell = New System.Windows.Forms.Button()
+        Me.bsendpay = New System.Windows.Forms.Button()
         Me.lselladdress = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -70,19 +70,19 @@ Partial Class paybuyfrm
         Me.bcancel.Text = "No"
         Me.bcancel.UseVisualStyleBackColor = False
         '
-        'bsell
+        'bsendpay
         '
-        Me.bsell.BackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(38, Byte), Integer))
-        Me.bsell.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.bsell.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.bsell.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.bsell.ForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
-        Me.bsell.Location = New System.Drawing.Point(603, 214)
-        Me.bsell.Name = "bsell"
-        Me.bsell.Size = New System.Drawing.Size(58, 23)
-        Me.bsell.TabIndex = 72
-        Me.bsell.Text = "Yes"
-        Me.bsell.UseVisualStyleBackColor = False
+        Me.bsendpay.BackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(38, Byte), Integer))
+        Me.bsendpay.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.bsendpay.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.bsendpay.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bsendpay.ForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
+        Me.bsendpay.Location = New System.Drawing.Point(603, 214)
+        Me.bsendpay.Name = "bsendpay"
+        Me.bsendpay.Size = New System.Drawing.Size(58, 23)
+        Me.bsendpay.TabIndex = 72
+        Me.bsendpay.Text = "Yes"
+        Me.bsendpay.UseVisualStyleBackColor = False
         '
         'lselladdress
         '
@@ -276,7 +276,7 @@ Partial Class paybuyfrm
         Me.Controls.Add(Me.lbtc)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.bcancel)
-        Me.Controls.Add(Me.bsell)
+        Me.Controls.Add(Me.bsendpay)
         Me.Controls.Add(Me.lselladdress)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.boverview)
@@ -292,7 +292,7 @@ Partial Class paybuyfrm
     End Sub
     Friend WithEvents boverview As System.Windows.Forms.Label
     Friend WithEvents bcancel As System.Windows.Forms.Button
-    Friend WithEvents bsell As System.Windows.Forms.Button
+    Friend WithEvents bsendpay As System.Windows.Forms.Button
     Friend WithEvents lselladdress As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
