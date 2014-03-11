@@ -28,6 +28,7 @@ Public Class Form1
     Const HT_CAPTION As Integer = &H2
     Public mlib As New Masterchest.mlib
 
+    Dim activeCulture As CultureInfo = Thread.CurrentThread.CurrentCulture.Clone()
     Dim locales As New Dictionary(Of String, String)
 
     '////////////////////////
@@ -65,12 +66,9 @@ Public Class Form1
         'Label49.Text = "            Distributed Exchange is disabled in this build."
 
         'declare globalization to make sure we use a . for decimal only
-        Dim customCulture As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture.Clone()
-        customCulture.NumberFormat.NumberDecimalSeparator = "."
-        System.Threading.Thread.CurrentThread.CurrentCulture = customCulture
-        System.Threading.Thread.CurrentThread.CurrentUICulture = customCulture
-
-        'disclaimer
+        activeCulture.NumberFormat.NumberDecimalSeparator = "."
+        Thread.CurrentThread.CurrentCulture = activeCulture
+        Thread.CurrentThread.CurrentUICulture = activeCulture
 
         ' Fallback Locale/CulutureInfo (embedded in main assembly)
         locales.Add("en-US", "English (US)")
@@ -439,10 +437,10 @@ Public Class Form1
 
     Private Sub workthread_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles workthread.DoWork
         'declare globalization to make sure we use a . for decimal only
-        Dim customCulture As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture.Clone()
-        customCulture.NumberFormat.NumberDecimalSeparator = "."
-        System.Threading.Thread.CurrentThread.CurrentCulture = customCulture
-        System.Threading.Thread.CurrentThread.CurrentUICulture = customCulture
+        ' Dim customCulture As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture.Clone()
+        'customCulture.NumberFormat.NumberDecimalSeparator = "."
+        System.Threading.Thread.CurrentThread.CurrentCulture = activeCulture
+        System.Threading.Thread.CurrentThread.CurrentUICulture = activeCulture
 
         varsyncronized = False
         workthread.ReportProgress(0, My.Resources.workerdebug1)
@@ -2409,14 +2407,14 @@ Public Class Form1
     Private Sub cbLocale_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbLocale.SelectedIndexChanged
         For Each kv In locales
             If Thread.CurrentThread.CurrentUICulture.Name <> kv.Key And kv.Value = cbLocale.SelectedItem Then
-                Dim newCulture = New CultureInfo(kv.Key)
+                activeCulture = New CultureInfo(kv.Key)
                 Dim style = NumberStyles.AllowDecimalPoint Or NumberStyles.AllowThousands
 
-                LocalizeNumericControls(Me, style, newCulture)
+                LocalizeNumericControls(Me, style, activeCulture)
 
                 ' Set culture for thread after numerics were converted
-                System.Threading.Thread.CurrentThread.CurrentCulture = newCulture
-                System.Threading.Thread.CurrentThread.CurrentUICulture = newCulture
+                Thread.CurrentThread.CurrentCulture = activeCulture
+                Thread.CurrentThread.CurrentUICulture = activeCulture
 
                 'Full namespace required, type of this
                 Dim rm As New System.Resources.ResourceManager("Masterchest_Wallet.Resources", GetType(Form1).Assembly)
