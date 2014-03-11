@@ -2424,6 +2424,13 @@ Public Class Form1
                 LocalizeTextControls(passfrm, rm)
                 LocalizeTextControls(sentfrm, rm)
 
+                ' Update number formatting in grids for new culture
+                dgvaddresses.Refresh()
+                dgvcurrencies.Refresh()
+                dgvhistory.Refresh()
+                dgvopenorders.Refresh()
+                dgvselloffer.Refresh()
+
                 My.Settings.culture = kv.Key
                 My.Settings.Save()
             End If
