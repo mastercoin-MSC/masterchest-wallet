@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" use="required" type="xsd:string"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -117,8 +117,51 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+  <data name="minicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\minicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="closeicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\closeicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="invalid" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\invalid1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="out" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="in" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\in.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="backicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="out1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sync" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sync.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="redcross" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\redcross.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="maxicon3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\maxicon3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="valid" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\valid.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="in1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\in.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="green-tick" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\green-tick.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uncof" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uncof1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="baddresses" xml:space="preserve">
-    <value>adresser</value>
+    <value>adresser </value>
   </data>
   <data name="bcontracts" xml:space="preserve">
     <value>kontrakt</value>
@@ -127,18 +170,548 @@
     <value>valutor</value>
   </data>
   <data name="bdebug" xml:space="preserve">
-    <value>debug</value>
+    <value>felsök</value>
   </data>
   <data name="bexchange" xml:space="preserve">
-    <value>handel</value>
+    <value>växla</value>
   </data>
   <data name="bhistory" xml:space="preserve">
-    <value>historia</value>
+    <value>historik</value>
   </data>
   <data name="boverview" xml:space="preserve">
-    <value>översigt</value>
+    <value>översikt</value>
+  </data>
+  <data name="bfinish" xml:space="preserve">
+    <value>KLART</value>
+  </data>
+  <data name="bsendnew" xml:space="preserve">
+    <value>Ny</value>
+  </data>
+  <data name="bsignsend" xml:space="preserve">
+    <value>Skicka</value>
+  </data>
+  <data name="btest" xml:space="preserve">
+    <value>TEST</value>
+  </data>
+  <data name="bupdatesettings" xml:space="preserve">
+    <value>Uppdatera inställningar </value>
+  </data>
+  <data name="checkdebugscroll" xml:space="preserve">
+    <value>VISA SCROLLBARS</value>
+  </data>
+  <data name="chkpreseed" xml:space="preserve">
+    <value>Använd en förinställd databas</value>
+  </data>
+  <data name="Form1" xml:space="preserve">
+    <value>Form1</value>
+  </data>
+  <data name="Label1" xml:space="preserve">
+    <value>MÄNGD:</value>
+  </data>
+  <data name="Label10" xml:space="preserve">
+    <value>TOTAL MASTERCOIN BALANS:</value>
+  </data>
+  <data name="Label12" xml:space="preserve">
+    <value>BITCOIN BALANS:</value>
+  </data>
+  <data name="Label13" xml:space="preserve">
+    <value>RPC LÖSENORD:</value>
+  </data>
+  <data name="Label14" xml:space="preserve">
+    <value>BEKRÄFTAD BALANS: </value>
+  </data>
+  <data name="Label16" xml:space="preserve">
+    <value>OBEKRÄFTAD BALANS:</value>
+  </data>
+  <data name="Label17" xml:space="preserve">
+    <value>DATUM:</value>
+  </data>
+  <data name="Label18" xml:space="preserve">
+    <value>TILL ADRESS: </value>
+  </data>
+  <data name="Label19" xml:space="preserve">
+    <value>NÄTVERKSSTATUS: </value>
+  </data>
+  <data name="Label2" xml:space="preserve">
+    <value>FRÅN:</value>
+  </data>
+  <data name="Label20" xml:space="preserve">
+    <value>Nyckel:</value>
+  </data>
+  <data name="Label22" xml:space="preserve">
+    <value>Valuta</value>
+  </data>
+  <data name="Label23" xml:space="preserve">
+    <value>PORT</value>
+  </data>
+  <data name="Label24" xml:space="preserve">
+    <value>TEST MSC BALANS:</value>
+  </data>
+  <data name="Label25" xml:space="preserve">
+    <value>ADRESS:</value>
+  </data>
+  <data name="Label27" xml:space="preserve">
+    <value>MOTTAGARES ADRESS:</value>
+  </data>
+  <data name="Label29" xml:space="preserve">
+    <value>SÄNDARES ADRESS:</value>
+  </data>
+  <data name="Label3" xml:space="preserve">
+    <value>Valuta</value>
+  </data>
+  <data name="Label30" xml:space="preserve">
+    <value>OBEKRÄFTAD BALANS: </value>
+  </data>
+  <data name="Label31" xml:space="preserve">
+    <value>BEKRÄFTAD BALANS:</value>
+  </data>
+  <data name="Label32" xml:space="preserve">
+    <value>SORTERA EFTER:</value>
+  </data>
+  <data name="Label33" xml:space="preserve">
+    <value>LÖSENORD:</value>
+  </data>
+  <data name="Label36" xml:space="preserve">
+    <value>MSC BALANS: </value>
+  </data>
+  <data name="Label37" xml:space="preserve">
+    <value>VISSAR: </value>
+  </data>
+  <data name="Label39" xml:space="preserve">
+    <value>RPC ANVÄNDARE: </value>
+  </data>
+  <data name="Label4" xml:space="preserve">
+    <value>Sortera Efter</value>
+  </data>
+  <data name="Label40" xml:space="preserve">
+    <value>BITCOIN RPC SERVER:</value>
+  </data>
+  <data name="Label42" xml:space="preserve">
+    <value>VALUTA:</value>
+  </data>
+  <data name="Label43" xml:space="preserve">
+    <value>ANVÄNDARE:</value>
+  </data>
+  <data name="Label44" xml:space="preserve">
+    <value>FELSÖKNINGS LOGG: </value>
+  </data>
+  <data name="Label46" xml:space="preserve">
+    <value>Vi behöver konfigurera en anslutning till din bitcoind/qt server. Din bitcoind/qt server behöver ha transaction indexing påslaget för att använda den här programvaran. Vänligen fyll in dina inställningar nedan och klicka på &apos;Test&apos; för att testa anslutningen till bitcoind/qt och bekräfta att transaction indext är påslaget. </value>
+  </data>
+  <data name="Label47" xml:space="preserve">
+    <value>SERVER:</value>
+  </data>
+  <data name="Label48" xml:space="preserve">
+    <value>KOMMA IGÅNG:</value>
+  </data>
+  <data name="Label5" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="Label50" xml:space="preserve">
+    <value>Du kommer också behöva välja ett lösenord för att kryptera plånbokens databas. Kom ihåg, din privata nyckel är inte lagrad i din Masterchest plånboks databas, transaktioner är signerade genom att använda din bitcoin plånbok.</value>
+  </data>
+  <data name="Label51" xml:space="preserve">
+    <value>PLÅNBOKENS NYCKEL: </value>
+  </data>
+  <data name="Label52" xml:space="preserve">
+    <value>För att snabba upp laddningen kan du välja att använda en förberedd databas. Det kommer minska antalet block att ta ikapp, men kräver att den förinstallerade databasen är pålitlig</value>
+  </data>
+  <data name="Label53" xml:space="preserve">
+    <value>Använd bara det här alternativet om du laddade hem den här plånboken från en pålitlig källa. </value>
+  </data>
+  <data name="Label54" xml:space="preserve">
+    <value>BELOPP: </value>
+  </data>
+  <data name="Label55" xml:space="preserve">
+    <value>Giltlig </value>
+  </data>
+  <data name="Label56" xml:space="preserve">
+    <value>Ej giltlig </value>
+  </data>
+  <data name="Label57" xml:space="preserve">
+    <value>Obekräftad </value>
+  </data>
+  <data name="Label6" xml:space="preserve">
+    <value>SORTERA EFTER: </value>
+  </data>
+  <data name="Label7" xml:space="preserve">
+    <value>PORT</value>
+  </data>
+  <data name="Label8" xml:space="preserve">
+    <value>FELSÖKNING TILLSTÅND: </value>
+  </data>
+  <data name="Label9" xml:space="preserve">
+    <value>FILTER: </value>
+  </data>
+  <data name="LinkLabel4" xml:space="preserve">
+    <value>Högsta Balans </value>
+  </data>
+  <data name="LinkLabel5" xml:space="preserve">
+    <value>Alla Valutor </value>
+  </data>
+  <data name="lnkaddfilter" xml:space="preserve">
+    <value>Inget Aktivt Filter </value>
+  </data>
+  <data name="lnkaddsort" xml:space="preserve">
+    <value>Huvudadress </value>
+  </data>
+  <data name="lnkdebug" xml:space="preserve">
+    <value>LÅG </value>
+  </data>
+  <data name="lnkhistoryfilter" xml:space="preserve">
+    <value>Inget Aktivt Filter</value>
+  </data>
+  <data name="lnkhistorysort" xml:space="preserve">
+    <value>Senaste Först</value>
+  </data>
+  <data name="loversync" xml:space="preserve">
+    <value>Inte Synkonriserad. </value>
+  </data>
+  <data name="lpoweredby" xml:space="preserve">
+    <value>Drivs av</value>
+  </data>
+  <data name="lsendavail" xml:space="preserve">
+    <value>Välj en sändande adress</value>
+  </data>
+  <data name="lwelstartup" xml:space="preserve">
+    <value>Vänligen vänta...</value>
+  </data>
+  <data name="rsendtmsc" xml:space="preserve">
+    <value>Test Mastercoin</value>
+  </data>
+  <data name="additionalinformation" xml:space="preserve">
+    <value>YTTERLIGARE INFORMATION: </value>
+  </data>
+  <data name="addressalpha" xml:space="preserve">
+    <value>Huvudadress</value>
+  </data>
+  <data name="available" xml:space="preserve">
+    <value>Tillgängligt: </value>
+  </data>
+  <data name="balancebtc" xml:space="preserve">
+    <value>BTC Balans </value>
+  </data>
+  <data name="balancemsc" xml:space="preserve">
+    <value>MSC Balans
+</value>
   </data>
   <data name="bsend" xml:space="preserve">
     <value>skicka</value>
+  </data>
+  <data name="completeFields" xml:space="preserve">
+    <value>Vänligen fyll i alla fält</value>
+  </data>
+  <data name="configFileError" xml:space="preserve">
+    <value>Fel i konfigurations-filen</value>
+  </data>
+  <data name="copypar" xml:space="preserve">
+    <value>kopiera</value>
+  </data>
+  <data name="currentblock" xml:space="preserve">
+    <value>Nuvarande Block: </value>
+  </data>
+  <data name="disclaimer1" xml:space="preserve">
+    <value>VILLKOR: </value>
+  </data>
+  <data name="disclaimer2" xml:space="preserve">
+    <value>Den här programvaran är en förstahand-utgåva endast för testning.</value>
+  </data>
+  <data name="disclaimer3" xml:space="preserve">
+    <value>Både protokollet och överförings reglerna för Mastercoin är under aktiv utvekling och kan komma att ändras i framtiden.</value>
+  </data>
+  <data name="disclaimer4" xml:space="preserve">
+    <value>ANVÄND INTE EN STOR SUMMA AV MASTERCOINS OCH/ELLER BITCOINS. DET ÄR FULT MÖJLIGT ATT DU FÖRLORAR ALLA DINA TILLGÅNGAR. MASTERCHEST LÄMNAR INGA GARANTIER ÖVERHUVUDTAGET. </value>
+  </data>
+  <data name="disclaimer5" xml:space="preserve">
+    <value>En bråkdel an en bitcoin och en bråkdel av en mastercoin är rekommenderad mängd att testa med. En ny bitcoin wallet.dat är också att rekommendera.</value>
+  </data>
+  <data name="disclaimer6" xml:space="preserve">
+    <value>Den här programvaran är tillgänglig kostnadsfritt med öppen källkod. Du är själv ansvarig för att följa lokala lagar och regler. </value>
+  </data>
+  <data name="emptybalances" xml:space="preserve">
+    <value>Tomma Balanser</value>
+  </data>
+  <data name="enterbtcpassphrase" xml:space="preserve">
+    <value>ange din bitcoin plånboks nyckel </value>
+  </data>
+  <data name="exception" xml:space="preserve">
+    <value>Undantag: </value>
+  </data>
+  <data name="exiting" xml:space="preserve">
+    <value>Avslutar...</value>
+  </data>
+  <data name="greatthanks" xml:space="preserve">
+    <value>Perfekt, tack</value>
+  </data>
+  <data name="high" xml:space="preserve">
+    <value>HÖG</value>
+  </data>
+  <data name="highestvalue" xml:space="preserve">
+    <value>Högsta Värde</value>
+  </data>
+  <data name="insufficientfunds" xml:space="preserve">
+    <value>Otillräcklig balans  </value>
+  </data>
+  <data name="low" xml:space="preserve">
+    <value>LÅG</value>
+  </data>
+  <data name="lowestvalue" xml:space="preserve">
+    <value>Lägsta Värde</value>
+  </data>
+  <data name="med" xml:space="preserve">
+    <value>MEDIUM </value>
+    <comment>Medium</comment>
+  </data>
+  <data name="messageexception" xml:space="preserve">
+    <value>Undantag i läsning av konfiguration: </value>
+  </data>
+  <data name="messageheader1" xml:space="preserve">
+    <value>AUTOMATISK BITCOIN KONFIGRATION </value>
+  </data>
+  <data name="messageinfo1" xml:space="preserve">
+    <value>Automatisk sökning har faststält att din bitcoind/qt konfigration inte har RPC servern aktiverad. </value>
+  </data>
+  <data name="messageinfo2" xml:space="preserve">
+    <value>Automatisk sökning har fastställt att din bitcoind/qt konfigration inte har transaction index aktiverat. </value>
+  </data>
+  <data name="messagerequest1" xml:space="preserve">
+    <value>Vänligen lägg till server=1 i din bitcoin.conf och starta om bitcoind/qt.</value>
+  </data>
+  <data name="messagerequest2" xml:space="preserve">
+    <value>Vänligen lägg till txindex=1 i din bitcoin.conf och starta om bitcoind/qt med -reindex flag för att aktivera transaction index.</value>
+  </data>
+  <data name="more" xml:space="preserve">
+    <value>Mer tack...</value>
+  </data>
+  <data name="nofilteractive" xml:space="preserve">
+    <value>Inget Aktivt Filter</value>
+  </data>
+  <data name="notconfigured" xml:space="preserve">
+    <value>Inte konfigurerad.</value>
+  </data>
+  <data name="notsynchronized" xml:space="preserve">
+    <value>Inte Synkroniserad.</value>
+  </data>
+  <data name="ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="onlymastercoin" xml:space="preserve">
+    <value>Endast Mastercoin</value>
+  </data>
+  <data name="recentfirst" xml:space="preserve">
+    <value>Senaste först</value>
+  </data>
+  <data name="selectsendaddress" xml:space="preserve">
+    <value>Välj en sändande adress</value>
+  </data>
+  <data name="startupinitializing" xml:space="preserve">
+    <value>Uppstart: Initierar...</value>
+  </data>
+  <data name="startupinitializingcomplete" xml:space="preserve">
+    <value>Uppstart: Initiering Klar.</value>
+  </data>
+  <data name="synchronizedlastblock" xml:space="preserve">
+    <value>Synkroniserad. Senaste block skannat var block</value>
+  </data>
+  <data name="synchronizing" xml:space="preserve">
+    <value>Synkonricerar... </value>
+  </data>
+  <data name="testError1" xml:space="preserve">
+    <value>FEL: Anslutning till bitcoin RPC verkar vara fastställd, men svaren är inte som väntat.</value>
+  </data>
+  <data name="testInfo1" xml:space="preserve">
+    <value>Bitcoin anslutning OK men transaction index verkar inaktiverat.</value>
+  </data>
+  <data name="testInfo2" xml:space="preserve">
+    <value>Bitcoin anslutning OK och transaction index verkar aktiverat. </value>
+  </data>
+  <data name="testInfo3" xml:space="preserve">
+    <value>Problem med att ansluta till Bitcoin eller kunde inte hitta plånboken</value>
+  </data>
+  <data name="transactionid" xml:space="preserve">
+    <value>TRANSAKTIONS ID:</value>
+  </data>
+  <data name="transactionsent" xml:space="preserve">
+    <value>transaktion skickad</value>
+  </data>
+  <data name="willnowexit" xml:space="preserve">
+    <value>Kommer nu avslutas.</value>
+  </data>
+  <data name="btcsenddisabled" xml:space="preserve">
+    <value>Att skicka bitcoins är tillfälligt avstängt i denna utgåva.</value>
+  </data>
+  <data name="cerror" xml:space="preserve">
+    <value>Debug: Verifierar saldo tabell...</value>
+  </data>
+  <data name="debugblockanalysis" xml:space="preserve">
+    <value>FELSÖKNING: Block Analys för: </value>
+  </data>
+  <data name="emptyrawtx" xml:space="preserve">
+    <value>Obearbetad transaktion är tom - avbryter.</value>
+  </data>
+  <data name="errorsendtx" xml:space="preserve">
+    <value>Fel vid skickande av transaktion. </value>
+  </data>
+  <data name="exceptionthrown" xml:space="preserve">
+    <value>Undantag givet : </value>
+  </data>
+  <data name="failedbuildtx" xml:space="preserve">
+    <value>Skapande av transaktion misslyckades. Mottagande adress är inte giltig. </value>
+  </data>
+  <data name="failedsendtx" xml:space="preserve">
+    <value>Misslyckades med att skicka transaktion. </value>
+  </data>
+  <data name="failedtx" xml:space="preserve">
+    <value>transaktion misslyckad </value>
+  </data>
+  <data name="invalidrecipient" xml:space="preserve">
+    <value>Mottagande adress är giltlig.</value>
+  </data>
+  <data name="rawtxdecode" xml:space="preserve">
+    <value>Obearbetad transaktion avkodning: </value>
+  </data>
+  <data name="rawtxhex" xml:space="preserve">
+    <value>Obearbetad transaktion hex: </value>
+  </data>
+  <data name="signingfailed" xml:space="preserve">
+    <value>Misslyckades med att signera transaktionen. Säkerställ att plånbokens nyckel är korrekt. </value>
+  </data>
+  <data name="signingsuccesstx" xml:space="preserve">
+    <value>Signering verkar lyckad. </value>
+  </data>
+  <data name="transactionnotsent" xml:space="preserve">
+    <value>Transaktion inte skickad. </value>
+  </data>
+  <data name="transactionsentid" xml:space="preserve">
+    <value>Transaktion skickad, ID: </value>
+  </data>
+  <data name="validrecipient" xml:space="preserve">
+    <value>Mottagande adress är giltig.</value>
+  </data>
+  <data name="addresslistexception" xml:space="preserve">
+    <value>Undantag från adresslistan </value>
+  </data>
+  <data name="blockscatchup" xml:space="preserve">
+    <value>Block att ta ikapp </value>
+  </data>
+  <data name="currencylistexception" xml:space="preserve">
+    <value>Undantag från valutalistan </value>
+  </data>
+  <data name="historylistexception" xml:space="preserve">
+    <value>Undantag från historielistan </value>
+  </data>
+  <data name="messageinfo3" xml:space="preserve">
+    <value>Verkställande kontroll har upptäckt adresser med flera balans värden i databasen. Det är inte säkert att fortsätta. Plånboken kommer nu avslutas.</value>
+  </data>
+  <data name="messagesstartexception1" xml:space="preserve">
+    <value>Undantag vid test av anslutning till bitcoin via RPC: </value>
+  </data>
+  <data name="messagestartinfo1" xml:space="preserve">
+    <value>Det var ett problem vid konfigrationen av din anslutning till bitcoind/qt. Både automatisk och manuell konfigration verkar ha misslyckats. </value>
+  </data>
+  <data name="starterror1" xml:space="preserve">
+    <value>Uppstart FEL: Anslutning till bitcoin RPC verkar vara fastställd men svaren är inte som förväntat. Avbryter uppstart. </value>
+  </data>
+  <data name="starterror2" xml:space="preserve">
+    <value>Uppstart FEL: Undantag vid test av anslutning till bitcoin via RPC. Avbryter uppstart. E2:</value>
+  </data>
+  <data name="starterror3" xml:space="preserve">
+    <value>Uppstart FEL: Anslutning till databasen verkar vara fastställd men svaren är inte som förväntat. Avbryter uppstart. </value>
+  </data>
+  <data name="starterror4" xml:space="preserve">
+    <value>Uppstart FEL: Räkning av adresser avslutades inte korrekt. Avbryter uppstart.  </value>
+  </data>
+  <data name="startinfo1" xml:space="preserve">
+    <value>Uppstart: Testar bitcoin anslutning... </value>
+  </data>
+  <data name="startinfo2" xml:space="preserve">
+    <value>Uppstart: Anslutning till bitcoin via RPC fastställd och verkställande kontroll OK.</value>
+  </data>
+  <data name="startinfo3" xml:space="preserve">
+    <value>Uppstart: Testar anslutningen till databasen... </value>
+  </data>
+  <data name="startinfo4" xml:space="preserve">
+    <value>Uppstart: Anslutning till databasen fastställd och verkställande kontroll OK.</value>
+  </data>
+  <data name="startinfo5" xml:space="preserve">
+    <value>Uppstart: Räknar plånboks adresser...</value>
+  </data>
+  <data name="status" xml:space="preserve">
+    <value>STATUS:</value>
+  </data>
+  <data name="txtdebugexit" xml:space="preserve">
+    <value>FELSÖKNING: Tråd lämnad. </value>
+  </data>
+  <data name="workerblockscan1" xml:space="preserve">
+    <value>BLOCKSÖKNING: Hittade MSC transaktion (simple send):</value>
+  </data>
+  <data name="workerblockscan2" xml:space="preserve">
+    <value>BLOCKSÖKNING: Hittade MSC transaktion (sälj erbjudande):</value>
+  </data>
+  <data name="workerblockscan3" xml:space="preserve">
+    <value>BLOCKSÖKNING: Hittade MSC transaktion (acceptera erbjudande):</value>
+  </data>
+  <data name="workerblockscan4" xml:space="preserve">
+    <value>BLOCKSÖKNING: Hittade MSC transaktion (simple send):</value>
+  </data>
+  <data name="workerblockscan5" xml:space="preserve">
+    <value>BLOCKSÖKNING: Transaktionen börjar processas...</value>
+  </data>
+  <data name="workerblockscan6" xml:space="preserve">
+    <value>BLOCKSÖKNING: Klart, sover. </value>
+  </data>
+  <data name="workerdebug1" xml:space="preserve">
+    <value>DEBUG: Tråd &apos;arbets tråd&apos; startar...</value>
+  </data>
+  <data name="workerdebug2" xml:space="preserve">
+    <value>FELSÖKNING: Block Analys för: </value>
+  </data>
+  <data name="workerdebug3" xml:space="preserve">
+    <value>DEBUG: Block analys för avvaktande transaktioner </value>
+  </data>
+  <data name="workerdebug4" xml:space="preserve">
+    <value>DEBUG: Räknar adresser... </value>
+  </data>
+  <data name="workerdebug5" xml:space="preserve">
+    <value>DEBUG: Verifierar saldo tabell...</value>
+  </data>
+  <data name="workerdebug6" xml:space="preserve">
+    <value>DEBUG: Tråd avslutad med fel. </value>
+  </data>
+  <data name="workerdebugSQL" xml:space="preserve">
+    <value>DEBUG: SQL</value>
+  </data>
+  <data name="workererror1" xml:space="preserve">
+    <value>FEL: Anslutning till bitcoin RPC verkar vara fastställd men svaren är inte som förväntat. </value>
+  </data>
+  <data name="workererror2" xml:space="preserve">
+    <value>FEL: Anslutning till databasen verkar vara fastställd men svaren är inte som förväntat. </value>
+  </data>
+  <data name="workererror3" xml:space="preserve">
+    <value>FEL: Block i databasen verkar nyare än bitcoin rpc block - är bitcoin rpc uppdaterad? Avslutar tråd. </value>
+  </data>
+  <data name="workererror4" xml:space="preserve">
+    <value>FEL: Räkning av adresser avslutades inte korrekt. </value>
+  </data>
+  <data name="workererror5" xml:space="preserve">
+    <value>FEL: Anslutning till databasen gav ett undantag av: </value>
+  </data>
+  <data name="workererror6" xml:space="preserve">
+    <value>FEL: Blockchain söknings tråd gav ett undantag:</value>
+  </data>
+  <data name="workerstatus1" xml:space="preserve">
+    <value>Uppstart: Anslutning till bitcoin RPC fastställd och verkställande kontroll OK.</value>
+  </data>
+  <data name="workerstatus2" xml:space="preserve">
+    <value>Uppstart: UI tråd förblir aktiv men blockchain avsöknings tråd kommer nu att avsluta.</value>
+  </data>
+  <data name="workerstatus3" xml:space="preserve">
+    <value>STATUS: Anslutning till databasen fastställd och verkställande kontroll OK.</value>
+  </data>
+  <data name="workerstatus4" xml:space="preserve">
+    <value>STATUS: Databasen börjar på block</value>
+  </data>
+  <data name="workerstatus5" xml:space="preserve">
+    <value>STATUS: Nätverket är på block</value>
   </data>
 </root>

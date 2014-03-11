@@ -713,4 +713,10 @@
   <data name="workerstatus5" xml:space="preserve">
     <value>STATUS: Network is at block</value>
   </data>
+  <data name="workerblockscan7" xml:space="preserve">
+    <value>BLOCKSCAN: Found pending MSC transaction (simple send):</value>
+  </data>
+  <data name="workerblockscan8" xml:space="preserve">
+    <value>BLOCKSCAN: Found pending MSC transaction (sell offer):</value>
+  </data>
 </root>

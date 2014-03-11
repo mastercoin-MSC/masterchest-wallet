@@ -48,3 +48,7 @@ C:\Users\rich\Documents\Visual Studio 2010\Projects\masterchest_wallet\masterche
 C:\Users\rich\Documents\Visual Studio 2010\Projects\masterchest_wallet\masterchest_wallet\obj\x86\Debug\Masterchest_Wallet.sentfrm.resources
 C:\Users\rich\Documents\Visual Studio 2010\Projects\masterchest_wallet\masterchest_wallet\bin\Debug\Masterchest.pdb
 C:\Users\rich\Documents\Visual Studio 2010\Projects\masterchest_wallet\masterchest_wallet\bin\Debug\Masterchest.xml
+C:\Users\rich\Documents\Visual Studio 2010\Projects\masterchest_wallet\masterchest_wallet\obj\x86\Debug\Masterchest_Wallet.buyfrm.resources
+C:\Users\rich\Documents\Visual Studio 2010\Projects\masterchest_wallet\masterchest_wallet\obj\x86\Debug\Masterchest_Wallet.sellfrm.resources
+C:\Users\rich\Documents\Visual Studio 2010\Projects\masterchest_wallet\masterchest_wallet\obj\x86\Debug\Masterchest_Wallet.sellcancelfrm.resources
+C:\Users\rich\Documents\Visual Studio 2010\Projects\masterchest_wallet\masterchest_wallet\obj\x86\Debug\Masterchest_Wallet.paybuyfrm.resources
