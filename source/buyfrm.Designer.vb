@@ -174,6 +174,7 @@ Partial Class buyfrm
         Me.txtsendamount.Name = "txtsendamount"
         Me.txtsendamount.Size = New System.Drawing.Size(150, 28)
         Me.txtsendamount.TabIndex = 65
+        Me.txtsendamount.Tag = LocaleTag.Numeric
         Me.txtsendamount.Text = "0.00"
         '
         'bcancel
@@ -199,6 +200,7 @@ Partial Class buyfrm
         Me.ltotal.Name = "ltotal"
         Me.ltotal.Size = New System.Drawing.Size(38, 15)
         Me.ltotal.TabIndex = 69
+        Me.ltotal.Tag = LocaleTag.Numeric
         Me.ltotal.Text = "0.000"
         '
         'Label4
@@ -219,6 +221,7 @@ Partial Class buyfrm
         Me.ltotalbtc.Name = "ltotalbtc"
         Me.ltotalbtc.Size = New System.Drawing.Size(151, 31)
         Me.ltotalbtc.TabIndex = 72
+        Me.ltotalbtc.Tag = LocaleTag.Numeric
         Me.ltotalbtc.Text = "0.00"
         '
         'Label5
@@ -240,6 +243,7 @@ Partial Class buyfrm
         Me.ltimelimit.Name = "ltimelimit"
         Me.ltimelimit.Size = New System.Drawing.Size(14, 15)
         Me.ltimelimit.TabIndex = 74
+        Me.ltimelimit.Tag = LocaleTag.Numeric
         Me.ltimelimit.Text = "0"
         '
         'bclose
@@ -270,6 +274,7 @@ Partial Class buyfrm
         Me.lminfee.Name = "lminfee"
         Me.lminfee.Size = New System.Drawing.Size(14, 15)
         Me.lminfee.TabIndex = 76
+        Me.lminfee.Tag = LocaleTag.Numeric
         Me.lminfee.Text = "0"
         '
         'lunit
@@ -280,6 +285,7 @@ Partial Class buyfrm
         Me.lunit.Name = "lunit"
         Me.lunit.Size = New System.Drawing.Size(155, 32)
         Me.lunit.TabIndex = 67
+        Me.lunit.Tag = LocaleTag.Numeric
         Me.lunit.Text = "0.00"
         '
         'lnkavail
@@ -294,6 +300,7 @@ Partial Class buyfrm
         Me.lnkavail.Size = New System.Drawing.Size(13, 13)
         Me.lnkavail.TabIndex = 81
         Me.lnkavail.TabStop = True
+        Me.lnkavail.Tag = LocaleTag.Numeric
         Me.lnkavail.Text = "0"
         Me.lnkavail.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
         '

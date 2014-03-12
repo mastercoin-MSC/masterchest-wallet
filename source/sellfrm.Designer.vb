@@ -141,6 +141,7 @@ Partial Class sellfrm
         Me.txtsendamount.Name = "txtsendamount"
         Me.txtsendamount.Size = New System.Drawing.Size(148, 28)
         Me.txtsendamount.TabIndex = 65
+        Me.txtsendamount.Tag = LocaleTag.Numeric
         Me.txtsendamount.Text = "0.00"
         '
         'bcancel
@@ -166,6 +167,7 @@ Partial Class sellfrm
         Me.lunit.Name = "lunit"
         Me.lunit.Size = New System.Drawing.Size(38, 15)
         Me.lunit.TabIndex = 67
+        Me.lunit.Tag = LocaleTag.Numeric
         Me.lunit.Text = "0.000"
         '
         'bclose
@@ -195,6 +197,7 @@ Partial Class sellfrm
         Me.ltotalbtc.Name = "ltotalbtc"
         Me.ltotalbtc.Size = New System.Drawing.Size(152, 31)
         Me.ltotalbtc.TabIndex = 72
+        Me.ltotalbtc.Tag = LocaleTag.Numeric
         Me.ltotalbtc.Text = "0.00"
         '
         'Label3
@@ -217,6 +220,7 @@ Partial Class sellfrm
         Me.txtunit.Name = "txtunit"
         Me.txtunit.Size = New System.Drawing.Size(145, 28)
         Me.txtunit.TabIndex = 76
+        Me.txtunit.Tag = LocaleTag.Numeric
         Me.txtunit.Text = "0.00"
         '
         'Label6
@@ -256,6 +260,8 @@ Partial Class sellfrm
         Me.lnkminfee.Size = New System.Drawing.Size(64, 13)
         Me.lnkminfee.TabIndex = 80
         Me.lnkminfee.TabStop = True
+        Me.lnkminfee.Name = "lnkminfee"
+        Me.lnkminfee.Tag = LocaleTag.Numeric
         Me.lnkminfee.Text = "0.0001 BTC"
         Me.lnkminfee.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
         '

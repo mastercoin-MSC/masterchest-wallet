@@ -34,6 +34,7 @@ Public Class sellfrm
         ltotalbtc.Text = "0.00"
         lnktimelimit.Text = "6 blocks"
         lnkminfee.Text = "0.0001 BTC"
+
         comselladdress.Items.Clear()
         comselladdress.Text = ""
         For Each row In addresslist.Rows

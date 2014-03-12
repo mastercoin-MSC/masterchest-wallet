@@ -2475,7 +2475,10 @@ Public Class Form1
                 sellrefadd = row.cells(0).value.ToString
             Next
             If sellrefadd <> "" Then
+                RevertCultureInfo()
                 buyfrm.buyfrminit()
+                LocalizeNumericControls(sellfrm, NumberStyles.AllowDecimalPoint Or NumberStyles.AllowThousands, activeCulture)
+                Thread.CurrentThread.CurrentUICulture = activeCulture
                 buyfrm.ShowDialog()
             End If
         Catch ex As Exception
@@ -2484,14 +2487,16 @@ Public Class Form1
     End Sub
 
     Private Sub bsell_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bsell.Click
+        RevertCultureInfo()
         sellfrm.sellfrminit()
+        LocalizeNumericControls(sellfrm, NumberStyles.AllowDecimalPoint Or NumberStyles.AllowThousands, activeCulture)
+        Thread.CurrentThread.CurrentUICulture = activeCulture
         sellfrm.ShowDialog()
     End Sub
 
     Private Sub dgvselloffer_DataError(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewDataErrorEventArgs) Handles dgvselloffer.DataError
         'trap error when we clear list bound to dgv temporarily
     End Sub
-
 
     Private Sub dgvselloffer_SelectionChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles dgvselloffer.SelectionChanged
         'get currently highlighted sell
@@ -2520,7 +2525,9 @@ Public Class Form1
     Private Sub sendpay_click(ByVal sender As Object, ByVal e As EventArgs)
         paybuytxid = ""
         paybuytxid = dgvopenorders.SelectedRows.Item(0).Cells(0).Value.ToString
+        RevertCultureInfo()
         paybuyfrm.paybuyfrminit()
+        Thread.CurrentThread.CurrentUICulture = activeCulture
         paybuyfrm.ShowDialog()
     End Sub
 
@@ -2592,6 +2599,15 @@ Public Class Form1
             Catch exc As Exception
                 MsgBox("DGV Open Orders Exception")
             End Try
+        End If
+    End Sub
+
+    'neccessary since decimal separator is dot by default, culture should reverted back to active culture immediately
+    Private Sub RevertCultureInfo()
+        If activeCulture.NumberFormat.CurrencyDecimalSeparator = "," Then
+            Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-US")
+        ElseIf activeCulture.NumberFormat.CurrencyDecimalSeparator = "." Then
+            Thread.CurrentThread.CurrentUICulture = New CultureInfo("sv-SE")
         End If
     End Sub
 End Class
