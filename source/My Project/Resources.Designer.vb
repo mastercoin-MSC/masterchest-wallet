@@ -1702,7 +1702,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("workerblockscan7", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to BLOCKSCAN: Found pending MSC transaction (sell offer):.
         '''</summary>
@@ -1711,7 +1711,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("workerblockscan8", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to DEBUG: Thread &apos;workthread&apos; starting....
         '''</summary>
@@ -1720,7 +1720,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("workerdebug1", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to DEBUG: Block Analysis for:.
         '''</summary>
@@ -1729,7 +1729,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("workerdebug2", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to DEBUG: Block Analysis for pending transactions.
         '''</summary>
@@ -1738,7 +1738,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("workerdebug3", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to DEBUG: Enumerating addresses....
         '''</summary>
@@ -1747,7 +1747,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("workerdebug4", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to DEBUG: Sanity checking balances table...&quot;.
         '''</summary>
@@ -1756,7 +1756,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("workerdebug5", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to DEBUG: Thread exited with error condition..
         '''</summary>
@@ -1765,7 +1765,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("workerdebug6", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to DEBUG: SQL.
         '''</summary>
@@ -1774,7 +1774,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("workerdebugSQL", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to ERROR: Connection to bitcoin RPC seems to be established but responses are not as expected..
         '''</summary>
@@ -1783,7 +1783,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("workererror1", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to ERROR: Connection to database seems to be established but responses are not as expected..
         '''</summary>
@@ -1792,7 +1792,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("workererror2", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to ERROR: Database block appears newer than bitcoinrpc blocks - is bitcoinrpc up to date? Exiting thread..
         '''</summary>
@@ -1801,7 +1801,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("workererror3", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to ERROR: Enumerating addresses did not complete properly..
         '''</summary>
@@ -1810,7 +1810,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("workererror4", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to ERROR: Connection to database threw an exception of:.
         '''</summary>
@@ -1819,7 +1819,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("workererror5", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to ERROR: Blockchain scanning thread threw exception :.
         '''</summary>
@@ -1828,7 +1828,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("workererror6", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to STATUS: Connection to bitcoin RPC established &amp; sanity check OK..
         '''</summary>
@@ -1837,7 +1837,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("workerstatus1", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to STATUS: UI thread will remain but blockchain scanning thread will now exit..
         '''</summary>
@@ -1846,7 +1846,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("workerstatus2", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to STATUS: Connection to database established &amp; sanity check OK..
         '''</summary>
@@ -1855,7 +1855,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("workerstatus3", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to STATUS: Database starting at block.
         '''</summary>
@@ -1864,7 +1864,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("workerstatus4", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to STATUS: Network is at block.
         '''</summary>

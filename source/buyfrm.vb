@@ -24,7 +24,7 @@ Public Class buyfrm
        
     End Sub
     Public Sub buyfrminit()
-        lsendavail.Text = "Select a buying address"
+        buyfrm_lsendavail.Text = "Select a buying address"
         txtsendamount.Text = "0.00"
         ltotalbtc.Text = "0.00"
         lunit.Text = "0.00"
@@ -57,7 +57,7 @@ Public Class buyfrm
         lnkavail.Text = saleamount.ToString("######0.00######")
         ltotal.Text = offeramount.ToString("######0.00######")
         lunit.Text = unitprice.ToString("######0.00######")
-        ltimelimit.Text = timelimit.ToString & " blocks"
+        ltimelimitn.Text = timelimit.ToString & " blocks"
         lminfee.Text = minfee.ToString("######0.00######")
         con.Close()
     End Sub
@@ -74,7 +74,7 @@ Public Class buyfrm
         For Each row In addresslist.Rows
             If row.item(0) = combuyaddress.SelectedItem Then avail = row.item(1)
         Next
-        lsendavail.Text = "Available: " & avail.ToString("######0.00######") & " BTC"
+        buyfrm_lsendavail.Text = "Available: " & avail.ToString("######0.00######") & " BTC"
     End Sub
 
     Private Sub txtsendamount_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtsendamount.LostFocus

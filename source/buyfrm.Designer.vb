@@ -24,24 +24,24 @@ Partial Class buyfrm
     Private Sub InitializeComponent()
         Me.RectangleShape1 = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
         Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
-        Me.Label75 = New System.Windows.Forms.Label()
-        Me.boverview = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.ltotall = New System.Windows.Forms.Label()
+        Me.buyfrm_Label75 = New System.Windows.Forms.Label()
+        Me.buyfrm_boverview = New System.Windows.Forms.Label()
+        Me.buyfrm_Label1 = New System.Windows.Forms.Label()
+        Me.lunitpricebtc = New System.Windows.Forms.Label()
+        Me.buyfrm_Label3 = New System.Windows.Forms.Label()
+        Me.ltotalpricebtc = New System.Windows.Forms.Label()
         Me.combuyaddress = New System.Windows.Forms.ComboBox()
-        Me.lsendavail = New System.Windows.Forms.Label()
+        Me.buyfrm_lsendavail = New System.Windows.Forms.Label()
         Me.bbuy = New System.Windows.Forms.Button()
         Me.txtsendamount = New System.Windows.Forms.TextBox()
         Me.bcancel = New System.Windows.Forms.Button()
         Me.ltotal = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
+        Me.ltotalcostbtc = New System.Windows.Forms.Label()
         Me.ltotalbtc = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.ltimelimit = New System.Windows.Forms.Label()
+        Me.ltimelimitn = New System.Windows.Forms.Label()
         Me.bclose = New System.Windows.Forms.PictureBox()
-        Me.Label6 = New System.Windows.Forms.Label()
+        Me.lminimumfee = New System.Windows.Forms.Label()
         Me.lminfee = New System.Windows.Forms.Label()
         Me.lunit = New System.Windows.Forms.Label()
         Me.lnkavail = New System.Windows.Forms.LinkLabel()
@@ -68,64 +68,70 @@ Partial Class buyfrm
         '
         'Label75
         '
-        Me.Label75.AutoSize = True
-        Me.Label75.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label75.Location = New System.Drawing.Point(54, 67)
-        Me.Label75.Name = "Label75"
-        Me.Label75.Size = New System.Drawing.Size(184, 13)
-        Me.Label75.TabIndex = 54
-        Me.Label75.Text = "SELECT YOUR BUYING ADDRESS:"
+        Me.buyfrm_Label75.AutoSize = True
+        Me.buyfrm_Label75.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.buyfrm_Label75.Location = New System.Drawing.Point(54, 67)
+        Me.buyfrm_Label75.Name = "Label75"
+        Me.buyfrm_Label75.Size = New System.Drawing.Size(184, 13)
+        Me.buyfrm_Label75.TabIndex = 54
+        Me.buyfrm_Label75.Tag = LocaleTag.Text
+        Me.buyfrm_Label75.Text = "SELECT YOUR BUYING ADDRESS:"
         '
-        'boverview
+        'buyfrm_boverview
         '
-        Me.boverview.AutoSize = True
-        Me.boverview.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.boverview.ForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
-        Me.boverview.Location = New System.Drawing.Point(30, 22)
-        Me.boverview.Name = "boverview"
-        Me.boverview.Size = New System.Drawing.Size(140, 30)
-        Me.boverview.TabIndex = 56
-        Me.boverview.Text = "buy 'test msc'"
+        Me.buyfrm_boverview.AutoSize = True
+        Me.buyfrm_boverview.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.buyfrm_boverview.ForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
+        Me.buyfrm_boverview.Location = New System.Drawing.Point(30, 22)
+        Me.buyfrm_boverview.Name = "boverview"
+        Me.buyfrm_boverview.Size = New System.Drawing.Size(140, 30)
+        Me.buyfrm_boverview.TabIndex = 56
+        Me.buyfrm_boverview.Tag = LocaleTag.Text
+        Me.buyfrm_boverview.Text = "buy 'test msc'"
         '
         'Label1
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(55, 173)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(137, 13)
-        Me.Label1.TabIndex = 57
-        Me.Label1.Text = "AMOUNT TO PURCHASE:"
+        Me.buyfrm_Label1.AutoSize = True
+        Me.buyfrm_Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.buyfrm_Label1.Location = New System.Drawing.Point(55, 173)
+        Me.buyfrm_Label1.Name = "Label1"
+        Me.buyfrm_Label1.Size = New System.Drawing.Size(137, 13)
+        Me.buyfrm_Label1.TabIndex = 57
+        Me.buyfrm_Label1.Tag = LocaleTag.Text
+        Me.buyfrm_Label1.Text = "AMOUNT TO PURCHASE:"
         '
-        'Label2
+        'lunitpricebtc
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label2.Location = New System.Drawing.Point(208, 173)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(101, 13)
-        Me.Label2.TabIndex = 58
-        Me.Label2.Text = "UNIT PRICE (BTC):"
+        Me.lunitpricebtc.AutoSize = True
+        Me.lunitpricebtc.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.lunitpricebtc.Location = New System.Drawing.Point(208, 173)
+        Me.lunitpricebtc.Name = "lunitpricebtc"
+        Me.lunitpricebtc.Size = New System.Drawing.Size(101, 13)
+        Me.lunitpricebtc.TabIndex = 58
+        Me.lunitpricebtc.Tag = LocaleTag.Text
+        Me.lunitpricebtc.Text = "UNIT PRICE (BTC):"
         '
-        'Label3
+        'buyfrm_Label3
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label3.Location = New System.Drawing.Point(263, 120)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(67, 13)
-        Me.Label3.TabIndex = 59
-        Me.Label3.Text = "AVAILABLE:"
+        Me.buyfrm_Label3.AutoSize = True
+        Me.buyfrm_Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.buyfrm_Label3.Location = New System.Drawing.Point(263, 120)
+        Me.buyfrm_Label3.Name = "buyfrm_Label3"
+        Me.buyfrm_Label3.Size = New System.Drawing.Size(67, 13)
+        Me.buyfrm_Label3.TabIndex = 59
+        Me.buyfrm_Label3.Tag = LocaleTag.Text
+        Me.buyfrm_Label3.Text = "AVAILABLE:"
         '
-        'ltotall
+        'ltotalpricebtc
         '
-        Me.ltotall.AutoSize = True
-        Me.ltotall.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.ltotall.Location = New System.Drawing.Point(262, 140)
-        Me.ltotall.Name = "ltotall"
-        Me.ltotall.Size = New System.Drawing.Size(110, 13)
-        Me.ltotall.TabIndex = 60
-        Me.ltotall.Text = "TOTAL PRICE (BTC):"
+        Me.ltotalpricebtc.AutoSize = True
+        Me.ltotalpricebtc.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.ltotalpricebtc.Location = New System.Drawing.Point(262, 140)
+        Me.ltotalpricebtc.Name = "ltotalpricebtc"
+        Me.ltotalpricebtc.Size = New System.Drawing.Size(110, 13)
+        Me.ltotalpricebtc.TabIndex = 60
+        Me.ltotalpricebtc.Tag = LocaleTag.Text
+        Me.ltotalpricebtc.Text = "TOTAL PRICE (BTC):"
         '
         'combuyaddress
         '
@@ -139,16 +145,17 @@ Partial Class buyfrm
         Me.combuyaddress.Size = New System.Drawing.Size(406, 21)
         Me.combuyaddress.TabIndex = 62
         '
-        'lsendavail
+        'buyfrm_lsendavail
         '
-        Me.lsendavail.Font = New System.Drawing.Font("Arial Narrow", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lsendavail.ForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
-        Me.lsendavail.Location = New System.Drawing.Point(317, 67)
-        Me.lsendavail.Name = "lsendavail"
-        Me.lsendavail.Size = New System.Drawing.Size(151, 15)
-        Me.lsendavail.TabIndex = 63
-        Me.lsendavail.Text = "Select a buying address"
-        Me.lsendavail.TextAlign = System.Drawing.ContentAlignment.TopRight
+        Me.buyfrm_lsendavail.Font = New System.Drawing.Font("Arial Narrow", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.buyfrm_lsendavail.ForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
+        Me.buyfrm_lsendavail.Location = New System.Drawing.Point(317, 67)
+        Me.buyfrm_lsendavail.Name = "buyfrm_lsendavail"
+        Me.buyfrm_lsendavail.Size = New System.Drawing.Size(151, 15)
+        Me.buyfrm_lsendavail.TabIndex = 63
+        Me.buyfrm_lsendavail.Tag = LocaleTag.Text
+        Me.buyfrm_lsendavail.Text = "Select a buying address"
+        Me.buyfrm_lsendavail.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'bbuy
         '
@@ -161,6 +168,7 @@ Partial Class buyfrm
         Me.bbuy.Name = "bbuy"
         Me.bbuy.Size = New System.Drawing.Size(58, 23)
         Me.bbuy.TabIndex = 64
+        Me.bbuy.Tag = LocaleTag.Text
         Me.bbuy.Text = "Buy"
         Me.bbuy.UseVisualStyleBackColor = False
         '
@@ -188,6 +196,7 @@ Partial Class buyfrm
         Me.bcancel.Name = "bcancel"
         Me.bcancel.Size = New System.Drawing.Size(58, 23)
         Me.bcancel.TabIndex = 66
+        Me.bcancel.Tag = LocaleTag.Text
         Me.bcancel.Text = "Cancel"
         Me.bcancel.UseVisualStyleBackColor = False
         '
@@ -203,15 +212,16 @@ Partial Class buyfrm
         Me.ltotal.Tag = LocaleTag.Numeric
         Me.ltotal.Text = "0.000"
         '
-        'Label4
+        'ltotalcostbtc
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label4.Location = New System.Drawing.Point(360, 173)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(104, 13)
-        Me.Label4.TabIndex = 71
-        Me.Label4.Text = "TOTAL COST (BTC)"
+        Me.ltotalcostbtc.AutoSize = True
+        Me.ltotalcostbtc.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.ltotalcostbtc.Location = New System.Drawing.Point(360, 173)
+        Me.ltotalcostbtc.Name = "ltotalcostbtc"
+        Me.ltotalcostbtc.Size = New System.Drawing.Size(104, 13)
+        Me.ltotalcostbtc.TabIndex = 71
+        Me.ltotalcostbtc.Tag = LocaleTag.Text
+        Me.ltotalcostbtc.Text = "TOTAL COST (BTC)"
         '
         'ltotalbtc
         '
@@ -224,27 +234,28 @@ Partial Class buyfrm
         Me.ltotalbtc.Tag = LocaleTag.Numeric
         Me.ltotalbtc.Text = "0.00"
         '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label5.Location = New System.Drawing.Point(55, 120)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(67, 13)
-        Me.Label5.TabIndex = 73
-        Me.Label5.Text = "TIME LIMIT:"
-        '
         'ltimelimit
         '
         Me.ltimelimit.AutoSize = True
-        Me.ltimelimit.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ltimelimit.ForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
-        Me.ltimelimit.Location = New System.Drawing.Point(143, 118)
+        Me.ltimelimit.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.ltimelimit.Location = New System.Drawing.Point(55, 120)
         Me.ltimelimit.Name = "ltimelimit"
-        Me.ltimelimit.Size = New System.Drawing.Size(14, 15)
-        Me.ltimelimit.TabIndex = 74
-        Me.ltimelimit.Tag = LocaleTag.Numeric
-        Me.ltimelimit.Text = "0"
+        Me.ltimelimit.Size = New System.Drawing.Size(67, 13)
+        Me.ltimelimit.TabIndex = 73
+        Me.ltimelimit.Tag = LocaleTag.Text
+        Me.ltimelimit.Text = "TIME LIMIT:"
+        '
+        'ltimelimitn
+        '
+        Me.ltimelimitn.AutoSize = True
+        Me.ltimelimitn.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ltimelimitn.ForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
+        Me.ltimelimitn.Location = New System.Drawing.Point(143, 118)
+        Me.ltimelimitn.Name = "ltimelimit"
+        Me.ltimelimitn.Size = New System.Drawing.Size(14, 15)
+        Me.ltimelimitn.TabIndex = 74
+        Me.ltimelimitn.Tag = LocaleTag.Numeric
+        Me.ltimelimitn.Text = "0"
         '
         'bclose
         '
@@ -255,15 +266,16 @@ Partial Class buyfrm
         Me.bclose.TabIndex = 70
         Me.bclose.TabStop = False
         '
-        'Label6
+        'lminimumfee
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label6.Location = New System.Drawing.Point(55, 140)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(82, 13)
-        Me.Label6.TabIndex = 75
-        Me.Label6.Text = "MINIMUM FEE:"
+        Me.lminimumfee.AutoSize = True
+        Me.lminimumfee.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.lminimumfee.Location = New System.Drawing.Point(55, 140)
+        Me.lminimumfee.Name = "lminimumfee"
+        Me.lminimumfee.Size = New System.Drawing.Size(82, 13)
+        Me.lminimumfee.TabIndex = 75
+        Me.lminimumfee.Tag = LocaleTag.Text
+        Me.lminimumfee.Text = "MINIMUM FEE:"
         '
         'lminfee
         '
@@ -311,26 +323,26 @@ Partial Class buyfrm
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(38, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(519, 291)
         Me.Controls.Add(Me.lnkavail)
-        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.lunitpricebtc)
         Me.Controls.Add(Me.lminfee)
-        Me.Controls.Add(Me.Label6)
+        Me.Controls.Add(Me.lminimumfee)
+        Me.Controls.Add(Me.ltimelimitn)
         Me.Controls.Add(Me.ltimelimit)
-        Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.ltotalcostbtc)
         Me.Controls.Add(Me.ltotalbtc)
         Me.Controls.Add(Me.bclose)
         Me.Controls.Add(Me.ltotal)
         Me.Controls.Add(Me.lunit)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.buyfrm_Label1)
         Me.Controls.Add(Me.bcancel)
         Me.Controls.Add(Me.txtsendamount)
         Me.Controls.Add(Me.bbuy)
-        Me.Controls.Add(Me.lsendavail)
+        Me.Controls.Add(Me.buyfrm_lsendavail)
         Me.Controls.Add(Me.combuyaddress)
-        Me.Controls.Add(Me.ltotall)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.boverview)
-        Me.Controls.Add(Me.Label75)
+        Me.Controls.Add(Me.ltotalpricebtc)
+        Me.Controls.Add(Me.buyfrm_Label3)
+        Me.Controls.Add(Me.buyfrm_boverview)
+        Me.Controls.Add(Me.buyfrm_Label75)
         Me.Controls.Add(Me.ShapeContainer1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "buyfrm"
@@ -345,24 +357,24 @@ Partial Class buyfrm
     End Sub
     Friend WithEvents RectangleShape1 As Microsoft.VisualBasic.PowerPacks.RectangleShape
     Friend WithEvents ShapeContainer1 As Microsoft.VisualBasic.PowerPacks.ShapeContainer
-    Friend WithEvents Label75 As System.Windows.Forms.Label
-    Friend WithEvents boverview As System.Windows.Forms.Label
-    Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents ltotall As System.Windows.Forms.Label
+    Friend WithEvents buyfrm_Label75 As System.Windows.Forms.Label
+    Friend WithEvents buyfrm_boverview As System.Windows.Forms.Label
+    Friend WithEvents buyfrm_Label1 As System.Windows.Forms.Label
+    Friend WithEvents lunitpricebtc As System.Windows.Forms.Label
+    Friend WithEvents buyfrm_Label3 As System.Windows.Forms.Label
+    Friend WithEvents ltotalpricebtc As System.Windows.Forms.Label
     Friend WithEvents combuyaddress As System.Windows.Forms.ComboBox
-    Friend WithEvents lsendavail As System.Windows.Forms.Label
+    Friend WithEvents buyfrm_lsendavail As System.Windows.Forms.Label
     Friend WithEvents bbuy As System.Windows.Forms.Button
     Friend WithEvents txtsendamount As System.Windows.Forms.TextBox
     Friend WithEvents bcancel As System.Windows.Forms.Button
     Friend WithEvents ltotal As System.Windows.Forms.Label
     Friend WithEvents bclose As System.Windows.Forms.PictureBox
-    Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents ltotalcostbtc As System.Windows.Forms.Label
     Friend WithEvents ltotalbtc As System.Windows.Forms.Label
-    Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents ltimelimit As System.Windows.Forms.Label
-    Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents ltimelimitn As System.Windows.Forms.Label
+    Friend WithEvents lminimumfee As System.Windows.Forms.Label
     Friend WithEvents lminfee As System.Windows.Forms.Label
     Friend WithEvents lunit As System.Windows.Forms.Label
     Friend WithEvents lnkavail As System.Windows.Forms.LinkLabel

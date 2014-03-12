@@ -24,24 +24,24 @@ Partial Class sellfrm
     Private Sub InitializeComponent()
         Me.RectangleShape1 = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
         Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
-        Me.Label75 = New System.Windows.Forms.Label()
-        Me.boverview = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.sellfrm_Label75 = New System.Windows.Forms.Label()
+        Me.sellfrm_boverview = New System.Windows.Forms.Label()
+        Me.sellfrm_Label1 = New System.Windows.Forms.Label()
         Me.comselladdress = New System.Windows.Forms.ComboBox()
-        Me.lsendavail = New System.Windows.Forms.Label()
+        Me.sellfrm_lsendavail = New System.Windows.Forms.Label()
         Me.bsell = New System.Windows.Forms.Button()
         Me.txtsendamount = New System.Windows.Forms.TextBox()
         Me.bcancel = New System.Windows.Forms.Button()
         Me.lunit = New System.Windows.Forms.Label()
         Me.bclose = New System.Windows.Forms.PictureBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.ltotalbtc = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
+        Me.ltotalcostbtc = New System.Windows.Forms.Label()
+        Me.ltotal = New System.Windows.Forms.Label()
+        Me.lunitpricebtc = New System.Windows.Forms.Label()
         Me.txtunit = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
+        Me.ltimelimit = New System.Windows.Forms.Label()
         Me.lnktimelimit = New System.Windows.Forms.LinkLabel()
         Me.lnkminfee = New System.Windows.Forms.LinkLabel()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.lminimumfee = New System.Windows.Forms.Label()
         CType(Me.bclose, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -63,36 +63,39 @@ Partial Class sellfrm
         Me.ShapeContainer1.TabIndex = 0
         Me.ShapeContainer1.TabStop = False
         '
-        'Label75
+        'sellfrm_Label75
         '
-        Me.Label75.AutoSize = True
-        Me.Label75.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label75.Location = New System.Drawing.Point(45, 67)
-        Me.Label75.Name = "Label75"
-        Me.Label75.Size = New System.Drawing.Size(188, 13)
-        Me.Label75.TabIndex = 54
-        Me.Label75.Text = "SELECT YOUR SELLING ADDRESS:"
+        Me.sellfrm_Label75.AutoSize = True
+        Me.sellfrm_Label75.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.sellfrm_Label75.Location = New System.Drawing.Point(45, 67)
+        Me.sellfrm_Label75.Name = "sellfrm_Label75"
+        Me.sellfrm_Label75.Size = New System.Drawing.Size(188, 13)
+        Me.sellfrm_Label75.TabIndex = 54
+        Me.sellfrm_Label75.Tag = LocaleTag.Text
+        Me.sellfrm_Label75.Text = "SELECT YOUR SELLING ADDRESS:"
         '
-        'boverview
+        'sellfrm_boverview
         '
-        Me.boverview.AutoSize = True
-        Me.boverview.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.boverview.ForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
-        Me.boverview.Location = New System.Drawing.Point(29, 22)
-        Me.boverview.Name = "boverview"
-        Me.boverview.Size = New System.Drawing.Size(136, 30)
-        Me.boverview.TabIndex = 56
-        Me.boverview.Text = "sell 'test msc'"
+        Me.sellfrm_boverview.AutoSize = True
+        Me.sellfrm_boverview.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.sellfrm_boverview.ForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
+        Me.sellfrm_boverview.Location = New System.Drawing.Point(29, 22)
+        Me.sellfrm_boverview.Name = "sellfrm_boverview"
+        Me.sellfrm_boverview.Size = New System.Drawing.Size(136, 30)
+        Me.sellfrm_boverview.TabIndex = 56
+        Me.sellfrm_boverview.Tag = LocaleTag.Text
+        Me.sellfrm_boverview.Text = "sell 'test msc'"
         '
-        'Label1
+        'sellfrm_Label1
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(46, 178)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(104, 13)
-        Me.Label1.TabIndex = 57
-        Me.Label1.Text = "AMOUNT TO SELL:"
+        Me.sellfrm_Label1.AutoSize = True
+        Me.sellfrm_Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.sellfrm_Label1.Location = New System.Drawing.Point(46, 178)
+        Me.sellfrm_Label1.Name = "sellfrm_Label1"
+        Me.sellfrm_Label1.Size = New System.Drawing.Size(104, 13)
+        Me.sellfrm_Label1.TabIndex = 57
+        Me.sellfrm_Label1.Tag = LocaleTag.Text
+        Me.sellfrm_Label1.Text = "AMOUNT TO SELL:"
         '
         'comselladdress
         '
@@ -106,16 +109,17 @@ Partial Class sellfrm
         Me.comselladdress.Size = New System.Drawing.Size(390, 21)
         Me.comselladdress.TabIndex = 62
         '
-        'lsendavail
+        'sellfrm_lsendavail
         '
-        Me.lsendavail.Font = New System.Drawing.Font("Arial Narrow", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lsendavail.ForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
-        Me.lsendavail.Location = New System.Drawing.Point(305, 67)
-        Me.lsendavail.Name = "lsendavail"
-        Me.lsendavail.Size = New System.Drawing.Size(138, 13)
-        Me.lsendavail.TabIndex = 63
-        Me.lsendavail.Text = "Select a selling address"
-        Me.lsendavail.TextAlign = System.Drawing.ContentAlignment.TopRight
+        Me.sellfrm_lsendavail.Font = New System.Drawing.Font("Arial Narrow", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.sellfrm_lsendavail.ForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
+        Me.sellfrm_lsendavail.Location = New System.Drawing.Point(305, 67)
+        Me.sellfrm_lsendavail.Name = "sellfrm_lsendavail"
+        Me.sellfrm_lsendavail.Size = New System.Drawing.Size(138, 13)
+        Me.sellfrm_lsendavail.TabIndex = 63
+        Me.sellfrm_lsendavail.Tag = LocaleTag.Text
+        Me.sellfrm_lsendavail.Text = "Select a selling address"
+        Me.sellfrm_lsendavail.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'bsell
         '
@@ -128,6 +132,7 @@ Partial Class sellfrm
         Me.bsell.Name = "bsell"
         Me.bsell.Size = New System.Drawing.Size(58, 23)
         Me.bsell.TabIndex = 64
+        Me.bsell.Tag = LocaleTag.Text
         Me.bsell.Text = "Sell"
         Me.bsell.UseVisualStyleBackColor = False
         '
@@ -155,6 +160,7 @@ Partial Class sellfrm
         Me.bcancel.Name = "bcancel"
         Me.bcancel.Size = New System.Drawing.Size(58, 23)
         Me.bcancel.TabIndex = 66
+        Me.bcancel.Tag = LocaleTag.Text
         Me.bcancel.Text = "Cancel"
         Me.bcancel.UseVisualStyleBackColor = False
         '
@@ -179,36 +185,38 @@ Partial Class sellfrm
         Me.bclose.TabIndex = 70
         Me.bclose.TabStop = False
         '
-        'Label4
+        'ltotalcostbtc
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label4.Location = New System.Drawing.Point(349, 178)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(75, 13)
-        Me.Label4.TabIndex = 71
-        Me.Label4.Text = "TOTAL (BTC):"
+        Me.ltotalcostbtc.AutoSize = True
+        Me.ltotalcostbtc.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.ltotalcostbtc.Location = New System.Drawing.Point(349, 178)
+        Me.ltotalcostbtc.Name = "ltotalcostbtc"
+        Me.ltotalcostbtc.Size = New System.Drawing.Size(75, 13)
+        Me.ltotalcostbtc.TabIndex = 71
+        Me.ltotalcostbtc.Tag = LocaleTag.Text
+        Me.ltotalcostbtc.Text = "TOTAL (BTC):"
         '
-        'ltotalbtc
+        'ltotal
         '
-        Me.ltotalbtc.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ltotalbtc.ForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
-        Me.ltotalbtc.Location = New System.Drawing.Point(346, 189)
-        Me.ltotalbtc.Name = "ltotalbtc"
-        Me.ltotalbtc.Size = New System.Drawing.Size(152, 31)
-        Me.ltotalbtc.TabIndex = 72
-        Me.ltotalbtc.Tag = LocaleTag.Numeric
-        Me.ltotalbtc.Text = "0.00"
+        Me.ltotal.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ltotal.ForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
+        Me.ltotal.Location = New System.Drawing.Point(346, 189)
+        Me.ltotal.Name = "ltotal"
+        Me.ltotal.Size = New System.Drawing.Size(152, 31)
+        Me.ltotal.TabIndex = 72
+        Me.ltotal.Tag = LocaleTag.Numeric
+        Me.ltotal.Text = "0.00"
         '
-        'Label3
+        'lunitpricebtc
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label3.Location = New System.Drawing.Point(198, 178)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(71, 13)
-        Me.Label3.TabIndex = 75
-        Me.Label3.Text = "UNIT PRICE:"
+        Me.lunitpricebtc.AutoSize = True
+        Me.lunitpricebtc.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.lunitpricebtc.Location = New System.Drawing.Point(198, 178)
+        Me.lunitpricebtc.Name = "lunitpricebtc"
+        Me.lunitpricebtc.Size = New System.Drawing.Size(71, 13)
+        Me.lunitpricebtc.TabIndex = 75
+        Me.ltotalcostbtc.Tag = LocaleTag.Text
+        Me.lunitpricebtc.Text = "UNIT PRICE:"
         '
         'txtunit
         '
@@ -223,15 +231,16 @@ Partial Class sellfrm
         Me.txtunit.Tag = LocaleTag.Numeric
         Me.txtunit.Text = "0.00"
         '
-        'Label6
+        'ltimelimit
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label6.Location = New System.Drawing.Point(45, 124)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(67, 13)
-        Me.Label6.TabIndex = 77
-        Me.Label6.Text = "TIME LIMIT:"
+        Me.ltimelimit.AutoSize = True
+        Me.ltimelimit.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.ltimelimit.Location = New System.Drawing.Point(45, 124)
+        Me.ltimelimit.Name = "ltimelimit"
+        Me.ltimelimit.Size = New System.Drawing.Size(67, 13)
+        Me.ltimelimit.TabIndex = 77
+        Me.ltimelimit.Tag = LocaleTag.Text
+        Me.ltimelimit.Text = "TIME LIMIT:"
         '
         'lnktimelimit
         '
@@ -265,15 +274,16 @@ Partial Class sellfrm
         Me.lnkminfee.Text = "0.0001 BTC"
         Me.lnkminfee.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
         '
-        'Label2
+        'lminimumfee
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label2.Location = New System.Drawing.Point(45, 147)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(82, 13)
-        Me.Label2.TabIndex = 81
-        Me.Label2.Text = "MINIMUM FEE:"
+        Me.lminimumfee.AutoSize = True
+        Me.lminimumfee.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.lminimumfee.Location = New System.Drawing.Point(45, 147)
+        Me.lminimumfee.Name = "lminimumfee"
+        Me.lminimumfee.Size = New System.Drawing.Size(82, 13)
+        Me.lminimumfee.TabIndex = 81
+        Me.lminimumfee.Tag = LocaleTag.Text
+        Me.lminimumfee.Text = "MINIMUM FEE:"
         '
         'sellfrm
         '
@@ -281,22 +291,22 @@ Partial Class sellfrm
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(38, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(501, 297)
-        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.lminimumfee)
         Me.Controls.Add(Me.lnkminfee)
         Me.Controls.Add(Me.lnktimelimit)
-        Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.ltotalbtc)
+        Me.Controls.Add(Me.ltimelimit)
+        Me.Controls.Add(Me.lunitpricebtc)
+        Me.Controls.Add(Me.ltotalcostbtc)
+        Me.Controls.Add(Me.ltotal)
         Me.Controls.Add(Me.bclose)
         Me.Controls.Add(Me.lunit)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.sellfrm_Label1)
         Me.Controls.Add(Me.bcancel)
         Me.Controls.Add(Me.bsell)
-        Me.Controls.Add(Me.lsendavail)
+        Me.Controls.Add(Me.sellfrm_lsendavail)
         Me.Controls.Add(Me.comselladdress)
-        Me.Controls.Add(Me.boverview)
-        Me.Controls.Add(Me.Label75)
+        Me.Controls.Add(Me.sellfrm_boverview)
+        Me.Controls.Add(Me.sellfrm_Label75)
         Me.Controls.Add(Me.txtunit)
         Me.Controls.Add(Me.txtsendamount)
         Me.Controls.Add(Me.ShapeContainer1)
@@ -313,22 +323,22 @@ Partial Class sellfrm
     End Sub
     Friend WithEvents RectangleShape1 As Microsoft.VisualBasic.PowerPacks.RectangleShape
     Friend WithEvents ShapeContainer1 As Microsoft.VisualBasic.PowerPacks.ShapeContainer
-    Friend WithEvents Label75 As System.Windows.Forms.Label
-    Friend WithEvents boverview As System.Windows.Forms.Label
-    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents sellfrm_Label75 As System.Windows.Forms.Label
+    Friend WithEvents sellfrm_boverview As System.Windows.Forms.Label
+    Friend WithEvents sellfrm_Label1 As System.Windows.Forms.Label
     Friend WithEvents comselladdress As System.Windows.Forms.ComboBox
-    Friend WithEvents lsendavail As System.Windows.Forms.Label
+    Friend WithEvents sellfrm_lsendavail As System.Windows.Forms.Label
     Friend WithEvents bsell As System.Windows.Forms.Button
     Friend WithEvents txtsendamount As System.Windows.Forms.TextBox
     Friend WithEvents bcancel As System.Windows.Forms.Button
     Friend WithEvents lunit As System.Windows.Forms.Label
     Friend WithEvents bclose As System.Windows.Forms.PictureBox
-    Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents ltotalbtc As System.Windows.Forms.Label
-    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents ltotalcostbtc As System.Windows.Forms.Label
+    Friend WithEvents ltotal As System.Windows.Forms.Label
+    Friend WithEvents lunitpricebtc As System.Windows.Forms.Label
     Friend WithEvents txtunit As System.Windows.Forms.TextBox
-    Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents ltimelimit As System.Windows.Forms.Label
     Friend WithEvents lnktimelimit As System.Windows.Forms.LinkLabel
     Friend WithEvents lnkminfee As System.Windows.Forms.LinkLabel
-    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents lminimumfee As System.Windows.Forms.Label
 End Class
