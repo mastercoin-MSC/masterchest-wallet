@@ -24,31 +24,53 @@ Public Class buyfrm
        
     End Sub
     Public Sub buyfrminit()
+        Dim baltype As Integer = 0
+        Dim balstr As String = ""
+        Dim tmpcur
+        If dexcur = "MSC" Then
+            tmpcur = 1
+            baltype = 3
+            boverview.Text = "buy 'mastercoin'"
+        End If
+        If dexcur = "TMSC" Then
+            tmpcur = 2
+            baltype = 2
+            boverview.Text = "buy 'test mastercoin'"
+        End If
+
         lsendavail.Text = "Select a buying address"
         txtsendamount.Text = "0.00"
         ltotalbtc.Text = "0.00"
         lunit.Text = "0.00"
         combuyaddress.Items.Clear()
         combuyaddress.Text = ""
-        For Each row In addresslist.Rows
+        'update addresses
+
+        For Each row In taddresslist.Rows
             If Not combuyaddress.Items.Contains(row.item(0).ToString) Then
-                If row.item(1) > 0 Then combuyaddress.Items.Add(row.item(0).ToString)
+                If row.item(1) = 0 Then
+                    'ignore empty address
+                Else
+                    Dim lblamt As Double = row.item(1)
+                    combuyaddress.Items.Add(row.item(0).ToString & "     (" & lblamt.ToString("######0.00######") & " BTC)")
+                End If
             End If
         Next
+
         Dim con As New SqlCeConnection("data source=" & Application.StartupPath & "\wallet.sdf; password=" & walpass)
         Dim cmd2 As New SqlCeCommand()
         cmd2.Connection = con
         con.Open()
         'open orders
-        cmd2.CommandText = "select saleamount from exchange where fromadd='" & sellrefadd & "'"
+        cmd2.CommandText = "select saleamount from exchange where fromadd='" & sellrefadd & "' and curtype=" & tmpcur.ToString
         Dim saleamount As Double = cmd2.ExecuteScalar
-        cmd2.CommandText = "select offeramount from exchange where fromadd='" & sellrefadd & "'"
+        cmd2.CommandText = "select offeramount from exchange where fromadd='" & sellrefadd & "' and curtype=" & tmpcur.ToString
         Dim offeramount As Double = cmd2.ExecuteScalar
-        cmd2.CommandText = "select unitprice from exchange where fromadd='" & sellrefadd & "'"
+        cmd2.CommandText = "select unitprice from exchange where fromadd='" & sellrefadd & "' and curtype=" & tmpcur.ToString
         Dim unitprice As Double = cmd2.ExecuteScalar
-        cmd2.CommandText = "select timelimit from exchange where fromadd='" & sellrefadd & "'"
+        cmd2.CommandText = "select timelimit from exchange where fromadd='" & sellrefadd & "' and curtype=" & tmpcur.ToString
         Dim timelimit As Integer = cmd2.ExecuteScalar
-        cmd2.CommandText = "select minfee from exchange where fromadd='" & sellrefadd & "'"
+        cmd2.CommandText = "select minfee from exchange where fromadd='" & sellrefadd & "' and curtype=" & tmpcur.ToString
         Dim minfee As Double = cmd2.ExecuteScalar
         unitprice = Math.Round(unitprice / 100000000, 8)
         offeramount = Math.Round(offeramount / 100000000, 8)
@@ -69,12 +91,13 @@ Public Class buyfrm
 
     End Sub
     Private Sub updateavail()
-        Dim denom As String = ""
-        avail = 0
+       
+        avail = -1
         For Each row In addresslist.Rows
-            If row.item(0) = combuyaddress.SelectedItem Then avail = row.item(1)
+            If InStr(combuyaddress.SelectedItem, row.item(0)) Then avail = row.item(1)
         Next
         lsendavail.Text = "Available: " & avail.ToString("######0.00######") & " BTC"
+        If avail = -1 Then lsendavail.Text = "Select a buying address"
     End Sub
 
     Private Sub txtsendamount_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtsendamount.LostFocus
@@ -96,10 +119,20 @@ Public Class buyfrm
     End Sub
 
     Private Sub bbuy_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bbuy.Click
+        Dim tmpcur
+        If dexcur = "MSC" Then
+            tmpcur = 1
+        End If
+        If dexcur = "TMSC" Then
+            tmpcur = 2
+        End If
         txsummary = ""
         senttxid = "Transaction not sent"
         'validate amounts
+        Dim mintxfee As Long
+        Dim fromadd As String = combuyaddress.Text.Substring(0, combuyaddress.Text.IndexOf(" "))
         Try
+            mintxfee = (Val(lminfee.Text) * 100000000)
             If Val(txtsendamount.Text) > Val(lnkavail.Text) Then
                 MsgBox("There are not that many available to buy.")
                 Exit Sub
@@ -111,12 +144,16 @@ Public Class buyfrm
                 MsgBox("The selected buy address does not have enough BTC to fund this buy.")
                 Exit Sub
             End If
-            If combuyaddress.Text.Length < 26 Or combuyaddress.Text.Length > 35 Then Exit Sub
+            If fromadd.Length < 26 Or fromadd.Length > 35 Then Exit Sub
+            If mintxfee > 500000 Then
+                MsgBox("Sanity check failed - fee too large.")
+                Exit Sub
+            End If
         Catch ex As Exception
             'validation fail
             Exit Sub
         End Try
-        Form1.txtdebug.AppendText(vbCrLf & "DEBUG: Beginning accept (buy) transaction")
+        Form1.txtdebug.AppendText(vbCrLf & "[" & DateTime.Now.ToString("s") & "] DEBUG: Beginning accept (buy) transaction")
         Form1.txtdebug.AppendText(vbCrLf & "===================================================================================")
 
         Dim mlib As New Masterchest.mlib
@@ -124,50 +161,51 @@ Public Class buyfrm
         'first validate recipient address
         If combuyaddress.Text <> "" Then
             'get wallet passphrase
-            Form1.txtdebug.AppendText(vbCrLf & "DEBUG: Requesting passphrase")
+            Form1.txtdebug.AppendText(vbCrLf & "[" & DateTime.Now.ToString("s") & "] DEBUG: Requesting passphrase")
             passfrm.ShowDialog()
-            If btcpass = "" Then Exit Sub 'cancelled
-            Dim fromadd As String
-            fromadd = combuyaddress.SelectedItem.ToString
 
-            Dim curtype As Integer = 2
+            Dim curtype As Integer = tmpcur
             Dim amount As Double = Val(txtsendamount.Text)
             Dim amountlong As Long = amount * 100000000
 
             Try
-                Form1.txtdebug.AppendText(vbCrLf & "DEBUG: Validating recipient address")
+                Form1.txtdebug.AppendText(vbCrLf & "[" & DateTime.Now.ToString("s") & "] DEBUG: Validating recipient address")
                 Dim validater As validate = JsonConvert.DeserializeObject(Of validate)(mlib.rpccall(bitcoin_con, "validateaddress", 1, sellrefadd, 0, 0))
                 If validater.result.isvalid = True Then 'address is valid
                     'push out to masterchest lib to encode the tx
-                    Form1.txtdebug.AppendText(vbCrLf & "DEBUG: Calling library: mlib.encodeaccepttx, bitcoin_con, " & fromadd & ", " & sellrefadd & ", " & curtype.ToString & ", " & amountlong.ToString)
-                    Dim rawtx As String = mlib.encodeaccepttx(bitcoin_con, fromadd, sellrefadd, curtype, amountlong)
+                    Form1.txtdebug.AppendText(vbCrLf & "[" & DateTime.Now.ToString("s") & "] DEBUG: Calling library: mlib.encodeaccepttx, bitcoin_con, " & fromadd & ", " & sellrefadd & ", " & curtype.ToString & ", " & amountlong.ToString)
+                    Dim rawtx As String = mlib.encodeaccepttx(bitcoin_con, fromadd, sellrefadd, curtype, amountlong, mintxfee)
                     'is rawtx empty
                     If rawtx = "" Then
                         Form1.txtdebug.AppendText(vbCrLf & "ERROR: Raw transaction is empty - stopping")
                         Form1.txtdebug.AppendText(vbCrLf & "===================================================================================")
-                        Form1.txtdebug.AppendText(vbCrLf & "DEBUG: Ending accept (buy) transaction")
+                        Form1.txtdebug.AppendText(vbCrLf & "[" & DateTime.Now.ToString("s") & "] DEBUG: Ending accept (buy) transaction")
                         Exit Sub
                     End If
                     'decode the tx in the viewer
                     txsummary = txsummary & vbCrLf & "Raw transaction hex:" & vbCrLf & rawtx & vbCrLf & "Raw transaction decode:" & vbCrLf & mlib.rpccall(bitcoin_con, "decoderawtransaction", 1, rawtx, 0, 0)
-                    Form1.txtdebug.AppendText(vbCrLf & "DEBUG: Raw transaction hex: " & vbCrLf & rawtx)
+                    Form1.txtdebug.AppendText(vbCrLf & "[" & DateTime.Now.ToString("s") & "] DEBUG: Raw transaction hex: " & vbCrLf & rawtx)
                     'attempt to unlock wallet, if it's not locked these will error out but we'll pick up the error on signing instead
-                    Form1.txtdebug.AppendText(vbCrLf & "DEUBG: Unlocking wallet")
-                    Dim dontcareresponse = mlib.rpccall(bitcoin_con, "walletlock", 0, 0, 0, 0)
-                    Dim dontcareresponse2 = mlib.rpccall(bitcoin_con, "walletpassphrase", 2, Trim(btcpass.ToString), 15, 0)
+                    Form1.txtdebug.AppendText(vbCrLf & "[" & DateTime.Now.ToString("s") & "] DEBUG: Unlocking wallet")
+                    If btcpass = "" Then 'skip unlocking wallet
+                        Form1.txtdebug.AppendText(vbCrLf & "[" & DateTime.Now.ToString("s") & "] DEBUG: No passphrase specified, skipping unlocking wallet")
+                    Else
+                        Dim dontcareresponse = mlib.rpccall(bitcoin_con, "walletlock", 0, 0, 0, 0)
+                        Dim dontcareresponse2 = mlib.rpccall(bitcoin_con, "walletpassphrase", 2, Trim(btcpass.ToString), 15, 0)
+                    End If
                     btcpass = ""
                     'try and sign transaction
-                    Form1.txtdebug.AppendText(vbCrLf & "DEUBG: Attempting signing")
+                    Form1.txtdebug.AppendText(vbCrLf & "[" & DateTime.Now.ToString("s") & "] DEBUG: Attempting signing")
                     Dim signedtxn As signedtx = JsonConvert.DeserializeObject(Of signedtx)(mlib.rpccall(bitcoin_con, "signrawtransaction", 1, rawtx, 0, 0))
                     If signedtxn.result.complete = True Then
                         txsummary = txsummary & vbCrLf & "Signing appears successful."
-                        Form1.txtdebug.AppendText(vbCrLf & "DEUBG: Attempting broadcast")
+                        Form1.txtdebug.AppendText(vbCrLf & "[" & DateTime.Now.ToString("s") & "] DEBUG: Attempting broadcast")
                         Dim broadcasttx As broadcasttx = JsonConvert.DeserializeObject(Of broadcasttx)(mlib.rpccall(bitcoin_con, "sendrawtransaction", 1, signedtxn.result.hex, 0, 0))
                         If broadcasttx.result <> "" Then
                             txsummary = txsummary & vbCrLf & "Transaction sent, ID: " & broadcasttx.result.ToString
-                            Form1.txtdebug.AppendText(vbCrLf & "DEUBG: Transaction sent - " & broadcasttx.result.ToString)
+                            Form1.txtdebug.AppendText(vbCrLf & "[" & DateTime.Now.ToString("s") & "] DEBUG: Transaction sent - " & broadcasttx.result.ToString)
                             Form1.txtdebug.AppendText(vbCrLf & "===================================================================================")
-                            Form1.txtdebug.AppendText(vbCrLf & "DEBUG: Ending accept (buy) transaction")
+                            Form1.txtdebug.AppendText(vbCrLf & "[" & DateTime.Now.ToString("s") & "] DEBUG: Ending accept (buy) transaction")
                             senttxid = broadcasttx.result.ToString
                             Application.DoEvents()
                             If Form1.workthread.IsBusy <> True Then
@@ -188,35 +226,35 @@ Public Class buyfrm
                         Else
                             txsummary = txsummary & vbCrLf & "Error sending transaction."
                             sentfrm.lsent.Text = "transaction failed"
-                            Form1.txtdebug.AppendText(vbCrLf & "ERROR: Unknown error sending transaction")
+                            Form1.txtdebug.AppendText(vbCrLf & "[" & DateTime.Now.ToString("s") & "] ERROR: Unknown error sending transaction")
                             Form1.txtdebug.AppendText(vbCrLf & "===================================================================================")
-                            Form1.txtdebug.AppendText(vbCrLf & "DEBUG: Ending accept (buy) transaction")
+                            Form1.txtdebug.AppendText(vbCrLf & "[" & DateTime.Now.ToString("s") & "] DEBUG: Ending accept (buy) transaction")
                             sentfrm.ShowDialog()
                             Exit Sub
                         End If
                     Else
                         txsummary = txsummary & vbCrLf & "Failed to sign transaction.  Ensure wallet passphrase is correct."
-                        Form1.txtdebug.AppendText(vbCrLf & "ERROR: Failed to sign transaction.  Ensure wallet passphrase is correct")
+                        Form1.txtdebug.AppendText(vbCrLf & "[" & DateTime.Now.ToString("s") & "] ERROR: Failed to sign transaction.  Ensure wallet passphrase is correct")
                         Form1.txtdebug.AppendText(vbCrLf & "===================================================================================")
-                        Form1.txtdebug.AppendText(vbCrLf & "DEBUG: Ending accept (buy) transaction")
+                        Form1.txtdebug.AppendText(vbCrLf & "[" & DateTime.Now.ToString("s") & "] DEBUG: Ending accept (buy) transaction")
                         sentfrm.lsent.Text = "transaction failed"
                         sentfrm.ShowDialog()
                         Exit Sub
                     End If
                 Else
                     txsummary = "Build transaction failed.  Recipient address is not valid."
-                    Form1.txtdebug.AppendText(vbCrLf & "ERROR: Build transaction failed.  Recipient address is not valid")
+                    Form1.txtdebug.AppendText(vbCrLf & "[" & DateTime.Now.ToString("s") & "] ERROR: Build transaction failed.  Recipient address is not valid")
                     Form1.txtdebug.AppendText(vbCrLf & "===================================================================================")
-                    Form1.txtdebug.AppendText(vbCrLf & "DEBUG: Ending accept (buy) transaction")
+                    Form1.txtdebug.AppendText(vbCrLf & "[" & DateTime.Now.ToString("s") & "] DEBUG: Ending accept (buy) transaction")
                     sentfrm.lsent.Text = "transaction failed"
                     sentfrm.ShowDialog()
                     Exit Sub
                 End If
             Catch ex As Exception
                 MsgBox("Exeption thrown : " & ex.Message)
-                Form1.txtdebug.AppendText(vbCrLf & "ERROR: Exception thrown: " & ex.Message)
+                Form1.txtdebug.AppendText(vbCrLf & "[" & DateTime.Now.ToString("s") & "] ERROR: Exception thrown: " & ex.Message)
                 Form1.txtdebug.AppendText(vbCrLf & "===================================================================================")
-                Form1.txtdebug.AppendText(vbCrLf & "DEBUG: Ending accept (buy) transaction")
+                Form1.txtdebug.AppendText(vbCrLf & "[" & DateTime.Now.ToString("s") & "] DEBUG: Ending accept (buy) transaction")
                 sentfrm.ShowDialog()
             End Try
         End If
