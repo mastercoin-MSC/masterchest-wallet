@@ -38,6 +38,13 @@ Public Class sellcancelfrm
     Private Sub bsell_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bsell.Click
         If Len(lselladdress.Text) > 26 And Len(lselladdress.Text) < 35 Then 'sanity check
             Try
+                Dim tmpcur
+                If dexcur = "MSC" Then
+                    tmpcur = 1
+                End If
+                If dexcur = "TMSC" Then
+                    tmpcur = 2
+                End If
                 sentfrm.lsent.Text = "transaction failed"
                 bsell.Enabled = False
                 'get wallet passphrase
@@ -48,7 +55,7 @@ Public Class sellcancelfrm
                 If validater.result.isvalid = True Then 'address is valid
                     txsummary = "Address is valid."
                     'push out to masterchest lib to encode the tx
-                    Dim rawtx As String = mlib.encodeselltx(bitcoin_con, lselladdress.Text, 2, 1, 1, 1, 1, 3)
+                    Dim rawtx As String = mlib.encodeselltx(bitcoin_con, lselladdress.Text, tmpcur, 1, 1, 1, 1, 3)
                     'is rawtx empty
                     If rawtx = "" Then
                         txsummary = txsummary & vbCrLf & "Raw transaction is empty - stopping."
