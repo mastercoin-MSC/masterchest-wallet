@@ -33,6 +33,7 @@ Module Module1
         Public id As String
     End Class
     Public bitcoin_con As New bitcoinrpcconnection
+    Public dexcur As String
     Public varsyncronized As Boolean
     Public varsyncblock As Integer
     Public debuglevel As Integer = 1
@@ -53,7 +54,7 @@ Module Module1
     Public balmsc As Double
     Public balumsc As Double
     Public balbtc As Double
-    Public balrestmsc As Double
+    Public balrestmsc, balresmsc As Double
     Public balubtc As Double
     Public baltmsc As Double
     Public balutmsc As Double

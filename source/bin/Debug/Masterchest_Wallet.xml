@@ -15,6 +15,806 @@ Masterchest_Wallet
   Overrides the current thread's CurrentUICulture property for all
   resource lookups using this strongly typed resource class.
 </summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources._in">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.additionalinformation">
+	<summary>
+  Looks up a localized string similar to ADDITIONAL INFORMATION:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.addressalpha">
+	<summary>
+  Looks up a localized string similar to Address Alpha.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.addresslistexception">
+	<summary>
+  Looks up a localized string similar to Addresslist exception.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.available">
+	<summary>
+  Looks up a localized string similar to Available:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.backicon">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.baddresses">
+	<summary>
+  Looks up a localized string similar to addresses.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.balancebtc">
+	<summary>
+  Looks up a localized string similar to BTC Balance.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.balancemsc">
+	<summary>
+  Looks up a localized string similar to MSC Balance.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.bcontracts">
+	<summary>
+  Looks up a localized string similar to contracts.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.bcurrencies">
+	<summary>
+  Looks up a localized string similar to currencies.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.bdebug">
+	<summary>
+  Looks up a localized string similar to debug.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.bexchange">
+	<summary>
+  Looks up a localized string similar to exchange.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.bfinish">
+	<summary>
+  Looks up a localized string similar to FINISH.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.bhistory">
+	<summary>
+  Looks up a localized string similar to history.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.blockscatchup">
+	<summary>
+  Looks up a localized string similar to blocks to catch up.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.boverview">
+	<summary>
+  Looks up a localized string similar to overview.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.bsend">
+	<summary>
+  Looks up a localized string similar to send.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.bsendnew">
+	<summary>
+  Looks up a localized string similar to New.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.bsignsend">
+	<summary>
+  Looks up a localized string similar to Send.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.btcsenddisabled">
+	<summary>
+  Looks up a localized string similar to Bitcoin sends are temporarily disabled in this build..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.btest">
+	<summary>
+  Looks up a localized string similar to TEST.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.bupdatesettings">
+	<summary>
+  Looks up a localized string similar to Update Settings.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.cerror">
+	<summary>
+  Looks up a localized string similar to DEBUG: Sanity checking balances table...".
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.checkdebugscroll">
+	<summary>
+  Looks up a localized string similar to SHOW SCROLLBARS.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.chkpreseed">
+	<summary>
+  Looks up a localized string similar to Use a preseeded database.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.closeicon">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.completeFields">
+	<summary>
+  Looks up a localized string similar to Please Complete All Fields..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.configFileError">
+	<summary>
+  Looks up a localized string similar to Configuration file error.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.copypar">
+	<summary>
+  Looks up a localized string similar to copy.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.currencylistexception">
+	<summary>
+  Looks up a localized string similar to Currencylist exception.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.currentblock">
+	<summary>
+  Looks up a localized string similar to Current Block:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.debugblockanalysis">
+	<summary>
+  Looks up a localized string similar to DEBUG: Block Analysis for:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.disclaimer1">
+	<summary>
+  Looks up a localized string similar to DISCLAIMER:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.disclaimer2">
+	<summary>
+  Looks up a localized string similar to This software is pre-release software for testing only..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.disclaimer3">
+	<summary>
+  Looks up a localized string similar to The protocol and transaction processing rules for Mastercoin are still under active development and are subject to change in future..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.disclaimer4">
+	<summary>
+  Looks up a localized string similar to DO NOT USE IT WITH A LARGE AMOUNT OF MASTERCOINS AND/OR BITCOINS.  IT IS ENTIRELY POSSIBLE YOU MAY LOSE ALL YOUR COINS.  INFORMATION DISPLAYED MAY BE INCORRECT.  MASTERCHEST OFFERS ABSOLUTELY NO GUARANTEES OF ANY KIND.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.disclaimer5">
+	<summary>
+  Looks up a localized string similar to A fraction of a bitcoin and a fraction of a mastercoin are the suggested testing amounts.  Preferably use a fresh bitcoin wallet.dat..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.disclaimer6">
+	<summary>
+  Looks up a localized string similar to This software is provided open-source at no cost.  You are responsible for knowing the law in your country and determining if your use of this software contravenes any local laws..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.emptybalances">
+	<summary>
+  Looks up a localized string similar to Empty Balances.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.emptyrawtx">
+	<summary>
+  Looks up a localized string similar to Raw transaction is empty - stopping..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.enterbtcpassphrase">
+	<summary>
+  Looks up a localized string similar to enter your bitcoin wallet passhrase.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.errorsendtx">
+	<summary>
+  Looks up a localized string similar to Error sending transaction..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.exception">
+	<summary>
+  Looks up a localized string similar to Exception:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.exceptionthrown">
+	<summary>
+  Looks up a localized string similar to Exeption thrown :.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.exiting">
+	<summary>
+  Looks up a localized string similar to Exiting....
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.failedbuildtx">
+	<summary>
+  Looks up a localized string similar to Build transaction failed.  Recipient address is not valid..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.failedsendtx">
+	<summary>
+  Looks up a localized string similar to Failed to send transaction..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.failedtx">
+	<summary>
+  Looks up a localized string similar to transaction failed.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Form1">
+	<summary>
+  Looks up a localized string similar to Form1.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.greatthanks">
+	<summary>
+  Looks up a localized string similar to Great, thanks.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.green_tick">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.high">
+	<summary>
+  Looks up a localized string similar to HIGH.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.highestvalue">
+	<summary>
+  Looks up a localized string similar to Highest Value.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.historylistexception">
+	<summary>
+  Looks up a localized string similar to historylist exception.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.in1">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.insufficientfunds">
+	<summary>
+  Looks up a localized string similar to Insufficient Funds.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.invalid">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.invalidrecipient">
+	<summary>
+  Looks up a localized string similar to Recipient address is valid..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label1">
+	<summary>
+  Looks up a localized string similar to AMOUNT:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label10">
+	<summary>
+  Looks up a localized string similar to TOTAL MASTERCOIN BALANCE:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label12">
+	<summary>
+  Looks up a localized string similar to BTC BALANCE:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label13">
+	<summary>
+  Looks up a localized string similar to RPC PASSWORD:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label14">
+	<summary>
+  Looks up a localized string similar to CONFIRMED BALANCE:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label16">
+	<summary>
+  Looks up a localized string similar to UNCONFIRMED BALANCE:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label17">
+	<summary>
+  Looks up a localized string similar to DATE:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label18">
+	<summary>
+  Looks up a localized string similar to TO ADDRESS:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label19">
+	<summary>
+  Looks up a localized string similar to NETWORK STATUS:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label2">
+	<summary>
+  Looks up a localized string similar to FROM:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label20">
+	<summary>
+  Looks up a localized string similar to Key:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label22">
+	<summary>
+  Looks up a localized string similar to Currency.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label23">
+	<summary>
+  Looks up a localized string similar to PORT.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label24">
+	<summary>
+  Looks up a localized string similar to TEST MSC BALANCE:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label25">
+	<summary>
+  Looks up a localized string similar to ADDRESS:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label27">
+	<summary>
+  Looks up a localized string similar to RECIPIENT ADDRESS:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label29">
+	<summary>
+  Looks up a localized string similar to SENDING ADDRESS:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label3">
+	<summary>
+  Looks up a localized string similar to Currency.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label30">
+	<summary>
+  Looks up a localized string similar to UNCONFIRMED BALANCE:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label31">
+	<summary>
+  Looks up a localized string similar to CONFIRMED BALANCE:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label32">
+	<summary>
+  Looks up a localized string similar to SORT BY:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label33">
+	<summary>
+  Looks up a localized string similar to PASSWORD:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label36">
+	<summary>
+  Looks up a localized string similar to MSC BALANCE:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label37">
+	<summary>
+  Looks up a localized string similar to SHOWING:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label39">
+	<summary>
+  Looks up a localized string similar to RPC USER:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label4">
+	<summary>
+  Looks up a localized string similar to Sort By.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label40">
+	<summary>
+  Looks up a localized string similar to BITCOIN RPC SERVER:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label42">
+	<summary>
+  Looks up a localized string similar to CURRENCY:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label43">
+	<summary>
+  Looks up a localized string similar to USER:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label44">
+	<summary>
+  Looks up a localized string similar to DEBUG LOG:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label46">
+	<summary>
+  Looks up a localized string similar to We'll need to configure a connection to your bitcoind/qt server.  Your bitcoind/qt server needs to have transaction indexing enabled to use this software.  Please enter the details below and click 'Test' to test the connection to bitcoind/qt and confirm that the transaction index is enabled..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label47">
+	<summary>
+  Looks up a localized string similar to SERVER:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label48">
+	<summary>
+  Looks up a localized string similar to GETTING STARTED:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label5">
+	<summary>
+  Looks up a localized string similar to Filter.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label50">
+	<summary>
+  Looks up a localized string similar to You'll also need to choose a passphrase to encrypt the wallet database.  Note, your private keys are not stored in your Masterchest wallet database; transactions are signed using your bitcoin wallet..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label51">
+	<summary>
+  Looks up a localized string similar to WALLET PASSPHRASE:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label52">
+	<summary>
+  Looks up a localized string similar to To speed up initial seeding, you can choose to use a preseeded database.  This will reduce the number of blocks to catchup, but requires that the preseeded database is trusted.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label53">
+	<summary>
+  Looks up a localized string similar to Only use this option if you downloaded this wallet from a trusted source.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label54">
+	<summary>
+  Looks up a localized string similar to AMOUNT:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label55">
+	<summary>
+  Looks up a localized string similar to Valid.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label56">
+	<summary>
+  Looks up a localized string similar to Invalid.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label57">
+	<summary>
+  Looks up a localized string similar to Unconfirmed.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label6">
+	<summary>
+  Looks up a localized string similar to SORT BY:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label7">
+	<summary>
+  Looks up a localized string similar to PORT.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label8">
+	<summary>
+  Looks up a localized string similar to DEBUG LEVEL:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.Label9">
+	<summary>
+  Looks up a localized string similar to FILTER:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.LinkLabel4">
+	<summary>
+  Looks up a localized string similar to Highest Balance.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.LinkLabel5">
+	<summary>
+  Looks up a localized string similar to All Currencies.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.lnkaddfilter">
+	<summary>
+  Looks up a localized string similar to No Filter Active.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.lnkaddsort">
+	<summary>
+  Looks up a localized string similar to Address Alpha.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.lnkdebug">
+	<summary>
+  Looks up a localized string similar to LOW.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.lnkhistoryfilter">
+	<summary>
+  Looks up a localized string similar to No Filter Active.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.lnkhistorysort">
+	<summary>
+  Looks up a localized string similar to Recent First.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.loversync">
+	<summary>
+  Looks up a localized string similar to Not Syncronized. .
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.low">
+	<summary>
+  Looks up a localized string similar to LOW.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.lowestvalue">
+	<summary>
+  Looks up a localized string similar to Lowest Value.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.lpoweredby">
+	<summary>
+  Looks up a localized string similar to Powered by .
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.lsendavail">
+	<summary>
+  Looks up a localized string similar to Select a sending address.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.lwelstartup">
+	<summary>
+  Looks up a localized string similar to Please wait....
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.maxicon3">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.med">
+	<summary>
+  Looks up a localized string similar to MED.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.messageexception">
+	<summary>
+  Looks up a localized string similar to Exception reading configuration :.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.messageheader1">
+	<summary>
+  Looks up a localized string similar to BITCOIN AUTO CONFIGURATION.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.messageinfo1">
+	<summary>
+  Looks up a localized string similar to Auto-detection has determined your bitcoind/qt configuration does not have the RPC server enabled..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.messageinfo2">
+	<summary>
+  Looks up a localized string similar to Auto-detection has determined your bitcoind/qt configuration does not have the transaction index enabled..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.messageinfo3">
+	<summary>
+  Looks up a localized string similar to Sanity checking has detected addresses with multiple balance entries in the database.  It is not safe to continue.  The wallet will now exit..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.messagerequest1">
+	<summary>
+  Looks up a localized string similar to Please add server=1 to bitcoin.conf and restart bitcoind/qt..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.messagerequest2">
+	<summary>
+  Looks up a localized string similar to Please add txindex=1 to bitcoin.conf and restart bitcoind/qt with the -reindex flag to enable the transaction index..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.messagesstartexception1">
+	<summary>
+  Looks up a localized string similar to Exception testing connection to bitcoin via RPC :.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.messagestartinfo1">
+	<summary>
+  Looks up a localized string similar to There was a problem configuring your connection to bitcoind/qt.  Both auto detection and manual configuration appear to have failed..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.minicon">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.more">
+	<summary>
+  Looks up a localized string similar to More please....
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.nofilteractive">
+	<summary>
+  Looks up a localized string similar to No Filter Active.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.notconfigured">
+	<summary>
+  Looks up a localized string similar to Not configured..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.notsynchronized">
+	<summary>
+  Looks up a localized string similar to Not Syncronized..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.ok">
+	<summary>
+  Looks up a localized string similar to OK.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.onlymastercoin">
+	<summary>
+  Looks up a localized string similar to Mastercoin Only.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.out">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.out1">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.rawtxdecode">
+	<summary>
+  Looks up a localized string similar to Raw transaction decode:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.rawtxhex">
+	<summary>
+  Looks up a localized string similar to Raw transaction hex:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.recentfirst">
+	<summary>
+  Looks up a localized string similar to Recent First.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.redcross">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.rsendtmsc">
+	<summary>
+  Looks up a localized string similar to Test Mastercoin.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.selectsendaddress">
+	<summary>
+  Looks up a localized string similar to Select a sending address.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.signingfailed">
+	<summary>
+  Looks up a localized string similar to Failed to sign transaction.  Ensure wallet passphrase is correct..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.signingsuccesstx">
+	<summary>
+  Looks up a localized string similar to Signing appears successful..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.starterror1">
+	<summary>
+  Looks up a localized string similar to Startup ERROR: Connection to bitcoin RPC seems to be established but responses are not as expected.  Aborting startup..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.starterror2">
+	<summary>
+  Looks up a localized string similar to Startup ERROR: Exception testing connection to bitcoin via RPC. Aborting startup. E2:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.starterror3">
+	<summary>
+  Looks up a localized string similar to Startup ERROR: Connection to database seems to be established but responses are not as expected.  Aborting startup..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.starterror4">
+	<summary>
+  Looks up a localized string similar to Startup ERROR: Enumerating addresses did not complete properly.  Aborting startup..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.startinfo1">
+	<summary>
+  Looks up a localized string similar to Startup: Testing bitcoin connection....
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.startinfo2">
+	<summary>
+  Looks up a localized string similar to Startup: Connection to bitcoin via RPC established and sanity check OK..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.startinfo3">
+	<summary>
+  Looks up a localized string similar to Startup: Testing database connection....
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.startinfo4">
+	<summary>
+  Looks up a localized string similar to Startup: Connection to database established and sanity check OK..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.startinfo5">
+	<summary>
+  Looks up a localized string similar to Startup: Enumerating wallet addresses....
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.startupinitializing">
+	<summary>
+  Looks up a localized string similar to Startup: Initializing....
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.startupinitializingcomplete">
+	<summary>
+  Looks up a localized string similar to Startup: Initialization Complete..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.status">
+	<summary>
+  Looks up a localized string similar to STATUS:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.sync">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.synchronizedlastblock">
+	<summary>
+  Looks up a localized string similar to Syncronized.  Last block scanned was block.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.synchronizing">
+	<summary>
+  Looks up a localized string similar to Syncronizing....
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.testError1">
+	<summary>
+  Looks up a localized string similar to ERROR: Connection to bitcoin RPC seems to be established but responses are not as expected..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.testInfo1">
+	<summary>
+  Looks up a localized string similar to Bitcoin connection OK but transaction index appears disabled..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.testInfo2">
+	<summary>
+  Looks up a localized string similar to Bitcoin connection OK and transaction index appears enabled..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.testInfo3">
+	<summary>
+  Looks up a localized string similar to Failed to connect to Bitcoin or could not locate seed wallet..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.transactionid">
+	<summary>
+  Looks up a localized string similar to TRANSACTION ID:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.transactionnotsent">
+	<summary>
+  Looks up a localized string similar to Transaction not sent.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.transactionsent">
+	<summary>
+  Looks up a localized string similar to transaction sent.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.transactionsentid">
+	<summary>
+  Looks up a localized string similar to Transaction sent, ID:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.txtdebugexit">
+	<summary>
+  Looks up a localized string similar to DEBUG: Thread exited..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.uncof">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.valid">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.validrecipient">
+	<summary>
+  Looks up a localized string similar to Recipient address is valid..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.willnowexit">
+	<summary>
+  Looks up a localized string similar to Will now exit..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.workerblockscan1">
+	<summary>
+  Looks up a localized string similar to BLOCKSCAN: Found MSC transaction (simple send):.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.workerblockscan2">
+	<summary>
+  Looks up a localized string similar to BLOCKSCAN: Found MSC transaction (sell offer):.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.workerblockscan3">
+	<summary>
+  Looks up a localized string similar to BLOCKSCAN: Found MSC transaction (accept offer):.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.workerblockscan4">
+	<summary>
+  Looks up a localized string similar to BLOCKSCAN: Found MSC transaction (simple send):.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.workerblockscan5">
+	<summary>
+  Looks up a localized string similar to BLOCKSCAN: Transaction processing starting....
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.workerblockscan6">
+	<summary>
+  Looks up a localized string similar to BLOCKSCAN: Finished, sleeping..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.workerblockscan7">
+	<summary>
+  Looks up a localized string similar to BLOCKSCAN: Found pending MSC transaction (simple send):.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.workerblockscan8">
+	<summary>
+  Looks up a localized string similar to BLOCKSCAN: Found pending MSC transaction (sell offer):.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.workerdebug1">
+	<summary>
+  Looks up a localized string similar to DEBUG: Thread 'workthread' starting....
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.workerdebug2">
+	<summary>
+  Looks up a localized string similar to DEBUG: Block Analysis for:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.workerdebug3">
+	<summary>
+  Looks up a localized string similar to DEBUG: Block Analysis for pending transactions.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.workerdebug4">
+	<summary>
+  Looks up a localized string similar to DEBUG: Enumerating addresses....
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.workerdebug5">
+	<summary>
+  Looks up a localized string similar to DEBUG: Sanity checking balances table...".
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.workerdebug6">
+	<summary>
+  Looks up a localized string similar to DEBUG: Thread exited with error condition..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.workerdebugSQL">
+	<summary>
+  Looks up a localized string similar to DEBUG: SQL.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.workererror1">
+	<summary>
+  Looks up a localized string similar to ERROR: Connection to bitcoin RPC seems to be established but responses are not as expected..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.workererror2">
+	<summary>
+  Looks up a localized string similar to ERROR: Connection to database seems to be established but responses are not as expected..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.workererror3">
+	<summary>
+  Looks up a localized string similar to ERROR: Database block appears newer than bitcoinrpc blocks - is bitcoinrpc up to date? Exiting thread..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.workererror4">
+	<summary>
+  Looks up a localized string similar to ERROR: Enumerating addresses did not complete properly..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.workererror5">
+	<summary>
+  Looks up a localized string similar to ERROR: Connection to database threw an exception of:.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.workererror6">
+	<summary>
+  Looks up a localized string similar to ERROR: Blockchain scanning thread threw exception :.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.workerstatus1">
+	<summary>
+  Looks up a localized string similar to STATUS: Connection to bitcoin RPC established &amp; sanity check OK..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.workerstatus2">
+	<summary>
+  Looks up a localized string similar to STATUS: UI thread will remain but blockchain scanning thread will now exit..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.workerstatus3">
+	<summary>
+  Looks up a localized string similar to STATUS: Connection to database established &amp; sanity check OK..
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.workerstatus4">
+	<summary>
+  Looks up a localized string similar to STATUS: Database starting at block.
+</summary>
+</member><member name="P:Masterchest_Wallet.My.Resources.Resources.workerstatus5">
+	<summary>
+  Looks up a localized string similar to STATUS: Network is at block.
+</summary>
 </member><member name="T:Masterchest_Wallet.My.Resources.Resources">
 	<summary>
   A strongly-typed resource class, for looking up localized strings, etc.

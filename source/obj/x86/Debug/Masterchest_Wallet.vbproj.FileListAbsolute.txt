@@ -52,3 +52,34 @@ C:\Users\rich\Documents\Visual Studio 2010\Projects\masterchest_wallet\masterche
 C:\Users\rich\Documents\Visual Studio 2010\Projects\masterchest_wallet\masterchest_wallet\obj\x86\Debug\Masterchest_Wallet.sellfrm.resources
 C:\Users\rich\Documents\Visual Studio 2010\Projects\masterchest_wallet\masterchest_wallet\obj\x86\Debug\Masterchest_Wallet.sellcancelfrm.resources
 C:\Users\rich\Documents\Visual Studio 2010\Projects\masterchest_wallet\masterchest_wallet\obj\x86\Debug\Masterchest_Wallet.paybuyfrm.resources
+C:\Users\filip\Documents\GitHub\masterchest-wallet\source\bin\Debug\Masterchest_Wallet.exe.config
+C:\Users\filip\Documents\GitHub\masterchest-wallet\source\obj\x86\Debug\Masterchest_Wallet.exe
+C:\Users\filip\Documents\GitHub\masterchest-wallet\source\obj\x86\Debug\Masterchest_Wallet.xml
+C:\Users\filip\Documents\GitHub\masterchest-wallet\source\obj\x86\Debug\Masterchest_Wallet.pdb
+C:\Users\filip\Documents\GitHub\masterchest-wallet\source\bin\Debug\Masterchest_Wallet.exe.manifest
+C:\Users\filip\Documents\GitHub\masterchest-wallet\source\bin\Debug\Masterchest_Wallet.application
+C:\Users\filip\Documents\GitHub\masterchest-wallet\source\bin\Debug\Masterchest_Wallet.exe
+C:\Users\filip\Documents\GitHub\masterchest-wallet\source\bin\Debug\Masterchest_Wallet.pdb
+C:\Users\filip\Documents\GitHub\masterchest-wallet\source\bin\Debug\Masterchest_Wallet.xml
+C:\Users\filip\Documents\GitHub\masterchest-wallet\source\bin\Debug\fr-FR\Masterchest_Wallet.resources.dll
+C:\Users\filip\Documents\GitHub\masterchest-wallet\source\bin\Debug\sv-SE\Masterchest_Wallet.resources.dll
+C:\Users\filip\Documents\GitHub\masterchest-wallet\source\bin\Debug\Microsoft.VisualBasic.PowerPacks.Vs.dll
+C:\Users\filip\Documents\GitHub\masterchest-wallet\source\bin\Debug\Masterchest.pdb
+C:\Users\filip\Documents\GitHub\masterchest-wallet\source\bin\Debug\Masterchest.xml
+C:\Users\filip\Documents\GitHub\masterchest-wallet\source\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\filip\Documents\GitHub\masterchest-wallet\source\obj\x86\Debug\Masterchest_Wallet.vbprojResolveAssemblyReference.cache
+C:\Users\filip\Documents\GitHub\masterchest-wallet\source\obj\x86\Debug\Masterchest_Wallet.buyfrm.resources
+C:\Users\filip\Documents\GitHub\masterchest-wallet\source\obj\x86\Debug\Masterchest_Wallet.Form1.resources
+C:\Users\filip\Documents\GitHub\masterchest-wallet\source\obj\x86\Debug\Masterchest_Wallet.Resources.resources
+C:\Users\filip\Documents\GitHub\masterchest-wallet\source\obj\x86\Debug\Masterchest_Wallet.paybuyfrm.resources
+C:\Users\filip\Documents\GitHub\masterchest-wallet\source\obj\x86\Debug\Masterchest_Wallet.sellcancelfrm.resources
+C:\Users\filip\Documents\GitHub\masterchest-wallet\source\obj\x86\Debug\Masterchest_Wallet.sellfrm.resources
+C:\Users\filip\Documents\GitHub\masterchest-wallet\source\obj\x86\Debug\Masterchest_Wallet.sentfrm.resources
+C:\Users\filip\Documents\GitHub\masterchest-wallet\source\obj\x86\Debug\Masterchest_Wallet.passfrm.resources
+C:\Users\filip\Documents\GitHub\masterchest-wallet\source\obj\x86\Debug\Masterchest_Wallet.Resources.fr-FR.resources
+C:\Users\filip\Documents\GitHub\masterchest-wallet\source\obj\x86\Debug\Masterchest_Wallet.Resources.sv-SE.resources
+C:\Users\filip\Documents\GitHub\masterchest-wallet\source\obj\x86\Debug\Masterchest_Wallet.vbproj.GenerateResource.Cache
+C:\Users\filip\Documents\GitHub\masterchest-wallet\source\obj\x86\Debug\fr-FR\Masterchest_Wallet.resources.dll
+C:\Users\filip\Documents\GitHub\masterchest-wallet\source\obj\x86\Debug\sv-SE\Masterchest_Wallet.resources.dll
+C:\Users\filip\Documents\GitHub\masterchest-wallet\source\obj\x86\Debug\Masterchest_Wallet.exe.manifest
+C:\Users\filip\Documents\GitHub\masterchest-wallet\source\obj\x86\Debug\Masterchest_Wallet.application
