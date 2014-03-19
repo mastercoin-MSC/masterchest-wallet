@@ -54,14 +54,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Masterchest.dll" size="43008">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Masterchest.dll" size="43520">
       <assemblyIdentity name="Masterchest" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>srjh3MRSHsl6gecmH6+JcQzQsBM=</dsig:DigestValue>
+        <dsig:DigestValue>SpIT9e2rHZdhteBakVT7W/NAB8Q=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -73,7 +73,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>M/+SVZnEgQH2nEAl1a+BnH0c5Pk=</dsig:DigestValue>
+        <dsig:DigestValue>gwwb0ZloZIYwTBwb3c/ndyH8Rb4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

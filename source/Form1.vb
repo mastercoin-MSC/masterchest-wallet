@@ -295,7 +295,7 @@ Public Class Form1
         'do some initial setup
         showlabels()
         bback.Visible = True
-        txtdebug.Text = "MASTERCHEST WALLET v0.3a"
+        txtdebug.Text = "MASTERCHEST WALLET v0.3b"
         activateoverview()
         lastscreen = "1"
         updateui()
@@ -2044,7 +2044,7 @@ Public Class Form1
         'do some initial setup
         showlabels()
         bback.Visible = True
-        txtdebug.Text = "MASTERCHEST WALLET v0.3a"
+        txtdebug.Text = "MASTERCHEST WALLET v0.3b"
         activateoverview()
         lastscreen = "1"
         updateui()
