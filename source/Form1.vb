@@ -11,6 +11,7 @@ Imports System.Net
 Imports System.Text
 Imports System.Environment
 Imports System.IO
+Imports System.Diagnostics
 Imports System.Data.SqlServerCe
 Imports System.Configuration
 Imports System.Security.Cryptography
@@ -220,7 +221,7 @@ Public Class Form1
         Dim testval As Integer
         testval = SQLGetSingleVal("SELECT count(*) FROM information_schema.columns WHERE table_name = 'processedblocks'")
         If testval = 99 Then Exit Sub
-        If testval = 2 Then 'sanity check ok
+        If testval = 3 Then 'sanity check ok
             lwelstartup.Text &= vbCrLf & "Startup: Connection to database established and sanity check OK."
         Else
             'something has gone wrong
@@ -295,7 +296,7 @@ Public Class Form1
         'do some initial setup
         showlabels()
         bback.Visible = True
-        txtdebug.Text = "MASTERCHEST WALLET v0.3b"
+        txtdebug.Text = "MASTERCHEST WALLET v0.3c"
         activateoverview()
         lastscreen = "1"
         updateui()
@@ -405,8 +406,29 @@ Public Class Form1
     '/// BACKGROUND WORKER
     '//////////////////////////////
     Private Sub workthread_ProgressChanged(ByVal sender As Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs) Handles workthread.ProgressChanged
-        Me.txtdebug.AppendText(vbCrLf & e.UserState.ToString)
-        If e.UserState.ToString.Substring(0, 27) = "[" & DateTime.Now.ToString("s") & "] DEBUG: Block Analysis for: " Then loversync.Text = "Syncronizing...  Current Block: " & e.UserState.ToString.Substring(27, 6) & "..."
+        Dim bluepen As New Pen(Color.FromArgb(51, 153, 255), 2)
+        Dim greypen As New Pen(Color.FromArgb(65, 65, 65), 2)
+        Dim greenpen As New Pen(Color.FromArgb(51, 255, 153), 2)
+        Dim fig As Integer
+        If InStr(e.UserState.ToString, "%") Then
+            fig = Val(e.UserState.ToString.Substring(0, Len(e.UserState.ToString) - 1))
+            lsyncing.Text = "Processing (" & fig & "%)..."
+            Static Dim blueline As System.Drawing.Graphics = CreateGraphics()
+            blueline.DrawLine(bluepen, Convert.ToInt32(556), Convert.ToInt32(32), Convert.ToInt32(fig + 556), Convert.ToInt32(32))
+            blueline.DrawLine(greypen, Convert.ToInt32(fig + 556), Convert.ToInt32(32), Convert.ToInt32(656), Convert.ToInt32(32))
+        Else
+            If InStr(e.UserState.ToString, "#") Then
+                fig = Val(e.UserState.ToString.Substring(0, Len(e.UserState.ToString) - 1))
+                lsyncing.Text = "Synchronizing (" & fig & "%)..."
+                Static Dim greenline As System.Drawing.Graphics = CreateGraphics()
+                greenline.DrawLine(greenpen, Convert.ToInt32(556), Convert.ToInt32(32), Convert.ToInt32(fig + 556), Convert.ToInt32(32))
+                greenline.DrawLine(greypen, Convert.ToInt32(fig + 556), Convert.ToInt32(32), Convert.ToInt32(656), Convert.ToInt32(32))
+            Else
+                Me.txtdebug.AppendText(vbCrLf & e.UserState.ToString)
+                If InStr(e.UserState.ToString, "Transaction processing") Then loversync.Text = "Processing..."
+                If InStr(e.UserState.ToString, "DEBUG: Block Analysis for: ") Then loversync.Text = "Synchronizing...  Current Block: " & e.UserState.ToString.Substring((Len(e.UserState.ToString) - 6), 6) & "..."
+            End If
+        End If
     End Sub
 
     Private Sub workthread_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles workthread.DoWork
@@ -436,7 +458,7 @@ Public Class Form1
         Dim testval As Integer
         testval = SQLGetSingleVal("SELECT count(*) FROM information_schema.columns WHERE table_name = 'processedblocks'")
         If testval = 99 Then Exit Sub
-        If testval = 2 Then 'sanity check ok
+        If testval = 3 Then 'sanity check ok
             workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] STATUS: Connection to database established & sanity check OK.")
         Else
             'something has gone wrong
@@ -448,9 +470,19 @@ Public Class Form1
 
         'check transaction list for last database block and update from there - always delete current last block transactions and go back one ensuring we don't miss transactions if code bombs while processing a block
         Dim dbposition As Integer
+        Dim dbposhash, rpcposhash As String
         dbposition = SQLGetSingleVal("SELECT MAX(BLOCKNUM) FROM processedblocks")
-        If dbposition > 249497 Then dbposition = dbposition - 5 Else dbposition = 249497 'roll database back five blocks every scan for sanity/orphans etc
+        If dbposition > 249497 Then dbposition = dbposition - 1 Else dbposition = 249497 'roll database back a block as long as hash matches, otherwise roll back 50 blocks
         'dbposition = 249497
+        'dbposition block hash check
+        dbposhash = SQLGetSingleVal("SELECT blockhash FROM processedblocks where blocknum=" & dbposition)
+        Dim tmpblockhash As blockhash = mlib.getblockhash(bitcoin_con, dbposition)
+        rpcposhash = tmpblockhash.result.ToString
+        If rpcposhash <> dbposhash Then
+            workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] WARNING: Reorg protection initiated, rolling back 50 blocks for safety")
+            dbposition = dbposition - 50
+        End If
+
         'delete transactions after dbposition block
         Dim txdeletedcount = SQLGetSingleVal("DELETE FROM transactions WHERE BLOCKNUM > " & dbposition - 1)
         Dim blockdeletedcount = SQLGetSingleVal("DELETE FROM processedblocks WHERE BLOCKNUM > " & dbposition - 1)
@@ -471,7 +503,7 @@ Public Class Form1
         'calculate catchup
         Dim catchup As Integer
         catchup = rpcblock - dbposition
-        workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] STATUS: " & catchup.ToString & " blocks to catch up")
+        workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] STATUS: " & (catchup + 1).ToString & " blocks to catch up")
 
         '### loop through blocks since dbposition and add any transactions detected as mastercoin to the transactions table
         Dim msctranscount As Integer
@@ -480,6 +512,8 @@ Public Class Form1
         For x = dbposition To rpcblock
             Dim blocknum As Integer = x
             If debuglevel > 0 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: Block Analysis for: " & blocknum.ToString)
+            Dim perccomp As Integer = ((x - dbposition) / (catchup + 1)) * 100
+            workthread.ReportProgress(0, perccomp.ToString & "#")
             Dim blockhash As blockhash = mlib.getblockhash(bitcoin_con, blocknum)
             Dim block As Block = mlib.getblock(bitcoin_con, blockhash.result.ToString)
             Dim txarray() As String = block.result.tx.ToArray
@@ -533,9 +567,9 @@ Public Class Form1
                 End Try
             Next
             'only here do we write that the block has been processed to database
-            Dim dbwrite3 As Integer = SQLGetSingleVal("INSERT INTO processedblocks VALUES (" & blocknum & "," & block.result.time & ")")
+            Dim dbwrite3 As Integer = SQLGetSingleVal("INSERT INTO processedblocks VALUES (" & blocknum & "," & block.result.time & ",'" & block.result.hash & "')")
         Next
-
+        workthread.ReportProgress(0, "100#")
         'handle unconfirmed transactions
         If debuglevel > 0 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: Block Analysis for pending transactions")
         Dim btemplate As blocktemplate = mlib.getblocktemplate(bitcoin_con)
@@ -580,7 +614,7 @@ Public Class Form1
         Dim maxtime As Long = SQLGetSingleVal("SELECT MAX(BLOCKTIME) FROM processedblocks")
         Dim devmsc As Double = Math.Round(((1 - (0.5 ^ ((maxtime - 1377993874) / 31556926))) * 56316.23576222), 8)
         'do all generate transactions and calculate initial balances
-        Dim con As New SqlCeConnection("data source=" & Application.StartupPath & "\wallet.sdf; password=" & walpass)
+        Dim con As New SqlCeConnection("data source=" & Application.StartupPath & "\wallet.sdf")
         Dim cmd As New SqlCeCommand()
         cmd.Connection = con
         con.Open()
@@ -596,21 +630,28 @@ Public Class Form1
         cmd.ExecuteNonQuery()
         cmd.CommandText = "insert into balances_temp (address, cbalance, cbalancet) VALUES ('1EXoDusjGwvnjZUyKkxZ4UHEf77z6A5S4P', " & (devmsc * 100000000) & ",0)"
         cmd.ExecuteNonQuery()
+        'try and speed things up a little - drop some indexes into the right places
+        cmd.CommandText = "create unique index balindex on balances_temp(address)"
+        'cmd.ExecuteNonQuery()
+        cmd.CommandText = "create unique index dexindex on exchange_temp(fromadd)"
+        'cmd.ExecuteNonQuery()
         'go through transactions, check validity, process by type and apply to balances
         Dim sqlquery
-        Dim tmpblktime As Decimal = 0
-        Dim lasttmpblktime As Decimal = 0
+        Dim pendinglist As New List(Of String)
+        Dim tmpblknum As Integer = 0
+        Dim lasttmpblknum As Integer = 0
         Dim returnval
         sqlquery = "SELECT * FROM transactions order by ID ASC"
         cmd.CommandText = sqlquery
         Dim adptSQL As New SqlCeDataAdapter(cmd)
         Dim ds1 As New DataSet()
         adptSQL.Fill(ds1)
-
+        'get total number of transactions to process
+        Dim totaltxcount As Integer = ds1.Tables(0).Rows.Count
         With ds1.Tables(0)
             For rowNumber As Integer = 0 To .Rows.Count - 1
                 With .Rows(rowNumber)
-                    tmpblktime = .Item(5)
+                    tmpblknum = .Item(6)
                     If .Item(4) = "simple" Then
                         'get currency type
                         Dim curtype As Integer = .Item(8)
@@ -982,6 +1023,8 @@ Public Class Form1
                                                     sqlquery = "INSERT INTO transactions_processed_temp (TXID,FROMADD,TOADD,PURCHASEAMOUNT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE,MATCHINGTX,EXPIRY) VALUES ('" & .Item(0) & "','" & .Item(1) & "','" & .Item(2) & "'," & purchaseamount & ",'pendingoffer'," & .Item(5) & "," & .Item(6) & ",1," & .Item(8) & ",'" & matchingtx & "'," & expiry & ")"
                                                     cmd.CommandText = sqlquery
                                                     returnval = cmd.ExecuteScalar
+                                                    'add to pendinglist
+                                                    pendinglist.Add(.Item(0))
                                                     sqlquery = "UPDATE exchange_temp SET saleamount=saleamount-" & purchaseamount & " where FROMADD='" & .Item(2).ToString & "' and curtype=" & curtype
                                                     cmd.CommandText = sqlquery
                                                     If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
@@ -1026,7 +1069,7 @@ Public Class Form1
                         End If
                     End If
 
-                    If .Item(4) = "btcpayment" Then
+                    If .Item(4) = "btcpayment" And .Item(6) > 265984 Then 'quickly invalidate spam payments from buymastercoins in the early days, since no sell offers before 265985 there can be no valid bitcoin payment dex messages before then
                         'get a list of the pending accepts this from address has open
                         sqlquery = "select txid,toadd,matchingtx,purchaseamount from transactions_processed_temp where fromadd='" & .Item(1) & "' and type='pendingoffer'"
                         cmd.CommandText = sqlquery
@@ -1165,17 +1208,18 @@ Public Class Form1
                         End If
                     End If
                 End With
-                'has blocktime changed? if so go through and remove expired pending offers
-                If tmpblktime <> lasttmpblktime Then
-                    lasttmpblktime = tmpblktime
+                'update progress (don't go overboard - just every ten txs)
+                If (rowNumber Mod 10) = 0 Then
+                    Dim percentdone As Integer = (rowNumber / totaltxcount) * 100
+                    workthread.ReportProgress(0, percentdone.ToString & "%")
+                End If
+                'is pendinglist nonempty, and if so has blocktime changed? if so go through and remove expired pending offers
+                If pendinglist.Count > 0 And tmpblknum > 0 And tmpblknum <> lasttmpblknum Then
+                    lasttmpblknum = tmpblknum
                     'blocktime has changed - get new blocknum
-                    sqlquery = "select blocknum from processedblocks where blocktime=" & tmpblktime
-                    cmd.CommandText = sqlquery
-                    returnval = cmd.ExecuteScalar
-                    Dim blknum As Integer
-                    If Not IsDBNull(returnval) Then blknum = returnval
+                    'optimization no need to go out to sqlce every block here, big waste of time - already have current blocknum in .item(6) - switch away from blocktime to blocknum
                     'get any expired pendingoffers
-                    sqlquery = "select txid,matchingtx,purchaseamount,curtype,toadd,fromadd from transactions_processed_temp where type='pendingoffer' and expiry<" & blknum
+                    sqlquery = "select txid,matchingtx,purchaseamount,curtype,toadd,fromadd from transactions_processed_temp where type='pendingoffer' and expiry<" & tmpblknum
                     cmd.CommandText = sqlquery
                     Dim refundtxid As String = ""
                     Dim adptSQLexp As New SqlCeDataAdapter(cmd)
@@ -1185,20 +1229,12 @@ Public Class Form1
                         For rownum As Integer = 0 To .Rows.Count - 1
                             With .Rows(rownum)
                                 Dim tmpcur2 As Integer = .Item(3)
-                                'were there any purchases of this offer
-                                'sqlquery = "select count(txid) from transactions_processed_temp where type='purchase' and matchingtx='" & .Item(0) & "' and toadd='" & .Item(5) & "'"
-                                'cmd.CommandText = sqlquery
-                                'returnval = cmd.ExecuteScalar
-                                'If returnval > 0 Then
-                                'flip pending to acceptoffer
-                                ' sqlquery = "update transactions_processed_temp SET type='acceptoffer' where txid='" & .Item(0) & "'"
-                                '  cmd.CommandText = sqlquery
-                                '   returnval = cmd.ExecuteScalar
-                                'Else
                                 'flip pending to expired
                                 sqlquery = "update transactions_processed_temp SET type='expiredoffer' where txid='" & .Item(0) & "'"
                                 cmd.CommandText = sqlquery
                                 returnval = cmd.ExecuteScalar
+                                'remove from pendinglist
+                                pendinglist.Remove(.Item(0))
                                 'return reserved funds
                                 'does a sell still exist for the currency?
                                 sqlquery = "SELECT txid FROM exchange_temp where fromadd='" & .Item(4).ToString & "' and curtype=" & .Item(3).ToString
@@ -1752,6 +1788,8 @@ Public Class Form1
         If rsendbtc.Checked = True Then balstr = "BTC"
         If rsendmsc.Checked = True Then balstr = "MSC"
         If rsendtmsc.Checked = True Then balstr = "TMSC"
+        comsendaddress.Items.Clear()
+        comsendaddress.Text = ""
         For Each row In taddresslist.Rows
             If Not comsendaddress.Items.Contains(row.item(0).ToString) Then
                 If row.item(baltype) = 0 Then
@@ -2044,7 +2082,7 @@ Public Class Form1
         'do some initial setup
         showlabels()
         bback.Visible = True
-        txtdebug.Text = "MASTERCHEST WALLET v0.3b"
+        txtdebug.Text = "MASTERCHEST WALLET v0.3c"
         activateoverview()
         lastscreen = "1"
         updateui()
@@ -2440,13 +2478,18 @@ Public Class Form1
                                 txsummary = txsummary & vbCrLf & "Transaction sent, ID: " & broadcasttx.result.ToString
                                 sentfrm.lsent.Text = "transaction sent"
                                 senttxid = broadcasttx.result.ToString
-                                'lsendtxinfo.Text = "Transaction sent, check viewer for TXID."
-                                'lsendtxinfo.ForeColor = Color.Lime
-                                bsignsend.Enabled = False
+                                txtsendamount.Text = "0.00000000"
+                                sentfrm.txtviewer.Text = ""
+                                lsendamver.Visible = False
+                                txtsenddest.Text = ""
+                                lsendtxinfo.Text = ""
+                                bsignsend.Enabled = True
                                 Application.DoEvents()
                                 If workthread.IsBusy <> True Then
                                     UIrefresh.Enabled = False
                                     syncicon.Visible = True
+                                    comsendaddress.Text = ""
+                                    lsendavail.Text = "Select a sending address"
                                     lsyncing.Visible = True
                                     poversync.Image = My.Resources.sync
                                     loversync.Text = "Synchronizing..."
@@ -2496,15 +2539,6 @@ Public Class Form1
             End If
 
         End If
-    End Sub
-
-    Private Sub bsendnew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bsendnew.Click
-        txtsendamount.Text = "0.00000000"
-        sentfrm.txtviewer.Text = ""
-        lsendamver.Visible = False
-        txtsenddest.Text = ""
-        lsendtxinfo.Text = ""
-        bsignsend.Enabled = True
     End Sub
 
     Private Sub dgvhistory_DataError(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewDataErrorEventArgs) Handles dgvhistory.DataError
@@ -2698,6 +2732,22 @@ Public Class Form1
         dgvselloffer.ClearSelection()
         dgvopenorders.ClearSelection()
         Application.DoEvents()
+    End Sub
+
+    Private Sub lnksyncnow_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lnksyncnow.LinkClicked
+        If workthread.IsBusy <> True Then
+            poversync.Image = My.Resources.sync
+            syncicon.Image = My.Resources.sync
+            syncicon.Visible = True
+            lsyncing.Visible = True
+            lsyncing.Text = "Synchronizing..."
+            workthread.RunWorkerAsync()
+        End If
+    End Sub
+
+    Private Sub lnksupport_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lnksupport.LinkClicked
+        Dim sinfo As New ProcessStartInfo("https://mastercoinfoundation.uservoice.com")
+        Process.Start(sinfo)
     End Sub
 End Class
 
