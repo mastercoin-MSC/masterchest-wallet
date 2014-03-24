@@ -45,8 +45,6 @@ Partial Class Form1
         Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
         Me.RectangleShape2 = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
         Me.RectangleShape1 = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
-        Me.lpoweredby = New System.Windows.Forms.Label()
-        Me.lmasterchest = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.loverviewmscbal = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -57,6 +55,8 @@ Partial Class Form1
         Me.Label19 = New System.Windows.Forms.Label()
         Me.loversync = New System.Windows.Forms.Label()
         Me.poverview = New System.Windows.Forms.Panel()
+        Me.loverviewres = New System.Windows.Forms.Label()
+        Me.Label82 = New System.Windows.Forms.Label()
         Me.poversync = New System.Windows.Forms.PictureBox()
         Me.psend = New System.Windows.Forms.Panel()
         Me.rsendbtc = New System.Windows.Forms.RadioButton()
@@ -90,8 +90,6 @@ Partial Class Form1
         Me.bcurrencies = New System.Windows.Forms.Label()
         Me.bdebug = New System.Windows.Forms.Label()
         Me.pdebug = New System.Windows.Forms.Panel()
-        Me.lnksupport = New System.Windows.Forms.LinkLabel()
-        Me.Label81 = New System.Windows.Forms.Label()
         Me.Label80 = New System.Windows.Forms.Label()
         Me.lnksyncnow = New System.Windows.Forms.LinkLabel()
         Me.lnkdebug = New System.Windows.Forms.LinkLabel()
@@ -205,13 +203,15 @@ Partial Class Form1
         Me.Label60 = New System.Windows.Forms.Label()
         Me.Label64 = New System.Windows.Forms.Label()
         Me.lsyncing = New System.Windows.Forms.Label()
+        Me.Label79 = New System.Windows.Forms.Label()
+        Me.lnksup = New System.Windows.Forms.LinkLabel()
         Me.syncicon = New System.Windows.Forms.PictureBox()
         Me.PictureBox5 = New System.Windows.Forms.PictureBox()
         Me.bmin = New System.Windows.Forms.PictureBox()
         Me.bclose = New System.Windows.Forms.PictureBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.bback = New System.Windows.Forms.PictureBox()
-        Me.Label79 = New System.Windows.Forms.Label()
+        Me.nfi = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.poverview.SuspendLayout()
         CType(Me.poversync, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.psend.SuspendLayout()
@@ -300,28 +300,6 @@ Partial Class Form1
         Me.RectangleShape1.Location = New System.Drawing.Point(0, 0)
         Me.RectangleShape1.Name = "RectangleShape1"
         Me.RectangleShape1.Size = New System.Drawing.Size(834, 565)
-        '
-        'lpoweredby
-        '
-        Me.lpoweredby.AutoSize = True
-        Me.lpoweredby.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lpoweredby.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.lpoweredby.Location = New System.Drawing.Point(122, 523)
-        Me.lpoweredby.Name = "lpoweredby"
-        Me.lpoweredby.Size = New System.Drawing.Size(70, 13)
-        Me.lpoweredby.TabIndex = 13
-        Me.lpoweredby.Text = "Powered by "
-        '
-        'lmasterchest
-        '
-        Me.lmasterchest.AutoSize = True
-        Me.lmasterchest.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lmasterchest.ForeColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.lmasterchest.Location = New System.Drawing.Point(190, 523)
-        Me.lmasterchest.Name = "lmasterchest"
-        Me.lmasterchest.Size = New System.Drawing.Size(69, 13)
-        Me.lmasterchest.TabIndex = 14
-        Me.lmasterchest.Text = "Masterchest"
         '
         'Label10
         '
@@ -412,7 +390,7 @@ Partial Class Form1
         Me.loversync.AutoSize = True
         Me.loversync.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.loversync.ForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
-        Me.loversync.Location = New System.Drawing.Point(97, 327)
+        Me.loversync.Location = New System.Drawing.Point(98, 327)
         Me.loversync.Name = "loversync"
         Me.loversync.Size = New System.Drawing.Size(111, 17)
         Me.loversync.TabIndex = 25
@@ -420,6 +398,8 @@ Partial Class Form1
         '
         'poverview
         '
+        Me.poverview.Controls.Add(Me.loverviewres)
+        Me.poverview.Controls.Add(Me.Label82)
         Me.poverview.Controls.Add(Me.poversync)
         Me.poverview.Controls.Add(Me.loversync)
         Me.poverview.Controls.Add(Me.Label19)
@@ -430,10 +410,31 @@ Partial Class Form1
         Me.poverview.Controls.Add(Me.Label14)
         Me.poverview.Controls.Add(Me.loverviewmscbal)
         Me.poverview.Controls.Add(Me.Label10)
-        Me.poverview.Location = New System.Drawing.Point(777, 358)
+        Me.poverview.Location = New System.Drawing.Point(769, 355)
         Me.poverview.Name = "poverview"
-        Me.poverview.Size = New System.Drawing.Size(668, 372)
+        Me.poverview.Size = New System.Drawing.Size(729, 372)
         Me.poverview.TabIndex = 27
+        '
+        'loverviewres
+        '
+        Me.loverviewres.AutoSize = True
+        Me.loverviewres.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.loverviewres.ForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
+        Me.loverviewres.Location = New System.Drawing.Point(526, 109)
+        Me.loverviewres.Name = "loverviewres"
+        Me.loverviewres.Size = New System.Drawing.Size(81, 17)
+        Me.loverviewres.TabIndex = 28
+        Me.loverviewres.Text = "Please wait..."
+        '
+        'Label82
+        '
+        Me.Label82.AutoSize = True
+        Me.Label82.ForeColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
+        Me.Label82.Location = New System.Drawing.Point(526, 90)
+        Me.Label82.Name = "Label82"
+        Me.Label82.Size = New System.Drawing.Size(121, 13)
+        Me.Label82.TabIndex = 27
+        Me.Label82.Text = "RESERVED BALANCE:"
         '
         'poversync
         '
@@ -461,7 +462,7 @@ Partial Class Form1
         Me.psend.Controls.Add(Me.Label26)
         Me.psend.Controls.Add(Me.Label27)
         Me.psend.Controls.Add(Me.Label29)
-        Me.psend.Location = New System.Drawing.Point(49, 114)
+        Me.psend.Location = New System.Drawing.Point(740, 394)
         Me.psend.Name = "psend"
         Me.psend.Size = New System.Drawing.Size(752, 396)
         Me.psend.TabIndex = 28
@@ -722,12 +723,13 @@ Partial Class Form1
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(38, Byte), Integer))
         DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         DataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(38, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dgvaddresses.DefaultCellStyle = DataGridViewCellStyle2
         Me.dgvaddresses.EnableHeadersVisualStyles = False
         Me.dgvaddresses.Location = New System.Drawing.Point(35, 21)
+        Me.dgvaddresses.MultiSelect = False
         Me.dgvaddresses.Name = "dgvaddresses"
         Me.dgvaddresses.ReadOnly = True
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -740,6 +742,7 @@ Partial Class Form1
         Me.dgvaddresses.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.dgvaddresses.RowHeadersVisible = False
         Me.dgvaddresses.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.dgvaddresses.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvaddresses.Size = New System.Drawing.Size(719, 345)
         Me.dgvaddresses.TabIndex = 35
         '
@@ -844,8 +847,6 @@ Partial Class Form1
         '
         'pdebug
         '
-        Me.pdebug.Controls.Add(Me.lnksupport)
-        Me.pdebug.Controls.Add(Me.Label81)
         Me.pdebug.Controls.Add(Me.Label80)
         Me.pdebug.Controls.Add(Me.lnksyncnow)
         Me.pdebug.Controls.Add(Me.lnkdebug)
@@ -854,37 +855,10 @@ Partial Class Form1
         Me.pdebug.Controls.Add(Me.txtdebug)
         Me.pdebug.Controls.Add(Me.Label41)
         Me.pdebug.Controls.Add(Me.Label44)
-        Me.pdebug.Location = New System.Drawing.Point(549, 544)
+        Me.pdebug.Location = New System.Drawing.Point(646, 462)
         Me.pdebug.Name = "pdebug"
         Me.pdebug.Size = New System.Drawing.Size(775, 391)
         Me.pdebug.TabIndex = 29
-        '
-        'lnksupport
-        '
-        Me.lnksupport.ActiveLinkColor = System.Drawing.Color.PaleTurquoise
-        Me.lnksupport.AutoSize = True
-        Me.lnksupport.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lnksupport.ForeColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.lnksupport.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
-        Me.lnksupport.LinkColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.lnksupport.Location = New System.Drawing.Point(91, 368)
-        Me.lnksupport.Name = "lnksupport"
-        Me.lnksupport.Size = New System.Drawing.Size(197, 13)
-        Me.lnksupport.TabIndex = 33
-        Me.lnksupport.TabStop = True
-        Me.lnksupport.Text = "mastercoinfoundation.uservoice.com"
-        Me.lnksupport.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
-        '
-        'Label81
-        '
-        Me.Label81.AutoSize = True
-        Me.Label81.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label81.ForeColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
-        Me.Label81.Location = New System.Drawing.Point(38, 368)
-        Me.Label81.Name = "Label81"
-        Me.Label81.Size = New System.Drawing.Size(57, 13)
-        Me.Label81.TabIndex = 32
-        Me.Label81.Text = "SUPPORT:"
         '
         'Label80
         '
@@ -915,12 +889,12 @@ Partial Class Form1
         '
         'lnkdebug
         '
-        Me.lnkdebug.ActiveLinkColor = System.Drawing.Color.PaleTurquoise
+        Me.lnkdebug.ActiveLinkColor = System.Drawing.Color.FromArgb(CType(CType(65, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.lnkdebug.AutoSize = True
         Me.lnkdebug.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lnkdebug.ForeColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.lnkdebug.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
-        Me.lnkdebug.LinkColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lnkdebug.LinkColor = System.Drawing.Color.FromArgb(CType(CType(65, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.lnkdebug.Location = New System.Drawing.Point(564, 368)
         Me.lnkdebug.Name = "lnkdebug"
         Me.lnkdebug.Size = New System.Drawing.Size(32, 13)
@@ -1298,7 +1272,7 @@ Partial Class Form1
         Me.phistory.Controls.Add(Me.lnkhistoryfilter)
         Me.phistory.Controls.Add(Me.Label11)
         Me.phistory.Controls.Add(Me.Label17)
-        Me.phistory.Location = New System.Drawing.Point(569, 531)
+        Me.phistory.Location = New System.Drawing.Point(560, 531)
         Me.phistory.Name = "phistory"
         Me.phistory.Size = New System.Drawing.Size(784, 400)
         Me.phistory.TabIndex = 41
@@ -1458,8 +1432,8 @@ Partial Class Form1
         DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(38, Byte), Integer))
         DataGridViewCellStyle8.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         DataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(38, Byte), Integer))
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.White
         DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dgvhistory.DefaultCellStyle = DataGridViewCellStyle8
         Me.dgvhistory.EnableHeadersVisualStyles = False
@@ -1477,6 +1451,7 @@ Partial Class Form1
         Me.dgvhistory.RowHeadersDefaultCellStyle = DataGridViewCellStyle9
         Me.dgvhistory.RowHeadersVisible = False
         Me.dgvhistory.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.dgvhistory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvhistory.Size = New System.Drawing.Size(778, 341)
         Me.dgvhistory.TabIndex = 35
         '
@@ -2323,10 +2298,37 @@ Partial Class Form1
         Me.lsyncing.Text = "Synchronizing..."
         Me.lsyncing.Visible = False
         '
+        'Label79
+        '
+        Me.Label79.AutoSize = True
+        Me.Label79.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label79.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.Label79.Location = New System.Drawing.Point(54, 523)
+        Me.Label79.Name = "Label79"
+        Me.Label79.Size = New System.Drawing.Size(262, 13)
+        Me.Label79.TabIndex = 47
+        Me.Label79.Text = "Masterchest Wallet Alpha 0.3C Build 0021   |   Get "
+        '
+        'lnksup
+        '
+        Me.lnksup.ActiveLinkColor = System.Drawing.Color.PaleTurquoise
+        Me.lnksup.AutoSize = True
+        Me.lnksup.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lnksup.ForeColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lnksup.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
+        Me.lnksup.LinkColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lnksup.Location = New System.Drawing.Point(310, 523)
+        Me.lnksup.Name = "lnksup"
+        Me.lnksup.Size = New System.Drawing.Size(49, 13)
+        Me.lnksup.TabIndex = 48
+        Me.lnksup.TabStop = True
+        Me.lnksup.Text = "Support"
+        Me.lnksup.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
+        '
         'syncicon
         '
         Me.syncicon.Image = Global.Masterchest_Wallet.My.Resources.Resources.sync
-        Me.syncicon.Location = New System.Drawing.Point(534, 15)
+        Me.syncicon.Location = New System.Drawing.Point(532, 15)
         Me.syncicon.Name = "syncicon"
         Me.syncicon.Size = New System.Drawing.Size(20, 21)
         Me.syncicon.TabIndex = 45
@@ -2378,16 +2380,11 @@ Partial Class Form1
         Me.bback.TabIndex = 4
         Me.bback.TabStop = False
         '
-        'Label79
+        'nfi
         '
-        Me.Label79.AutoSize = True
-        Me.Label79.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label79.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label79.Location = New System.Drawing.Point(54, 523)
-        Me.Label79.Name = "Label79"
-        Me.Label79.Size = New System.Drawing.Size(61, 13)
-        Me.Label79.TabIndex = 47
-        Me.Label79.Text = "Build 0020"
+        Me.nfi.Icon = CType(resources.GetObject("nfi.Icon"), System.Drawing.Icon)
+        Me.nfi.Text = "Masterchest Wallet"
+        Me.nfi.Visible = True
         '
         'Form1
         '
@@ -2395,6 +2392,7 @@ Partial Class Form1
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(38, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(835, 566)
+        Me.Controls.Add(Me.lnksup)
         Me.Controls.Add(Me.Label79)
         Me.Controls.Add(Me.lsyncing)
         Me.Controls.Add(Me.syncicon)
@@ -2412,8 +2410,6 @@ Partial Class Form1
         Me.Controls.Add(Me.bcurrencies)
         Me.Controls.Add(Me.baddresses)
         Me.Controls.Add(Me.poverview)
-        Me.Controls.Add(Me.lmasterchest)
-        Me.Controls.Add(Me.lpoweredby)
         Me.Controls.Add(Me.PictureBox5)
         Me.Controls.Add(Me.bmin)
         Me.Controls.Add(Me.bclose)
@@ -2426,9 +2422,10 @@ Partial Class Form1
         Me.Controls.Add(Me.bexchange)
         Me.Controls.Add(Me.ShapeContainer1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form1"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Form1"
+        Me.Text = "Masterchest Wallet"
         Me.poverview.ResumeLayout(False)
         Me.poverview.PerformLayout()
         CType(Me.poversync, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2481,8 +2478,6 @@ Partial Class Form1
     Friend WithEvents bclose As System.Windows.Forms.PictureBox
     Friend WithEvents bmin As System.Windows.Forms.PictureBox
     Friend WithEvents PictureBox5 As System.Windows.Forms.PictureBox
-    Friend WithEvents lpoweredby As System.Windows.Forms.Label
-    Friend WithEvents lmasterchest As System.Windows.Forms.Label
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents loverviewmscbal As System.Windows.Forms.Label
     Friend WithEvents Label14 As System.Windows.Forms.Label
@@ -2640,8 +2635,10 @@ Partial Class Form1
     Friend WithEvents Label78 As System.Windows.Forms.Label
     Friend WithEvents Label79 As System.Windows.Forms.Label
     Friend WithEvents lnksyncnow As System.Windows.Forms.LinkLabel
-    Friend WithEvents lnksupport As System.Windows.Forms.LinkLabel
-    Friend WithEvents Label81 As System.Windows.Forms.Label
     Friend WithEvents Label80 As System.Windows.Forms.Label
+    Friend WithEvents lnksup As System.Windows.Forms.LinkLabel
+    Friend WithEvents loverviewres As System.Windows.Forms.Label
+    Friend WithEvents Label82 As System.Windows.Forms.Label
+    Friend WithEvents nfi As System.Windows.Forms.NotifyIcon
 
 End Class

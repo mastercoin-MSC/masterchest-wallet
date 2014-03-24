@@ -66,14 +66,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Masterchest_Wallet.exe" size="301568">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Masterchest_Wallet.exe" size="812032">
       <assemblyIdentity name="Masterchest_Wallet" version="0.0.0.3" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>31aAQ+0+69OWxGoy/TFBOMihIsk=</dsig:DigestValue>
+        <dsig:DigestValue>IQqdyQif3f0ekC4sXeqCQCoNNZs=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -225,9 +225,9 @@ Public Class sellfrm
                             Form1.UIrefresh.Enabled = False
                             Form1.lsyncing.Visible = True
                             Form1.lsyncing.Text = "Synchronizing..."
-                            Form1.syncicon.Image = My.Resources.sync
+                            Form1.syncicon.Image = My.Resources.gif
                             Form1.syncicon.Visible = True
-                            Form1.poversync.Image = My.Resources.sync
+                            Form1.poversync.Image = My.Resources.gif
                             Form1.loversync.Text = "Synchronizing..."
                             'Start the workthread for the blockchain scanner
                             Form1.workthread.RunWorkerAsync()

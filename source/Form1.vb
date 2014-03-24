@@ -13,6 +13,7 @@ Imports System.Environment
 Imports System.IO
 Imports System.Diagnostics
 Imports System.Data.SqlServerCe
+Imports System.Drawing.Drawing2D
 Imports System.Configuration
 Imports System.Security.Cryptography
 Imports Masterchest.mlib
@@ -35,32 +36,58 @@ Public Class Form1
     End Function
     <DllImportAttribute("user32.dll")> Public Shared Function ReleaseCapture() As Boolean
     End Function
+
+    Private Sub Form1_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
+
+    End Sub
     Private Sub Form1_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles MyBase.MouseDown, RectangleShape1.MouseDown, psetup.MouseDown, pwelcome.MouseDown, pcurrencies.MouseDown, paddresses.MouseDown, pdebug.MouseDown, poverview.MouseDown, psend.MouseDown, psettings.MouseDown
         If e.Button = MouseButtons.Left Then
+            dgvaddresses.CurrentCell = Nothing
+            dgvaddresses.ClearSelection()
+            dgvhistory.CurrentCell = Nothing
+            dgvhistory.ClearSelection()
+            dgvselloffer.CurrentCell = Nothing
+            dgvselloffer.ClearSelection()
+            dgvopenorders.CurrentCell = Nothing
+            dgvopenorders.ClearSelection()
             ReleaseCapture()
             SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0)
         End If
 
     End Sub
     Private Sub bclose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bclose.Click
-        Application.Exit()
+        MsgBox("The default behaviour for Masterchest Wallet has changed.  Closing the wallet will now minimize it to your system tray." & vbCrLf & vbCrLf & "It is important to understand that this means your wallet will continue to run." & vbCrLf & vbCrLf & "To return to the wallet, simply double-click the icon in your system tray.  If you wish to completely exit the wallet, please right click on the system tray icon and choose 'Exit'." & vbCrLf & vbCrLf & "This message will be removed in the next update.")
+        Me.WindowState = FormWindowState.Minimized
+        Me.Visible = False
+        nfi.Visible = True
     End Sub
     Private Sub bmin_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bmin.Click
         Me.WindowState = FormWindowState.Minimized
     End Sub
 
+    Private Sub mnurestore_click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+        nfi.Visible = False
+        Me.Visible = True
+        Me.WindowState = FormWindowState.Normal
+    End Sub
+    Private Sub mnuexit_click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+        nfi.Visible = False
+        Application.Exit()
+    End Sub
 
     '//////////////
     '////INITIALIZE
     '//////////////
     Private Sub Form1_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'disable dex
-        'Button1.Visible = False
-        'DataGridView1.Visible = False
-        'Label60.Visible = False
-        'Label61.Visible = False
-        'lnkpricehistory.Visible = False
-        'Label49.Text = "            Distributed Exchange is disabled in this build."
+        'context icon
+        Dim icnmnu As New ContextMenuStrip
+        Dim mnurestore As New ToolStripMenuItem("&Restore")
+        AddHandler mnurestore.Click, AddressOf mnurestore_click
+        icnmnu.Items.AddRange(New ToolStripItem() {mnurestore})
+        Dim mnuexit As New ToolStripMenuItem("E&xit")
+        AddHandler mnuexit.Click, AddressOf mnuexit_click
+        icnmnu.Items.AddRange(New ToolStripItem() {mnuexit})
+        nfi.ContextMenuStrip = icnmnu
 
         'declare globalization to make sure we use a . for decimal only
         Dim customCulture As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture.Clone()
@@ -73,7 +100,7 @@ Public Class Form1
 
         'disclaimer
         MsgBox("DISCLAIMER: " & vbCrLf & vbCrLf & "This software is pre-release software for testing only." & vbCrLf & vbCrLf & "The protocol and transaction processing rules for Mastercoin are still under active development and are subject to change in future." & vbCrLf & vbCrLf & "DO NOT USE IT WITH A LARGE AMOUNT OF MASTERCOINS AND/OR BITCOINS.  IT IS ENTIRELY POSSIBLE YOU MAY LOSE ALL YOUR COINS.  INFORMATION DISPLAYED MAY BE INCORRECT.  MASTERCHEST OFFERS ABSOLUTELY NO GUARANTEES OF ANY KIND." & vbCrLf & vbCrLf & "A fraction of a bitcoin and a fraction of a mastercoin are the suggested testing amounts.  Preferably use a fresh bitcoin wallet.dat." & vbCrLf & vbCrLf & "This software is provided open-source at no cost.  You are responsible for knowing the law in your country and determining if your use of this software contravenes any local laws.")
-        poversync.Image = My.Resources.sync
+        poversync.Image = My.Resources.gif
         loversync.Text = "Syncronizing..."
         bback.Visible = False
         hidelabels()
@@ -182,6 +209,7 @@ Public Class Form1
     End Sub
 
     Private Sub teststartup()
+        'build 0021 drastically shrunk most of the startup delays, we no longer need to wait for anything to catch up etc
         'check we have configuration info
         If bitcoin_con.bitcoinrpcserver = "" Or bitcoin_con.bitcoinrpcport = 0 Or bitcoin_con.bitcoinrpcuser = "" Or bitcoin_con.bitcoinrpcpassword = "" Then
             MsgBox("There was a problem configuring your connection to bitcoind/qt.  Both auto detection and manual configuration appear to have failed." & vbCrLf & vbCrLf & "Will now exit.")
@@ -191,7 +219,7 @@ Public Class Form1
         'test connection to bitcoind
         lwelstartup.Text &= vbCrLf & "Startup: Testing bitcoin connection..."
         Application.DoEvents()
-        System.Threading.Thread.Sleep(500)
+        System.Threading.Thread.Sleep(100)
         Application.DoEvents()
 
         Try
@@ -209,18 +237,18 @@ Public Class Form1
             Application.Exit()
         End Try
         Application.DoEvents()
-        System.Threading.Thread.Sleep(500)
+        System.Threading.Thread.Sleep(100)
         Application.DoEvents()
 
         'test connection to database
         lwelstartup.Text &= vbCrLf & "Startup: Testing database connection..."
         Application.DoEvents()
-        System.Threading.Thread.Sleep(500)
+        System.Threading.Thread.Sleep(100)
         Application.DoEvents()
 
         Dim testval As Integer
         testval = SQLGetSingleVal("SELECT count(*) FROM information_schema.columns WHERE table_name = 'processedblocks'")
-        If testval = 99 Then Exit Sub
+        If testval = 99 Then Application.Exit() 'something went wrong
         If testval = 3 Then 'sanity check ok
             lwelstartup.Text &= vbCrLf & "Startup: Connection to database established and sanity check OK."
         Else
@@ -229,7 +257,7 @@ Public Class Form1
             Exit Sub
         End If
         Application.DoEvents()
-        System.Threading.Thread.Sleep(500)
+        System.Threading.Thread.Sleep(100)
         Application.DoEvents()
 
 
@@ -238,7 +266,7 @@ Public Class Form1
         'enumarate bitcoin addresses
         lwelstartup.Text &= vbCrLf & "Startup: Enumerating wallet addresses..."
         Application.DoEvents()
-        System.Threading.Thread.Sleep(500)
+        System.Threading.Thread.Sleep(100)
         Application.DoEvents()
         balubtc = 0
         Try
@@ -291,7 +319,7 @@ Public Class Form1
         startup = False
         lwelstartup.Text &= vbCrLf & "Startup: Initialization Complete."
         Application.DoEvents()
-        System.Threading.Thread.Sleep(5000)
+        System.Threading.Thread.Sleep(1000)
         Application.DoEvents()
         'do some initial setup
         showlabels()
@@ -304,7 +332,7 @@ Public Class Form1
         Application.DoEvents()
         'kick off the background worker thread
         If workthread.IsBusy <> True Then
-            syncicon.Image = My.Resources.sync
+            syncicon.Image = My.Resources.gif
             syncicon.Visible = True
             lsyncing.Visible = True
             lsyncing.Text = "Synchronizing..."
@@ -384,7 +412,11 @@ Public Class Form1
         If checkdebugscroll.Checked = True Then txtdebug.ScrollBars = ScrollBars.Vertical
         If checkdebugscroll.Checked = False Then txtdebug.ScrollBars = ScrollBars.None
     End Sub
+
     Private Sub lnkdebug_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lnkdebug.LinkClicked
+        'disabled for now
+        Exit Sub
+
         If debuglevel = 1 Then
             debuglevel = 2
             lnkdebug.Text = "MED"
@@ -413,22 +445,30 @@ Public Class Form1
         If InStr(e.UserState.ToString, "%") Then
             fig = Val(e.UserState.ToString.Substring(0, Len(e.UserState.ToString) - 1))
             lsyncing.Text = "Processing (" & fig & "%)..."
-            Static Dim blueline As System.Drawing.Graphics = CreateGraphics()
-            blueline.DrawLine(bluepen, Convert.ToInt32(556), Convert.ToInt32(32), Convert.ToInt32(fig + 556), Convert.ToInt32(32))
-            blueline.DrawLine(greypen, Convert.ToInt32(fig + 556), Convert.ToInt32(32), Convert.ToInt32(656), Convert.ToInt32(32))
+            If fig Mod 2 = 0 Then
+                Dim blueline As System.Drawing.Graphics = CreateGraphics()
+                blueline.DrawLine(bluepen, Convert.ToInt32(556), Convert.ToInt32(32), Convert.ToInt32(fig + 556), Convert.ToInt32(32))
+                blueline.DrawLine(greypen, Convert.ToInt32(fig + 556), Convert.ToInt32(32), Convert.ToInt32(656), Convert.ToInt32(32))
+            End If
+            Application.DoEvents()
         Else
             If InStr(e.UserState.ToString, "#") Then
                 fig = Val(e.UserState.ToString.Substring(0, Len(e.UserState.ToString) - 1))
                 lsyncing.Text = "Synchronizing (" & fig & "%)..."
-                Static Dim greenline As System.Drawing.Graphics = CreateGraphics()
-                greenline.DrawLine(greenpen, Convert.ToInt32(556), Convert.ToInt32(32), Convert.ToInt32(fig + 556), Convert.ToInt32(32))
-                greenline.DrawLine(greypen, Convert.ToInt32(fig + 556), Convert.ToInt32(32), Convert.ToInt32(656), Convert.ToInt32(32))
+                    Dim greenline As System.Drawing.Graphics = CreateGraphics()
+                    greenline.DrawLine(greenpen, Convert.ToInt32(556), Convert.ToInt32(32), Convert.ToInt32(fig + 556), Convert.ToInt32(32))
+                    greenline.DrawLine(greypen, Convert.ToInt32(fig + 556), Convert.ToInt32(32), Convert.ToInt32(656), Convert.ToInt32(32))
+                 Application.DoEvents()
             Else
                 Me.txtdebug.AppendText(vbCrLf & e.UserState.ToString)
-                If InStr(e.UserState.ToString, "Transaction processing") Then loversync.Text = "Processing..."
+                If InStr(e.UserState.ToString, "Transaction processing") Then
+                    loversync.Text = "Processing..."
+                    Me.Refresh()
+                End If
+
                 If InStr(e.UserState.ToString, "DEBUG: Block Analysis for: ") Then loversync.Text = "Synchronizing...  Current Block: " & e.UserState.ToString.Substring((Len(e.UserState.ToString) - 6), 6) & "..."
             End If
-        End If
+            End If
     End Sub
 
     Private Sub workthread_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles workthread.DoWork
@@ -1209,7 +1249,7 @@ Public Class Form1
                     End If
                 End With
                 'update progress (don't go overboard - just every ten txs)
-                If (rowNumber Mod 10) = 0 Then
+                If (rowNumber Mod 50) = 0 Then
                     Dim percentdone As Integer = (rowNumber / totaltxcount) * 100
                     workthread.ReportProgress(0, percentdone.ToString & "%")
                 End If
@@ -1366,7 +1406,7 @@ Public Class Form1
             Dim adptSQL2 As New SqlCeDataAdapter(cmd)
             Dim ds2 As New DataSet()
             adptSQL2.Fill(ds2)
-            Dim cur As String
+            Dim cur, txid As String
             Dim valimg, dirimg As System.Drawing.Bitmap
             Dim txexists As Boolean = False
 
@@ -1374,6 +1414,7 @@ Public Class Form1
                 For rowNumber As Integer = 0 To .Rows.Count - 1
                     With .Rows(rowNumber)
                         txexists = False
+                        txid = .Item(0)
                         If .Item(4) = 1 Then cur = "Mastercoin"
                         If .Item(4) = 2 Then cur = "Test Mastercoin"
                         If .Item(1) = False Then valimg = My.Resources.invalid
@@ -1448,7 +1489,7 @@ Public Class Form1
                         Else
                             tadd = "N/A"
                         End If
-                        thistorylist.Rows.Add(valimg, dirimg, dtdatetime, fadd, tadd, txtype, cur, amo)
+                        thistorylist.Rows.Add(valimg, dirimg, dtdatetime, fadd, tadd, txtype, cur, amo, txid)
                     End With
                 Next
 
@@ -1764,7 +1805,7 @@ Public Class Form1
         txtdebug.AppendText(vbCrLf & "[" & DateTime.Now.ToString("s") & "] DEBUG: Thread exited.")
         UIrefresh.Enabled = True
         If varsyncronized = True Then
-            syncicon.Image = My.Resources.sync
+            syncicon.Image = My.Resources.gif
             syncicon.Visible = False
             lsyncing.Visible = False
             lsyncing.Text = "Synchronizing..."
@@ -1803,10 +1844,11 @@ Public Class Form1
         Dim hrbaltmsc As Double = baltmsc / 100000000
         Dim hrbalumsc As Double = balumsc / 100000000
         Dim hrbalutmsc As Double = balutmsc / 100000000
-
-        loverviewmscbal.Text = (hrbalmsc + hrbalumsc).ToString("#0.00000000") & " MSC"
+        Dim hrbalresmsc As Double = balresmsc / 100000000
+        loverviewmscbal.Text = (hrbalmsc + hrbalumsc + hrbalresmsc).ToString("#0.00000000") & " MSC"
         loverviewsmallmscbal.Text = hrbalmsc.ToString("#0.00000000") & " MSC"
         loverviewsmallunconfmsc.Text = hrbalumsc.ToString("#0.00000000") & " MSC"
+        loverviewres.Text = (hrbalresmsc).ToString("#0.00000000") & " MSC"
 
         Try
             dgvaddresses.DataSource = Nothing
@@ -1867,16 +1909,16 @@ Public Class Form1
             'load historylist with thistorylist
             historylist.Clear()
             For Each row In thistorylist.Rows
-                historylist.Rows.Add(row.item(0), row.item(1), row.item(2), row.item(3), row.item(4), row.item(5), row.item(6), row.item(7))
+                historylist.Rows.Add(row.item(0), row.item(1), row.item(2), row.item(3), row.item(4), row.item(5), row.item(6), row.item(7), row.item(8))
             Next
             dgvhistory.DataSource = historylist
             Dim dgvcolumn As New DataGridViewColumn
             dgvcolumn = dgvhistory.Columns(0)
-            dgvcolumn.Width = 13
-            dgvcolumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+            dgvcolumn.Width = 14
+            dgvcolumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             dgvcolumn = dgvhistory.Columns(1)
             dgvcolumn.Width = 16
-            dgvcolumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+            dgvcolumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             dgvcolumn = dgvhistory.Columns(2)
             dgvcolumn.Width = 115
             dgvcolumn = dgvhistory.Columns(3)
@@ -1890,6 +1932,8 @@ Public Class Form1
             dgvcolumn = dgvhistory.Columns(7)
             dgvcolumn.DefaultCellStyle.Format = "########0.00######"
             dgvcolumn.Width = 140
+            dgvcolumn = dgvhistory.Columns(8)
+            dgvcolumn.Width = 0
             If lnkhistorysort.Text = "Highest Value" Then dgvhistory.Sort(dgvhistory.Columns(6), System.ComponentModel.ListSortDirection.Descending)
             If lnkhistorysort.Text = "Lowest Value" Then dgvhistory.Sort(dgvhistory.Columns(6), System.ComponentModel.ListSortDirection.Ascending)
             If lnkhistorysort.Text = "Recent First" Then dgvhistory.Sort(dgvhistory.Columns(2), System.ComponentModel.ListSortDirection.Descending)
@@ -1946,9 +1990,16 @@ Public Class Form1
             lbldextotalcur.Text = (balmsc / 100000000).ToString("######0.00######") & " " & dexcur
             lbldexrescur.Text = (balresmsc / 100000000).ToString("######0.00######") & " " & dexcur
         End If
+
         lbldextotalbtc.Text = balbtc.ToString & " BTC"
         dgvselloffer.CurrentCell = Nothing
         dgvselloffer.ClearSelection()
+        dgvhistory.FirstDisplayedScrollingRowIndex = 0
+        dgvhistory.CurrentCell = Nothing
+        dgvhistory.ClearSelection()
+        dgvaddresses.FirstDisplayedScrollingRowIndex = 0
+        dgvaddresses.CurrentCell = Nothing
+        dgvaddresses.ClearSelection()
         lnknofocus.Focus()
         updateui()
         lnkdexcurrency.Visible = True
@@ -1956,18 +2007,25 @@ Public Class Form1
         Application.DoEvents()
 
     End Sub
-
+    Private Sub dgvhistory_CellMouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvhistory.CellMouseDown
+        If e.Button = MouseButtons.Right Then
+            hrow = e.RowIndex
+            hcol = e.ColumnIndex
+            If e.RowIndex > 0 Then dgvhistory.Rows(e.RowIndex).Selected = True
+        End If
+    End Sub
 
     Private Sub dgvaddresses_CellMouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvaddresses.CellMouseDown
         If e.Button = MouseButtons.Right Then
             mrow = e.RowIndex
             mcol = e.ColumnIndex
+            If e.RowIndex > 0 Then dgvaddresses.Rows(e.RowIndex).Selected = True
         End If
     End Sub
 
     Private Sub UIrefresh_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UIrefresh.Tick
         UIrefresh.Enabled = False
-        poversync.Image = My.Resources.sync
+        poversync.Image = My.Resources.gif
         loversync.Text = "Synchronizing..."
         lsyncing.Visible = True
         lsyncing.Text = "Synchronizing..."
@@ -2417,7 +2475,7 @@ Public Class Form1
                                 syncicon.Visible = True
                                 lsyncing.Text = "Synchronizing..."
                                 lsyncing.Visible = True
-                                poversync.Image = My.Resources.sync
+                                poversync.Image = My.Resources.gif
                                 loversync.Text = "Synchronizing..."
                                 ' Start the workthread for the blockchain scanner
                                 workthread.RunWorkerAsync()
@@ -2491,7 +2549,7 @@ Public Class Form1
                                     comsendaddress.Text = ""
                                     lsendavail.Text = "Select a sending address"
                                     lsyncing.Visible = True
-                                    poversync.Image = My.Resources.sync
+                                    poversync.Image = My.Resources.gif
                                     loversync.Text = "Synchronizing..."
                                     lsyncing.Text = "Synchronizing..."
                                     ' Start the workthread for the blockchain scanner
@@ -2607,7 +2665,6 @@ Public Class Form1
     Private Sub dgvselloffer_DataError(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewDataErrorEventArgs) Handles dgvselloffer.DataError
         'trap error when we clear list bound to dgv temporarily
     End Sub
-
 
     Private Sub dgvselloffer_SelectionChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles dgvselloffer.SelectionChanged
         'get currently highlighted sell
@@ -2736,8 +2793,8 @@ Public Class Form1
 
     Private Sub lnksyncnow_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lnksyncnow.LinkClicked
         If workthread.IsBusy <> True Then
-            poversync.Image = My.Resources.sync
-            syncicon.Image = My.Resources.sync
+            poversync.Image = My.Resources.gif
+            syncicon.Image = My.Resources.gif
             syncicon.Visible = True
             lsyncing.Visible = True
             lsyncing.Text = "Synchronizing..."
@@ -2745,9 +2802,21 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub lnksupport_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lnksupport.LinkClicked
-        Dim sinfo As New ProcessStartInfo("https://mastercoinfoundation.uservoice.com")
+    Private Sub lnksup_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lnksup.LinkClicked
+        Dim sinfo As New ProcessStartInfo("https://masterchest.info/support")
         Process.Start(sinfo)
     End Sub
+
+    Private Sub RectangleShape1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RectangleShape1.Click
+
+    End Sub
+
+    Private Sub nfi_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles nfi.DoubleClick
+        nfi.Visible = False
+        Me.Visible = True
+        Me.WindowState = FormWindowState.Normal
+    End Sub
+
+  
 End Class
 

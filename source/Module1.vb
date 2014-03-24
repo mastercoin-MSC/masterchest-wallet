@@ -51,6 +51,8 @@ Module Module1
     Public historylist, thistorylist As New DataTable
     Public mcol As Integer = -1
     Public mrow As Integer = -1
+    Public hcol As Integer = -1
+    Public hrow As Integer = -1
     Public balmsc As Double
     Public balumsc As Double
     Public balbtc As Double
@@ -77,8 +79,11 @@ Module Module1
         Form1.phistory.Location = New Point(27, 125)
         Form1.pwelcome.Location = New Point(27, 125)
         Form1.pexchange.Location = New Point(27, 125)
-
         Form1.psetup.Location = New Point(27, 55)
+        'suggested by DexX for ,/. fix
+        '-------------------------------
+        currencylist.Locale = System.Globalization.CultureInfo.InvariantCulture
+        '-------------------------------
         addresslist.Columns.Add("Address", GetType(String))
         addresslist.Columns.Add("btcamount", GetType(Double))
         addresslist.Columns.Add("tmscamount", GetType(Double))
@@ -100,6 +105,7 @@ Module Module1
         historylist.Columns.Add("type", GetType(String))
         historylist.Columns.Add("currency", GetType(String))
         historylist.Columns.Add("amount", GetType(Double))
+        historylist.Columns.Add("txid", GetType(String))
         thistorylist.Columns.Add("valid", GetType(Image))
         thistorylist.Columns.Add("direction", GetType(Image))
         thistorylist.Columns.Add("blocktime", GetType(Date))
@@ -108,6 +114,7 @@ Module Module1
         thistorylist.Columns.Add("type", GetType(String))
         thistorylist.Columns.Add("currency", GetType(String))
         thistorylist.Columns.Add("amount", GetType(Double))
+        thistorylist.Columns.Add("txid", GetType(String))
         Form1.dgvhistory.RowTemplate.Height = 18
         Form1.dgvselloffer.RowTemplate.Height = 18
         Form1.dgvopenorders.RowTemplate.Height = 18
@@ -127,15 +134,56 @@ Module Module1
         openorders.Columns.Add("Status")
         Form1.dgvopenorders.RowTemplate.DefaultCellStyle.Padding = New Padding(0)
         Dim mnu As New ContextMenuStrip
-        Dim mnucopy As New ToolStripMenuItem("Copy")
+        Dim mnucopy As New ToolStripMenuItem("Copy Address")
         AddHandler mnucopy.Click, AddressOf mnucopy_click
         mnu.Items.AddRange(New ToolStripItem() {mnucopy})
         Form1.dgvaddresses.ContextMenuStrip = mnu
+
+        Dim histmnu As New ContextMenuStrip
+        Dim histmnucopysender As New ToolStripMenuItem("Copy Sender Address")
+        AddHandler histmnucopysender.Click, AddressOf histmnucopysender_click
+        histmnu.Items.AddRange(New ToolStripItem() {histmnucopysender})
+        Dim histmnucopyref As New ToolStripMenuItem("Copy Receipient Address")
+        AddHandler histmnucopyref.Click, AddressOf histmnucopyref_click
+        histmnu.Items.AddRange(New ToolStripItem() {histmnucopyref})
+        Dim histmnucopytxid As New ToolStripMenuItem("Copy Transaction ID")
+        AddHandler histmnucopytxid.Click, AddressOf histmnucopytxid_click
+        histmnu.Items.AddRange(New ToolStripItem() {histmnucopytxid})
+        Form1.dgvhistory.ContextMenuStrip = histmnu
+
+
+    End Sub
+    Public Sub histmnucopysender_click()
+        If hrow >= 0 And hcol >= 0 Then
+            Try
+                Clipboard.SetData(DataFormats.Text, Form1.dgvhistory.Rows(hrow).Cells(3).Value.ToString)
+            Catch e As Exception
+            End Try
+
+        End If
+    End Sub
+    Public Sub histmnucopyref_click()
+        If hrow >= 0 And hcol >= 0 Then
+            Try
+                Clipboard.SetData(DataFormats.Text, Form1.dgvhistory.Rows(hrow).Cells(4).Value.ToString)
+            Catch e As Exception
+            End Try
+
+        End If
+    End Sub
+    Public Sub histmnucopytxid_click()
+        If hrow >= 0 And hcol >= 0 Then
+            Try
+                Clipboard.SetData(DataFormats.Text, Form1.dgvhistory.Rows(hrow).Cells(8).Value.ToString)
+            Catch e As Exception
+            End Try
+
+        End If
     End Sub
     Public Sub mnucopy_click()
         If mrow >= 0 And mcol >= 0 Then
             Try
-                Clipboard.SetData(DataFormats.Text, Form1.dgvaddresses.Rows(mrow).Cells(mcol).Value.ToString)
+                Clipboard.SetData(DataFormats.Text, Form1.dgvaddresses.Rows(mrow).Cells(0).Value.ToString)
             Catch e As Exception
             End Try
 
