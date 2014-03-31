@@ -48,9 +48,27 @@ Public Class sellfrm
 
         comselladdress.Items.Clear()
         comselladdress.Text = ""
-        'update addresses
+        'update addresses - hide those than already have a sell 
+        Dim con As New SqlCeConnection("data source=" & Application.StartupPath & "\wallet.sdf; password=" & walpass)
+        Dim cmd As New SqlCeCommand()
+        cmd.Connection = con
+        con.Open()
+        cmd.CommandText = "SELECT fromadd FROM exchange_temp where curtype=" & tmpcur.ToString
+        Dim returnval = cmd.ExecuteScalar
+        Dim adaptfrm As New SqlCeDataAdapter(cmd)
+        Dim dsfrm As New DataSet()
+        Dim frmlist As New List(Of String)
+        adaptfrm.Fill(dsfrm)
+        With dsfrm.Tables(0)
+            For rownum As Integer = 0 To .Rows.Count - 1
+                With .Rows(rownum)
+                    frmlist.Add(.Item(0))
+                End With
+            Next
+        End With
+        con.Close()
         For Each row In taddresslist.Rows
-            If Not comselladdress.Items.Contains(row.item(0).ToString) Then
+            If Not comselladdress.Items.Contains(row.item(0).ToString) And Not frmlist.Contains(row.item(0).ToString) Then
                 If row.item(baltype) = 0 Then
                     'ignore empty address
                 Else
@@ -208,9 +226,9 @@ Public Class sellfrm
                             Form1.UIrefresh.Enabled = False
                             Form1.lsyncing.Visible = True
                             Form1.lsyncing.Text = "Synchronizing..."
-                            Form1.syncicon.Image = My.Resources.sync
+                            Form1.syncicon.Image = My.Resources.gif
                             Form1.syncicon.Visible = True
-                            Form1.poversync.Image = My.Resources.sync
+                            Form1.poversync.Image = My.Resources.gif
                             Form1.loversync.Text = "Synchronizing..."
                             'Start the workthread for the blockchain scanner
                             Form1.workthread.RunWorkerAsync()

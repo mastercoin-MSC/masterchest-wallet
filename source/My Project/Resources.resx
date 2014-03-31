@@ -154,11 +154,14 @@
   <data name="in1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\in.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="uncof" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uncof1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="green-tick" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\green-tick.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="uncof" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uncof1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="gif" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gif.GIF;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="baddresses" xml:space="preserve">
     <value>addresses</value>
@@ -205,9 +208,6 @@
   <data name="Form1" xml:space="preserve">
     <value>Form1</value>
   </data>
-  <data name="Label1" xml:space="preserve">
-    <value>AMOUNT:</value>
-  </data>
   <data name="Label10" xml:space="preserve">
     <value>TOTAL MASTERCOIN BALANCE:</value>
   </data>
@@ -246,9 +246,6 @@
   </data>
   <data name="Label24" xml:space="preserve">
     <value>TEST MSC BALANCE:</value>
-  </data>
-  <data name="Label25" xml:space="preserve">
-    <value>ADDRESS:</value>
   </data>
   <data name="Label27" xml:space="preserve">
     <value>RECIPIENT ADDRESS:</value>
@@ -319,9 +316,6 @@
   <data name="Label53" xml:space="preserve">
     <value>Only use this option if you downloaded this wallet from a trusted source</value>
   </data>
-  <data name="Label54" xml:space="preserve">
-    <value>AMOUNT:</value>
-  </data>
   <data name="Label55" xml:space="preserve">
     <value>Valid</value>
   </data>
@@ -345,9 +339,6 @@
   </data>
   <data name="LinkLabel4" xml:space="preserve">
     <value>Highest Balance</value>
-  </data>
-  <data name="LinkLabel5" xml:space="preserve">
-    <value>All Currencies</value>
   </data>
   <data name="lnkaddfilter" xml:space="preserve">
     <value>No Filter Active</value>
@@ -434,7 +425,7 @@
     <value>enter your bitcoin wallet passhrase</value>
   </data>
   <data name="exception" xml:space="preserve">
-    <value>Exception:</value>
+    <value>Exception: </value>
   </data>
   <data name="exiting" xml:space="preserve">
     <value>Exiting...</value>
@@ -552,7 +543,7 @@
     <value>Error sending transaction.</value>
   </data>
   <data name="exceptionthrown" xml:space="preserve">
-    <value>Exeption thrown :</value>
+    <value>Exeption thrown: </value>
   </data>
   <data name="failedbuildtx" xml:space="preserve">
     <value>Build transaction failed.  Recipient address is not valid.</value>
@@ -603,7 +594,7 @@
     <value>Sanity checking has detected addresses with multiple balance entries in the database.  It is not safe to continue.  The wallet will now exit.</value>
   </data>
   <data name="messagesstartexception1" xml:space="preserve">
-    <value>Exception testing connection to bitcoin via RPC :</value>
+    <value>ERROR: An exception was raised testing your connection to bitcoin via RPC.  Please ensure bitcoind/qt is running.</value>
   </data>
   <data name="messagestartinfo1" xml:space="preserve">
     <value>There was a problem configuring your connection to bitcoind/qt.  Both auto detection and manual configuration appear to have failed.</value>
@@ -718,5 +709,35 @@
   </data>
   <data name="workerblockscan8" xml:space="preserve">
     <value>BLOCKSCAN: Found pending MSC transaction (sell offer):</value>
+  </data>
+  <data name="Label1" xml:space="preserve">
+    <value>AMOUNT:</value>
+  </data>
+  <data name="Label25" xml:space="preserve">
+    <value>ADDRESS:</value>
+  </data>
+  <data name="Label54" xml:space="preserve">
+    <value>AMOUNT:</value>
+  </data>
+  <data name="LinkLabel5" xml:space="preserve">
+    <value>All Currencies</value>
+  </data>
+  <data name="sanitycheckfail1" xml:space="preserve">
+    <value>Sanity check has failed.  More than one sell for an address exists in the exchange table.  It is not safe to continue.  Exiting...</value>
+  </data>
+  <data name="workerdebug7" xml:space="preserve">
+    <value>DEBUG: Beginning simple send transaction"</value>
+  </data>
+  <data name="workerdebug8" xml:space="preserve">
+    <value>DEBUG: Requesting passphrase</value>
+  </data>
+  <data name="workerdebug9" xml:space="preserve">
+    <value>DEBUG: No passphrase specified, skipping unlocking wallet"</value>
+  </data>
+  <data name="restore" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+  <data name="_exit" xml:space="preserve">
+    <value>Exit</value>
   </data>
 </root>

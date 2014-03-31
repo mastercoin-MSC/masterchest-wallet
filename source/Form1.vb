@@ -12,7 +12,9 @@ Imports System.Text
 Imports System.Threading
 Imports System.Environment
 Imports System.IO
+Imports System.Diagnostics
 Imports System.Data.SqlServerCe
+Imports System.Drawing.Drawing2D
 Imports System.Configuration
 Imports System.Security.Cryptography
 Imports Masterchest.mlib
@@ -38,45 +40,69 @@ Public Class Form1
     End Function
     <DllImportAttribute("user32.dll")> Public Shared Function ReleaseCapture() As Boolean
     End Function
+
+    Private Sub Form1_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
+
+    End Sub
+
     Private Sub Form1_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles MyBase.MouseDown, psetup.MouseDown, pwelcome.MouseDown, pcurrencies.MouseDown, paddresses.MouseDown, pdebug.MouseDown, poverview.MouseDown, psend.MouseDown, psettings.MouseDown
         If e.Button = MouseButtons.Left Then
+            dgvaddresses.CurrentCell = Nothing
+            dgvaddresses.ClearSelection()
+            dgvhistory.CurrentCell = Nothing
+            dgvhistory.ClearSelection()
+            dgvselloffer.CurrentCell = Nothing
+            dgvselloffer.ClearSelection()
+            dgvopenorders.CurrentCell = Nothing
+            dgvopenorders.ClearSelection()
             ReleaseCapture()
             SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0)
         End If
+    End Sub
 
-    End Sub
     Private Sub bclose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bclose.Click
-        Application.Exit()
+        MsgBox("The default behaviour for Masterchest Wallet has changed.  Closing the wallet will now minimize it to your system tray." & vbCrLf & vbCrLf & "It is important to understand that this means your wallet will continue to run." & vbCrLf & vbCrLf & "To return to the wallet, simply double-click the icon in your system tray.  If you wish to completely exit the wallet, please right click on the system tray icon and choose 'Exit'." & vbCrLf & vbCrLf & "This message will be removed in the next update.")
+        Me.WindowState = FormWindowState.Minimized
+        Me.Visible = False
+        nfi.Visible = True
     End Sub
+
     Private Sub bmin_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bmin.Click
         Me.WindowState = FormWindowState.Minimized
     End Sub
 
+    Private Sub mnurestore_click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+        nfi.Visible = False
+        Me.Visible = True
+        Me.WindowState = FormWindowState.Normal
+    End Sub
+
+    Private Sub mnuexit_click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+        nfi.Visible = False
+        Application.Exit()
+    End Sub
 
     '//////////////
     '////INITIALIZE
     '//////////////
     Private Sub Form1_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'disable dex
-        'Button1.Visible = False
-        'DataGridView1.Visible = False
-        'Label60.Visible = False
-        'Label61.Visible = False
-        'lnkpricehistory.Visible = False
-        'Label49.Text = "            Distributed Exchange is disabled in this build."
-
-        'declare globalization to make sure we use a . for decimal only
-        activeCulture.NumberFormat.NumberDecimalSeparator = "."
-        Thread.CurrentThread.CurrentCulture = activeCulture
-        Thread.CurrentThread.CurrentUICulture = activeCulture
+        'context icon
+        Dim icnmnu As New ContextMenuStrip
+        Dim mnurestore As New ToolStripMenuItem(My.Resources.restore)
+        AddHandler mnurestore.Click, AddressOf mnurestore_click
+        icnmnu.Items.AddRange(New ToolStripItem() {mnurestore})
+        Dim mnuexit As New ToolStripMenuItem(My.Resources._exit)
+        AddHandler mnuexit.Click, AddressOf mnuexit_click
+        icnmnu.Items.AddRange(New ToolStripItem() {mnuexit})
+        nfi.ContextMenuStrip = icnmnu
 
         ' Fallback Locale/CulutureInfo (embedded in main assembly)
         locales.Add("en-US", "English (US)")
 
-
         ' More culutures can be added here when translations are available
         ' Culture name and language  matrix: http://msdn.microsoft.com/en-us/goglobal/bb896001.aspx
         ' To list cultures of host OS use: System.Globalization.CultureInfo.GetCultures(System.Globalization.CultureTypes.AllCultures)
+        locales.Add("en-GB", "English (GB)")
         locales.Add("sv-SE", "Svenska")
         locales.Add("fr-FR", "Français")
 
@@ -100,8 +126,9 @@ Public Class Form1
         'declare current currency for exchange
         dexcur = "TMSC"
 
-        poversync.Image = My.Resources.sync
+        poversync.Image = My.Resources.gif
         loversync.Text = My.Resources.synchronizing
+
         bback.Visible = False
         hidelabels()
         initialize()
@@ -209,6 +236,7 @@ Public Class Form1
     End Sub
 
     Private Sub teststartup()
+        'build 0021 drastically shrunk most of the startup delays, we no longer need to wait for anything to catch up etc
         'check we have configuration info
         If bitcoin_con.bitcoinrpcserver = "" Or bitcoin_con.bitcoinrpcport = 0 Or bitcoin_con.bitcoinrpcuser = "" Or bitcoin_con.bitcoinrpcpassword = "" Then
             MsgBox(My.Resources.messagestartinfo1 & vbCrLf & vbCrLf & My.Resources.willnowexit)
@@ -218,7 +246,7 @@ Public Class Form1
         'test connection to bitcoind
         lwelstartup.Text &= vbCrLf & My.Resources.startinfo1
         Application.DoEvents()
-        System.Threading.Thread.Sleep(500)
+        System.Threading.Thread.Sleep(100)
         Application.DoEvents()
 
         Try
@@ -232,24 +260,24 @@ Public Class Form1
             End If
         Catch ex2 As Exception
             lwelstartup.Text &= vbCrLf & My.Resources.starterror2 & " " & ex2.Message
-            MsgBox(My.Resources.messagesstartexception1 & " " & ex2.Message)
-            MsgBox("ERROR: An exception was raised testing your connection to bitcoin via RPC.  Please ensure bitcoind/qt is running.  The wallet will now exit.")
+            MsgBox(My.Resources.messagesstartexception1 & My.Resources.willnowexit)
             Application.Exit()
         End Try
         Application.DoEvents()
-        System.Threading.Thread.Sleep(500)
+        System.Threading.Thread.Sleep(100)
         Application.DoEvents()
 
         'test connection to database
         lwelstartup.Text &= vbCrLf & My.Resources.startinfo3
         Application.DoEvents()
-        System.Threading.Thread.Sleep(500)
+        System.Threading.Thread.Sleep(100)
         Application.DoEvents()
 
         Dim testval As Integer
         testval = SQLGetSingleVal("SELECT count(*) FROM information_schema.columns WHERE table_name = 'processedblocks'")
-        If testval = 99 Then Exit Sub
-        If testval = 2 Then 'sanity check ok
+
+        If testval = 99 Then Application.Exit() 'something went wrong
+        If testval = 3 Then 'sanity check ok
             lwelstartup.Text &= vbCrLf & My.Resources.startinfo4
         Else
             'something has gone wrong
@@ -257,7 +285,7 @@ Public Class Form1
             Exit Sub
         End If
         Application.DoEvents()
-        System.Threading.Thread.Sleep(500)
+        System.Threading.Thread.Sleep(100)
         Application.DoEvents()
 
 
@@ -266,7 +294,7 @@ Public Class Form1
         'enumarate bitcoin addresses
         lwelstartup.Text &= vbCrLf & My.Resources.startinfo5
         Application.DoEvents()
-        System.Threading.Thread.Sleep(500)
+        System.Threading.Thread.Sleep(100)
         Application.DoEvents()
         balubtc = 0
         Try
@@ -307,10 +335,10 @@ Public Class Form1
             If lnkaddfilter.Text = My.Resources.nofilteractive Then addresslist.DefaultView.RowFilter = ""
             If lnkaddfilter.Text = My.Resources.emptybalances Then addresslist.DefaultView.RowFilter = "btcamount > 0 or mscamount > 0 or tmscamount > 0"
 
-            Catch ex As Exception
-                MsgBox(ex.Message)
+        Catch ex As Exception
+            MsgBox(ex.Message)
             lwelstartup.Text &= vbCrLf & My.Resources.starterror4
-                Exit Sub
+            Exit Sub
 
         End Try
         balbtc = 0
@@ -321,12 +349,12 @@ Public Class Form1
         startup = False
         lwelstartup.Text &= vbCrLf & My.Resources.startupinitializingcomplete
         Application.DoEvents()
-        System.Threading.Thread.Sleep(5000)
+        System.Threading.Thread.Sleep(1000)
         Application.DoEvents()
         'do some initial setup
         showlabels()
         bback.Visible = True
-        txtdebug.Text = "MASTERCHEST WALLET v0.3a"
+        txtdebug.Text = "MASTERCHEST WALLET v0.3c"
         activateoverview()
         lastscreen = "1"
         updateui()
@@ -334,10 +362,10 @@ Public Class Form1
         Application.DoEvents()
         'kick off the background worker thread
         If workthread.IsBusy <> True Then
-            syncicon.Image = My.Resources.sync
+            syncicon.Image = My.Resources.gif
             syncicon.Visible = True
             lsyncing.Visible = True
-            lsyncing.Text = "Synchronizing..."
+            lsyncing.Text = My.Resources.synchronizing
             workthread.RunWorkerAsync()
         End If
 
@@ -414,7 +442,11 @@ Public Class Form1
         If checkdebugscroll.Checked = True Then txtdebug.ScrollBars = ScrollBars.Vertical
         If checkdebugscroll.Checked = False Then txtdebug.ScrollBars = ScrollBars.None
     End Sub
+
     Private Sub lnkdebug_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lnkdebug.LinkClicked
+        'disabled for now
+        Exit Sub
+
         If debuglevel = 1 Then
             debuglevel = 2
             lnkdebug.Text = My.Resources.med
@@ -436,8 +468,37 @@ Public Class Form1
     '/// BACKGROUND WORKER
     '//////////////////////////////
     Private Sub workthread_ProgressChanged(ByVal sender As Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs) Handles workthread.ProgressChanged
-        Me.txtdebug.AppendText(vbCrLf & e.UserState.ToString)
-        If e.UserState.ToString.Substring(0, 27) = "[" & DateTime.Now.ToString("s") & "]" & My.Resources.debugblockanalysis & " " Then loversync.Text = My.Resources.synchronizing & " " & My.Resources.currentblock & " " & e.UserState.ToString.Substring(27, 6) & "..."
+        Dim bluepen As New Pen(Color.FromArgb(51, 153, 255), 2)
+        Dim greypen As New Pen(Color.FromArgb(65, 65, 65), 2)
+        Dim greenpen As New Pen(Color.FromArgb(51, 255, 153), 2)
+        Dim fig As Integer
+        If InStr(e.UserState.ToString, "%") Then
+            fig = Val(e.UserState.ToString.Substring(0, Len(e.UserState.ToString) - 1))
+            lsyncing.Text = "Processing (" & fig & "%)..."
+            If fig Mod 2 = 0 Then
+                Dim blueline As System.Drawing.Graphics = CreateGraphics()
+                blueline.DrawLine(bluepen, Convert.ToInt32(556), Convert.ToInt32(32), Convert.ToInt32(fig + 556), Convert.ToInt32(32))
+                blueline.DrawLine(greypen, Convert.ToInt32(fig + 556), Convert.ToInt32(32), Convert.ToInt32(656), Convert.ToInt32(32))
+            End If
+            Application.DoEvents()
+        Else
+            If InStr(e.UserState.ToString, "#") Then
+                fig = Val(e.UserState.ToString.Substring(0, Len(e.UserState.ToString) - 1))
+                lsyncing.Text = "Synchronizing (" & fig & "%)..."
+                Dim greenline As System.Drawing.Graphics = CreateGraphics()
+                greenline.DrawLine(greenpen, Convert.ToInt32(556), Convert.ToInt32(32), Convert.ToInt32(fig + 556), Convert.ToInt32(32))
+                greenline.DrawLine(greypen, Convert.ToInt32(fig + 556), Convert.ToInt32(32), Convert.ToInt32(656), Convert.ToInt32(32))
+                Application.DoEvents()
+            Else
+                Me.txtdebug.AppendText(vbCrLf & e.UserState.ToString)
+                If InStr(e.UserState.ToString, "Transaction processing") Then
+                    loversync.Text = "Processing..."
+                    Me.Refresh()
+                End If
+
+                If InStr(e.UserState.ToString, "DEBUG: Block Analysis for: ") Then loversync.Text = "Synchronizing...  Current Block: " & e.UserState.ToString.Substring((Len(e.UserState.ToString) - 6), 6) & "..."
+            End If
+        End If
     End Sub
 
     Private Sub workthread_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles workthread.DoWork
@@ -468,7 +529,7 @@ Public Class Form1
         Dim testval As Integer
         testval = SQLGetSingleVal("SELECT count(*) FROM information_schema.columns WHERE table_name = 'processedblocks'")
         If testval = 99 Then Exit Sub
-        If testval = 2 Then 'sanity check ok
+        If testval = 3 Then 'sanity check ok
             workthread.ReportProgress(0, My.Resources.workerstatus3)
         Else
             'something has gone wrong
@@ -480,9 +541,19 @@ Public Class Form1
 
         'check transaction list for last database block and update from there - always delete current last block transactions and go back one ensuring we don't miss transactions if code bombs while processing a block
         Dim dbposition As Integer
+        Dim dbposhash, rpcposhash As String
         dbposition = SQLGetSingleVal("SELECT MAX(BLOCKNUM) FROM processedblocks")
-        If dbposition > 249497 Then dbposition = dbposition - 5 Else dbposition = 249497 'roll database back five blocks every scan for sanity/orphans etc
+        If dbposition > 249497 Then dbposition = dbposition - 1 Else dbposition = 249497 'roll database back a block as long as hash matches, otherwise roll back 50 blocks
         'dbposition = 249497
+        'dbposition block hash check
+        dbposhash = SQLGetSingleVal("SELECT blockhash FROM processedblocks where blocknum=" & dbposition)
+        Dim tmpblockhash As blockhash = mlib.getblockhash(bitcoin_con, dbposition)
+        rpcposhash = tmpblockhash.result.ToString
+        If rpcposhash <> dbposhash Then
+            workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] WARNING: Reorg protection initiated, rolling back 50 blocks for safety")
+            dbposition = dbposition - 50
+        End If
+
         'delete transactions after dbposition block
         Dim txdeletedcount = SQLGetSingleVal("DELETE FROM transactions WHERE BLOCKNUM > " & dbposition - 1)
         Dim blockdeletedcount = SQLGetSingleVal("DELETE FROM processedblocks WHERE BLOCKNUM > " & dbposition - 1)
@@ -511,8 +582,9 @@ Public Class Form1
         Dim msctrans(100000) As String
         For x = dbposition To rpcblock
             Dim blocknum As Integer = x
-
             If debuglevel > 0 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] " & My.Resources.workerdebug2 & " " & blocknum.ToString)
+            Dim perccomp As Integer = ((x - dbposition) / (catchup + 1)) * 100
+            workthread.ReportProgress(0, perccomp.ToString & "#")
             Dim blockhash As blockhash = mlib.getblockhash(bitcoin_con, blocknum)
             Dim block As Block = mlib.getblock(bitcoin_con, blockhash.result.ToString)
             Dim txarray() As String = block.result.tx.ToArray
@@ -566,9 +638,9 @@ Public Class Form1
                 End Try
             Next
             'only here do we write that the block has been processed to database
-            Dim dbwrite3 As Integer = SQLGetSingleVal("INSERT INTO processedblocks VALUES (" & blocknum & "," & block.result.time & ")")
+            Dim dbwrite3 As Integer = SQLGetSingleVal("INSERT INTO processedblocks VALUES (" & blocknum & "," & block.result.time & ",'" & block.result.hash & "')")
         Next
-
+        workthread.ReportProgress(0, "100#")
         'handle unconfirmed transactions
         If debuglevel > 0 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] " & My.Resources.workerdebug3)
         Dim btemplate As blocktemplate = mlib.getblocktemplate(bitcoin_con)
@@ -613,7 +685,7 @@ Public Class Form1
         Dim maxtime As Long = SQLGetSingleVal("SELECT MAX(BLOCKTIME) FROM processedblocks")
         Dim devmsc As Double = Math.Round(((1 - (0.5 ^ ((maxtime - 1377993874) / 31556926))) * 56316.23576222), 8)
         'do all generate transactions and calculate initial balances
-        Dim con As New SqlCeConnection("data source=" & Application.StartupPath & "\wallet.sdf; password=" & walpass)
+        Dim con As New SqlCeConnection("data source=" & Application.StartupPath & "\wallet.sdf")
         Dim cmd As New SqlCeCommand()
         cmd.Connection = con
         con.Open()
@@ -629,21 +701,28 @@ Public Class Form1
         cmd.ExecuteNonQuery()
         cmd.CommandText = "insert into balances_temp (address, cbalance, cbalancet) VALUES ('1EXoDusjGwvnjZUyKkxZ4UHEf77z6A5S4P', " & (devmsc * 100000000) & ",0)"
         cmd.ExecuteNonQuery()
+        'try and speed things up a little - drop some indexes into the right places
+        cmd.CommandText = "create unique index balindex on balances_temp(address)"
+        'cmd.ExecuteNonQuery()
+        cmd.CommandText = "create unique index dexindex on exchange_temp(fromadd)"
+        'cmd.ExecuteNonQuery()
         'go through transactions, check validity, process by type and apply to balances
         Dim sqlquery
-        Dim tmpblktime As Decimal = 0
-        Dim lasttmpblktime As Decimal = 0
+        Dim pendinglist As New List(Of String)
+        Dim tmpblknum As Integer = 0
+        Dim lasttmpblknum As Integer = 0
         Dim returnval
         sqlquery = "SELECT * FROM transactions order by ID ASC"
         cmd.CommandText = sqlquery
         Dim adptSQL As New SqlCeDataAdapter(cmd)
         Dim ds1 As New DataSet()
         adptSQL.Fill(ds1)
-
+        'get total number of transactions to process
+        Dim totaltxcount As Integer = ds1.Tables(0).Rows.Count
         With ds1.Tables(0)
             For rowNumber As Integer = 0 To .Rows.Count - 1
                 With .Rows(rowNumber)
-                    tmpblktime = .Item(5)
+                    tmpblknum = .Item(6)
                     If .Item(4) = "simple" Then
                         'get currency type
                         Dim curtype As Integer = .Item(8)
@@ -760,7 +839,7 @@ Public Class Form1
 
                                 'sanity check exchange table to ensure not more than one sell for address
                                 If sellexists > 1 Then
-                                    MsgBox("Sanity check has failed.  More than one sell for an address exists in the exchange table.  It is not safe to continue.  Exiting...")
+                                    MsgBox(My.Resources.sanitycheckfail1)
                                     End
                                 End If
 
@@ -957,7 +1036,7 @@ Public Class Form1
                             If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
                             returnval = cmd.ExecuteScalar
                             If returnval > 1 Then
-                                MsgBox("Sanity check has failed.  More than one sell for an address exists in the exchange table.  It is not safe to continue.  Exiting...")
+                                MsgBox(My.Resources.sanitycheckfail1)
                                 End
                             End If
                             If returnval = 1 Then
@@ -1015,6 +1094,8 @@ Public Class Form1
                                                     sqlquery = "INSERT INTO transactions_processed_temp (TXID,FROMADD,TOADD,PURCHASEAMOUNT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE,MATCHINGTX,EXPIRY) VALUES ('" & .Item(0) & "','" & .Item(1) & "','" & .Item(2) & "'," & purchaseamount & ",'pendingoffer'," & .Item(5) & "," & .Item(6) & ",1," & .Item(8) & ",'" & matchingtx & "'," & expiry & ")"
                                                     cmd.CommandText = sqlquery
                                                     returnval = cmd.ExecuteScalar
+                                                    'add to pendinglist
+                                                    pendinglist.Add(.Item(0))
                                                     sqlquery = "UPDATE exchange_temp SET saleamount=saleamount-" & purchaseamount & " where FROMADD='" & .Item(2).ToString & "' and curtype=" & curtype
                                                     cmd.CommandText = sqlquery
                                                     If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
@@ -1059,7 +1140,7 @@ Public Class Form1
                         End If
                     End If
 
-                    If .Item(4) = "btcpayment" Then
+                    If .Item(4) = "btcpayment" And .Item(6) > 265984 Then 'quickly invalidate spam payments from buymastercoins in the early days, since no sell offers before 265985 there can be no valid bitcoin payment dex messages before then
                         'get a list of the pending accepts this from address has open
                         sqlquery = "select txid,toadd,matchingtx,purchaseamount from transactions_processed_temp where fromadd='" & .Item(1) & "' and type='pendingoffer'"
                         cmd.CommandText = sqlquery
@@ -1198,17 +1279,18 @@ Public Class Form1
                         End If
                     End If
                 End With
-                'has blocktime changed? if so go through and remove expired pending offers
-                If tmpblktime <> lasttmpblktime Then
-                    lasttmpblktime = tmpblktime
+                'update progress (don't go overboard - just every ten txs)
+                If (rowNumber Mod 50) = 0 Then
+                    Dim percentdone As Integer = (rowNumber / totaltxcount) * 100
+                    workthread.ReportProgress(0, percentdone.ToString & "%")
+                End If
+                'is pendinglist nonempty, and if so has blocktime changed? if so go through and remove expired pending offers
+                If pendinglist.Count > 0 And tmpblknum > 0 And tmpblknum <> lasttmpblknum Then
+                    lasttmpblknum = tmpblknum
                     'blocktime has changed - get new blocknum
-                    sqlquery = "select blocknum from processedblocks where blocktime=" & tmpblktime
-                    cmd.CommandText = sqlquery
-                    returnval = cmd.ExecuteScalar
-                    Dim blknum As Integer
-                    If Not IsDBNull(returnval) Then blknum = returnval
+                    'optimization no need to go out to sqlce every block here, big waste of time - already have current blocknum in .item(6) - switch away from blocktime to blocknum
                     'get any expired pendingoffers
-                    sqlquery = "select txid,matchingtx,purchaseamount,curtype,toadd,fromadd from transactions_processed_temp where type='pendingoffer' and expiry<" & blknum
+                    sqlquery = "select txid,matchingtx,purchaseamount,curtype,toadd,fromadd from transactions_processed_temp where type='pendingoffer' and expiry<" & tmpblknum
                     cmd.CommandText = sqlquery
                     Dim refundtxid As String = ""
                     Dim adptSQLexp As New SqlCeDataAdapter(cmd)
@@ -1218,20 +1300,12 @@ Public Class Form1
                         For rownum As Integer = 0 To .Rows.Count - 1
                             With .Rows(rownum)
                                 Dim tmpcur2 As Integer = .Item(3)
-                                'were there any purchases of this offer
-                                'sqlquery = "select count(txid) from transactions_processed_temp where type='purchase' and matchingtx='" & .Item(0) & "' and toadd='" & .Item(5) & "'"
-                                'cmd.CommandText = sqlquery
-                                'returnval = cmd.ExecuteScalar
-                                'If returnval > 0 Then
-                                'flip pending to acceptoffer
-                                ' sqlquery = "update transactions_processed_temp SET type='acceptoffer' where txid='" & .Item(0) & "'"
-                                '  cmd.CommandText = sqlquery
-                                '   returnval = cmd.ExecuteScalar
-                                'Else
                                 'flip pending to expired
                                 sqlquery = "update transactions_processed_temp SET type='expiredoffer' where txid='" & .Item(0) & "'"
                                 cmd.CommandText = sqlquery
                                 returnval = cmd.ExecuteScalar
+                                'remove from pendinglist
+                                pendinglist.Remove(.Item(0))
                                 'return reserved funds
                                 'does a sell still exist for the currency?
                                 sqlquery = "SELECT txid FROM exchange_temp where fromadd='" & .Item(4).ToString & "' and curtype=" & .Item(3).ToString
@@ -1363,7 +1437,7 @@ Public Class Form1
             Dim adptSQL2 As New SqlCeDataAdapter(cmd)
             Dim ds2 As New DataSet()
             adptSQL2.Fill(ds2)
-            Dim cur As String
+            Dim cur, txid As String
             Dim valimg, dirimg As System.Drawing.Bitmap
             Dim txexists As Boolean = False
 
@@ -1371,6 +1445,7 @@ Public Class Form1
                 For rowNumber As Integer = 0 To .Rows.Count - 1
                     With .Rows(rowNumber)
                         txexists = False
+                        txid = .Item(0)
                         If .Item(4) = 1 Then cur = "Mastercoin"
                         If .Item(4) = 2 Then cur = "Test Mastercoin"
                         If .Item(1) = False Then valimg = My.Resources.invalid
@@ -1445,7 +1520,7 @@ Public Class Form1
                         Else
                             tadd = "N/A"
                         End If
-                        thistorylist.Rows.Add(valimg, dirimg, dtdatetime, fadd, tadd, txtype, cur, amo)
+                        thistorylist.Rows.Add(valimg, dirimg, dtdatetime, fadd, tadd, txtype, cur, amo, txid)
                     End With
                 Next
 
@@ -1471,7 +1546,7 @@ Public Class Form1
 
         varsyncronized = True
         varsyncblock = rpcblock
-        workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] BLOCKSCAN: Finished, sleeping. ")
+        workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] " & My.Resources.workerblockscan6)
 
     End Sub
 
@@ -1740,7 +1815,7 @@ Public Class Form1
         Catch e As Exception
             'exception thrown connecting
             MsgBox(e.Message.ToString)
-            workthread.ReportProgress(0, My.Resources.workererror5 & " " & vbCrLf & e.Message.ToString & vbCrLf & "STATUS: UI thread will remain but blockchain scanning thread will now exit.")
+            workthread.ReportProgress(0, My.Resources.workererror5 & " " & vbCrLf & e.Message.ToString & vbCrLf & My.Resources.workerstatus2)
             Return 99
         End Try
     End Function
@@ -1761,7 +1836,7 @@ Public Class Form1
         txtdebug.AppendText(vbCrLf & "[" & DateTime.Now.ToString("s") & "] " & My.Resources.txtdebugexit)
         UIrefresh.Enabled = True
         If varsyncronized = True Then
-            syncicon.Image = My.Resources.sync
+            syncicon.Image = My.Resources.gif
             syncicon.Visible = False
             lsyncing.Visible = False
             lsyncing.Text = My.Resources.synchronizing
@@ -1785,6 +1860,8 @@ Public Class Form1
         If rsendbtc.Checked = True Then balstr = "BTC"
         If rsendmsc.Checked = True Then balstr = "MSC"
         If rsendtmsc.Checked = True Then balstr = "TMSC"
+        comsendaddress.Items.Clear()
+        comsendaddress.Text = ""
         For Each row In taddresslist.Rows
             If Not comsendaddress.Items.Contains(row.item(0).ToString) Then
                 If row.item(baltype) = 0 Then
@@ -1798,10 +1875,11 @@ Public Class Form1
         Dim hrbaltmsc As Double = baltmsc / 100000000
         Dim hrbalumsc As Double = balumsc / 100000000
         Dim hrbalutmsc As Double = balutmsc / 100000000
-
-        loverviewmscbal.Text = (hrbalmsc + hrbalumsc).ToString("#0.00000000") & " MSC"
+        Dim hrbalresmsc As Double = balresmsc / 100000000
+        loverviewmscbal.Text = (hrbalmsc + hrbalumsc + hrbalresmsc).ToString("#0.00000000") & " MSC"
         loverviewsmallmscbal.Text = hrbalmsc.ToString("#0.00000000") & " MSC"
         loverviewsmallunconfmsc.Text = hrbalumsc.ToString("#0.00000000") & " MSC"
+        loverviewres.Text = (hrbalresmsc).ToString("#0.00000000") & " MSC"
 
         Try
             dgvaddresses.DataSource = Nothing
@@ -1862,16 +1940,16 @@ Public Class Form1
             'load historylist with thistorylist
             historylist.Clear()
             For Each row In thistorylist.Rows
-                historylist.Rows.Add(row.item(0), row.item(1), row.item(2), row.item(3), row.item(4), row.item(5), row.item(6), row.item(7))
+                historylist.Rows.Add(row.item(0), row.item(1), row.item(2), row.item(3), row.item(4), row.item(5), row.item(6), row.item(7), row.item(8))
             Next
             dgvhistory.DataSource = historylist
             Dim dgvcolumn As New DataGridViewColumn
             dgvcolumn = dgvhistory.Columns(0)
-            dgvcolumn.Width = 13
-            dgvcolumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+            dgvcolumn.Width = 14
+            dgvcolumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             dgvcolumn = dgvhistory.Columns(1)
             dgvcolumn.Width = 16
-            dgvcolumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+            dgvcolumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             dgvcolumn = dgvhistory.Columns(2)
             dgvcolumn.Width = 115
             dgvcolumn = dgvhistory.Columns(3)
@@ -1888,7 +1966,8 @@ Public Class Form1
             If lnkhistorysort.Text = My.Resources.highestvalue Then dgvhistory.Sort(dgvhistory.Columns(6), System.ComponentModel.ListSortDirection.Descending)
             If lnkhistorysort.Text = My.Resources.lowestvalue Then dgvhistory.Sort(dgvhistory.Columns(6), System.ComponentModel.ListSortDirection.Ascending)
             If lnkhistorysort.Text = My.Resources.recentfirst Then dgvhistory.Sort(dgvhistory.Columns(2), System.ComponentModel.ListSortDirection.Descending)
-            dgvcolumn.Width = 140
+            dgvcolumn = dgvhistory.Columns(8)
+            dgvcolumn.Width = 0
         Catch ex As Exception
             MsgBox(My.Resources.historylistexception & vbCrLf & ex.Message)
         End Try
@@ -1942,9 +2021,16 @@ Public Class Form1
             lbldextotalcur.Text = (balmsc / 100000000).ToString("######0.00######") & " " & dexcur
             lbldexrescur.Text = (balresmsc / 100000000).ToString("######0.00######") & " " & dexcur
         End If
+
         lbldextotalbtc.Text = balbtc.ToString & " BTC"
         dgvselloffer.CurrentCell = Nothing
         dgvselloffer.ClearSelection()
+        dgvhistory.FirstDisplayedScrollingRowIndex = 0
+        dgvhistory.CurrentCell = Nothing
+        dgvhistory.ClearSelection()
+        dgvaddresses.FirstDisplayedScrollingRowIndex = 0
+        dgvaddresses.CurrentCell = Nothing
+        dgvaddresses.ClearSelection()
         lnknofocus.Focus()
         updateui()
         lnkdexcurrency.Visible = True
@@ -1952,17 +2038,28 @@ Public Class Form1
         Application.DoEvents()
     End Sub
 
+    Private Sub dgvhistory_CellMouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvhistory.CellMouseDown
+        If e.Button = MouseButtons.Right Then
+            hrow = e.RowIndex
+            hcol = e.ColumnIndex
+            If e.RowIndex > 0 Then dgvhistory.Rows(e.RowIndex).Selected = True
+        End If
+    End Sub
+
     Private Sub dgvaddresses_CellMouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvaddresses.CellMouseDown
         If e.Button = MouseButtons.Right Then
             mrow = e.RowIndex
             mcol = e.ColumnIndex
+            If e.RowIndex > 0 Then dgvaddresses.Rows(e.RowIndex).Selected = True
         End If
     End Sub
 
     Private Sub UIrefresh_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UIrefresh.Tick
         UIrefresh.Enabled = False
-        poversync.Image = My.Resources.sync
+
+        poversync.Image = My.Resources.gif
         loversync.Text = My.Resources.synchronizing
+        lsyncing.Text = My.Resources.synchronizing
         syncicon.Visible = True
         lsyncing.Visible = True
         Application.DoEvents()
@@ -2074,7 +2171,7 @@ Public Class Form1
         'do some initial setup
         showlabels()
         bback.Visible = True
-        txtdebug.Text = "MASTERCHEST WALLET v0.3a"
+        txtdebug.Text = "MASTERCHEST WALLET v0.3c"
         activateoverview()
         lastscreen = "1"
         updateui()
@@ -2225,7 +2322,7 @@ Public Class Form1
         If Len(txtstartwalpass.Text) < 6 Then
             lwalinfo.Text = My.Resources.more
             lwalinfo.ForeColor = Color.FromArgb(255, 192, 128)
-            Exit Sub
+        Exit Sub
         End If
         If Len(txtstartwalpass.Text) < 12 Then
             lwalinfo.Text = My.Resources.more & " " & My.Resources.more
@@ -2360,13 +2457,13 @@ Public Class Form1
             'nothing to send
             Exit Sub
         End If
-        txtdebug.AppendText(vbCrLf & "[" & DateTime.Now.ToString("s") & "] DEBUG: Beginning simple send transaction")
+        txtdebug.AppendText(vbCrLf & "[" & DateTime.Now.ToString("s") & "] " & My.Resources.workerdebug7)
         txtdebug.AppendText(vbCrLf & "===================================================================================")
         txsummary = ""
         senttxid = My.Resources.transactionnotsent
         'first validate recipient address
         If txtsenddest.Text <> "" Then
-            txtdebug.AppendText(vbCrLf & "[" & DateTime.Now.ToString("s") & "] DEBUG: Requesting passphrase")
+            txtdebug.AppendText(vbCrLf & "[" & DateTime.Now.ToString("s") & "] " & My.Resources.workerdebug8)
             'get wallet passphrase
             passfrm.ShowDialog()
             Dim fromadd As String
@@ -2389,7 +2486,7 @@ Public Class Form1
                         'push out to bitcoin rpc to send the tx since we can use sendtoaddress for simple bitcoin tx
                         'attempt to unlock wallet, if it's not locked these will error out but we'll pick up the error on signing instead
                         If btcpass = "" Then 'skip unlocking wallet
-                            txtdebug.AppendText(vbCrLf & "[" & DateTime.Now.ToString("s") & "] DEBUG: No passphrase specified, skipping unlocking wallet")
+                            txtdebug.AppendText(vbCrLf & "[" & DateTime.Now.ToString("s") & "] " & My.Resources.workerdebug9)
                         Else
                             Dim dontcareresponse = mlib.rpccall(bitcoin_con, "walletlock", 0, 0, 0, 0)
                             Dim dontcareresponse2 = mlib.rpccall(bitcoin_con, "walletpassphrase", 2, Trim(btcpass.ToString), 15, 0)
@@ -2407,11 +2504,10 @@ Public Class Form1
                             If workthread.IsBusy <> True Then
                                 UIrefresh.Enabled = False
                                 syncicon.Visible = True
-                                lsyncing.Text = "Synchronizing..."
+                                lsyncing.Text = My.Resources.synchronizing
                                 lsyncing.Visible = True
-                                poversync.Image = My.Resources.sync
+                                poversync.Image = My.Resources.gif
                                 loversync.Text = My.Resources.synchronizing
-
                                 ' Start the workthread for the blockchain scanner
                                 workthread.RunWorkerAsync()
                             End If
@@ -2471,15 +2567,20 @@ Public Class Form1
                                 txsummary = txsummary & vbCrLf & "Transaction sent, ID: " & broadcasttx.result.ToString
                                 sentfrm.lsent.Text = "transaction sent"
                                 senttxid = broadcasttx.result.ToString
-                                'lsendtxinfo.Text = "Transaction sent, check viewer for TXID."
-                                'lsendtxinfo.ForeColor = Color.Lime
-                                bsignsend.Enabled = False
+                                txtsendamount.Text = "0.00000000"
+                                sentfrm.txtviewer.Text = ""
+                                lsendamver.Visible = False
+                                txtsenddest.Text = ""
+                                lsendtxinfo.Text = ""
+                                bsignsend.Enabled = True
                                 Application.DoEvents()
                                 If workthread.IsBusy <> True Then
                                     UIrefresh.Enabled = False
                                     syncicon.Visible = True
+                                    comsendaddress.Text = ""
+                                    lsendavail.Text = My.Resources.lsendavail
                                     lsyncing.Visible = True
-                                    poversync.Image = My.Resources.sync
+                                    poversync.Image = My.Resources.gif
                                     loversync.Text = My.Resources.synchronizing
                                     lsyncing.Text = My.Resources.synchronizing
                                     ' Start the workthread for the blockchain scanner
@@ -2530,15 +2631,6 @@ Public Class Form1
             End If
 
         End If
-    End Sub
-
-    Private Sub bsendnew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bsendnew.Click
-        txtsendamount.Text = "0.00000000"
-        sentfrm.txtviewer.Text = ""
-        lsendamver.Visible = False
-        txtsenddest.Text = ""
-        lsendtxinfo.Text = ""
-        bsignsend.Enabled = True
     End Sub
 
     Private Sub dgvhistory_DataError(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewDataErrorEventArgs) Handles dgvhistory.DataError
@@ -2810,5 +2902,27 @@ Public Class Form1
         dgvopenorders.ClearSelection()
         Application.DoEvents()
     End Sub
-End Class
 
+    Private Sub lnksyncnow_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lnksyncnow.LinkClicked
+        If workthread.IsBusy <> True Then
+            poversync.Image = My.Resources.gif
+            syncicon.Image = My.Resources.gif
+            syncicon.Visible = True
+            lsyncing.Visible = True
+            lsyncing.Text = My.Resources.synchronizing
+            workthread.RunWorkerAsync()
+        End If
+    End Sub
+
+    Private Sub lnksup_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lnksup.LinkClicked
+        Dim sinfo As New ProcessStartInfo("https://masterchest.info/support")
+        Process.Start(sinfo)
+    End Sub
+
+    Private Sub nfi_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles nfi.DoubleClick
+        nfi.Visible = False
+        Me.Visible = True
+        Me.WindowState = FormWindowState.Normal
+    End Sub
+
+End Class

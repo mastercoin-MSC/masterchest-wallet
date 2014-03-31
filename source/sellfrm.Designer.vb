@@ -22,6 +22,7 @@ Partial Class sellfrm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sellfrm))
         Me.RectangleShape1 = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
         Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
         Me.sellfrm_Label75 = New System.Windows.Forms.Label()
@@ -311,6 +312,7 @@ Partial Class sellfrm
         Me.Controls.Add(Me.txtsendamount)
         Me.Controls.Add(Me.ShapeContainer1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "sellfrm"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
