@@ -42,6 +42,9 @@ Partial Class Form1
         Me.boverview = New System.Windows.Forms.Label()
         Me.bsend = New System.Windows.Forms.Label()
         Me.bhistory = New System.Windows.Forms.Label()
+        Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
+        Me.RectangleShape2 = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
+        Me.RectangleShape1 = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.loverviewmscbal = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -71,21 +74,6 @@ Partial Class Form1
         Me.Label26 = New System.Windows.Forms.Label()
         Me.Label27 = New System.Windows.Forms.Label()
         Me.Label29 = New System.Windows.Forms.Label()
-        Me.pwelcome = New System.Windows.Forms.Panel()
-        Me.lwelstartup = New System.Windows.Forms.Label()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.Label28 = New System.Windows.Forms.Label()
-        Me.Label45 = New System.Windows.Forms.Label()
-        Me.pcurrencies = New System.Windows.Forms.Panel()
-        Me.Label30 = New System.Windows.Forms.Label()
-        Me.Label31 = New System.Windows.Forms.Label()
-        Me.LinkLabel4 = New System.Windows.Forms.LinkLabel()
-        Me.dgvcurrencies = New System.Windows.Forms.DataGridView()
-        Me.Label32 = New System.Windows.Forms.Label()
-        Me.LinkLabel5 = New System.Windows.Forms.LinkLabel()
-        Me.Label35 = New System.Windows.Forms.Label()
-        Me.Label37 = New System.Windows.Forms.Label()
-        Me.Label42 = New System.Windows.Forms.Label()
         Me.paddresses = New System.Windows.Forms.Panel()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label36 = New System.Windows.Forms.Label()
@@ -123,6 +111,16 @@ Partial Class Form1
         Me.Label39 = New System.Windows.Forms.Label()
         Me.Label40 = New System.Windows.Forms.Label()
         Me.workthread = New System.ComponentModel.BackgroundWorker()
+        Me.pcurrencies = New System.Windows.Forms.Panel()
+        Me.Label30 = New System.Windows.Forms.Label()
+        Me.Label31 = New System.Windows.Forms.Label()
+        Me.LinkLabel4 = New System.Windows.Forms.LinkLabel()
+        Me.dgvcurrencies = New System.Windows.Forms.DataGridView()
+        Me.Label32 = New System.Windows.Forms.Label()
+        Me.LinkLabel5 = New System.Windows.Forms.LinkLabel()
+        Me.Label35 = New System.Windows.Forms.Label()
+        Me.Label37 = New System.Windows.Forms.Label()
+        Me.Label42 = New System.Windows.Forms.Label()
         Me.UIrefresh = New System.Windows.Forms.Timer(Me.components)
         Me.phistory = New System.Windows.Forms.Panel()
         Me.Label78 = New System.Windows.Forms.Label()
@@ -144,6 +142,11 @@ Partial Class Form1
         Me.lnkhistoryfilter = New System.Windows.Forms.LinkLabel()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
+        Me.pwelcome = New System.Windows.Forms.Panel()
+        Me.lwelstartup = New System.Windows.Forms.Label()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.Label28 = New System.Windows.Forms.Label()
+        Me.Label45 = New System.Windows.Forms.Label()
         Me.psetup = New System.Windows.Forms.Panel()
         Me.lwalinfo = New System.Windows.Forms.Label()
         Me.ltestinfo = New System.Windows.Forms.Label()
@@ -209,24 +212,23 @@ Partial Class Form1
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.bback = New System.Windows.Forms.PictureBox()
         Me.cbLocale = New System.Windows.Forms.ComboBox()
-        Me.Label79 = New System.Windows.Forms.Label()
         Me.nfi = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.poverview.SuspendLayout()
         CType(Me.poversync, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.psend.SuspendLayout()
-        Me.pwelcome.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.pcurrencies.SuspendLayout()
-        CType(Me.dgvcurrencies, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.paddresses.SuspendLayout()
         CType(Me.dgvaddresses, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pdebug.SuspendLayout()
         Me.psettings.SuspendLayout()
+        Me.pcurrencies.SuspendLayout()
+        CType(Me.dgvcurrencies, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.phistory.SuspendLayout()
         CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvhistory, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pwelcome.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.psetup.SuspendLayout()
         Me.pexchange.SuspendLayout()
         CType(Me.dgvselloffer, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -275,6 +277,33 @@ Partial Class Form1
         Me.bhistory.TabIndex = 2
         Me.bhistory.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.bhistory.Text = "history"
+        '
+        'ShapeContainer1
+        '
+        Me.ShapeContainer1.Location = New System.Drawing.Point(0, 0)
+        Me.ShapeContainer1.Margin = New System.Windows.Forms.Padding(0)
+        Me.ShapeContainer1.Name = "ShapeContainer1"
+        Me.ShapeContainer1.Shapes.AddRange(New Microsoft.VisualBasic.PowerPacks.Shape() {Me.RectangleShape2, Me.RectangleShape1})
+        Me.ShapeContainer1.Size = New System.Drawing.Size(835, 566)
+        Me.ShapeContainer1.TabIndex = 5
+        Me.ShapeContainer1.TabStop = False
+        '
+        'RectangleShape2
+        '
+        Me.RectangleShape2.BackColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.RectangleShape2.BackStyle = Microsoft.VisualBasic.PowerPacks.BackStyle.Opaque
+        Me.RectangleShape2.BorderColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.RectangleShape2.Location = New System.Drawing.Point(1, 60)
+        Me.RectangleShape2.Name = "RectangleShape2"
+        Me.RectangleShape2.Size = New System.Drawing.Size(14, 53)
+        '
+        'RectangleShape1
+        '
+        Me.RectangleShape1.BackColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.RectangleShape1.BorderColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.RectangleShape1.Location = New System.Drawing.Point(0, 0)
+        Me.RectangleShape1.Name = "RectangleShape1"
+        Me.RectangleShape1.Size = New System.Drawing.Size(834, 565)
         '
         'Label10
         '
@@ -631,190 +660,6 @@ Partial Class Form1
         Me.Label29.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label29.Text = "SENDING ADDRESS:"
         '
-        'pwelcome
-        '
-        Me.pwelcome.Controls.Add(Me.lwelstartup)
-        Me.pwelcome.Controls.Add(Me.PictureBox1)
-        Me.pwelcome.Controls.Add(Me.Label28)
-        Me.pwelcome.Controls.Add(Me.Label45)
-        Me.pwelcome.Location = New System.Drawing.Point(440, 393)
-        Me.pwelcome.Name = "pwelcome"
-        Me.pwelcome.Size = New System.Drawing.Size(668, 384)
-        Me.pwelcome.TabIndex = 42
-        '
-        'lwelstartup
-        '
-        Me.lwelstartup.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lwelstartup.ForeColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.lwelstartup.Location = New System.Drawing.Point(190, 197)
-        Me.lwelstartup.Name = "lwelstartup"
-        Me.lwelstartup.Size = New System.Drawing.Size(393, 116)
-        Me.lwelstartup.TabIndex = 43
-        Me.lwelstartup.Tag = Masterchest_Wallet.LocaleTag.Text
-        Me.lwelstartup.Text = "Please wait..."
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(172, 41)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(431, 94)
-        Me.PictureBox1.TabIndex = 40
-        Me.PictureBox1.TabStop = False
-        '
-        'Label28
-        '
-        Me.Label28.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label28.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label28.Location = New System.Drawing.Point(174, 138)
-        Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(431, 37)
-        Me.Label28.TabIndex = 39
-        Me.Label28.Text = "Masterchest Wallet ALPHA 0.1a"
-        Me.Label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label45
-        '
-        Me.Label45.AutoSize = True
-        Me.Label45.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label45.ForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
-        Me.Label45.Location = New System.Drawing.Point(53, 160)
-        Me.Label45.Name = "Label45"
-        Me.Label45.Size = New System.Drawing.Size(0, 17)
-        Me.Label45.TabIndex = 20
-        '
-        'pcurrencies
-        '
-        Me.pcurrencies.Controls.Add(Me.Label30)
-        Me.pcurrencies.Controls.Add(Me.Label31)
-        Me.pcurrencies.Controls.Add(Me.LinkLabel4)
-        Me.pcurrencies.Controls.Add(Me.dgvcurrencies)
-        Me.pcurrencies.Controls.Add(Me.Label32)
-        Me.pcurrencies.Controls.Add(Me.LinkLabel5)
-        Me.pcurrencies.Controls.Add(Me.Label35)
-        Me.pcurrencies.Controls.Add(Me.Label37)
-        Me.pcurrencies.Controls.Add(Me.Label42)
-        Me.pcurrencies.Location = New System.Drawing.Point(590, 515)
-        Me.pcurrencies.Name = "pcurrencies"
-        Me.pcurrencies.Size = New System.Drawing.Size(750, 395)
-        Me.pcurrencies.TabIndex = 36
-        '
-        'Label30
-        '
-        Me.Label30.AutoSize = True
-        Me.Label30.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label30.Location = New System.Drawing.Point(596, 5)
-        Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(142, 13)
-        Me.Label30.TabIndex = 38
-        Me.Label30.Tag = Masterchest_Wallet.LocaleTag.Text
-        Me.Label30.Text = "UNCONFIRMED BALANCE:"
-        '
-        'Label31
-        '
-        Me.Label31.AutoSize = True
-        Me.Label31.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label31.Location = New System.Drawing.Point(435, 5)
-        Me.Label31.Name = "Label31"
-        Me.Label31.Size = New System.Drawing.Size(126, 13)
-        Me.Label31.TabIndex = 37
-        Me.Label31.Tag = Masterchest_Wallet.LocaleTag.Text
-        Me.Label31.Text = "CONFIRMED BALANCE:"
-        '
-        'LinkLabel4
-        '
-        Me.LinkLabel4.ActiveLinkColor = System.Drawing.Color.PaleTurquoise
-        Me.LinkLabel4.AutoSize = True
-        Me.LinkLabel4.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LinkLabel4.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
-        Me.LinkLabel4.LinkColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LinkLabel4.Location = New System.Drawing.Point(505, 368)
-        Me.LinkLabel4.Name = "LinkLabel4"
-        Me.LinkLabel4.Size = New System.Drawing.Size(90, 13)
-        Me.LinkLabel4.TabIndex = 36
-        Me.LinkLabel4.TabStop = True
-        Me.LinkLabel4.Tag = Masterchest_Wallet.LocaleTag.Text
-        Me.LinkLabel4.Text = "Highest Balance"
-        Me.LinkLabel4.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
-        '
-        'dgvcurrencies
-        '
-        Me.dgvcurrencies.AllowUserToAddRows = False
-        Me.dgvcurrencies.AllowUserToDeleteRows = False
-        Me.dgvcurrencies.AllowUserToResizeColumns = False
-        Me.dgvcurrencies.AllowUserToResizeRows = False
-        Me.dgvcurrencies.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(38, Byte), Integer))
-        Me.dgvcurrencies.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.dgvcurrencies.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
-        Me.dgvcurrencies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvcurrencies.ColumnHeadersVisible = False
-        Me.dgvcurrencies.EnableHeadersVisualStyles = False
-        Me.dgvcurrencies.Location = New System.Drawing.Point(37, 21)
-        Me.dgvcurrencies.Name = "dgvcurrencies"
-        Me.dgvcurrencies.ReadOnly = True
-        Me.dgvcurrencies.RowHeadersVisible = False
-        Me.dgvcurrencies.Size = New System.Drawing.Size(700, 335)
-        Me.dgvcurrencies.TabIndex = 35
-        '
-        'Label32
-        '
-        Me.Label32.AutoSize = True
-        Me.Label32.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label32.Location = New System.Drawing.Point(450, 368)
-        Me.Label32.Name = "Label32"
-        Me.Label32.Size = New System.Drawing.Size(57, 13)
-        Me.Label32.TabIndex = 34
-        Me.Label32.Tag = Masterchest_Wallet.LocaleTag.Text
-        Me.Label32.Text = "SORT BY:"
-        '
-        'LinkLabel5
-        '
-        Me.LinkLabel5.ActiveLinkColor = System.Drawing.Color.PaleTurquoise
-        Me.LinkLabel5.AutoSize = True
-        Me.LinkLabel5.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LinkLabel5.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
-        Me.LinkLabel5.LinkColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.LinkLabel5.Location = New System.Drawing.Point(662, 368)
-        Me.LinkLabel5.Name = "LinkLabel5"
-        Me.LinkLabel5.Size = New System.Drawing.Size(77, 13)
-        Me.LinkLabel5.TabIndex = 32
-        Me.LinkLabel5.TabStop = True
-        Me.LinkLabel5.Tag = Masterchest_Wallet.LocaleTag.Text
-        Me.LinkLabel5.Text = "All Currencies"
-        Me.LinkLabel5.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
-        '
-        'Label35
-        '
-        Me.Label35.AutoSize = True
-        Me.Label35.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label35.ForeColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(209, Byte), Integer))
-        Me.Label35.Location = New System.Drawing.Point(53, 160)
-        Me.Label35.Name = "Label35"
-        Me.Label35.Size = New System.Drawing.Size(0, 17)
-        Me.Label35.TabIndex = 20
-        '
-        'Label37
-        '
-        Me.Label37.AutoSize = True
-        Me.Label37.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label37.Location = New System.Drawing.Point(601, 368)
-        Me.Label37.Name = "Label37"
-        Me.Label37.Size = New System.Drawing.Size(63, 13)
-        Me.Label37.TabIndex = 19
-        Me.Label37.Tag = Masterchest_Wallet.LocaleTag.Text
-        Me.Label37.Text = "SHOWING:"
-        '
-        'Label42
-        '
-        Me.Label42.AutoSize = True
-        Me.Label42.ForeColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label42.Location = New System.Drawing.Point(38, 5)
-        Me.Label42.Name = "Label42"
-        Me.Label42.Size = New System.Drawing.Size(70, 13)
-        Me.Label42.TabIndex = 17
-        Me.Label42.Tag = Masterchest_Wallet.LocaleTag.Text
-        Me.Label42.Text = "CURRENCY:"
-        '
         'paddresses
         '
         Me.paddresses.Controls.Add(Me.Label12)
@@ -827,7 +672,7 @@ Partial Class Form1
         Me.paddresses.Controls.Add(Me.lnkaddfilter)
         Me.paddresses.Controls.Add(Me.Label21)
         Me.paddresses.Controls.Add(Me.Label25)
-        Me.paddresses.Location = New System.Drawing.Point(122, 129)
+        Me.paddresses.Location = New System.Drawing.Point(678, 441)
         Me.paddresses.Name = "paddresses"
         Me.paddresses.Size = New System.Drawing.Size(757, 391)
         Me.paddresses.TabIndex = 29
@@ -840,7 +685,6 @@ Partial Class Form1
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(83, 13)
         Me.Label12.TabIndex = 41
-        Me.Label12.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label12.Text = "BTC BALANCE:"
         '
         'Label36
@@ -851,7 +695,6 @@ Partial Class Form1
         Me.Label36.Name = "Label36"
         Me.Label36.Size = New System.Drawing.Size(85, 13)
         Me.Label36.TabIndex = 39
-        Me.Label36.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label36.Text = "MSC BALANCE:"
         '
         'Label24
@@ -862,7 +705,6 @@ Partial Class Form1
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(116, 13)
         Me.Label24.TabIndex = 38
-        Me.Label24.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label24.Text = "TEST MSC BALANCE:"
         '
         'lnkaddsort
@@ -877,7 +719,6 @@ Partial Class Form1
         Me.lnkaddsort.Size = New System.Drawing.Size(81, 13)
         Me.lnkaddsort.TabIndex = 36
         Me.lnkaddsort.TabStop = True
-        Me.lnkaddsort.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.lnkaddsort.Text = "Address Alpha"
         Me.lnkaddsort.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
         '
@@ -935,7 +776,6 @@ Partial Class Form1
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(57, 13)
         Me.Label6.TabIndex = 34
-        Me.Label6.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label6.Text = "SORT BY:"
         '
         'Label5
@@ -946,7 +786,6 @@ Partial Class Form1
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(47, 13)
         Me.Label5.TabIndex = 33
-        Me.Label5.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label5.Text = "FILTER:"
         '
         'lnkaddfilter
@@ -961,7 +800,6 @@ Partial Class Form1
         Me.lnkaddfilter.Size = New System.Drawing.Size(84, 13)
         Me.lnkaddfilter.TabIndex = 31
         Me.lnkaddfilter.TabStop = True
-        Me.lnkaddfilter.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.lnkaddfilter.Text = "No Filter Active"
         Me.lnkaddfilter.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
         '
@@ -983,7 +821,6 @@ Partial Class Form1
         Me.Label25.Name = "Label25"
         Me.Label25.Size = New System.Drawing.Size(62, 13)
         Me.Label25.TabIndex = 17
-        Me.Label25.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label25.Text = "ADDRESS:"
         '
         'bcontracts
@@ -995,7 +832,6 @@ Partial Class Form1
         Me.bcontracts.Name = "bcontracts"
         Me.bcontracts.Size = New System.Drawing.Size(98, 30)
         Me.bcontracts.TabIndex = 3
-        Me.bcontracts.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.bcontracts.Text = "contracts"
         '
         'baddresses
@@ -1007,7 +843,6 @@ Partial Class Form1
         Me.baddresses.Name = "baddresses"
         Me.baddresses.Size = New System.Drawing.Size(104, 30)
         Me.baddresses.TabIndex = 31
-        Me.baddresses.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.baddresses.Text = "addresses"
         '
         'bcurrencies
@@ -1019,7 +854,6 @@ Partial Class Form1
         Me.bcurrencies.Name = "bcurrencies"
         Me.bcurrencies.Size = New System.Drawing.Size(107, 30)
         Me.bcurrencies.TabIndex = 32
-        Me.bcurrencies.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.bcurrencies.Text = "currencies"
         '
         'bdebug
@@ -1031,7 +865,6 @@ Partial Class Form1
         Me.bdebug.Name = "bdebug"
         Me.bdebug.Size = New System.Drawing.Size(72, 30)
         Me.bdebug.TabIndex = 33
-        Me.bdebug.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.bdebug.Text = "debug"
         '
         'pdebug
@@ -1101,7 +934,6 @@ Partial Class Form1
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(79, 13)
         Me.Label8.TabIndex = 28
-        Me.Label8.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label8.Text = "DEBUG LEVEL:"
         '
         'checkdebugscroll
@@ -1113,7 +945,6 @@ Partial Class Form1
         Me.checkdebugscroll.Name = "checkdebugscroll"
         Me.checkdebugscroll.Size = New System.Drawing.Size(129, 17)
         Me.checkdebugscroll.TabIndex = 27
-        Me.checkdebugscroll.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.checkdebugscroll.Text = "SHOW SCROLLBARS"
         Me.checkdebugscroll.UseVisualStyleBackColor = True
         '
@@ -1147,7 +978,6 @@ Partial Class Form1
         Me.Label44.Name = "Label44"
         Me.Label44.Size = New System.Drawing.Size(73, 13)
         Me.Label44.TabIndex = 17
-        Me.Label44.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label44.Text = "DEBUG LOG:"
         '
         'lnknofocus
@@ -1196,7 +1026,6 @@ Partial Class Form1
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(40, 13)
         Me.Label7.TabIndex = 30
-        Me.Label7.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label7.Text = "PORT:"
         '
         'bupdatesettings
@@ -1210,7 +1039,6 @@ Partial Class Form1
         Me.bupdatesettings.Name = "bupdatesettings"
         Me.bupdatesettings.Size = New System.Drawing.Size(111, 28)
         Me.bupdatesettings.TabIndex = 29
-        Me.bupdatesettings.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.bupdatesettings.Text = "Update Settings"
         Me.bupdatesettings.UseVisualStyleBackColor = False
         '
@@ -1256,7 +1084,6 @@ Partial Class Form1
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(98, 13)
         Me.Label13.TabIndex = 24
-        Me.Label13.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label13.Text = "RPC PASSWORD:"
         '
         'Label38
@@ -1277,7 +1104,6 @@ Partial Class Form1
         Me.Label39.Name = "Label39"
         Me.Label39.Size = New System.Drawing.Size(65, 13)
         Me.Label39.TabIndex = 19
-        Me.Label39.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label39.Text = "RPC USER:"
         '
         'Label40
@@ -1288,7 +1114,6 @@ Partial Class Form1
         Me.Label40.Name = "Label40"
         Me.Label40.Size = New System.Drawing.Size(125, 13)
         Me.Label40.TabIndex = 17
-        Me.Label40.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label40.Text = "BITCOIN RPC SERVER:"
         '
         'workthread
@@ -1319,6 +1144,7 @@ Partial Class Form1
         Me.Label30.Name = "Label30"
         Me.Label30.Size = New System.Drawing.Size(142, 13)
         Me.Label30.TabIndex = 38
+        Me.Label30.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label30.Text = "UNCONFIRMED BALANCE:"
         '
         'Label31
@@ -1329,6 +1155,7 @@ Partial Class Form1
         Me.Label31.Name = "Label31"
         Me.Label31.Size = New System.Drawing.Size(126, 13)
         Me.Label31.TabIndex = 37
+        Me.Label31.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label31.Text = "CONFIRMED BALANCE:"
         '
         'LinkLabel4
@@ -1343,6 +1170,7 @@ Partial Class Form1
         Me.LinkLabel4.Size = New System.Drawing.Size(90, 13)
         Me.LinkLabel4.TabIndex = 36
         Me.LinkLabel4.TabStop = True
+        Me.LinkLabel4.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.LinkLabel4.Text = "Highest Balance"
         Me.LinkLabel4.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
         '
@@ -1397,6 +1225,7 @@ Partial Class Form1
         Me.Label32.Name = "Label32"
         Me.Label32.Size = New System.Drawing.Size(57, 13)
         Me.Label32.TabIndex = 34
+        Me.Label32.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label32.Text = "SORT BY:"
         '
         'LinkLabel5
@@ -1411,6 +1240,7 @@ Partial Class Form1
         Me.LinkLabel5.Size = New System.Drawing.Size(77, 13)
         Me.LinkLabel5.TabIndex = 32
         Me.LinkLabel5.TabStop = True
+        Me.LinkLabel5.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.LinkLabel5.Text = "All Currencies"
         Me.LinkLabel5.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
         '
@@ -1432,6 +1262,7 @@ Partial Class Form1
         Me.Label37.Name = "Label37"
         Me.Label37.Size = New System.Drawing.Size(63, 13)
         Me.Label37.TabIndex = 19
+        Me.Label37.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label37.Text = "SHOWING:"
         '
         'Label42
@@ -1442,6 +1273,7 @@ Partial Class Form1
         Me.Label42.Name = "Label42"
         Me.Label42.Size = New System.Drawing.Size(70, 13)
         Me.Label42.TabIndex = 17
+        Me.Label42.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label42.Text = "CURRENCY:"
         '
         'UIrefresh
@@ -1482,6 +1314,7 @@ Partial Class Form1
         Me.Label78.Name = "Label78"
         Me.Label78.Size = New System.Drawing.Size(38, 13)
         Me.Label78.TabIndex = 50
+        Me.Label78.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label78.Text = "TYPE:"
         '
         'Label57
@@ -1726,7 +1559,7 @@ Partial Class Form1
         Me.pwelcome.Controls.Add(Me.PictureBox1)
         Me.pwelcome.Controls.Add(Me.Label28)
         Me.pwelcome.Controls.Add(Me.Label45)
-        Me.pwelcome.Location = New System.Drawing.Point(809, 310)
+        Me.pwelcome.Location = New System.Drawing.Point(440, 393)
         Me.pwelcome.Name = "pwelcome"
         Me.pwelcome.Size = New System.Drawing.Size(668, 384)
         Me.pwelcome.TabIndex = 42
@@ -1739,6 +1572,7 @@ Partial Class Form1
         Me.lwelstartup.Name = "lwelstartup"
         Me.lwelstartup.Size = New System.Drawing.Size(393, 116)
         Me.lwelstartup.TabIndex = 43
+        Me.lwelstartup.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.lwelstartup.Text = "Please wait..."
         '
         'PictureBox1
@@ -1855,8 +1689,8 @@ Partial Class Form1
         Me.Label52.TabIndex = 39
         Me.Label52.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label52.Text = "To speed up initial seeding, you can choose to use a preseeded database.  This wi" & _
-    "ll reduce the number of blocks to catchup, but requires that the preseeded datab" & _
-    "ase is trusted."
+            "ll reduce the number of blocks to catchup, but requires that the preseeded datab" & _
+            "ase is trusted."
         '
         'bfinish
         '
@@ -1906,7 +1740,9 @@ Partial Class Form1
         Me.Label50.Size = New System.Drawing.Size(528, 38)
         Me.Label50.TabIndex = 35
         Me.Label50.Tag = Masterchest_Wallet.LocaleTag.Text
-        Me.Label50.Text = My.Resources.Label50
+        Me.Label50.Text = "You'll also need to choose a passphrase to encrypt the wallet database.  Note, yo" & _
+            "ur private keys are not stored in your Masterchest wallet database; transactions" & _
+            " are signed using your bitcoin wallet."
         '
         'Label46
         '
@@ -2129,6 +1965,7 @@ Partial Class Form1
         Me.Label76.Name = "Label76"
         Me.Label76.Size = New System.Drawing.Size(77, 13)
         Me.Label76.TabIndex = 63
+        Me.Label76.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label76.Text = "PURCHASED:"
         '
         'Label69
@@ -2139,6 +1976,7 @@ Partial Class Form1
         Me.Label69.Name = "Label69"
         Me.Label69.Size = New System.Drawing.Size(69, 13)
         Me.Label69.TabIndex = 62
+        Me.Label69.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label69.Text = "RESERVED:"
         '
         'Label62
@@ -2149,6 +1987,7 @@ Partial Class Form1
         Me.Label62.Name = "Label62"
         Me.Label62.Size = New System.Drawing.Size(47, 13)
         Me.Label62.TabIndex = 61
+        Me.Label62.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label62.Text = "BUYER:"
         '
         'lbldexrescur
@@ -2159,7 +1998,6 @@ Partial Class Form1
         Me.lbldexrescur.Name = "lbldexrescur"
         Me.lbldexrescur.Size = New System.Drawing.Size(127, 19)
         Me.lbldexrescur.TabIndex = 59
-        Me.lbldexrescur.Tag = LocaleTag.Numeric
         Me.lbldexrescur.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         '
         'Label59
@@ -2169,6 +2007,7 @@ Partial Class Form1
         Me.Label59.Name = "Label59"
         Me.Label59.Size = New System.Drawing.Size(130, 13)
         Me.Label59.TabIndex = 58
+        Me.Label59.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label59.Text = "AVAILABLE BITCOIN:"
         Me.Label59.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
@@ -2180,7 +2019,6 @@ Partial Class Form1
         Me.lbldextotalbtc.Name = "lbldextotalbtc"
         Me.lbldextotalbtc.Size = New System.Drawing.Size(127, 19)
         Me.lbldextotalbtc.TabIndex = 57
-        Me.lbldextotalbtc.Tag = LocaleTag.Numeric
         Me.lbldextotalbtc.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         '
         'Label75
@@ -2190,6 +2028,7 @@ Partial Class Form1
         Me.Label75.Name = "Label75"
         Me.Label75.Size = New System.Drawing.Size(141, 13)
         Me.Label75.TabIndex = 56
+        Me.Label75.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label75.Text = "RESERVED CURRENCY:"
         Me.Label75.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
@@ -2200,6 +2039,7 @@ Partial Class Form1
         Me.Label65.Name = "Label65"
         Me.Label65.Size = New System.Drawing.Size(130, 13)
         Me.Label65.TabIndex = 55
+        Me.Label65.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label65.Text = "AVAILABLE CURRENCY:"
         Me.Label65.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
@@ -2210,6 +2050,7 @@ Partial Class Form1
         Me.Label63.Name = "Label63"
         Me.Label63.Size = New System.Drawing.Size(130, 13)
         Me.Label63.TabIndex = 54
+        Me.Label63.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label63.Text = "SELECTED CURRENCY:"
         Me.Label63.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
@@ -2238,7 +2079,6 @@ Partial Class Form1
         Me.lbldextotalcur.Name = "lbldextotalcur"
         Me.lbldextotalcur.Size = New System.Drawing.Size(125, 19)
         Me.lbldextotalcur.TabIndex = 51
-        Me.lbldextotalcur.Tag = LocaleTag.Numeric
         Me.lbldextotalcur.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         '
         'Label58
@@ -2249,6 +2089,7 @@ Partial Class Form1
         Me.Label58.Name = "Label58"
         Me.Label58.Size = New System.Drawing.Size(38, 13)
         Me.Label58.TabIndex = 50
+        Me.Label58.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label58.Text = "TYPE:"
         '
         'bsell
@@ -2262,6 +2103,7 @@ Partial Class Form1
         Me.bsell.Name = "bsell"
         Me.bsell.Size = New System.Drawing.Size(53, 23)
         Me.bsell.TabIndex = 48
+        Me.bsell.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.bsell.Text = "Sell"
         Me.bsell.UseVisualStyleBackColor = False
         '
@@ -2276,6 +2118,7 @@ Partial Class Form1
         Me.bbuy.Name = "bbuy"
         Me.bbuy.Size = New System.Drawing.Size(53, 23)
         Me.bbuy.TabIndex = 49
+        Me.bbuy.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.bbuy.Text = "Buy"
         Me.bbuy.UseVisualStyleBackColor = False
         '
@@ -2287,6 +2130,7 @@ Partial Class Form1
         Me.Label74.Name = "Label74"
         Me.Label74.Size = New System.Drawing.Size(53, 13)
         Me.Label74.TabIndex = 47
+        Me.Label74.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label74.Text = "STATUS:"
         '
         'Label70
@@ -2297,6 +2141,7 @@ Partial Class Form1
         Me.Label70.Name = "Label70"
         Me.Label70.Size = New System.Drawing.Size(67, 13)
         Me.Label70.TabIndex = 45
+        Me.Label70.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label70.Text = "AVAILABLE:"
         '
         'Label71
@@ -2307,6 +2152,7 @@ Partial Class Form1
         Me.Label71.Name = "Label71"
         Me.Label71.Size = New System.Drawing.Size(63, 13)
         Me.Label71.TabIndex = 44
+        Me.Label71.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label71.Text = "UNIT         :"
         '
         'Label72
@@ -2317,6 +2163,7 @@ Partial Class Form1
         Me.Label72.Name = "Label72"
         Me.Label72.Size = New System.Drawing.Size(72, 13)
         Me.Label72.TabIndex = 43
+        Me.Label72.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label72.Text = "TOTAL         :"
         '
         'Label73
@@ -2327,6 +2174,7 @@ Partial Class Form1
         Me.Label73.Name = "Label73"
         Me.Label73.Size = New System.Drawing.Size(51, 13)
         Me.Label73.TabIndex = 42
+        Me.Label73.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label73.Text = "SELLER:"
         '
         'Label68
@@ -2337,6 +2185,7 @@ Partial Class Form1
         Me.Label68.Name = "Label68"
         Me.Label68.Size = New System.Drawing.Size(86, 13)
         Me.Label68.TabIndex = 40
+        Me.Label68.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label68.Text = "SELL AMOUNT:"
         '
         'Label67
@@ -2347,6 +2196,7 @@ Partial Class Form1
         Me.Label67.Name = "Label67"
         Me.Label67.Size = New System.Drawing.Size(75, 13)
         Me.Label67.TabIndex = 39
+        Me.Label67.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label67.Text = "UNIT PRICE*:"
         '
         'Label66
@@ -2357,6 +2207,7 @@ Partial Class Form1
         Me.Label66.Name = "Label66"
         Me.Label66.Size = New System.Drawing.Size(49, 13)
         Me.Label66.TabIndex = 38
+        Me.Label66.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label66.Text = "TOTAL*:"
         '
         'dgvselloffer
@@ -2442,6 +2293,7 @@ Partial Class Form1
         Me.Label49.Name = "Label49"
         Me.Label49.Size = New System.Drawing.Size(185, 13)
         Me.Label49.TabIndex = 29
+        Me.Label49.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label49.Text = "PRICE HISTORY - SHOWING LAST:"
         '
         'dgvopenorders
@@ -2499,6 +2351,7 @@ Partial Class Form1
         Me.Label60.Name = "Label60"
         Me.Label60.Size = New System.Drawing.Size(108, 13)
         Me.Label60.TabIndex = 24
+        Me.Label60.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label60.Text = "MY OPEN ORDERS:"
         '
         'Label64
@@ -2520,6 +2373,7 @@ Partial Class Form1
         Me.lsyncing.Name = "lsyncing"
         Me.lsyncing.Size = New System.Drawing.Size(89, 13)
         Me.lsyncing.TabIndex = 46
+        Me.lsyncing.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.lsyncing.Text = "Synchronizing..."
         Me.lsyncing.Visible = False
         '
@@ -2547,6 +2401,7 @@ Partial Class Form1
         Me.lnksup.Size = New System.Drawing.Size(49, 13)
         Me.lnksup.TabIndex = 48
         Me.lnksup.TabStop = True
+        Me.lnksup.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.lnksup.Text = "Support"
         Me.lnksup.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
         '
@@ -2659,6 +2514,7 @@ Partial Class Form1
         Me.Controls.Add(Me.bsend)
         Me.Controls.Add(Me.boverview)
         Me.Controls.Add(Me.bexchange)
+        Me.Controls.Add(Me.ShapeContainer1)
         Me.Controls.Add(Me.cbLocale)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -2670,12 +2526,6 @@ Partial Class Form1
         CType(Me.poversync, System.ComponentModel.ISupportInitialize).EndInit()
         Me.psend.ResumeLayout(False)
         Me.psend.PerformLayout()
-        Me.pwelcome.ResumeLayout(False)
-        Me.pwelcome.PerformLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.pcurrencies.ResumeLayout(False)
-        Me.pcurrencies.PerformLayout()
-        CType(Me.dgvcurrencies, System.ComponentModel.ISupportInitialize).EndInit()
         Me.paddresses.ResumeLayout(False)
         Me.paddresses.PerformLayout()
         CType(Me.dgvaddresses, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2683,12 +2533,18 @@ Partial Class Form1
         Me.pdebug.PerformLayout()
         Me.psettings.ResumeLayout(False)
         Me.psettings.PerformLayout()
+        Me.pcurrencies.ResumeLayout(False)
+        Me.pcurrencies.PerformLayout()
+        CType(Me.dgvcurrencies, System.ComponentModel.ISupportInitialize).EndInit()
         Me.phistory.ResumeLayout(False)
         Me.phistory.PerformLayout()
         CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvhistory, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pwelcome.ResumeLayout(False)
+        Me.pwelcome.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.psetup.ResumeLayout(False)
         Me.psetup.PerformLayout()
         Me.pexchange.ResumeLayout(False)
@@ -2710,6 +2566,9 @@ Partial Class Form1
     Friend WithEvents bsend As System.Windows.Forms.Label
     Friend WithEvents bhistory As System.Windows.Forms.Label
     Friend WithEvents bback As System.Windows.Forms.PictureBox
+    Friend WithEvents ShapeContainer1 As Microsoft.VisualBasic.PowerPacks.ShapeContainer
+    Friend WithEvents RectangleShape1 As Microsoft.VisualBasic.PowerPacks.RectangleShape
+    Friend WithEvents RectangleShape2 As Microsoft.VisualBasic.PowerPacks.RectangleShape
     Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
     Friend WithEvents bclose As System.Windows.Forms.PictureBox
     Friend WithEvents bmin As System.Windows.Forms.PictureBox
@@ -2834,7 +2693,6 @@ Partial Class Form1
     Friend WithEvents lsendtxinfo As System.Windows.Forms.Label
     Friend WithEvents rsendbtc As System.Windows.Forms.RadioButton
     Friend WithEvents bexchange As System.Windows.Forms.Label
-    Friend WithEvents cbLocale As System.Windows.Forms.ComboBox
     Friend WithEvents pexchange As System.Windows.Forms.Panel
     Friend WithEvents lnkdexcurrency As System.Windows.Forms.LinkLabel
     Friend WithEvents lbldextotalcur As System.Windows.Forms.Label
@@ -2876,6 +2734,7 @@ Partial Class Form1
     Friend WithEvents lnksup As System.Windows.Forms.LinkLabel
     Friend WithEvents loverviewres As System.Windows.Forms.Label
     Friend WithEvents Label82 As System.Windows.Forms.Label
+    Friend WithEvents cbLocale As System.Windows.Forms.ComboBox
     Friend WithEvents nfi As System.Windows.Forms.NotifyIcon
 
 End Class

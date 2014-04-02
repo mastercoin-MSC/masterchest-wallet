@@ -21,7 +21,7 @@ Public Class buyfrm
     Const HT_CAPTION As Integer = &H2
 
     Private Sub buyfrm_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-       
+
     End Sub
     Public Sub buyfrminit()
         Dim baltype As Integer = 0
@@ -91,7 +91,7 @@ Public Class buyfrm
 
     End Sub
     Private Sub updateavail()
-       
+
         avail = -1
         For Each row In addresslist.Rows
             If InStr(combuyaddress.SelectedItem, row.item(0)) Then avail = row.item(1)

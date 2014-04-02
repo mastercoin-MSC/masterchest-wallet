@@ -97,12 +97,11 @@ Public Class Form1
         nfi.ContextMenuStrip = icnmnu
 
         ' Fallback Locale/CulutureInfo (embedded in main assembly)
-        locales.Add("en-US", "English (US)")
+        locales.Add("en-US", "English")
 
         ' More culutures can be added here when translations are available
         ' Culture name and language  matrix: http://msdn.microsoft.com/en-us/goglobal/bb896001.aspx
         ' To list cultures of host OS use: System.Globalization.CultureInfo.GetCultures(System.Globalization.CultureTypes.AllCultures)
-        locales.Add("en-GB", "English (GB)")
         locales.Add("sv-SE", "Svenska")
         locales.Add("fr-FR", "Français")
 
@@ -574,7 +573,7 @@ Public Class Form1
         'calculate catchup
         Dim catchup As Integer
         catchup = rpcblock - dbposition
-        workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] " & My.Resources.status & " " & catchup.ToString & " " & My.Resources.blockscatchup)
+        workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] " & My.Resources.status.Trim() & " " & catchup.ToString & " " & My.Resources.blockscatchup)
 
         '### loop through blocks since dbposition and add any transactions detected as mastercoin to the transactions table
         Dim msctranscount As Integer
@@ -582,6 +581,13 @@ Public Class Form1
         Dim msctrans(100000) As String
         For x = dbposition To rpcblock
             Dim blocknum As Integer = x
+
+            ' if culture changed while scanning -> change culture once for thread
+            If Not activeCulture.Equals(System.Threading.Thread.CurrentThread.CurrentCulture) Then
+                System.Threading.Thread.CurrentThread.CurrentCulture = activeCulture
+                System.Threading.Thread.CurrentThread.CurrentUICulture = activeCulture
+            End If
+
             If debuglevel > 0 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] " & My.Resources.workerdebug2 & " " & blocknum.ToString)
             Dim perccomp As Integer = ((x - dbposition) / (catchup + 1)) * 100
             workthread.ReportProgress(0, perccomp.ToString & "#")
@@ -2322,7 +2328,7 @@ Public Class Form1
         If Len(txtstartwalpass.Text) < 6 Then
             lwalinfo.Text = My.Resources.more
             lwalinfo.ForeColor = Color.FromArgb(255, 192, 128)
-        Exit Sub
+            Exit Sub
         End If
         If Len(txtstartwalpass.Text) < 12 Then
             lwalinfo.Text = My.Resources.more & " " & My.Resources.more
@@ -2736,6 +2742,15 @@ Public Class Form1
         Next
     End Sub
 
+    'neccessary since decimal separator is dot by default, culture should reverted back to active culture immediately
+    Private Sub RevertCultureInfo()
+        If activeCulture.NumberFormat.CurrencyDecimalSeparator = "," Then
+            Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-US")
+        ElseIf activeCulture.NumberFormat.CurrencyDecimalSeparator = "." Then
+            Thread.CurrentThread.CurrentUICulture = New CultureInfo("sv-SE")
+        End If
+    End Sub
+
     Private Sub bbuy_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bbuy.Click
         sellrefadd = ""
         Try
@@ -2872,14 +2887,6 @@ Public Class Form1
         End If
     End Sub
 
-    'neccessary since decimal separator is dot by default, culture should reverted back to active culture immediately
-    Private Sub RevertCultureInfo()
-        If activeCulture.NumberFormat.CurrencyDecimalSeparator = "," Then
-            Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-US")
-        ElseIf activeCulture.NumberFormat.CurrencyDecimalSeparator = "." Then
-            Thread.CurrentThread.CurrentUICulture = New CultureInfo("sv-SE")
-        End If
-    End Sub
     Private Sub lnkdexcurrency_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lnkdexcurrency.LinkClicked
         If lnkdexcurrency.Text = "Test Mastercoin" Then
             lnkdexcurrency.Text = "Mastercoin"
