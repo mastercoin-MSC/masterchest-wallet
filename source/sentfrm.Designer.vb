@@ -58,7 +58,8 @@ Partial Class sentfrm
         Me.lsent.Name = "lsent"
         Me.lsent.Size = New System.Drawing.Size(161, 30)
         Me.lsent.TabIndex = 57
-        Me.lsent.Text = "transaction sent"
+        Me.lsent.Tag = "localizabletext"
+        Me.lsent.Text = My.Resources.transactionsent
         '
         'Label2
         '
@@ -68,7 +69,8 @@ Partial Class sentfrm
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(101, 13)
         Me.Label2.TabIndex = 59
-        Me.Label2.Text = "TRANSACTION ID:"
+        Me.Label2.Tag = "localizabletext"
+        Me.Label2.Text = My.Resources.transactionid
         '
         'ltxid
         '
@@ -91,7 +93,8 @@ Partial Class sentfrm
         Me.lnkcopy.Size = New System.Drawing.Size(36, 13)
         Me.lnkcopy.TabIndex = 61
         Me.lnkcopy.TabStop = True
-        Me.lnkcopy.Text = "(copy)"
+        Me.lnkcopy.Tag = LocaleTag.Text
+        Me.lnkcopy.Text = My.Resources.copypar
         Me.lnkcopy.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(153, Byte), Integer), CType(CType(255, Byte), Integer))
         '
         'Label3
@@ -102,7 +105,8 @@ Partial Class sentfrm
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(153, 13)
         Me.Label3.TabIndex = 62
-        Me.Label3.Text = "ADDITIONAL INFORMATION:"
+        Me.Label3.Tag = LocaleTag.Text
+        Me.Label3.Text = My.Resources.additionalinformation
         '
         'bcancel
         '
@@ -115,7 +119,8 @@ Partial Class sentfrm
         Me.bcancel.Name = "bcancel"
         Me.bcancel.Size = New System.Drawing.Size(58, 23)
         Me.bcancel.TabIndex = 68
-        Me.bcancel.Text = "OK"
+        Me.bcancel.Tag = LocaleTag.Text
+        Me.bcancel.Text = My.Resources.ok
         Me.bcancel.UseVisualStyleBackColor = False
         '
         'bclose

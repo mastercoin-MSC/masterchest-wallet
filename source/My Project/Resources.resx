@@ -163,4 +163,581 @@
   <data name="gif" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\gif.GIF;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="baddresses" xml:space="preserve">
+    <value>addresses</value>
+  </data>
+  <data name="bcontracts" xml:space="preserve">
+    <value>contracts</value>
+  </data>
+  <data name="bcurrencies" xml:space="preserve">
+    <value>currencies</value>
+  </data>
+  <data name="bdebug" xml:space="preserve">
+    <value>debug</value>
+  </data>
+  <data name="bexchange" xml:space="preserve">
+    <value>exchange</value>
+  </data>
+  <data name="bhistory" xml:space="preserve">
+    <value>history</value>
+  </data>
+  <data name="boverview" xml:space="preserve">
+    <value>overview</value>
+  </data>
+  <data name="bfinish" xml:space="preserve">
+    <value>FINISH</value>
+  </data>
+  <data name="bsendnew" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="bsignsend" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="btest" xml:space="preserve">
+    <value>TEST</value>
+  </data>
+  <data name="bupdatesettings" xml:space="preserve">
+    <value>Update Settings</value>
+  </data>
+  <data name="checkdebugscroll" xml:space="preserve">
+    <value>SHOW SCROLLBARS</value>
+  </data>
+  <data name="chkpreseed" xml:space="preserve">
+    <value>Use a preseeded database</value>
+  </data>
+  <data name="Form1" xml:space="preserve">
+    <value>Form1</value>
+  </data>
+  <data name="Label10" xml:space="preserve">
+    <value>TOTAL MASTERCOIN BALANCE:</value>
+  </data>
+  <data name="Label12" xml:space="preserve">
+    <value>BTC BALANCE:</value>
+  </data>
+  <data name="Label13" xml:space="preserve">
+    <value>RPC PASSWORD:</value>
+  </data>
+  <data name="Label14" xml:space="preserve">
+    <value>CONFIRMED BALANCE:</value>
+  </data>
+  <data name="Label16" xml:space="preserve">
+    <value>UNCONFIRMED BALANCE:</value>
+  </data>
+  <data name="Label17" xml:space="preserve">
+    <value>DATE:</value>
+  </data>
+  <data name="Label18" xml:space="preserve">
+    <value>TO ADDRESS:</value>
+  </data>
+  <data name="Label19" xml:space="preserve">
+    <value>NETWORK STATUS:</value>
+  </data>
+  <data name="Label2" xml:space="preserve">
+    <value>FROM:</value>
+  </data>
+  <data name="Label20" xml:space="preserve">
+    <value>Key:</value>
+  </data>
+  <data name="Label22" xml:space="preserve">
+    <value>Currency</value>
+  </data>
+  <data name="Label23" xml:space="preserve">
+    <value>PORT</value>
+  </data>
+  <data name="Label24" xml:space="preserve">
+    <value>TEST MSC BALANCE:</value>
+  </data>
+  <data name="Label27" xml:space="preserve">
+    <value>RECIPIENT ADDRESS:</value>
+  </data>
+  <data name="Label29" xml:space="preserve">
+    <value>SENDING ADDRESS:</value>
+  </data>
+  <data name="Label3" xml:space="preserve">
+    <value>Currency</value>
+  </data>
+  <data name="Label30" xml:space="preserve">
+    <value>UNCONFIRMED BALANCE:</value>
+  </data>
+  <data name="Label31" xml:space="preserve">
+    <value>CONFIRMED BALANCE:</value>
+  </data>
+  <data name="Label32" xml:space="preserve">
+    <value>SORT BY:</value>
+  </data>
+  <data name="Label33" xml:space="preserve">
+    <value>PASSWORD:</value>
+  </data>
+  <data name="Label36" xml:space="preserve">
+    <value>MSC BALANCE:</value>
+  </data>
+  <data name="Label37" xml:space="preserve">
+    <value>SHOWING:</value>
+  </data>
+  <data name="Label39" xml:space="preserve">
+    <value>RPC USER:</value>
+  </data>
+  <data name="Label4" xml:space="preserve">
+    <value>Sort By</value>
+  </data>
+  <data name="Label40" xml:space="preserve">
+    <value>BITCOIN RPC SERVER:</value>
+  </data>
+  <data name="Label42" xml:space="preserve">
+    <value>CURRENCY:</value>
+  </data>
+  <data name="Label43" xml:space="preserve">
+    <value>USER:</value>
+  </data>
+  <data name="Label44" xml:space="preserve">
+    <value>DEBUG LOG:</value>
+  </data>
+  <data name="Label46" xml:space="preserve">
+    <value>We'll need to configure a connection to your bitcoind/qt server.  Your bitcoind/qt server needs to have transaction indexing enabled to use this software.  Please enter the details below and click 'Test' to test the connection to bitcoind/qt and confirm that the transaction index is enabled.</value>
+  </data>
+  <data name="Label47" xml:space="preserve">
+    <value>SERVER:</value>
+  </data>
+  <data name="Label48" xml:space="preserve">
+    <value>GETTING STARTED:</value>
+  </data>
+  <data name="Label5" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="Label50" xml:space="preserve">
+    <value>You'll also need to choose a passphrase to encrypt the wallet database.  Note, your private keys are not stored in your Masterchest wallet database; transactions are signed using your bitcoin wallet.</value>
+  </data>
+  <data name="Label51" xml:space="preserve">
+    <value>WALLET PASSPHRASE:</value>
+  </data>
+  <data name="Label52" xml:space="preserve">
+    <value>To speed up initial seeding, you can choose to use a preseeded database.  This will reduce the number of blocks to catchup, but requires that the preseeded database is trusted</value>
+  </data>
+  <data name="Label53" xml:space="preserve">
+    <value>Only use this option if you downloaded this wallet from a trusted source</value>
+  </data>
+  <data name="Label55" xml:space="preserve">
+    <value>Valid</value>
+  </data>
+  <data name="Label56" xml:space="preserve">
+    <value>Invalid</value>
+  </data>
+  <data name="Label57" xml:space="preserve">
+    <value>Unconfirmed</value>
+  </data>
+  <data name="Label6" xml:space="preserve">
+    <value>SORT BY:</value>
+  </data>
+  <data name="Label7" xml:space="preserve">
+    <value>PORT</value>
+  </data>
+  <data name="Label8" xml:space="preserve">
+    <value>DEBUG LEVEL:</value>
+  </data>
+  <data name="Label9" xml:space="preserve">
+    <value>FILTER:</value>
+  </data>
+  <data name="LinkLabel4" xml:space="preserve">
+    <value>Highest Balance</value>
+  </data>
+  <data name="lnkaddfilter" xml:space="preserve">
+    <value>No Filter Active</value>
+  </data>
+  <data name="lnkaddsort" xml:space="preserve">
+    <value>Address Alpha</value>
+  </data>
+  <data name="lnkdebug" xml:space="preserve">
+    <value>LOW</value>
+  </data>
+  <data name="lnkhistoryfilter" xml:space="preserve">
+    <value>No Filter Active</value>
+  </data>
+  <data name="lnkhistorysort" xml:space="preserve">
+    <value>Recent First</value>
+  </data>
+  <data name="loversync" xml:space="preserve">
+    <value>Not Syncronized. </value>
+  </data>
+  <data name="lpoweredby" xml:space="preserve">
+    <value>Powered by </value>
+  </data>
+  <data name="lsendavail" xml:space="preserve">
+    <value>Select a sending address</value>
+  </data>
+  <data name="lwelstartup" xml:space="preserve">
+    <value>Please wait...</value>
+  </data>
+  <data name="rsendtmsc" xml:space="preserve">
+    <value>Test Mastercoin</value>
+  </data>
+  <data name="additionalinformation" xml:space="preserve">
+    <value>ADDITIONAL INFORMATION:</value>
+  </data>
+  <data name="addressalpha" xml:space="preserve">
+    <value>Address Alpha</value>
+  </data>
+  <data name="available" xml:space="preserve">
+    <value>Available:</value>
+  </data>
+  <data name="balancebtc" xml:space="preserve">
+    <value>BTC Balance</value>
+  </data>
+  <data name="balancemsc" xml:space="preserve">
+    <value>MSC Balance</value>
+  </data>
+  <data name="bsend" xml:space="preserve">
+    <value>send</value>
+  </data>
+  <data name="completeFields" xml:space="preserve">
+    <value>Please Complete All Fields.</value>
+  </data>
+  <data name="configFileError" xml:space="preserve">
+    <value>Configuration file error</value>
+  </data>
+  <data name="copypar" xml:space="preserve">
+    <value>copy</value>
+  </data>
+  <data name="currentblock" xml:space="preserve">
+    <value>Current Block:</value>
+  </data>
+  <data name="disclaimer1" xml:space="preserve">
+    <value>DISCLAIMER:</value>
+  </data>
+  <data name="disclaimer2" xml:space="preserve">
+    <value>This software is pre-release software for testing only.</value>
+  </data>
+  <data name="disclaimer3" xml:space="preserve">
+    <value>The protocol and transaction processing rules for Mastercoin are still under active development and are subject to change in future.</value>
+  </data>
+  <data name="disclaimer4" xml:space="preserve">
+    <value>DO NOT USE IT WITH A LARGE AMOUNT OF MASTERCOINS AND/OR BITCOINS.  IT IS ENTIRELY POSSIBLE YOU MAY LOSE ALL YOUR COINS.  INFORMATION DISPLAYED MAY BE INCORRECT.  MASTERCHEST OFFERS ABSOLUTELY NO GUARANTEES OF ANY KIND</value>
+  </data>
+  <data name="disclaimer5" xml:space="preserve">
+    <value>A fraction of a bitcoin and a fraction of a mastercoin are the suggested testing amounts.  Preferably use a fresh bitcoin wallet.dat.</value>
+  </data>
+  <data name="disclaimer6" xml:space="preserve">
+    <value>This software is provided open-source at no cost.  You are responsible for knowing the law in your country and determining if your use of this software contravenes any local laws.</value>
+  </data>
+  <data name="emptybalances" xml:space="preserve">
+    <value>Empty Balances</value>
+  </data>
+  <data name="enterbtcpassphrase" xml:space="preserve">
+    <value>enter your bitcoin wallet passhrase</value>
+  </data>
+  <data name="exception" xml:space="preserve">
+    <value>Exception: </value>
+  </data>
+  <data name="exiting" xml:space="preserve">
+    <value>Exiting...</value>
+  </data>
+  <data name="greatthanks" xml:space="preserve">
+    <value>Great, thanks</value>
+  </data>
+  <data name="high" xml:space="preserve">
+    <value>HIGH</value>
+  </data>
+  <data name="highestvalue" xml:space="preserve">
+    <value>Highest Value</value>
+  </data>
+  <data name="insufficientfunds" xml:space="preserve">
+    <value>Insufficient Funds</value>
+  </data>
+  <data name="low" xml:space="preserve">
+    <value>LOW</value>
+  </data>
+  <data name="lowestvalue" xml:space="preserve">
+    <value>Lowest Value</value>
+  </data>
+  <data name="med" xml:space="preserve">
+    <value>MED</value>
+    <comment>Medium</comment>
+  </data>
+  <data name="messageexception" xml:space="preserve">
+    <value>Exception reading configuration :</value>
+  </data>
+  <data name="messageheader1" xml:space="preserve">
+    <value>BITCOIN AUTO CONFIGURATION</value>
+  </data>
+  <data name="messageinfo1" xml:space="preserve">
+    <value>Auto-detection has determined your bitcoind/qt configuration does not have the RPC server enabled.</value>
+  </data>
+  <data name="messageinfo2" xml:space="preserve">
+    <value>Auto-detection has determined your bitcoind/qt configuration does not have the transaction index enabled.</value>
+  </data>
+  <data name="messagerequest1" xml:space="preserve">
+    <value>Please add server=1 to bitcoin.conf and restart bitcoind/qt.</value>
+  </data>
+  <data name="messagerequest2" xml:space="preserve">
+    <value>Please add txindex=1 to bitcoin.conf and restart bitcoind/qt with the -reindex flag to enable the transaction index.</value>
+  </data>
+  <data name="more" xml:space="preserve">
+    <value>More please...</value>
+  </data>
+  <data name="nofilteractive" xml:space="preserve">
+    <value>No Filter Active</value>
+  </data>
+  <data name="notconfigured" xml:space="preserve">
+    <value>Not configured.</value>
+  </data>
+  <data name="notsynchronized" xml:space="preserve">
+    <value>Not Syncronized.</value>
+  </data>
+  <data name="ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="onlymastercoin" xml:space="preserve">
+    <value>Mastercoin Only</value>
+  </data>
+  <data name="recentfirst" xml:space="preserve">
+    <value>Recent First</value>
+  </data>
+  <data name="selectsendaddress" xml:space="preserve">
+    <value>Select a sending address</value>
+  </data>
+  <data name="startupinitializing" xml:space="preserve">
+    <value>Startup: Initializing...</value>
+  </data>
+  <data name="startupinitializingcomplete" xml:space="preserve">
+    <value>Startup: Initialization Complete.</value>
+  </data>
+  <data name="synchronizedlastblock" xml:space="preserve">
+    <value>Syncronized.  Last block scanned was block</value>
+  </data>
+  <data name="synchronizing" xml:space="preserve">
+    <value>Syncronizing...</value>
+  </data>
+  <data name="testError1" xml:space="preserve">
+    <value>ERROR: Connection to bitcoin RPC seems to be established but responses are not as expected.</value>
+  </data>
+  <data name="testInfo1" xml:space="preserve">
+    <value>Bitcoin connection OK but transaction index appears disabled.</value>
+  </data>
+  <data name="testInfo2" xml:space="preserve">
+    <value>Bitcoin connection OK and transaction index appears enabled.</value>
+  </data>
+  <data name="testInfo3" xml:space="preserve">
+    <value>Failed to connect to Bitcoin or could not locate seed wallet.</value>
+  </data>
+  <data name="transactionid" xml:space="preserve">
+    <value>TRANSACTION ID:</value>
+  </data>
+  <data name="transactionsent" xml:space="preserve">
+    <value>transaction sent</value>
+  </data>
+  <data name="willnowexit" xml:space="preserve">
+    <value>Will now exit.</value>
+  </data>
+  <data name="btcsenddisabled" xml:space="preserve">
+    <value>Bitcoin sends are temporarily disabled in this build.</value>
+  </data>
+  <data name="cerror" xml:space="preserve">
+    <value>DEBUG: Sanity checking balances table..."</value>
+  </data>
+  <data name="debugblockanalysis" xml:space="preserve">
+    <value>DEBUG: Block Analysis for:</value>
+  </data>
+  <data name="emptyrawtx" xml:space="preserve">
+    <value>Raw transaction is empty - stopping.</value>
+  </data>
+  <data name="errorsendtx" xml:space="preserve">
+    <value>Error sending transaction.</value>
+  </data>
+  <data name="exceptionthrown" xml:space="preserve">
+    <value>Exeption thrown: </value>
+  </data>
+  <data name="failedbuildtx" xml:space="preserve">
+    <value>Build transaction failed.  Recipient address is not valid.</value>
+  </data>
+  <data name="failedsendtx" xml:space="preserve">
+    <value>Failed to send transaction.</value>
+  </data>
+  <data name="failedtx" xml:space="preserve">
+    <value>transaction failed</value>
+  </data>
+  <data name="invalidrecipient" xml:space="preserve">
+    <value>Recipient address is valid.</value>
+  </data>
+  <data name="rawtxdecode" xml:space="preserve">
+    <value>Raw transaction decode:</value>
+  </data>
+  <data name="rawtxhex" xml:space="preserve">
+    <value>Raw transaction hex:</value>
+  </data>
+  <data name="signingfailed" xml:space="preserve">
+    <value>Failed to sign transaction.  Ensure wallet passphrase is correct.</value>
+  </data>
+  <data name="signingsuccesstx" xml:space="preserve">
+    <value>Signing appears successful.</value>
+  </data>
+  <data name="transactionnotsent" xml:space="preserve">
+    <value>Transaction not sent</value>
+  </data>
+  <data name="transactionsentid" xml:space="preserve">
+    <value>Transaction sent, ID:</value>
+  </data>
+  <data name="validrecipient" xml:space="preserve">
+    <value>Recipient address is valid.</value>
+  </data>
+  <data name="addresslistexception" xml:space="preserve">
+    <value>Addresslist exception</value>
+  </data>
+  <data name="blockscatchup" xml:space="preserve">
+    <value>blocks to catch up</value>
+  </data>
+  <data name="currencylistexception" xml:space="preserve">
+    <value>Currencylist exception</value>
+  </data>
+  <data name="historylistexception" xml:space="preserve">
+    <value>historylist exception</value>
+  </data>
+  <data name="messageinfo3" xml:space="preserve">
+    <value>Sanity checking has detected addresses with multiple balance entries in the database.  It is not safe to continue.  The wallet will now exit.</value>
+  </data>
+  <data name="messagesstartexception1" xml:space="preserve">
+    <value>ERROR: An exception was raised testing your connection to bitcoin via RPC.  Please ensure bitcoind/qt is running.</value>
+  </data>
+  <data name="messagestartinfo1" xml:space="preserve">
+    <value>There was a problem configuring your connection to bitcoind/qt.  Both auto detection and manual configuration appear to have failed.</value>
+  </data>
+  <data name="starterror1" xml:space="preserve">
+    <value>Startup ERROR: Connection to bitcoin RPC seems to be established but responses are not as expected.  Aborting startup.</value>
+  </data>
+  <data name="starterror2" xml:space="preserve">
+    <value>Startup ERROR: Exception testing connection to bitcoin via RPC. Aborting startup. E2:</value>
+  </data>
+  <data name="starterror3" xml:space="preserve">
+    <value>Startup ERROR: Connection to database seems to be established but responses are not as expected.  Aborting startup.</value>
+  </data>
+  <data name="starterror4" xml:space="preserve">
+    <value>Startup ERROR: Enumerating addresses did not complete properly.  Aborting startup.</value>
+  </data>
+  <data name="startinfo1" xml:space="preserve">
+    <value>Startup: Testing bitcoin connection...</value>
+  </data>
+  <data name="startinfo2" xml:space="preserve">
+    <value>Startup: Connection to bitcoin via RPC established and sanity check OK.</value>
+  </data>
+  <data name="startinfo3" xml:space="preserve">
+    <value>Startup: Testing database connection...</value>
+  </data>
+  <data name="startinfo4" xml:space="preserve">
+    <value>Startup: Connection to database established and sanity check OK.</value>
+  </data>
+  <data name="startinfo5" xml:space="preserve">
+    <value>Startup: Enumerating wallet addresses...</value>
+  </data>
+  <data name="status" xml:space="preserve">
+    <value>STATUS:</value>
+  </data>
+  <data name="txtdebugexit" xml:space="preserve">
+    <value>DEBUG: Thread exited.</value>
+  </data>
+  <data name="workerblockscan1" xml:space="preserve">
+    <value>BLOCKSCAN: Found MSC transaction (simple send):</value>
+  </data>
+  <data name="workerblockscan2" xml:space="preserve">
+    <value>BLOCKSCAN: Found MSC transaction (sell offer):</value>
+  </data>
+  <data name="workerblockscan3" xml:space="preserve">
+    <value>BLOCKSCAN: Found MSC transaction (accept offer):</value>
+  </data>
+  <data name="workerblockscan4" xml:space="preserve">
+    <value>BLOCKSCAN: Found MSC transaction (simple send):</value>
+  </data>
+  <data name="workerblockscan5" xml:space="preserve">
+    <value>BLOCKSCAN: Transaction processing starting...</value>
+  </data>
+  <data name="workerblockscan6" xml:space="preserve">
+    <value>BLOCKSCAN: Finished, sleeping.</value>
+  </data>
+  <data name="workerdebug1" xml:space="preserve">
+    <value>DEBUG: Thread 'workthread' starting...</value>
+  </data>
+  <data name="workerdebug2" xml:space="preserve">
+    <value>DEBUG: Block Analysis for:</value>
+  </data>
+  <data name="workerdebug3" xml:space="preserve">
+    <value>DEBUG: Block Analysis for pending transactions</value>
+  </data>
+  <data name="workerdebug4" xml:space="preserve">
+    <value>DEBUG: Enumerating addresses...</value>
+  </data>
+  <data name="workerdebug5" xml:space="preserve">
+    <value>DEBUG: Sanity checking balances table..."</value>
+  </data>
+  <data name="workerdebug6" xml:space="preserve">
+    <value>DEBUG: Thread exited with error condition.</value>
+  </data>
+  <data name="workerdebugSQL" xml:space="preserve">
+    <value>DEBUG: SQL</value>
+  </data>
+  <data name="workererror1" xml:space="preserve">
+    <value>ERROR: Connection to bitcoin RPC seems to be established but responses are not as expected.</value>
+  </data>
+  <data name="workererror2" xml:space="preserve">
+    <value>ERROR: Connection to database seems to be established but responses are not as expected.</value>
+  </data>
+  <data name="workererror3" xml:space="preserve">
+    <value>ERROR: Database block appears newer than bitcoinrpc blocks - is bitcoinrpc up to date? Exiting thread.</value>
+  </data>
+  <data name="workererror4" xml:space="preserve">
+    <value>ERROR: Enumerating addresses did not complete properly.</value>
+  </data>
+  <data name="workererror5" xml:space="preserve">
+    <value>ERROR: Connection to database threw an exception of:</value>
+  </data>
+  <data name="workererror6" xml:space="preserve">
+    <value>ERROR: Blockchain scanning thread threw exception :</value>
+  </data>
+  <data name="workerstatus1" xml:space="preserve">
+    <value>STATUS: Connection to bitcoin RPC established &amp; sanity check OK.</value>
+  </data>
+  <data name="workerstatus2" xml:space="preserve">
+    <value>STATUS: UI thread will remain but blockchain scanning thread will now exit.</value>
+  </data>
+  <data name="workerstatus3" xml:space="preserve">
+    <value>STATUS: Connection to database established &amp; sanity check OK.</value>
+  </data>
+  <data name="workerstatus4" xml:space="preserve">
+    <value>STATUS: Database starting at block</value>
+  </data>
+  <data name="workerstatus5" xml:space="preserve">
+    <value>STATUS: Network is at block</value>
+  </data>
+  <data name="workerblockscan7" xml:space="preserve">
+    <value>BLOCKSCAN: Found pending MSC transaction (simple send):</value>
+  </data>
+  <data name="workerblockscan8" xml:space="preserve">
+    <value>BLOCKSCAN: Found pending MSC transaction (sell offer):</value>
+  </data>
+  <data name="Label1" xml:space="preserve">
+    <value>AMOUNT:</value>
+  </data>
+  <data name="Label25" xml:space="preserve">
+    <value>ADDRESS:</value>
+  </data>
+  <data name="Label54" xml:space="preserve">
+    <value>AMOUNT:</value>
+  </data>
+  <data name="LinkLabel5" xml:space="preserve">
+    <value>All Currencies</value>
+  </data>
+  <data name="sanitycheckfail1" xml:space="preserve">
+    <value>Sanity check has failed.  More than one sell for an address exists in the exchange table.  It is not safe to continue.  Exiting...</value>
+  </data>
+  <data name="workerdebug7" xml:space="preserve">
+    <value>DEBUG: Beginning simple send transaction"</value>
+  </data>
+  <data name="workerdebug8" xml:space="preserve">
+    <value>DEBUG: Requesting passphrase</value>
+  </data>
+  <data name="workerdebug9" xml:space="preserve">
+    <value>DEBUG: No passphrase specified, skipping unlocking wallet"</value>
+  </data>
+  <data name="restore" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+  <data name="_exit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
 </root>

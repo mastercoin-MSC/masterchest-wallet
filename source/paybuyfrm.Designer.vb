@@ -124,6 +124,7 @@ Partial Class paybuyfrm
         Me.lbtc.Name = "lbtc"
         Me.lbtc.Size = New System.Drawing.Size(254, 32)
         Me.lbtc.TabIndex = 76
+        Me.lbtc.Tag = LocaleTag.Numeric
         Me.lbtc.Text = "0.00 BTC"
         '
         'Label5
@@ -144,6 +145,7 @@ Partial Class paybuyfrm
         Me.lcur.Name = "lcur"
         Me.lcur.Size = New System.Drawing.Size(254, 32)
         Me.lcur.TabIndex = 78
+        Me.lcur.Tag = LocaleTag.Numeric
         Me.lcur.Text = "0.00 TMSC"
         '
         'Label2

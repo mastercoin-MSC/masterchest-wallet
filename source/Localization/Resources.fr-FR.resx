@@ -1,0 +1,716 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+  <data name="minicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\minicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="closeicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\closeicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="invalid" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\invalid1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="out" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="in" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\in.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="backicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="out1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sync" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sync.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="redcross" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\redcross.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="maxicon3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\maxicon3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="valid" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\valid.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="in1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\in.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="green-tick" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\green-tick.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uncof" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uncof1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="baddresses" xml:space="preserve">
+    <value>adresses</value>
+  </data>
+  <data name="bcontracts" xml:space="preserve">
+    <value>contrats</value>
+  </data>
+  <data name="bcurrencies" xml:space="preserve">
+    <value>monnaies</value>
+  </data>
+  <data name="bdebug" xml:space="preserve">
+    <value>débugage</value>
+  </data>
+  <data name="bexchange" xml:space="preserve">
+    <value>marché d&apos;échange</value>
+  </data>
+  <data name="bhistory" xml:space="preserve">
+    <value>historique</value>
+  </data>
+  <data name="boverview" xml:space="preserve">
+    <value>vue d&apos;ensemble</value>
+  </data>
+  <data name="bfinish" xml:space="preserve">
+    <value>FINIR</value>
+  </data>
+  <data name="bsendnew" xml:space="preserve">
+    <value>Nouveau</value>
+  </data>
+  <data name="bsignsend" xml:space="preserve">
+    <value>Envoyer</value>
+  </data>
+  <data name="btest" xml:space="preserve">
+    <value>TEST</value>
+  </data>
+  <data name="bupdatesettings" xml:space="preserve">
+    <value>Mettre à jour les paramètres</value>
+  </data>
+  <data name="checkdebugscroll" xml:space="preserve">
+    <value>MONTRER LES SCROLLBARS</value>
+  </data>
+  <data name="chkpreseed" xml:space="preserve">
+    <value>Utilisez une base de donnée déjà existante</value>
+  </data>
+  <data name="Form1" xml:space="preserve">
+    <value>Form1</value>
+  </data>
+  <data name="Label1" xml:space="preserve">
+    <value>SOLDE :</value>
+  </data>
+  <data name="Label10" xml:space="preserve">
+    <value>SOLDE TOTAL DE MASTERCOIN :</value>
+  </data>
+  <data name="Label12" xml:space="preserve">
+    <value>SOLDE BTC :</value>
+  </data>
+  <data name="Label13" xml:space="preserve">
+    <value>MOT DE PASSE RPC :</value>
+  </data>
+  <data name="Label14" xml:space="preserve">
+    <value>SOLDE CONFIRMÉ :</value>
+  </data>
+  <data name="Label16" xml:space="preserve">
+    <value>SOLDE NON CONFIRMÉ :</value>
+  </data>
+  <data name="Label17" xml:space="preserve">
+    <value>DATE :</value>
+  </data>
+  <data name="Label18" xml:space="preserve">
+    <value>VERS ADRESSE :</value>
+  </data>
+  <data name="Label19" xml:space="preserve">
+    <value>STATUS DU RESEAU :</value>
+  </data>
+  <data name="Label2" xml:space="preserve">
+    <value>DE :</value>
+  </data>
+  <data name="Label20" xml:space="preserve">
+    <value>Clé :</value>
+  </data>
+  <data name="Label22" xml:space="preserve">
+    <value>Monnaie</value>
+  </data>
+  <data name="Label23" xml:space="preserve">
+    <value>PORT</value>
+  </data>
+  <data name="Label24" xml:space="preserve">
+    <value>SOLDE TEST MSC :</value>
+  </data>
+  <data name="Label25" xml:space="preserve">
+    <value>ADRESSE :</value>
+  </data>
+  <data name="Label27" xml:space="preserve">
+    <value>ADRESSE DU RECEVEUR :</value>
+  </data>
+  <data name="Label29" xml:space="preserve">
+    <value>ADRESSE D&apos;ENVOI : </value>
+  </data>
+  <data name="Label3" xml:space="preserve">
+    <value>Monnaie</value>
+  </data>
+  <data name="Label30" xml:space="preserve">
+    <value>SOLDE NON CONFIRMÉ :</value>
+  </data>
+  <data name="Label31" xml:space="preserve">
+    <value>SOLDE CONFIRMÉ :</value>
+  </data>
+  <data name="Label32" xml:space="preserve">
+    <value>CLASSÉ PAR :</value>
+  </data>
+  <data name="Label33" xml:space="preserve">
+    <value>MOT DE PASSE : </value>
+  </data>
+  <data name="Label36" xml:space="preserve">
+    <value>SOLDE MSC :</value>
+  </data>
+  <data name="Label37" xml:space="preserve">
+    <value>AFFICHÉ : </value>
+  </data>
+  <data name="Label39" xml:space="preserve">
+    <value>RPC USER :</value>
+  </data>
+  <data name="Label4" xml:space="preserve">
+    <value>Classé par</value>
+  </data>
+  <data name="Label40" xml:space="preserve">
+    <value>BITCOIN RPC SERVER :</value>
+  </data>
+  <data name="Label42" xml:space="preserve">
+    <value>MONNAIE : </value>
+  </data>
+  <data name="Label43" xml:space="preserve">
+    <value>USER :</value>
+  </data>
+  <data name="Label44" xml:space="preserve">
+    <value>DEBUG LOG :</value>
+  </data>
+  <data name="Label46" xml:space="preserve">
+    <value>Vous devez configurer une connexion à votre bitcoind/qt server. Votre bitcoind/qt server a besoin d&apos;avoir l&apos;indexation des transactions activé pour utiliser ce software. S&apos;il vous plait, entrer les détails ci-dessous et cliquez sur &quot;Test&quot; pour tester la connexion à bitcoinq/qt et confirmer que l&apos;indexation des transactions est activé.</value>
+  </data>
+  <data name="Label47" xml:space="preserve">
+    <value>SERVER :</value>
+  </data>
+  <data name="Label48" xml:space="preserve">
+    <value>POUR DÉMARRER :</value>
+  </data>
+  <data name="Label5" xml:space="preserve">
+    <value>Filtrer</value>
+  </data>
+  <data name="Label50" xml:space="preserve">
+    <value>Vous aurez aussi besoin de choisir un mot de passe pour encrypter la base de donnée de vos portefeuilles. Notez que vos clefs privées ne sont pas stockée dans votre base de donnée Masterchest; les transactions sont signées en utilisant votre portefeuille bitcoin.</value>
+  </data>
+  <data name="Label51" xml:space="preserve">
+    <value>MOT DE PASSE DU PORTEFEUILLE :</value>
+  </data>
+  <data name="Label52" xml:space="preserve">
+    <value>Pour accélérer votre mise en route, vous pouvez choisir d&apos;utiliser une base de donnée pré-remplie. Cela va réduire le nombre de blocks à synchroniser, cependant cela requiert une base de donnée pré-remplie de confiance.</value>
+  </data>
+  <data name="Label53" xml:space="preserve">
+    <value>N&apos;utilisez cette option que si vous avez téléchargé ce portefeuille d&apos;une source de confiance</value>
+  </data>
+  <data name="Label54" xml:space="preserve">
+    <value>MONTANT:</value>
+  </data>
+  <data name="Label55" xml:space="preserve">
+    <value>Valide</value>
+  </data>
+  <data name="Label56" xml:space="preserve">
+    <value>Invalide</value>
+  </data>
+  <data name="Label57" xml:space="preserve">
+    <value>Non-confirmé</value>
+  </data>
+  <data name="Label6" xml:space="preserve">
+    <value>CLASSÉ PAR:</value>
+  </data>
+  <data name="Label7" xml:space="preserve">
+    <value>PORT</value>
+  </data>
+  <data name="Label8" xml:space="preserve">
+    <value>DEBUG LEVEL:</value>
+  </data>
+  <data name="Label9" xml:space="preserve">
+    <value>FILTRER:</value>
+  </data>
+  <data name="LinkLabel4" xml:space="preserve">
+    <value>Solde le plus important</value>
+  </data>
+  <data name="LinkLabel5" xml:space="preserve">
+    <value>Toutes monnaies</value>
+  </data>
+  <data name="lnkaddfilter" xml:space="preserve">
+    <value>Pas de filtre actif</value>
+  </data>
+  <data name="lnkaddsort" xml:space="preserve">
+    <value>Adresse Alpha</value>
+  </data>
+  <data name="lnkdebug" xml:space="preserve">
+    <value>BAS</value>
+  </data>
+  <data name="lnkhistoryfilter" xml:space="preserve">
+    <value>Pas de filtre actif</value>
+  </data>
+  <data name="lnkhistorysort" xml:space="preserve">
+    <value>Récent en premier</value>
+  </data>
+  <data name="loversync" xml:space="preserve">
+    <value>Non synchronisé.</value>
+  </data>
+  <data name="lpoweredby" xml:space="preserve">
+    <value>Alimenté par</value>
+  </data>
+  <data name="lsendavail" xml:space="preserve">
+    <value>Sélectionnez une adresse d&apos;envoi</value>
+  </data>
+  <data name="lwelstartup" xml:space="preserve">
+    <value>Attendez s&apos;il vous plait...</value>
+  </data>
+  <data name="rsendtmsc" xml:space="preserve">
+    <value>Test Mastercoin</value>
+  </data>
+  <data name="additionalinformation" xml:space="preserve">
+    <value>INFORMATION ADDITIONNELLE :</value>
+  </data>
+  <data name="addressalpha" xml:space="preserve">
+    <value>Adresse Alpha</value>
+  </data>
+  <data name="available" xml:space="preserve">
+    <value>Disponible:</value>
+  </data>
+  <data name="balancebtc" xml:space="preserve">
+    <value>Solde BTC</value>
+  </data>
+  <data name="balancemsc" xml:space="preserve">
+    <value>Solde MSC</value>
+  </data>
+  <data name="bsend" xml:space="preserve">
+    <value>envoyer</value>
+  </data>
+  <data name="completeFields" xml:space="preserve">
+    <value>Complétez tous les champs svp.</value>
+  </data>
+  <data name="configFileError" xml:space="preserve">
+    <value>Erreur du fichier de configuration</value>
+  </data>
+  <data name="copypar" xml:space="preserve">
+    <value>copier</value>
+  </data>
+  <data name="currentblock" xml:space="preserve">
+    <value>Block actuel :</value>
+  </data>
+  <data name="disclaimer1" xml:space="preserve">
+    <value>MISE EN GARDE:</value>
+  </data>
+  <data name="disclaimer2" xml:space="preserve">
+    <value>Ce software est une version d&apos;essai à des fins d&apos;essais.</value>
+  </data>
+  <data name="disclaimer3" xml:space="preserve">
+    <value>Le protocole et les règles de transactions de Mastercoin sont toujours sous développement et donc sujets à de modifications dans le futur.</value>
+  </data>
+  <data name="disclaimer4" xml:space="preserve">
+    <value>N&apos;UTILISEZ PAS CE WALLET AVEC DE GROS MONTANTS DE MASTERCOINS ET/OU BITCOINS. IL SE PEUT QUE VOUS PUISSIEZ PERDRE TOUS VOS FONDS. LES INFORMATIONS AFFICHÉES PEUVENT ETRE INCORRECTES. MASTERCHEST N&apos;OFFRE ABSOLUMENT AUCUNES GARANTIES.</value>
+  </data>
+  <data name="disclaimer5" xml:space="preserve">
+    <value>Pour tester, n&apos;utilisez qu&apos;une faible portion de bitcoins et de mastercoins. De préférence utilisez un bitcoin wallet.dat totalement neuf.</value>
+  </data>
+  <data name="disclaimer6" xml:space="preserve">
+    <value>Ce software est libre et open-source. Vous êtes responsable de connaître la loi dans votre pays et de déterminer si l&apos;utilisation de ce logiciel contrevient aux lois locales.</value>
+  </data>
+  <data name="emptybalances" xml:space="preserve">
+    <value>Soldes nuls</value>
+  </data>
+  <data name="enterbtcpassphrase" xml:space="preserve">
+    <value>entrez le mot de passe de votre portefeuille bitcoin</value>
+  </data>
+  <data name="exception" xml:space="preserve">
+    <value>Exception :</value>
+  </data>
+  <data name="exiting" xml:space="preserve">
+    <value>En train de quitter...</value>
+  </data>
+  <data name="greatthanks" xml:space="preserve">
+    <value>Super, merci </value>
+  </data>
+  <data name="high" xml:space="preserve">
+    <value>HIGH</value>
+  </data>
+  <data name="highestvalue" xml:space="preserve">
+    <value>Valeur la plus élevée</value>
+  </data>
+  <data name="insufficientfunds" xml:space="preserve">
+    <value>Fonds insufisants </value>
+  </data>
+  <data name="low" xml:space="preserve">
+    <value>LOW</value>
+  </data>
+  <data name="lowestvalue" xml:space="preserve">
+    <value>Valeur la plus basse</value>
+  </data>
+  <data name="med" xml:space="preserve">
+    <value>MOYEN</value>
+    <comment>Medium</comment>
+  </data>
+  <data name="messageexception" xml:space="preserve">
+    <value>Exception reading configuration :</value>
+  </data>
+  <data name="messageheader1" xml:space="preserve">
+    <value>BITCOIN CONFIGURATION AUTOMATIQUE</value>
+  </data>
+  <data name="messageinfo1" xml:space="preserve">
+    <value>L&apos;auto-détection a déterminé que la configuration de votre bitcoind/qt n&apos;a pas le serveur RPC activé.</value>
+  </data>
+  <data name="messageinfo2" xml:space="preserve">
+    <value>L&apos;auto-détection a déterminé que la configuration de votre bitcoind/qt n&apos;a pas l&apos;indexation des transactions activée.</value>
+  </data>
+  <data name="messagerequest1" xml:space="preserve">
+    <value>Svp, ajoutez server=1 à votre fichier bitcoin.conf et redémarrer bitcoind/qt.</value>
+  </data>
+  <data name="messagerequest2" xml:space="preserve">
+    <value>Svp, ajoutez txindex=1 à votre fichier bitcoin.conf et redémarrer bitcoind/qt avec l&apos;argument -reindex pour activer l&apos;indexation des transactions.</value>
+  </data>
+  <data name="more" xml:space="preserve">
+    <value>Plus svp...</value>
+  </data>
+  <data name="nofilteractive" xml:space="preserve">
+    <value>Pas de filtre actif</value>
+  </data>
+  <data name="notconfigured" xml:space="preserve">
+    <value>Non configuré.</value>
+  </data>
+  <data name="notsynchronized" xml:space="preserve">
+    <value>Non synchronisé.</value>
+  </data>
+  <data name="ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="onlymastercoin" xml:space="preserve">
+    <value>Seulement Mastercoin</value>
+  </data>
+  <data name="recentfirst" xml:space="preserve">
+    <value>Récent en premier</value>
+  </data>
+  <data name="selectsendaddress" xml:space="preserve">
+    <value>Sélectionnez une adresse d&apos;envoi</value>
+  </data>
+  <data name="startupinitializing" xml:space="preserve">
+    <value>Démarrage: Initialisation...</value>
+  </data>
+  <data name="startupinitializingcomplete" xml:space="preserve">
+    <value>Démarrage: Initialisation complète.</value>
+  </data>
+  <data name="synchronizedlastblock" xml:space="preserve">
+    <value>Synchronisé. Dernier block scanné était le block </value>
+  </data>
+  <data name="synchronizing" xml:space="preserve">
+    <value>Synchronisation...</value>
+  </data>
+  <data name="testError1" xml:space="preserve">
+    <value>ERREUR: La connection au bitcoin RPC semble établie mais fourni des réponses non attendues.</value>
+  </data>
+  <data name="testInfo1" xml:space="preserve">
+    <value>Connexion Bitcoin OK mais l&apos;indexation des transaction semble désactivée.</value>
+  </data>
+  <data name="testInfo2" xml:space="preserve">
+    <value>Bitcoin connexion OK et l&apos;indexation des transactions semble activée.</value>
+  </data>
+  <data name="testInfo3" xml:space="preserve">
+    <value>Connexion à Bitcoin ratée ou n&apos;a pas pu localiser le portefeuille existant/originel.</value>
+  </data>
+  <data name="transactionid" xml:space="preserve">
+    <value>N° DE TRANSACTION : </value>
+  </data>
+  <data name="transactionsent" xml:space="preserve">
+    <value>transaction envoyée</value>
+  </data>
+  <data name="willnowexit" xml:space="preserve">
+    <value>Va maintenant quitter.</value>
+  </data>
+  <data name="btcsenddisabled" xml:space="preserve">
+    <value>Les envois Bitcoin sont temporairement déactivés dans cette version.</value>
+  </data>
+  <data name="cerror" xml:space="preserve">
+    <value>DEBUG: Test de cohérences des montants...</value>
+  </data>
+  <data name="debugblockanalysis" xml:space="preserve">
+    <value>DEBUG: Analyse de block pour:</value>
+  </data>
+  <data name="emptyrawtx" xml:space="preserve">
+    <value>Raw transaction est vide - arrêt.</value>
+  </data>
+  <data name="errorsendtx" xml:space="preserve">
+    <value>Erreur durant l&apos;envoi de transaction.</value>
+  </data>
+  <data name="exceptionthrown" xml:space="preserve">
+    <value>Exception parvenue :</value>
+  </data>
+  <data name="failedbuildtx" xml:space="preserve">
+    <value>Transaction ratée. L&apos;adresse du receveur n&apos;est pas valide.</value>
+  </data>
+  <data name="failedsendtx" xml:space="preserve">
+    <value>Envoi de transaction raté.</value>
+  </data>
+  <data name="failedtx" xml:space="preserve">
+    <value>transaction ratée</value>
+  </data>
+  <data name="invalidrecipient" xml:space="preserve">
+    <value>L&apos;adresse du receveur est valide.</value>
+  </data>
+  <data name="rawtxdecode" xml:space="preserve">
+    <value>Raw transaction decode :</value>
+  </data>
+  <data name="rawtxhex" xml:space="preserve">
+    <value>Raw transaction hex :</value>
+  </data>
+  <data name="signingfailed" xml:space="preserve">
+    <value>Signature de la transaction ratée. Assurez-vous que le mot de passe du portefeuille est correct.</value>
+  </data>
+  <data name="signingsuccesstx" xml:space="preserve">
+    <value>La signature semble réussie.</value>
+  </data>
+  <data name="transactionnotsent" xml:space="preserve">
+    <value>Transaction non envoyée</value>
+  </data>
+  <data name="transactionsentid" xml:space="preserve">
+    <value>Transaction envoyée, ID :</value>
+  </data>
+  <data name="validrecipient" xml:space="preserve">
+    <value>L&apos;adresse du receveur est valide.</value>
+  </data>
+  <data name="addresslistexception" xml:space="preserve">
+    <value>Addresslist exception</value>
+  </data>
+  <data name="blockscatchup" xml:space="preserve">
+    <value>Blocks à rattraper</value>
+  </data>
+  <data name="currencylistexception" xml:space="preserve">
+    <value>Currencylist exception</value>
+  </data>
+  <data name="historylistexception" xml:space="preserve">
+    <value>historylist exception</value>
+  </data>
+  <data name="messageinfo3" xml:space="preserve">
+    <value>Le test de cohérence a détecter des adresses avec de multiples soldes différents dans la base de donnée. Il n&apos;est pas sûr de continuer. Le portefeuille va maintenant quitter.</value>
+  </data>
+  <data name="messagesstartexception1" xml:space="preserve">
+    <value>Exception/erreur du test de la connexion à bitcoin via RPC :</value>
+  </data>
+  <data name="messagestartinfo1" xml:space="preserve">
+    <value>Il y a eu une problème lors de la configuration de votre connexion à bitcoind/qt. L&apos;auto détection et la configuration manuelle ont, tout deux, raté.</value>
+  </data>
+  <data name="starterror1" xml:space="preserve">
+    <value>ERREUR démarrage : la connexion au bitcoin RPC semble établie mais les réponses ne sont pas celles attendues. Arrêt du démarrage.</value>
+  </data>
+  <data name="starterror2" xml:space="preserve">
+    <value>ERREUR démarrage: Exception testing connection to bitcoin via RPC. Fin du démarrage E2:</value>
+  </data>
+  <data name="starterror3" xml:space="preserve">
+    <value>ERREUR démarrage: La connexion à la base de donnée semble établie mais les réponses ne sont pas celles attendues. Fin du démarrage.</value>
+  </data>
+  <data name="starterror4" xml:space="preserve">
+    <value>ERREUR démarrage: L&apos;énumération des adresses ne s&apos;est pas faite complètement. Fin du démarrage.</value>
+  </data>
+  <data name="startinfo1" xml:space="preserve">
+    <value>Démarrage: Test de la connexion à bitcoin...</value>
+  </data>
+  <data name="startinfo2" xml:space="preserve">
+    <value>Démarrage: Connexion à bitcoin via RPC établie, test de cohérence OK.</value>
+  </data>
+  <data name="startinfo3" xml:space="preserve">
+    <value>Démarrage: Test de la connexion à la base de donnée.</value>
+  </data>
+  <data name="startinfo4" xml:space="preserve">
+    <value>Démarrage: Connexion à la base de donnée établie et test de cohérence OK.</value>
+  </data>
+  <data name="startinfo5" xml:space="preserve">
+    <value>Démarrage: Énumération des adresses du portefeuille. </value>
+  </data>
+  <data name="status" xml:space="preserve">
+    <value>STATUS:</value>
+  </data>
+  <data name="txtdebugexit" xml:space="preserve">
+    <value>DEBUG: Thread exited.</value>
+  </data>
+  <data name="workerblockscan1" xml:space="preserve">
+    <value>BLOCKSCAN: Transaction MSC trouvée (simple envoi):</value>
+  </data>
+  <data name="workerblockscan2" xml:space="preserve">
+    <value>BLOCKSCAN: Transaction MSC trouvée (offre de vente):</value>
+  </data>
+  <data name="workerblockscan3" xml:space="preserve">
+    <value>BLOCKSCAN: Transaction MSC trouvée (acceptation d&apos;offre):</value>
+  </data>
+  <data name="workerblockscan4" xml:space="preserve">
+    <value>BLOCKSCAN: Transaction MSC trouvée (simple envoi):</value>
+  </data>
+  <data name="workerblockscan5" xml:space="preserve">
+    <value>BLOCKSCAN: Démarrage de la résolution des transactions...</value>
+  </data>
+  <data name="workerblockscan6" xml:space="preserve">
+    <value>BLOCKSCAN: Fin, mise en veille.</value>
+  </data>
+  <data name="workerdebug1" xml:space="preserve">
+    <value>DEBUG: Thread &apos;workthread&apos; starting...</value>
+  </data>
+  <data name="workerdebug2" xml:space="preserve">
+    <value>DEBUG: Block Analysis for:</value>
+  </data>
+  <data name="workerdebug3" xml:space="preserve">
+    <value>DEBUG: Block Analysis for pending transactions</value>
+  </data>
+  <data name="workerdebug4" xml:space="preserve">
+    <value>DEBUG: Enumerating addresses...</value>
+  </data>
+  <data name="workerdebug5" xml:space="preserve">
+    <value>DEBUG: Sanity checking balances table...&quot;</value>
+  </data>
+  <data name="workerdebug6" xml:space="preserve">
+    <value>DEBUG: Thread exited with error condition.</value>
+  </data>
+  <data name="workerdebugSQL" xml:space="preserve">
+    <value>DEBUG: SQL</value>
+  </data>
+  <data name="workererror1" xml:space="preserve">
+    <value>ERREUR : la connexion au bitcoin RPC semble établie mais les réponses ne sont pas celles attendues.</value>
+  </data>
+  <data name="workererror2" xml:space="preserve">
+    <value>ERREUR : la connexion à la base de donnée semble établie mais les réponses ne sont pas celles attendues.</value>
+  </data>
+  <data name="workererror3" xml:space="preserve">
+    <value>ERREUR : Les blocks de la base de donnée semble plus récents que les blocks du bitcoinrpc - est-ce que le bitcoinrpc est à jour ? Fin de l’exécution.</value>
+  </data>
+  <data name="workererror4" xml:space="preserve">
+    <value>ERREUR : L&apos;énumération des adresses ne s&apos;est pas faite complètement. </value>
+  </data>
+  <data name="workererror5" xml:space="preserve">
+    <value>ERREUR : La connexion à la base de donnée a produit une &quot;exception&quot;:</value>
+  </data>
+  <data name="workererror6" xml:space="preserve">
+    <value>ERREUR : Le scan du blockchain a produit une &quot;exception&quot; :</value>
+  </data>
+  <data name="workerstatus1" xml:space="preserve">
+    <value>STATUT : Connexion au bitcoin RPC établie et le test de cohérence OK.</value>
+  </data>
+  <data name="workerstatus2" xml:space="preserve">
+    <value>STATUT:  Le filtrage de l&apos;interface utilisateur va rester, mais le scan du blockchain va maintenant quitter.</value>
+  </data>
+  <data name="workerstatus3" xml:space="preserve">
+    <value>STATUT: La connexion à la base de données est établie et la vérification de cohérence est OK. </value>
+  </data>
+  <data name="workerstatus4" xml:space="preserve">
+    <value>STATUT: La base de données commence au bloc</value>
+  </data>
+  <data name="workerstatus5" xml:space="preserve">
+    <value>STATUT: Le réseau est au bloc</value>
+  </data>
+</root>

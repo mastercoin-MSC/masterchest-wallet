@@ -12,7 +12,7 @@ Public Class sellfrm
         lnktimelimit.Text = "6 blocks"
         txtsendamount.Text = "0.00"
         txtunit.Text = "0.00"
-        ltotalbtc.Text = "0.00"
+        ltotal.Text = "0.00"
         comselladdress.Text = ""
         comselladdress.SelectedItem = Nothing
     End Sub
@@ -32,19 +32,20 @@ Public Class sellfrm
         If dexcur = "MSC" Then
             tmpcur = 1
             baltype = 3
-            boverview.Text = "sell 'mastercoin'"
+            sellfrm_boverview.Text = "sell 'mastercoin'"
         End If
         If dexcur = "TMSC" Then
             tmpcur = 2
             baltype = 2
-            boverview.Text = "sell 'test mastercoin'"
+            sellfrm_boverview.Text = "sell 'test mastercoin'"
         End If
-        lsendavail.Text = "Select a selling address"
+        sellfrm_lsendavail.Text = "Select a selling address"
         txtsendamount.Text = "0.00"
         txtunit.Text = "0.00"
-        ltotalbtc.Text = "0.00"
+        ltotal.Text = "0.00"
         lnktimelimit.Text = "6 blocks"
         lnkminfee.Text = "0.0001 BTC"
+
         comselladdress.Items.Clear()
         comselladdress.Text = ""
         'update addresses - hide those than already have a sell 
@@ -93,13 +94,13 @@ Public Class sellfrm
         For Each row In addresslist.Rows
             If InStr(comselladdress.SelectedItem, row.item(0)) Then avail = row.item(baltype)
         Next
-        lsendavail.Text = "Available: " & avail.ToString("######0.00######") & " " & dexcur
-        If avail = -1 Then lsendavail.Text = "Select a buying address"
+        sellfrm_lsendavail.Text = "Available: " & avail.ToString("######0.00######") & " " & dexcur
+        If avail = -1 Then sellfrm_lsendavail.Text = "Select a buying address"
     End Sub
 
     Private Sub txtsendamount_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtsendamount.TextChanged
         Dim tot As Double = Val(txtunit.Text) * Val(txtsendamount.Text)
-        ltotalbtc.Text = tot.ToString("######0.00######")
+        ltotal.Text = tot.ToString("######0.00######")
     End Sub
 
     Private Sub combuyaddress_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles comselladdress.SelectedIndexChanged
@@ -119,7 +120,7 @@ Public Class sellfrm
         If comselladdress.Text <> "" Then fromadd = comselladdress.Text.Substring(0, comselladdress.Text.IndexOf(" "))
         senttxid = "Transaction not sent"
         'validate amounts
-        If Not Val(txtsendamount.Text) > 0 Or Not Val(ltotalbtc.Text) > 0 Or Not Val(txtunit.Text) > 0 Or String.IsNullOrEmpty(fromadd) Then
+        If Not Val(txtsendamount.Text) > 0 Or Not Val(ltotal.Text) > 0 Or Not Val(txtunit.Text) > 0 Or String.IsNullOrEmpty(fromadd) Then
             Exit Sub
         End If
         If Val(txtsendamount.Text) > avail Then
@@ -149,7 +150,7 @@ Public Class sellfrm
         Dim curtype As Integer = tmpcur
         Dim amount As Double = Val(txtsendamount.Text)
         Dim amountlong As Long = amount * 100000000
-        Dim offer As Double = Val(ltotalbtc.Text)
+        Dim offer As Double = Val(ltotal.Text)
         Dim offerlong As Long = offer * 100000000
         Dim timelimit As Integer = 6
         Dim minfee As Long = 10000
@@ -273,7 +274,7 @@ Public Class sellfrm
         End Try
 
 
-    
+
     End Sub
 
     Private Sub bclose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bclose.Click
@@ -282,14 +283,14 @@ Public Class sellfrm
         lnktimelimit.Text = "6 blocks"
         txtsendamount.Text = "0.00"
         txtunit.Text = "0.00"
-        ltotalbtc.Text = "0.00"
+        ltotal.Text = "0.00"
         comselladdress.Text = ""
         comselladdress.SelectedItem = Nothing
     End Sub
 
     Private Sub txtunit_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtunit.TextChanged
         Dim tot As Double = Val(txtunit.Text) * Val(txtsendamount.Text)
-        ltotalbtc.Text = tot.ToString("######0.00######")
+        ltotal.Text = tot.ToString("######0.00######")
     End Sub
 
     Private Sub TextBox2_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)

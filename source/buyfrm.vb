@@ -21,7 +21,7 @@ Public Class buyfrm
     Const HT_CAPTION As Integer = &H2
 
     Private Sub buyfrm_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-       
+
     End Sub
     Public Sub buyfrminit()
         Dim baltype As Integer = 0
@@ -30,15 +30,15 @@ Public Class buyfrm
         If dexcur = "MSC" Then
             tmpcur = 1
             baltype = 3
-            boverview.Text = "buy 'mastercoin'"
+            buyfrm_boverview.Text = "buy 'mastercoin'"
         End If
         If dexcur = "TMSC" Then
             tmpcur = 2
             baltype = 2
-            boverview.Text = "buy 'test mastercoin'"
+            buyfrm_boverview.Text = "buy 'test mastercoin'"
         End If
 
-        lsendavail.Text = "Select a buying address"
+        buyfrm_lsendavail.Text = "Select a buying address"
         txtsendamount.Text = "0.00"
         ltotalbtc.Text = "0.00"
         lunit.Text = "0.00"
@@ -79,7 +79,7 @@ Public Class buyfrm
         lnkavail.Text = saleamount.ToString("######0.00######")
         ltotal.Text = offeramount.ToString("######0.00######")
         lunit.Text = unitprice.ToString("######0.00######")
-        ltimelimit.Text = timelimit.ToString & " blocks"
+        ltimelimitn.Text = timelimit.ToString & " blocks"
         lminfee.Text = minfee.ToString("######0.00######")
         con.Close()
     End Sub
@@ -91,13 +91,13 @@ Public Class buyfrm
 
     End Sub
     Private Sub updateavail()
-       
+
         avail = -1
         For Each row In addresslist.Rows
             If InStr(combuyaddress.SelectedItem, row.item(0)) Then avail = row.item(1)
         Next
-        lsendavail.Text = "Available: " & avail.ToString("######0.00######") & " BTC"
-        If avail = -1 Then lsendavail.Text = "Select a buying address"
+        buyfrm_lsendavail.Text = "Available: " & avail.ToString("######0.00######") & " BTC"
+        If avail = -1 Then buyfrm_lsendavail.Text = "Select a buying address"
     End Sub
 
     Private Sub txtsendamount_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtsendamount.LostFocus
