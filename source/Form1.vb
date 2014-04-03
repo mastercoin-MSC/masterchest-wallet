@@ -1994,10 +1994,14 @@ Public Class Form1
         lbldextotalbtc.Text = balbtc.ToString & " BTC"
         dgvselloffer.CurrentCell = Nothing
         dgvselloffer.ClearSelection()
-        dgvhistory.FirstDisplayedScrollingRowIndex = 0
+        If dgvhistory.Rows.Count > 0 Then
+            dgvhistory.FirstDisplayedScrollingRowIndex = 0
+        End If
         dgvhistory.CurrentCell = Nothing
         dgvhistory.ClearSelection()
-        dgvaddresses.FirstDisplayedScrollingRowIndex = 0
+        If dgvaddresses.Rows.Count > 0 Then
+            dgvaddresses.FirstDisplayedScrollingRowIndex = 0
+        End If
         dgvaddresses.CurrentCell = Nothing
         dgvaddresses.ClearSelection()
         lnknofocus.Focus()
