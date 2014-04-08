@@ -117,13 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="workthread.TrayLocation" type="System.Drawing.Point, System.Drawing">
+  <metadata name="workthread.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
-  </data>
-  <data name="UIrefresh.TrayLocation" type="System.Drawing.Point, System.Drawing">
+  </metadata>
+  <metadata name="UIrefresh.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>131, 17</value>
-  </data>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="PictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAa8AAABkCAIAAAC+USiVAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
@@ -267,6 +267,9 @@
         AAAASUVORK5CYII=
 </value>
   </data>
+  <data name="Label46.Text" xml:space="preserve">
+    <value>We'll need to configure a connection to your bitcoind/qt server.  Your bitcoind/qt server needs to have transaction indexing enabled to use this software.  Please enter the details below and click 'Test' to test the connection to bitcoind/qt and confirm that the transaction index is enabled.</value>
+  </data>
   <data name="PictureBox5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADMAAAAsCAIAAABHQxczAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
@@ -289,9 +292,9 @@
         sJl0p7WZ/fgPrhoG3hZLN4oAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="nfi.TrayLocation" type="System.Drawing.Point, System.Drawing">
+  <metadata name="nfi.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>232, 3</value>
-  </data>
+  </metadata>
   <data name="nfi.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAUAEBAAAAAAIABoBAAAVgAAACAgAAAAACAAqBAAAL4EAAAwMAAAAAAgAKglAABmFQAAQEAAAAAA
@@ -1958,10 +1961,9 @@
         AAAAAAAAAAAAAAAAAAAAAAAA
 </value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="$this.TrayHeight" type="System.Int32, mscorlib">
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>25</value>
-  </data>
+  </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAUAEBAAAAAAIABoBAAAVgAAACAgAAAAACAAqBAAAL4EAAAwMAAAAAAgAKglAABmFQAAQEAAAAAA

@@ -30,8 +30,10 @@ Public Class Form1
     Const HT_CAPTION As Integer = &H2
     Public mlib As New Masterchest.mlib
 
+    Dim defaultCulture = New CultureInfo("en-US")
     Dim activeCulture As CultureInfo = Thread.CurrentThread.CurrentCulture.Clone()
     Dim locales As New Dictionary(Of String, String)
+    Dim gNetworkStatus = NetworkStatus.Processing
 
     '////////////////////////
     '///HANDLE FORM FUNCTIONS
@@ -45,7 +47,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Form1_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles MyBase.MouseDown, psetup.MouseDown, pwelcome.MouseDown, pcurrencies.MouseDown, paddresses.MouseDown, pdebug.MouseDown, poverview.MouseDown, psend.MouseDown, psettings.MouseDown
+    Private Sub Form1_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles MyBase.MouseDown, RectangleShape1.MouseDown, psetup.MouseDown, pwelcome.MouseDown, pcurrencies.MouseDown, paddresses.MouseDown, pdebug.MouseDown, poverview.MouseDown, psend.MouseDown, psettings.MouseDown
         If e.Button = MouseButtons.Left Then
             dgvaddresses.CurrentCell = Nothing
             dgvaddresses.ClearSelection()
@@ -126,7 +128,7 @@ Public Class Form1
         dexcur = "TMSC"
 
         poversync.Image = My.Resources.gif
-        loversync.Text = My.Resources.synchronizing
+        loversync.Text = My.Resources.synchronizingdotdotdot
 
         bback.Visible = False
         hidelabels()
@@ -364,7 +366,7 @@ Public Class Form1
             syncicon.Image = My.Resources.gif
             syncicon.Visible = True
             lsyncing.Visible = True
-            lsyncing.Text = My.Resources.synchronizing
+            lsyncing.Text = My.Resources.synchronizingdotdotdot
             workthread.RunWorkerAsync()
         End If
 
@@ -507,6 +509,7 @@ Public Class Form1
         System.Threading.Thread.CurrentThread.CurrentCulture = activeCulture
         System.Threading.Thread.CurrentThread.CurrentUICulture = activeCulture
 
+        gNetworkStatus = NetworkStatus.Synchronizing
         varsyncronized = False
         workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] " & My.Resources.workerdebug1)
 
@@ -953,10 +956,10 @@ Public Class Form1
                                         Dim tmpofferamount As Decimal = (tmpsaleam * tmpunitprice)
                                         tmpofferamount = tmpofferamount / 100000000
                                         'put in exchange & processed tables
-                                        cmd.CommandText = "UPDATE exchange_temp SET TXID='" & .Item(0) & "',SALEAMOUNT=" & tmpsaleam & ",OFFERAMOUNT=" & tmpofferamount & ",MINFEE=" & .Item(12) & ",TIMELIMIT=" & .Item(13) & ",BLOCKTIME=" & .Item(5) & ",BLOCKNUM=" & .Item(6) & ",UNITPRICE=" & tmpunitprice & " WHERE FROMADD='" & .Item(1) & "' and curtype=" & curtype
+                                        cmd.CommandText = "UPDATE exchange_temp SET TXID='" & .Item(0) & "',SALEAMOUNT=" & tmpsaleam & ",OFFERAMOUNT=" & tmpofferamount.ToString(defaultCulture) & ",MINFEE=" & .Item(12) & ",TIMELIMIT=" & .Item(13) & ",BLOCKTIME=" & .Item(5) & ",BLOCKNUM=" & .Item(6) & ",UNITPRICE=" & tmpunitprice.ToString(defaultCulture) & " WHERE FROMADD='" & .Item(1) & "' and curtype=" & curtype
                                         If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
                                         returnval = cmd.ExecuteScalar
-                                        cmd.CommandText = "INSERT INTO transactions_processed_temp (TXID,FROMADD,SALEAMOUNT,OFFERAMOUNT,MINFEE,TIMELIMIT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE) VALUES ('" & .Item(0) & "','" & .Item(1) & "'," & tmpsaleam & "," & tmpofferamount & "," & .Item(12) & "," & .Item(13) & ",'" & "updatesell" & "'," & .Item(5) & "," & .Item(6) & ",1," & curtype & ")"
+                                        cmd.CommandText = "INSERT INTO transactions_processed_temp (TXID,FROMADD,SALEAMOUNT,OFFERAMOUNT,MINFEE,TIMELIMIT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE) VALUES ('" & .Item(0) & "','" & .Item(1) & "'," & tmpsaleam & "," & tmpofferamount.ToString(defaultCulture) & "," & .Item(12) & "," & .Item(13) & ",'" & "updatesell" & "'," & .Item(5) & "," & .Item(6) & ",1," & curtype & ")"
                                         If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
                                         returnval = cmd.ExecuteScalar
                                     Else
@@ -993,26 +996,26 @@ Public Class Form1
                                         End If
                                         If returnval >= saleamount Then 'ok
                                             'reduce seller balance
-                                            If curtype = 1 Then cmd.CommandText = "UPDATE balances_temp SET CBALANCE=CBALANCE-" & saleamount & " where ADDRESS='" & .Item(1).ToString & "'"
-                                            If curtype = 2 Then cmd.CommandText = "UPDATE balances_temp SET CBALANCET=CBALANCET-" & saleamount & " where ADDRESS='" & .Item(1).ToString & "'"
+                                            If curtype = 1 Then cmd.CommandText = "UPDATE balances_temp SET CBALANCE=CBALANCE-" & saleamount.ToString(defaultCulture) & " where ADDRESS='" & .Item(1).ToString & "'"
+                                            If curtype = 2 Then cmd.CommandText = "UPDATE balances_temp SET CBALANCET=CBALANCET-" & saleamount.ToString(defaultCulture) & " where ADDRESS='" & .Item(1).ToString & "'"
                                             If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
                                             returnval = cmd.ExecuteScalar
                                             'put in exchange & processed tables
-                                            cmd.CommandText = "INSERT INTO exchange_temp (TXID,FROMADD,SALEAMOUNT,OFFERAMOUNT,MINFEE,TIMELIMIT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE,UNITPRICE,RESERVED) VALUES ('" & .Item(0) & "','" & .Item(1) & "'," & saleamount & "," & tmpofferamount & "," & .Item(12) & "," & .Item(13) & ",'" & "selloffer" & "'," & .Item(5) & "," & .Item(6) & ",1," & curtype & "," & tmpunitprice & ",0)"
+                                            cmd.CommandText = "INSERT INTO exchange_temp (TXID,FROMADD,SALEAMOUNT,OFFERAMOUNT,MINFEE,TIMELIMIT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE,UNITPRICE,RESERVED) VALUES ('" & .Item(0) & "','" & .Item(1) & "'," & saleamount.ToString(defaultCulture) & "," & tmpofferamount.ToString(defaultCulture) & "," & .Item(12) & "," & .Item(13) & ",'" & "selloffer" & "'," & .Item(5) & "," & .Item(6) & ",1," & curtype & "," & tmpunitprice.ToString(defaultCulture) & ",0)"
                                             If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
                                             returnval = cmd.ExecuteScalar
-                                            cmd.CommandText = "INSERT INTO transactions_processed_temp (TXID,FROMADD,SALEAMOUNT,OFFERAMOUNT,MINFEE,TIMELIMIT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE) VALUES ('" & .Item(0) & "','" & .Item(1) & "'," & saleamount & "," & tmpofferamount & "," & .Item(12) & "," & .Item(13) & ",'" & "selloffer" & "'," & .Item(5) & "," & .Item(6) & ",1," & curtype & ")"
+                                            cmd.CommandText = "INSERT INTO transactions_processed_temp (TXID,FROMADD,SALEAMOUNT,OFFERAMOUNT,MINFEE,TIMELIMIT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE) VALUES ('" & .Item(0) & "','" & .Item(1) & "'," & saleamount.ToString(defaultCulture) & "," & tmpofferamount.ToString(defaultCulture) & "," & .Item(12) & "," & .Item(13) & ",'" & "selloffer" & "'," & .Item(5) & "," & .Item(6) & ",1," & curtype & ")"
                                             If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
                                             returnval = cmd.ExecuteScalar
                                         Else
                                             'insufficient balance
-                                            cmd.CommandText = "INSERT INTO transactions_processed_temp (TXID,FROMADD,SALEAMOUNT,OFFERAMOUNT,MINFEE,TIMELIMIT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE) VALUES ('" & .Item(0) & "','" & .Item(1) & "'," & saleamount & "," & .Item(11) & "," & .Item(12) & "," & .Item(13) & ",'" & "selloffer" & "'," & .Item(5) & "," & .Item(6) & ",0," & curtype & ")"
+                                            cmd.CommandText = "INSERT INTO transactions_processed_temp (TXID,FROMADD,SALEAMOUNT,OFFERAMOUNT,MINFEE,TIMELIMIT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE) VALUES ('" & .Item(0) & "','" & .Item(1) & "'," & saleamount.ToString(defaultCulture) & "," & .Item(11) & "," & .Item(12) & "," & .Item(13) & ",'" & "selloffer" & "'," & .Item(5) & "," & .Item(6) & ",0," & curtype & ")"
                                             If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
                                             returnval = cmd.ExecuteScalar
                                         End If
                                     Else
                                         'there is an existing sell, we can't create a new one - invalidate sell offer
-                                        cmd.CommandText = "INSERT INTO transactions_processed_temp (TXID,FROMADD,SALEAMOUNT,OFFERAMOUNT,MINFEE,TIMELIMIT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE) VALUES ('" & .Item(0) & "','" & .Item(1) & "'," & saleamount & "," & .Item(11) & "," & .Item(12) & "," & .Item(13) & ",'" & "selloffer" & "'," & .Item(5) & "," & .Item(6) & ",0," & curtype & ")"
+                                        cmd.CommandText = "INSERT INTO transactions_processed_temp (TXID,FROMADD,SALEAMOUNT,OFFERAMOUNT,MINFEE,TIMELIMIT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE) VALUES ('" & .Item(0) & "','" & .Item(1) & "'," & saleamount.ToString(defaultCulture) & "," & .Item(11) & "," & .Item(12) & "," & .Item(13) & ",'" & "selloffer" & "'," & .Item(5) & "," & .Item(6) & ",0," & curtype & ")"
                                         If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
                                         returnval = cmd.ExecuteScalar
                                     End If
@@ -1154,7 +1157,7 @@ Public Class Form1
                         Dim dsbtc As New DataSet()
                         adptSQLbtc.Fill(dsbtc)
                         Dim vouts As String = .Item(18)
-                        Dim paymentpaidlong As Decimal = 0
+                        Dim paymentpaidlong As Long = 0
                         Dim matched As Boolean = False
                         Dim matchedtxid As String = ""
                         Dim buyer As String = ""
@@ -1214,7 +1217,7 @@ Public Class Form1
                                     paymentpaidlong = paymentpaid * 100000000
                                     matchedunitprice = (matchedofferamount / (matchedsaleamount / 100000000))
                                     'work out total amount of units covered by payment
-                                    Dim unitspurchased As Decimal
+                                    Dim unitspurchased As Long
                                     If paymentpaid = 0 Then
                                         unitspurchased = 0
                                     Else
@@ -1230,11 +1233,11 @@ Public Class Form1
                                         cmd.CommandText = sqlquery
                                         returnval = cmd.ExecuteScalar
                                         If returnval = .Item(1).ToString Then
-                                            If matchedcurtype = 1 Then sqlquery = "UPDATE balances_temp SET CBALANCE=CBALANCE+" & unitspurchased & " where ADDRESS='" & buyer & "'"
-                                            If matchedcurtype = 2 Then sqlquery = "UPDATE balances_temp SET CBALANCET=CBALANCET+" & unitspurchased & " where ADDRESS='" & buyer & "'"
+                                            If matchedcurtype = 1 Then sqlquery = "UPDATE balances_temp SET CBALANCE=CBALANCE+" & unitspurchased.ToString("D") & " where ADDRESS='" & buyer & "'"
+                                            If matchedcurtype = 2 Then sqlquery = "UPDATE balances_temp SET CBALANCET=CBALANCET+" & unitspurchased.ToString("D") & " where ADDRESS='" & buyer & "'"
                                         Else
-                                            If matchedcurtype = 1 Then sqlquery = "INSERT INTO balances_temp (ADDRESS,CBALANCE,CBALANCET, UBALANCE,UBALANCET) VALUES ('" & buyer & "'," & unitspurchased & ",0,0,0)"
-                                            If matchedcurtype = 2 Then sqlquery = "INSERT INTO balances_temp (ADDRESS,CBALANCE,CBALANCET, UBALANCE,UBALANCET) VALUES ('" & buyer & "',0," & unitspurchased & ",0,0)"
+                                            If matchedcurtype = 1 Then sqlquery = "INSERT INTO balances_temp (ADDRESS,CBALANCE,CBALANCET, UBALANCE,UBALANCET) VALUES ('" & buyer & "'," & unitspurchased.ToString("D") & ",0,0,0)"
+                                            If matchedcurtype = 2 Then sqlquery = "INSERT INTO balances_temp (ADDRESS,CBALANCE,CBALANCET, UBALANCE,UBALANCET) VALUES ('" & buyer & "',0," & unitspurchased.ToString("D") & ",0,0)"
                                         End If
                                         cmd.CommandText = sqlquery
                                         returnval = cmd.ExecuteScalar
@@ -1256,7 +1259,7 @@ Public Class Form1
                                             cmd.CommandText = sqlquery
                                             returnval = cmd.ExecuteScalar
                                         Else
-                                            sqlquery = "UPDATE exchange_temp SET reserved=reserved-" & unitspurchased & " where fromadd='" & seller & "' and curtype=" & matchedcurtype
+                                            sqlquery = "UPDATE exchange_temp SET reserved=reserved-" & unitspurchased.ToString("D") & " where fromadd='" & seller & "' and curtype=" & matchedcurtype
                                             cmd.CommandText = sqlquery
                                             returnval = cmd.ExecuteScalar
                                         End If
@@ -1267,16 +1270,16 @@ Public Class Form1
                                             cmd.CommandText = sqlquery
                                             returnval = cmd.ExecuteScalar
                                         Else
-                                            sqlquery = "update transactions_processed_temp SET purchaseamount=purchaseamount-" & unitspurchased & " where txid='" & matchedtxid & "'"
+                                            sqlquery = "update transactions_processed_temp SET purchaseamount=purchaseamount-" & unitspurchased.ToString("D") & " where txid='" & matchedtxid & "'"
                                             cmd.CommandText = sqlquery
                                             returnval = cmd.ExecuteScalar
-                                            sqlquery = "update exchange_temp SET reserved=reserved-" & unitspurchased & " where txid='" & matchedtxid & "'"
+                                            sqlquery = "update exchange_temp SET reserved=reserved-" & unitspurchased.ToString("D") & " where txid='" & matchedtxid & "'"
                                             cmd.CommandText = sqlquery
                                             returnval = cmd.ExecuteScalar
                                         End If
 
                                         'write transaction
-                                        sqlquery = "INSERT INTO transactions_processed_temp (TXID,FROMADD,TOADD,PURCHASEAMOUNT,OFFERAMOUNT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE,MATCHINGTX) VALUES ('" & .Item(0) & "','" & seller & "','" & buyer & "'," & unitspurchased & "," & paymentpaidlong & ",'" & "purchase" & "'," & .Item(5) & "," & .Item(6).ToString & ",1," & matchedcurtype & ",'" & matchedtxid & "')"
+                                        sqlquery = "INSERT INTO transactions_processed_temp (TXID,FROMADD,TOADD,PURCHASEAMOUNT,OFFERAMOUNT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE,MATCHINGTX) VALUES ('" & .Item(0) & "','" & seller & "','" & buyer & "'," & unitspurchased.ToString("D") & "," & paymentpaidlong.ToString("D") & ",'" & "purchase" & "'," & .Item(5) & "," & .Item(6).ToString & ",1," & matchedcurtype & ",'" & matchedtxid & "')"
                                         cmd.CommandText = sqlquery
                                         returnval = cmd.ExecuteScalar
                                     End If
@@ -1339,6 +1342,7 @@ Public Class Form1
             Next
         End With
         'processing
+        gNetworkStatus = NetworkStatus.Processing
         Dim tmpcur
         If dexcur = "MSC" Then tmpcur = 1
         If dexcur = "TMSC" Then tmpcur = 2
@@ -1550,10 +1554,10 @@ Public Class Form1
         Application.DoEvents()
         con.Close()
 
+        gNetworkStatus = NetworkStatus.Synchronized
         varsyncronized = True
         varsyncblock = rpcblock
         workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] " & My.Resources.workerblockscan6)
-
     End Sub
 
     '//////////////////////////////
@@ -1845,7 +1849,7 @@ Public Class Form1
             syncicon.Image = My.Resources.gif
             syncicon.Visible = False
             lsyncing.Visible = False
-            lsyncing.Text = My.Resources.synchronizing
+            lsyncing.Text = My.Resources.synchronizingdotdotdot
             poversync.Image = My.Resources.green_tick
             loversync.Text = My.Resources.synchronizedlastblock & " " & varsyncblock.ToString & "."
         Else
@@ -2064,8 +2068,8 @@ Public Class Form1
         UIrefresh.Enabled = False
 
         poversync.Image = My.Resources.gif
-        loversync.Text = My.Resources.synchronizing
-        lsyncing.Text = My.Resources.synchronizing
+        loversync.Text = My.Resources.synchronizingdotdotdot
+        lsyncing.Text = My.Resources.synchronizingdotdotdot
         syncicon.Visible = True
         lsyncing.Visible = True
         Application.DoEvents()
@@ -2459,7 +2463,11 @@ Public Class Form1
             lsendamver.ForeColor = Color.FromArgb(255, 192, 128)
             Exit Sub
         End If
-        If Val(txtsendamount.Text) = 0 Then
+        Dim amount As Double
+        If Not Double.TryParse(txtsendamount.Text, NumberStyles.AllowDecimalPoint, activeCulture, amount) Then
+            Exit Sub
+        End If
+        If amount = 0 Then
             'nothing to send
             Exit Sub
         End If
@@ -2478,7 +2486,6 @@ Public Class Form1
             Dim curtype As Integer
             If rsendmsc.Checked = True Then curtype = 1
             If rsendtmsc.Checked = True Then curtype = 2
-            Dim amount As Double = Val(txtsendamount.Text)
             Dim amountlong As Long = amount * 100000000
 
             'handle bitcoin sends - disabled while we move to building transaction manually so we have control over sending address
@@ -2510,10 +2517,10 @@ Public Class Form1
                             If workthread.IsBusy <> True Then
                                 UIrefresh.Enabled = False
                                 syncicon.Visible = True
-                                lsyncing.Text = My.Resources.synchronizing
+                                lsyncing.Text = My.Resources.synchronizingdotdotdot
                                 lsyncing.Visible = True
                                 poversync.Image = My.Resources.gif
-                                loversync.Text = My.Resources.synchronizing
+                                loversync.Text = My.Resources.synchronizingdotdotdot
                                 ' Start the workthread for the blockchain scanner
                                 workthread.RunWorkerAsync()
                             End If
@@ -2587,8 +2594,8 @@ Public Class Form1
                                     lsendavail.Text = My.Resources.lsendavail
                                     lsyncing.Visible = True
                                     poversync.Image = My.Resources.gif
-                                    loversync.Text = My.Resources.synchronizing
-                                    lsyncing.Text = My.Resources.synchronizing
+                                    loversync.Text = My.Resources.synchronizingdotdotdot
+                                    lsyncing.Text = My.Resources.synchronizingdotdotdot
                                     ' Start the workthread for the blockchain scanner
                                     workthread.RunWorkerAsync()
                                 End If
@@ -2715,6 +2722,10 @@ Public Class Form1
         If control.Tag IsNot Nothing And TypeOf control.Tag Is LocaleTag Then
             If control.Tag = LocaleTag.Text Then
                 control.Text = rm.GetString(control.Name)
+            ElseIf control.Tag = LocaleTag.NetworkDependent And control.Visible Then
+                If gNetworkStatus = NetworkStatus.Synchronized Then
+                    control.Text = My.Resources.synchronizedlastblock & " " & varsyncblock.ToString & "."
+                End If
             End If
         End If
         For Each child As Control In control.Controls
@@ -2916,7 +2927,7 @@ Public Class Form1
             syncicon.Image = My.Resources.gif
             syncicon.Visible = True
             lsyncing.Visible = True
-            lsyncing.Text = My.Resources.synchronizing
+            lsyncing.Text = My.Resources.synchronizingdotdotdot
             workthread.RunWorkerAsync()
         End If
     End Sub

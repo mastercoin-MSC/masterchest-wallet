@@ -477,10 +477,10 @@
     <value>No Filter Active</value>
   </data>
   <data name="notconfigured" xml:space="preserve">
-    <value>Not configured.</value>
+    <value>Not configured</value>
   </data>
   <data name="notsynchronized" xml:space="preserve">
-    <value>Not Syncronized.</value>
+    <value>Not Syncronized</value>
   </data>
   <data name="ok" xml:space="preserve">
     <value>OK</value>
@@ -503,7 +503,7 @@
   <data name="synchronizedlastblock" xml:space="preserve">
     <value>Syncronized.  Last block scanned was block</value>
   </data>
-  <data name="synchronizing" xml:space="preserve">
+  <data name="synchronizingdotdotdot" xml:space="preserve">
     <value>Syncronizing...</value>
   </data>
   <data name="testError1" xml:space="preserve">
@@ -739,5 +739,17 @@
   </data>
   <data name="_exit" xml:space="preserve">
     <value>Exit</value>
+  </data>
+  <data name="processing" xml:space="preserve">
+    <value>Processing</value>
+  </data>
+  <data name="processingdotdotdot" xml:space="preserve">
+    <value>Processing...</value>
+  </data>
+  <data name="synchronized" xml:space="preserve">
+    <value>Synchronized</value>
+  </data>
+  <data name="synchronizing" xml:space="preserve">
+    <value>Synchronizing</value>
   </data>
 </root>

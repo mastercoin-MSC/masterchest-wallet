@@ -326,9 +326,8 @@ Partial Class Form1
         Me.loverviewmscbal.Name = "loverviewmscbal"
         Me.loverviewmscbal.Size = New System.Drawing.Size(131, 30)
         Me.loverviewmscbal.TabIndex = 16
-        Me.loverviewmscbal.Tag = Masterchest_Wallet.LocaleTag.Text
+        Me.loverviewmscbal.Tag = Masterchest_Wallet.LocaleTag.Numeric
         Me.loverviewmscbal.Text = "Please wait..."
-
         '
         'Label14
         '
@@ -371,7 +370,7 @@ Partial Class Form1
         Me.loverviewsmallmscbal.Name = "loverviewsmallmscbal"
         Me.loverviewsmallmscbal.Size = New System.Drawing.Size(81, 17)
         Me.loverviewsmallmscbal.TabIndex = 22
-        Me.loverviewsmallmscbal.Tag = Masterchest_Wallet.LocaleTag.Text
+        Me.loverviewsmallmscbal.Tag = Masterchest_Wallet.LocaleTag.Numeric
         Me.loverviewsmallmscbal.Text = "Please wait..."
         '
         'loverviewsmallunconfmsc
@@ -383,7 +382,7 @@ Partial Class Form1
         Me.loverviewsmallunconfmsc.Name = "loverviewsmallunconfmsc"
         Me.loverviewsmallunconfmsc.Size = New System.Drawing.Size(81, 17)
         Me.loverviewsmallunconfmsc.TabIndex = 23
-        Me.loverviewsmallmscbal.Tag = Masterchest_Wallet.LocaleTag.Text
+        Me.loverviewsmallunconfmsc.Tag = Masterchest_Wallet.LocaleTag.Numeric
         Me.loverviewsmallunconfmsc.Text = "Please wait..."
         '
         'Label19
@@ -406,7 +405,7 @@ Partial Class Form1
         Me.loversync.Name = "loversync"
         Me.loversync.Size = New System.Drawing.Size(111, 17)
         Me.loversync.TabIndex = 25
-        Me.loversync.Tag = Masterchest_Wallet.LocaleTag.Text
+        Me.loversync.Tag = Masterchest_Wallet.LocaleTag.NetworkDependent
         Me.loversync.Text = "Not Syncronized. "
         '
         'poverview
@@ -437,6 +436,7 @@ Partial Class Form1
         Me.loverviewres.Name = "loverviewres"
         Me.loverviewres.Size = New System.Drawing.Size(81, 17)
         Me.loverviewres.TabIndex = 28
+        Me.loverviewres.Tag = Masterchest_Wallet.LocaleTag.Numeric
         Me.loverviewres.Text = "Please wait..."
         '
         'Label82
@@ -1689,8 +1689,8 @@ Partial Class Form1
         Me.Label52.TabIndex = 39
         Me.Label52.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label52.Text = "To speed up initial seeding, you can choose to use a preseeded database.  This wi" & _
-            "ll reduce the number of blocks to catchup, but requires that the preseeded datab" & _
-            "ase is trusted."
+    "ll reduce the number of blocks to catchup, but requires that the preseeded datab" & _
+    "ase is trusted."
         '
         'bfinish
         '
@@ -1741,8 +1741,8 @@ Partial Class Form1
         Me.Label50.TabIndex = 35
         Me.Label50.Tag = Masterchest_Wallet.LocaleTag.Text
         Me.Label50.Text = "You'll also need to choose a passphrase to encrypt the wallet database.  Note, yo" & _
-            "ur private keys are not stored in your Masterchest wallet database; transactions" & _
-            " are signed using your bitcoin wallet."
+    "ur private keys are not stored in your Masterchest wallet database; transactions" & _
+    " are signed using your bitcoin wallet."
         '
         'Label46
         '
@@ -1753,7 +1753,7 @@ Partial Class Form1
         Me.Label46.Size = New System.Drawing.Size(547, 49)
         Me.Label46.TabIndex = 34
         Me.Label46.Tag = Masterchest_Wallet.LocaleTag.Text
-        Me.Label46.Text = My.Resources.Label46
+        Me.Label46.Text = resources.GetString("Label46.Text")
         '
         'Label48
         '
@@ -2019,6 +2019,7 @@ Partial Class Form1
         Me.lbldextotalbtc.Name = "lbldextotalbtc"
         Me.lbldextotalbtc.Size = New System.Drawing.Size(127, 19)
         Me.lbldextotalbtc.TabIndex = 57
+        Me.lbldextotalbtc.Tag = Masterchest_Wallet.LocaleTag.Numeric
         Me.lbldextotalbtc.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         '
         'Label75
@@ -2079,6 +2080,7 @@ Partial Class Form1
         Me.lbldextotalcur.Name = "lbldextotalcur"
         Me.lbldextotalcur.Size = New System.Drawing.Size(125, 19)
         Me.lbldextotalcur.TabIndex = 51
+        Me.lbldextotalcur.Tag = Masterchest_Wallet.LocaleTag.Numeric
         Me.lbldextotalcur.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         '
         'Label58
@@ -2373,7 +2375,7 @@ Partial Class Form1
         Me.lsyncing.Name = "lsyncing"
         Me.lsyncing.Size = New System.Drawing.Size(89, 13)
         Me.lsyncing.TabIndex = 46
-        Me.lsyncing.Tag = Masterchest_Wallet.LocaleTag.Text
+        Me.lsyncing.Tag = Masterchest_Wallet.LocaleTag.NetworkDependent
         Me.lsyncing.Text = "Synchronizing..."
         Me.lsyncing.Visible = False
         '
@@ -2566,9 +2568,6 @@ Partial Class Form1
     Friend WithEvents bsend As System.Windows.Forms.Label
     Friend WithEvents bhistory As System.Windows.Forms.Label
     Friend WithEvents bback As System.Windows.Forms.PictureBox
-    Friend WithEvents ShapeContainer1 As Microsoft.VisualBasic.PowerPacks.ShapeContainer
-    Friend WithEvents RectangleShape1 As Microsoft.VisualBasic.PowerPacks.RectangleShape
-    Friend WithEvents RectangleShape2 As Microsoft.VisualBasic.PowerPacks.RectangleShape
     Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
     Friend WithEvents bclose As System.Windows.Forms.PictureBox
     Friend WithEvents bmin As System.Windows.Forms.PictureBox
@@ -2736,5 +2735,8 @@ Partial Class Form1
     Friend WithEvents Label82 As System.Windows.Forms.Label
     Friend WithEvents cbLocale As System.Windows.Forms.ComboBox
     Friend WithEvents nfi As System.Windows.Forms.NotifyIcon
+    Private WithEvents ShapeContainer1 As Microsoft.VisualBasic.PowerPacks.ShapeContainer
+    Private WithEvents RectangleShape1 As Microsoft.VisualBasic.PowerPacks.RectangleShape
+    Private WithEvents RectangleShape2 As Microsoft.VisualBasic.PowerPacks.RectangleShape
 
 End Class
