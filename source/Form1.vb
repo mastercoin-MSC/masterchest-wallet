@@ -692,6 +692,54 @@ Public Class Form1
             For rowNumber As Integer = 0 To .Rows.Count - 1
                 With .Rows(rowNumber)
                     tmpblknum = .Item(6)
+
+                    'is pendinglist nonempty, and if so has blocktime changed? if so go through and remove expired pending offers
+                    If tmpblknum > 0 And tmpblknum <> lasttmpblknum Then 'pendinglist.Count > 0 And
+                        lasttmpblknum = tmpblknum
+                        'blocktime has changed - get new blocknum
+                        'optimization no need to go out to sqlce every block here, big waste of time - already have current blocknum in .item(6) - switch away from blocktime to blocknum
+                        'get any expired pendingoffers
+                        sqlquery = "select txid,matchingtx,purchaseamount,curtype,toadd,fromadd from transactions_processed_temp where type='pendingoffer' and expiry<" & tmpblknum
+                        cmd.CommandText = sqlquery
+                        Dim refundtxid As String = ""
+                        Dim adptSQLexp As New SqlCeDataAdapter(cmd)
+                        Dim dsexp As New DataSet()
+                        adptSQLexp.Fill(dsexp)
+                        With dsexp.Tables(0)
+                            For rownum As Integer = 0 To .Rows.Count - 1
+                                With .Rows(rownum)
+                                    Dim tmpcur2 As Integer = .Item(3)
+                                    'flip pending to expired
+                                    sqlquery = "update transactions_processed_temp SET type='expiredoffer' where txid='" & .Item(0) & "'"
+                                    cmd.CommandText = sqlquery
+                                    returnval = cmd.ExecuteScalar
+                                    'remove from pendinglist
+                                    pendinglist.Remove(.Item(0))
+                                    'return reserved funds
+                                    'does a sell still exist for the currency?
+                                    sqlquery = "SELECT txid FROM exchange_temp where fromadd='" & .Item(4).ToString & "' and curtype=" & .Item(3).ToString
+                                    cmd.CommandText = sqlquery
+                                    refundtxid = cmd.ExecuteScalar
+                                    If refundtxid <> "" Then
+                                        'yes, return to sell
+                                        sqlquery = "update exchange_temp SET reserved=reserved-" & .Item(2).ToString & " where txid='" & refundtxid & "'"
+                                        cmd.CommandText = sqlquery
+                                        returnval = cmd.ExecuteScalar
+                                        sqlquery = "update exchange_temp SET saleamount=saleamount+" & .Item(2).ToString & " where txid='" & refundtxid & "'"
+                                        cmd.CommandText = sqlquery
+                                        returnval = cmd.ExecuteScalar
+                                    Else
+                                        'otherwise sell has been cancelled, return to sellers balance
+                                        'credit back remaining saleamount
+                                        If tmpcur2 = 1 Then cmd.CommandText = "UPDATE balances_temp SET CBALANCE=CBALANCE+" & .Item(2).ToString & " where ADDRESS='" & .Item(4).ToString & "'"
+                                        If tmpcur2 = 2 Then cmd.CommandText = "UPDATE balances_temp SET CBALANCET=CBALANCET+" & .Item(2).ToString & " where ADDRESS='" & .Item(4).ToString & "'"
+                                        returnval = cmd.ExecuteScalar
+                                    End If
+                                End With
+                            Next
+                        End With
+                    End If
+
                     If .Item(4) = "simple" Then
                         'get currency type
                         Dim curtype As Integer = .Item(8)
@@ -1253,52 +1301,7 @@ Public Class Form1
                     Dim percentdone As Integer = (rowNumber / totaltxcount) * 100
                     workthread.ReportProgress(0, percentdone.ToString & "%")
                 End If
-                'is pendinglist nonempty, and if so has blocktime changed? if so go through and remove expired pending offers
-                If pendinglist.Count > 0 And tmpblknum > 0 And tmpblknum <> lasttmpblknum Then
-                    lasttmpblknum = tmpblknum
-                    'blocktime has changed - get new blocknum
-                    'optimization no need to go out to sqlce every block here, big waste of time - already have current blocknum in .item(6) - switch away from blocktime to blocknum
-                    'get any expired pendingoffers
-                    sqlquery = "select txid,matchingtx,purchaseamount,curtype,toadd,fromadd from transactions_processed_temp where type='pendingoffer' and expiry<" & tmpblknum
-                    cmd.CommandText = sqlquery
-                    Dim refundtxid As String = ""
-                    Dim adptSQLexp As New SqlCeDataAdapter(cmd)
-                    Dim dsexp As New DataSet()
-                    adptSQLexp.Fill(dsexp)
-                    With dsexp.Tables(0)
-                        For rownum As Integer = 0 To .Rows.Count - 1
-                            With .Rows(rownum)
-                                Dim tmpcur2 As Integer = .Item(3)
-                                'flip pending to expired
-                                sqlquery = "update transactions_processed_temp SET type='expiredoffer' where txid='" & .Item(0) & "'"
-                                cmd.CommandText = sqlquery
-                                returnval = cmd.ExecuteScalar
-                                'remove from pendinglist
-                                pendinglist.Remove(.Item(0))
-                                'return reserved funds
-                                'does a sell still exist for the currency?
-                                sqlquery = "SELECT txid FROM exchange_temp where fromadd='" & .Item(4).ToString & "' and curtype=" & .Item(3).ToString
-                                cmd.CommandText = sqlquery
-                                refundtxid = cmd.ExecuteScalar
-                                If refundtxid <> "" Then
-                                    'yes, return to sell
-                                    sqlquery = "update exchange_temp SET reserved=reserved-" & .Item(2).ToString & " where txid='" & refundtxid & "'"
-                                    cmd.CommandText = sqlquery
-                                    returnval = cmd.ExecuteScalar
-                                    sqlquery = "update exchange_temp SET saleamount=saleamount+" & .Item(2).ToString & " where txid='" & refundtxid & "'"
-                                    cmd.CommandText = sqlquery
-                                    returnval = cmd.ExecuteScalar
-                                Else
-                                    'otherwise sell has been cancelled, return to sellers balance
-                                    'credit back remaining saleamount
-                                    If tmpcur2 = 1 Then cmd.CommandText = "UPDATE balances_temp SET CBALANCE=CBALANCE+" & .Item(2).ToString & " where ADDRESS='" & .Item(4).ToString & "'"
-                                    If tmpcur2 = 2 Then cmd.CommandText = "UPDATE balances_temp SET CBALANCET=CBALANCET+" & .Item(2).ToString & " where ADDRESS='" & .Item(4).ToString & "'"
-                                    returnval = cmd.ExecuteScalar
-                                End If
-                            End With
-                        Next
-                    End With
-                End If
+               
             Next
         End With
         'processing
