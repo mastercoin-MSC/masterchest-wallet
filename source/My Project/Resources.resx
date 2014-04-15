@@ -746,10 +746,79 @@
   <data name="processingdotdotdot" xml:space="preserve">
     <value>Processing...</value>
   </data>
+  <data name="rsendbtc" xml:space="preserve">
+    <value>Bitcoin</value>
+  </data>
+  <data name="rsendmsc" xml:space="preserve">
+    <value>Mastercoin</value>
+  </data>
   <data name="synchronized" xml:space="preserve">
     <value>Synchronized</value>
   </data>
   <data name="synchronizing" xml:space="preserve">
     <value>Synchronizing</value>
+  </data>
+  <data name="bbuy" xml:space="preserve">
+    <value>Buy</value>
+  </data>
+  <data name="bsell" xml:space="preserve">
+    <value>Sell</value>
+  </data>
+  <data name="Label58" xml:space="preserve">
+    <value>TYPE:</value>
+  </data>
+  <data name="Label59" xml:space="preserve">
+    <value>AVAILABLE BITCOIN:</value>
+  </data>
+  <data name="Label60" xml:space="preserve">
+    <value>MY OPEN ORDERS:</value>
+  </data>
+  <data name="Label61" xml:space="preserve">
+    <value>(BTC)</value>
+  </data>
+  <data name="Label62" xml:space="preserve">
+    <value>BUYER:</value>
+  </data>
+  <data name="Label63" xml:space="preserve">
+    <value>SELECTED CURRENCY:</value>
+  </data>
+  <data name="Label65" xml:space="preserve">
+    <value>AVAILABLE CURRENCY:</value>
+  </data>
+  <data name="Label66" xml:space="preserve">
+    <value>TOTAL*:</value>
+  </data>
+  <data name="Label67" xml:space="preserve">
+    <value>UNIT PRICE*:</value>
+  </data>
+  <data name="Label68" xml:space="preserve">
+    <value>SELL AMOUNT:</value>
+  </data>
+  <data name="Label69" xml:space="preserve">
+    <value>RESERVED:</value>
+  </data>
+  <data name="Label70" xml:space="preserve">
+    <value>AVAILABLE:</value>
+  </data>
+  <data name="Label71" xml:space="preserve">
+    <value>UNIT         :</value>
+  </data>
+  <data name="Label72" xml:space="preserve">
+    <value>TOTAL         :</value>
+  </data>
+  <data name="Label73" xml:space="preserve">
+    <value>SELLER:</value>
+  </data>
+  <data name="Label74" xml:space="preserve">
+    <value>STATUS:</value>
+  </data>
+  <data name="Label75" xml:space="preserve">
+    <value>RESERVED CURRENCY:</value>
+  </data>
+  <data name="Label76" xml:space="preserve">
+    <value>PURCHASED:</value>
+  </data>
+  <data name="Label77" xml:space="preserve">
+    <value>(BTC)</value>
   </data>
 </root>

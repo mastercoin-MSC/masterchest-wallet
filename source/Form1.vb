@@ -2721,7 +2721,10 @@ Public Class Form1
     Private Sub LocalizeTextControls(ByVal control As Control, ByVal rm As System.Resources.ResourceManager)
         If control.Tag IsNot Nothing And TypeOf control.Tag Is LocaleTag Then
             If control.Tag = LocaleTag.Text Then
-                control.Text = rm.GetString(control.Name)
+                Dim localizedText = rm.GetString(control.Name)
+                If Not String.IsNullOrEmpty(localizedText) Then
+                    control.Text = localizedText
+                End If
             ElseIf control.Tag = LocaleTag.NetworkDependent And control.Visible Then
                 If gNetworkStatus = NetworkStatus.Synchronized Then
                     control.Text = My.Resources.synchronizedlastblock & " " & varsyncblock.ToString & "."
