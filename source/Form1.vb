@@ -691,8 +691,7 @@ Public Class Form1
         With ds1.Tables(0)
             For rowNumber As Integer = 0 To .Rows.Count - 1
                 With .Rows(rowNumber)
-                    tmpblknum = .Item(6)
-
+                    If .Item(6) < 999990 Then tmpblknum = .Item(6)
                     'is pendinglist nonempty, and if so has blocktime changed? if so go through and remove expired pending offers
                     If tmpblknum > 0 And tmpblknum <> lasttmpblknum Then 'pendinglist.Count > 0 And
                         lasttmpblknum = tmpblknum

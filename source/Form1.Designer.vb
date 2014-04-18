@@ -2307,7 +2307,7 @@ Partial Class Form1
         Me.Label79.Name = "Label79"
         Me.Label79.Size = New System.Drawing.Size(262, 13)
         Me.Label79.TabIndex = 47
-        Me.Label79.Text = "Masterchest Wallet Alpha 0.3C Build 0023   |   Get "
+        Me.Label79.Text = "Masterchest Wallet Alpha 0.3C Build 0024   |   Get "
         '
         'lnksup
         '
