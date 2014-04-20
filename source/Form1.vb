@@ -828,9 +828,9 @@ Public Class Form1
                             End If
                             If .Item(16) = 1 And Not IsDBNull(.Item(15)) Then
                                 If .Item(15) = 2 Then
-                                    If sellexists = 0 Then
-                                        sellaction = 1 'new
-                                    End If
+                                    ' If sellexists = 0 Then
+                                    'sellaction = 1 'new
+                                    'End If
                                 End If
                             End If
                             If .Item(16) = 0 Then 'version 0 transaction, infer action from exchange state
@@ -919,150 +919,294 @@ Public Class Form1
 
                                 'update
                                 If sellaction = 2 And .Item(10) > 0 And .Item(11) > 0 And .Item(13) > 0 Then 'sanity check we have all the necessary details
-                                    'calculate update difference
-                                    Dim tmpsaleam As Decimal = 0
-                                    Dim tmpvalid As Boolean = False
-                                    Dim tmpdiff As Decimal = saleamount - tmpsaleamount
-                                    Dim tmpunitprice As Decimal
-                                    tmpunitprice = (.Item(11) / (saleamount / 100000000))
-                                    If tmpdiff > 0 Then 'new sell is higher than existing sell
-                                        If curtype = 1 Then sqlquery = "SELECT CBALANCE FROM balances_temp where ADDRESS='" & .Item(1).ToString & "'"
-                                        If curtype = 2 Then sqlquery = "SELECT CBALANCET FROM balances_temp where ADDRESS='" & .Item(1).ToString & "'"
-                                        cmd.CommandText = sqlquery
-                                        If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
-                                        returnval = cmd.ExecuteScalar
-                                        'check if transaction amount is over senders balance, if not diff amount = senders balance
-                                        If returnval < tmpdiff Then
-                                            tmpdiff = returnval
-                                        End If
-                                        tmpsaleam = tmpdiff + tmpsaleamount
-                                        If returnval >= tmpdiff Then 'ok
-                                            'reduce seller balance
-                                            If curtype = 1 Then cmd.CommandText = "UPDATE balances_temp SET CBALANCE=CBALANCE-" & tmpdiff & " where ADDRESS='" & .Item(1).ToString & "'"
-                                            If curtype = 2 Then cmd.CommandText = "UPDATE balances_temp SET CBALANCET=CBALANCET-" & tmpdiff & " where ADDRESS='" & .Item(1).ToString & "'"
+                                    'check there is existing sell
+                                    If sellexists = 1 Then
+                                        'calculate update difference
+                                        Dim tmpsaleam As Decimal = 0
+                                        Dim tmpvalid As Boolean = False
+                                        Dim tmpdiff As Decimal = saleamount - tmpsaleamount
+                                        Dim tmpunitprice As Decimal
+                                        tmpunitprice = (.Item(11) / (saleamount / 100000000))
+                                        If tmpdiff > 0 Then 'new sell is higher than existing sell
+                                            If curtype = 1 Then sqlquery = "SELECT CBALANCE FROM balances_temp where ADDRESS='" & .Item(1).ToString & "'"
+                                            If curtype = 2 Then sqlquery = "SELECT CBALANCET FROM balances_temp where ADDRESS='" & .Item(1).ToString & "'"
+                                            cmd.CommandText = sqlquery
                                             If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
                                             returnval = cmd.ExecuteScalar
+                                            'check if transaction amount is over senders balance, if not diff amount = senders balance
+                                            If returnval < tmpdiff Then
+                                                tmpdiff = returnval
+                                            End If
+                                            tmpsaleam = tmpdiff + tmpsaleamount
+                                            If returnval >= tmpdiff Then 'ok
+                                                'reduce seller balance
+                                                If curtype = 1 Then cmd.CommandText = "UPDATE balances_temp SET CBALANCE=CBALANCE-" & tmpdiff & " where ADDRESS='" & .Item(1).ToString & "'"
+                                                If curtype = 2 Then cmd.CommandText = "UPDATE balances_temp SET CBALANCET=CBALANCET-" & tmpdiff & " where ADDRESS='" & .Item(1).ToString & "'"
+                                                If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
+                                                returnval = cmd.ExecuteScalar
+                                                tmpvalid = True
+                                            Else
+                                                'insufficient balance
+                                                tmpvalid = False
+                                            End If
+                                        Else 'new sell is lower than or equal to existing sell
+                                            'return difference to seller balance
+                                            If tmpsaleamount - saleamount > 0 Then
+                                                If curtype = 1 Then cmd.CommandText = "UPDATE balances_temp SET CBALANCE=CBALANCE+" & (tmpsaleamount - saleamount) & " where ADDRESS='" & .Item(1).ToString & "'"
+                                                If curtype = 2 Then cmd.CommandText = "UPDATE balances_temp SET CBALANCET=CBALANCET+" & (tmpsaleamount - saleamount) & " where ADDRESS='" & .Item(1).ToString & "'"
+                                                If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
+                                                returnval = cmd.ExecuteScalar
+                                            End If
+                                            tmpsaleam = saleamount
                                             tmpvalid = True
-                                        Else
-                                            'insufficient balance
-                                            tmpvalid = False
                                         End If
-                                    Else 'new sell is lower than or equal to existing sell
-                                        'return difference to seller balance
-                                        If tmpsaleamount - saleamount > 0 Then
-                                            If curtype = 1 Then cmd.CommandText = "UPDATE balances_temp SET CBALANCE=CBALANCE+" & (tmpsaleamount - saleamount) & " where ADDRESS='" & .Item(1).ToString & "'"
-                                            If curtype = 2 Then cmd.CommandText = "UPDATE balances_temp SET CBALANCET=CBALANCET+" & (tmpsaleamount - saleamount) & " where ADDRESS='" & .Item(1).ToString & "'"
+                                        If tmpvalid = True Then
+                                            'recalculate offeramount
+                                            Dim tmpofferamount As Decimal = (tmpsaleam * tmpunitprice)
+                                            tmpofferamount = tmpofferamount / 100000000
+                                            'put in exchange & processed tables
+                                            cmd.CommandText = "UPDATE exchange_temp SET TXID='" & .Item(0) & "',SALEAMOUNT=" & tmpsaleam & ",OFFERAMOUNT=" & tmpofferamount & ",MINFEE=" & .Item(12) & ",TIMELIMIT=" & .Item(13) & ",BLOCKTIME=" & .Item(5) & ",BLOCKNUM=" & .Item(6) & ",UNITPRICE=" & tmpunitprice & " WHERE FROMADD='" & .Item(1) & "' and curtype=" & curtype
+                                            If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
+                                            returnval = cmd.ExecuteScalar
+                                            cmd.CommandText = "INSERT INTO transactions_processed_temp (TXID,FROMADD,SALEAMOUNT,OFFERAMOUNT,MINFEE,TIMELIMIT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE) VALUES ('" & .Item(0) & "','" & .Item(1) & "'," & tmpsaleam & "," & tmpofferamount & "," & .Item(12) & "," & .Item(13) & ",'" & "updatesell" & "'," & .Item(5) & "," & .Item(6) & ",1," & curtype & ")"
+                                            If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
+                                            returnval = cmd.ExecuteScalar
+                                        Else
+                                            cmd.CommandText = "INSERT INTO transactions_processed_temp (TXID,FROMADD,SALEAMOUNT,OFFERAMOUNT,MINFEE,TIMELIMIT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE) VALUES ('" & .Item(0) & "','" & .Item(1) & "'," & tmpsaleam & "," & .Item(11) & "," & .Item(12) & "," & .Item(13) & ",'" & "updatesell" & "'," & .Item(5) & "," & .Item(6) & ",0," & curtype & ")"
                                             If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
                                             returnval = cmd.ExecuteScalar
                                         End If
-                                        tmpsaleam = saleamount
-                                        tmpvalid = True
-                                    End If
-                                    If tmpvalid = True Then
-                                        'recalculate offeramount
-                                        Dim tmpofferamount As Decimal = (tmpsaleam * tmpunitprice)
-                                        tmpofferamount = tmpofferamount / 100000000
-                                        'put in exchange & processed tables
-                                        cmd.CommandText = "UPDATE exchange_temp SET TXID='" & .Item(0) & "',SALEAMOUNT=" & tmpsaleam & ",OFFERAMOUNT=" & tmpofferamount & ",MINFEE=" & .Item(12) & ",TIMELIMIT=" & .Item(13) & ",BLOCKTIME=" & .Item(5) & ",BLOCKNUM=" & .Item(6) & ",UNITPRICE=" & tmpunitprice & " WHERE FROMADD='" & .Item(1) & "' and curtype=" & curtype
-                                        If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
-                                        returnval = cmd.ExecuteScalar
-                                        cmd.CommandText = "INSERT INTO transactions_processed_temp (TXID,FROMADD,SALEAMOUNT,OFFERAMOUNT,MINFEE,TIMELIMIT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE) VALUES ('" & .Item(0) & "','" & .Item(1) & "'," & tmpsaleam & "," & tmpofferamount & "," & .Item(12) & "," & .Item(13) & ",'" & "updatesell" & "'," & .Item(5) & "," & .Item(6) & ",1," & curtype & ")"
-                                        If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
-                                        returnval = cmd.ExecuteScalar
                                     Else
-                                        cmd.CommandText = "INSERT INTO transactions_processed_temp (TXID,FROMADD,SALEAMOUNT,OFFERAMOUNT,MINFEE,TIMELIMIT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE) VALUES ('" & .Item(0) & "','" & .Item(1) & "'," & tmpsaleam & "," & .Item(11) & "," & .Item(12) & "," & .Item(13) & ",'" & "updatesell" & "'," & .Item(5) & "," & .Item(6) & ",0," & curtype & ")"
+                                        cmd.CommandText = "INSERT INTO transactions_processed_temp (TXID,FROMADD,SALEAMOUNT,OFFERAMOUNT,MINFEE,TIMELIMIT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE) VALUES ('" & .Item(0) & "','" & .Item(1) & "'," & .Item(10) & "," & .Item(11) & "," & .Item(12) & "," & .Item(13) & ",'" & "updatesell" & "'," & .Item(5) & "," & .Item(6) & ",0," & curtype & ")"
                                         If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
                                         returnval = cmd.ExecuteScalar
                                     End If
                                 End If
 
-                                'new
-                                If sellaction = 1 And .Item(10) > 0 And .Item(11) > 0 And .Item(13) > 0 Then 'sanity check we have all the necessary details
-                                    'check there is not already an existing sell
-                                    sqlquery = "SELECT COUNT(fromadd) FROM exchange_temp where FROMADD='" & .Item(1).ToString & "' and curtype=" & curtype
-                                    cmd.CommandText = sqlquery
-                                    If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
-                                    returnval = cmd.ExecuteScalar
-                                    Dim tmpofferamount As Decimal
-                                    If returnval = 0 Then
-                                        'there is no existing sell, we can go ahead - first check sellers balance
-                                        If curtype = 1 Then sqlquery = "SELECT CBALANCE FROM balances_temp where ADDRESS='" & .Item(1).ToString & "'"
-                                        If curtype = 2 Then sqlquery = "SELECT CBALANCET FROM balances_temp where ADDRESS='" & .Item(1).ToString & "'"
+                                    'new
+                                    If sellaction = 1 And .Item(10) > 0 And .Item(11) > 0 And .Item(13) > 0 Then 'sanity check we have all the necessary details
+                                        'check there is not already an existing sell
+                                        sqlquery = "SELECT COUNT(fromadd) FROM exchange_temp where FROMADD='" & .Item(1).ToString & "' and curtype=" & curtype
                                         cmd.CommandText = sqlquery
                                         If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
                                         returnval = cmd.ExecuteScalar
-                                        Dim tmpunitprice As Decimal
-                                        tmpunitprice = (.Item(11) / (saleamount / 100000000))
-                                        'check if transaction amount is over senders balance, if not sell amount = senders balance
-                                        tmpofferamount = .Item(11)
-                                        If returnval > 0 And returnval < saleamount Then
-                                            'reduce saleamount to balance
-                                            saleamount = returnval
-                                            'recalculate offeramount
-                                            tmpofferamount = (saleamount * tmpunitprice) / 100000000
-                                        End If
-                                        If returnval >= saleamount Then 'ok
-                                            'reduce seller balance
-                                            If curtype = 1 Then cmd.CommandText = "UPDATE balances_temp SET CBALANCE=CBALANCE-" & saleamount & " where ADDRESS='" & .Item(1).ToString & "'"
-                                            If curtype = 2 Then cmd.CommandText = "UPDATE balances_temp SET CBALANCET=CBALANCET-" & saleamount & " where ADDRESS='" & .Item(1).ToString & "'"
+                                        Dim tmpofferamount As Decimal
+                                        If returnval = 0 Then
+                                            'there is no existing sell, we can go ahead - first check sellers balance
+                                            If curtype = 1 Then sqlquery = "SELECT CBALANCE FROM balances_temp where ADDRESS='" & .Item(1).ToString & "'"
+                                            If curtype = 2 Then sqlquery = "SELECT CBALANCET FROM balances_temp where ADDRESS='" & .Item(1).ToString & "'"
+                                            cmd.CommandText = sqlquery
                                             If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
                                             returnval = cmd.ExecuteScalar
-                                            'put in exchange & processed tables
-                                            cmd.CommandText = "INSERT INTO exchange_temp (TXID,FROMADD,SALEAMOUNT,OFFERAMOUNT,MINFEE,TIMELIMIT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE,UNITPRICE,RESERVED) VALUES ('" & .Item(0) & "','" & .Item(1) & "'," & saleamount & "," & tmpofferamount & "," & .Item(12) & "," & .Item(13) & ",'" & "selloffer" & "'," & .Item(5) & "," & .Item(6) & ",1," & curtype & "," & tmpunitprice & ",0)"
-                                            If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
-                                            returnval = cmd.ExecuteScalar
-                                            cmd.CommandText = "INSERT INTO transactions_processed_temp (TXID,FROMADD,SALEAMOUNT,OFFERAMOUNT,MINFEE,TIMELIMIT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE) VALUES ('" & .Item(0) & "','" & .Item(1) & "'," & saleamount & "," & tmpofferamount & "," & .Item(12) & "," & .Item(13) & ",'" & "selloffer" & "'," & .Item(5) & "," & .Item(6) & ",1," & curtype & ")"
-                                            If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
-                                            returnval = cmd.ExecuteScalar
+                                            Dim tmpunitprice As Decimal
+                                            tmpunitprice = (.Item(11) / (saleamount / 100000000))
+                                            'check if transaction amount is over senders balance, if not sell amount = senders balance
+                                            tmpofferamount = .Item(11)
+                                            If returnval > 0 And returnval < saleamount Then
+                                                'reduce saleamount to balance
+                                                saleamount = returnval
+                                                'recalculate offeramount
+                                                tmpofferamount = (saleamount * tmpunitprice) / 100000000
+                                            End If
+                                            If returnval >= saleamount Then 'ok
+                                                'reduce seller balance
+                                                If curtype = 1 Then cmd.CommandText = "UPDATE balances_temp SET CBALANCE=CBALANCE-" & saleamount & " where ADDRESS='" & .Item(1).ToString & "'"
+                                                If curtype = 2 Then cmd.CommandText = "UPDATE balances_temp SET CBALANCET=CBALANCET-" & saleamount & " where ADDRESS='" & .Item(1).ToString & "'"
+                                                If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
+                                                returnval = cmd.ExecuteScalar
+                                                'put in exchange & processed tables
+                                                cmd.CommandText = "INSERT INTO exchange_temp (TXID,FROMADD,SALEAMOUNT,OFFERAMOUNT,MINFEE,TIMELIMIT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE,UNITPRICE,RESERVED) VALUES ('" & .Item(0) & "','" & .Item(1) & "'," & saleamount & "," & tmpofferamount & "," & .Item(12) & "," & .Item(13) & ",'" & "selloffer" & "'," & .Item(5) & "," & .Item(6) & ",1," & curtype & "," & tmpunitprice & ",0)"
+                                                If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
+                                                returnval = cmd.ExecuteScalar
+                                                cmd.CommandText = "INSERT INTO transactions_processed_temp (TXID,FROMADD,SALEAMOUNT,OFFERAMOUNT,MINFEE,TIMELIMIT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE) VALUES ('" & .Item(0) & "','" & .Item(1) & "'," & saleamount & "," & tmpofferamount & "," & .Item(12) & "," & .Item(13) & ",'" & "selloffer" & "'," & .Item(5) & "," & .Item(6) & ",1," & curtype & ")"
+                                                If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
+                                                returnval = cmd.ExecuteScalar
+                                            Else
+                                                'insufficient balance
+                                                cmd.CommandText = "INSERT INTO transactions_processed_temp (TXID,FROMADD,SALEAMOUNT,OFFERAMOUNT,MINFEE,TIMELIMIT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE) VALUES ('" & .Item(0) & "','" & .Item(1) & "'," & saleamount & "," & .Item(11) & "," & .Item(12) & "," & .Item(13) & ",'" & "selloffer" & "'," & .Item(5) & "," & .Item(6) & ",0," & curtype & ")"
+                                                If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
+                                                returnval = cmd.ExecuteScalar
+                                            End If
                                         Else
-                                            'insufficient balance
+                                            'there is an existing sell, we can't create a new one - invalidate sell offer
                                             cmd.CommandText = "INSERT INTO transactions_processed_temp (TXID,FROMADD,SALEAMOUNT,OFFERAMOUNT,MINFEE,TIMELIMIT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE) VALUES ('" & .Item(0) & "','" & .Item(1) & "'," & saleamount & "," & .Item(11) & "," & .Item(12) & "," & .Item(13) & ",'" & "selloffer" & "'," & .Item(5) & "," & .Item(6) & ",0," & curtype & ")"
                                             If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
                                             returnval = cmd.ExecuteScalar
                                         End If
-                                    Else
-                                        'there is an existing sell, we can't create a new one - invalidate sell offer
-                                        cmd.CommandText = "INSERT INTO transactions_processed_temp (TXID,FROMADD,SALEAMOUNT,OFFERAMOUNT,MINFEE,TIMELIMIT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE) VALUES ('" & .Item(0) & "','" & .Item(1) & "'," & saleamount & "," & .Item(11) & "," & .Item(12) & "," & .Item(13) & ",'" & "selloffer" & "'," & .Item(5) & "," & .Item(6) & ",0," & curtype & ")"
-                                        If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
-                                        returnval = cmd.ExecuteScalar
                                     End If
                                 End If
                             End If
                         End If
-                    End If
 
-                    If .Item(4) = "acceptoffer" Then
-                        'get currency type
-                        Dim curtype As Integer = .Item(8)
-                        'validate curid
-                        If curtype > 0 And curtype < 3 Then
-                            Dim matchedunitprice As Decimal
-                            'get transaction amount
-                            Dim purchaseamount As Decimal = .Item(14)
-                            Dim paymentpaidlong As Decimal
-                            Dim toadd As String = .Item(2)
-                            Dim matchedsaleamount, matchedofferamount, matchedminfee As Decimal
-                            Dim matchedtimelimit As Integer = 0
-                            Dim expiry As Integer = 0
-                            Dim txid As String
-                            Dim matchingtx As String = ""
-                            'look for a sell at the reference address and verify there is only one sell (sanity check)
-                            sqlquery = "SELECT COUNT(fromadd) FROM exchange_temp where FROMADD='" & .Item(2).ToString & "' and curtype=" & curtype
-                            cmd.CommandText = sqlquery
-                            If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
-                            returnval = cmd.ExecuteScalar
-                            If returnval > 1 Then
-                                MsgBox("Sanity check has failed.  More than one sell for an address exists in the exchange table.  It is not safe to continue.  Exiting...")
-                                End
-                            End If
-                            If returnval = 1 Then
-                                'look for a pending accept from this address and make sure there isn't one
-                                sqlquery = "SELECT COUNT(txid) FROM transactions_processed_temp where FROMADD='" & .Item(1).ToString & "' and TOADD='" & .Item(2).ToString & "' and TYPE='pendingoffer' and curtype=" & curtype
+                        If .Item(4) = "acceptoffer" Then
+                            'get currency type
+                            Dim curtype As Integer = .Item(8)
+                            'validate curid
+                            If curtype > 0 And curtype < 3 Then
+                                Dim matchedunitprice As Decimal
+                                'get transaction amount
+                                Dim purchaseamount As Decimal = .Item(14)
+                                Dim paymentpaidlong As Decimal
+                                Dim toadd As String = .Item(2)
+                                Dim matchedsaleamount, matchedofferamount, matchedminfee As Decimal
+                                Dim matchedtimelimit As Integer = 0
+                                Dim expiry As Integer = 0
+                                Dim txid As String
+                                Dim matchingtx As String = ""
+                                'look for a sell at the reference address and verify there is only one sell (sanity check)
+                                sqlquery = "SELECT COUNT(fromadd) FROM exchange_temp where FROMADD='" & .Item(2).ToString & "' and curtype=" & curtype
                                 cmd.CommandText = sqlquery
+                                If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
                                 returnval = cmd.ExecuteScalar
-                                If returnval = 0 Then
+                                If returnval > 1 Then
+                                    MsgBox("Sanity check has failed.  More than one sell for an address exists in the exchange table.  It is not safe to continue.  Exiting...")
+                                    End
+                                End If
+                                If returnval = 1 Then
+                                    'look for a pending accept from this address and make sure there isn't one
+                                    sqlquery = "SELECT COUNT(txid) FROM transactions_processed_temp where FROMADD='" & .Item(1).ToString & "' and TOADD='" & .Item(2).ToString & "' and TYPE='pendingoffer' and curtype=" & curtype
+                                    cmd.CommandText = sqlquery
+                                    returnval = cmd.ExecuteScalar
+                                    If returnval = 0 Then
+                                        'matched a sell offer - get details
+                                        sqlquery = "SELECT txid,saleamount,timelimit,unitprice,minfee,offeramount FROM exchange_temp where FROMADD='" & .Item(2).ToString & "' and curtype=" & curtype
+                                        cmd.CommandText = sqlquery
+                                        Dim adptSQLselldetails As New SqlCeDataAdapter(cmd)
+                                        Dim dsselldetails As New DataSet()
+                                        adptSQLselldetails.Fill(dsselldetails)
+                                        If dsselldetails.Tables(0).Rows.Count = 1 Then
+                                            matchingtx = dsselldetails.Tables(0).Rows(0).Item(0)
+                                            matchedsaleamount = dsselldetails.Tables(0).Rows(0).Item(1)
+                                            matchedtimelimit = dsselldetails.Tables(0).Rows(0).Item(2)
+                                            matchedunitprice = dsselldetails.Tables(0).Rows(0).Item(3)
+                                            matchedminfee = dsselldetails.Tables(0).Rows(0).Item(4)
+                                            matchedofferamount = dsselldetails.Tables(0).Rows(0).Item(5)
+
+                                            'check if transaction amount is over saleamount, if not set purchaseamount = saleamount
+                                            If purchaseamount > matchedsaleamount Then purchaseamount = matchedsaleamount
+
+                                            'set expiry
+                                            expiry = .Item(6) + matchedtimelimit
+
+                                            'check saleamount is not zero, if it is reject offer
+                                            If matchedsaleamount > 0 Then
+                                                'check accept transaction paid over minfee
+                                                Dim paidfee As Decimal = 0
+                                                If Not IsDBNull(.Item(17)) Then
+                                                    paidfee = .Item(17)
+                                                Else
+                                                    paidfee = 0
+                                                End If
+                                                If paidfee >= matchedminfee Then
+                                                    'is it our unconfirmed accept?
+                                                    If .Item(6) > 999998 Then
+                                                        sqlquery = "INSERT INTO transactions_processed_temp (TXID,FROMADD,TOADD,PURCHASEAMOUNT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE,MATCHINGTX) VALUES ('" & .Item(0) & "','" & .Item(1) & "','" & .Item(2) & "'," & .Item(14) & ",'pendingoffer'," & .Item(5) & ",999999,1," & .Item(8) & ",'" & matchingtx & "')"
+                                                        cmd.CommandText = sqlquery
+                                                        If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
+                                                        returnval = cmd.ExecuteScalar
+                                                        sqlquery = "UPDATE exchange_temp SET saleamount=saleamount-" & purchaseamount & " where FROMADD='" & .Item(2).ToString & "' and curtype=" & curtype
+                                                        cmd.CommandText = sqlquery
+                                                        If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
+                                                        returnval = cmd.ExecuteScalar
+                                                        sqlquery = "UPDATE exchange_temp SET reserved=reserved+" & purchaseamount & " where FROMADD='" & .Item(2).ToString & "' and curtype=" & curtype
+                                                        cmd.CommandText = sqlquery
+                                                        If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
+                                                        returnval = cmd.ExecuteScalar
+                                                    Else
+                                                        'add to transactions_processed 
+                                                        sqlquery = "INSERT INTO transactions_processed_temp (TXID,FROMADD,TOADD,PURCHASEAMOUNT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE,MATCHINGTX,EXPIRY) VALUES ('" & .Item(0) & "','" & .Item(1) & "','" & .Item(2) & "'," & purchaseamount & ",'pendingoffer'," & .Item(5) & "," & .Item(6) & ",1," & .Item(8) & ",'" & matchingtx & "'," & expiry & ")"
+                                                        cmd.CommandText = sqlquery
+                                                        returnval = cmd.ExecuteScalar
+                                                        'add to pendinglist
+                                                        pendinglist.Add(.Item(0))
+                                                        sqlquery = "UPDATE exchange_temp SET saleamount=saleamount-" & purchaseamount & " where FROMADD='" & .Item(2).ToString & "' and curtype=" & curtype
+                                                        cmd.CommandText = sqlquery
+                                                        If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
+                                                        returnval = cmd.ExecuteScalar
+                                                        sqlquery = "UPDATE exchange_temp SET reserved=reserved+" & purchaseamount & " where FROMADD='" & .Item(2).ToString & "' and curtype=" & curtype
+                                                        cmd.CommandText = sqlquery
+                                                        If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
+                                                        returnval = cmd.ExecuteScalar
+                                                    End If
+                                                Else
+                                                    'minfee not sufficient, reject accept
+                                                    sqlquery = "INSERT INTO transactions_processed_temp (TXID,FROMADD,TOADD,PURCHASEAMOUNT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE,MATCHINGTX) VALUES ('" & .Item(0) & "','" & .Item(1) & "','" & .Item(2) & "'," & .Item(14) & ",'rejectedoffer'," & .Item(5) & "," & .Item(6) & ",0," & .Item(8) & ",'" & matchingtx & "')"
+                                                    cmd.CommandText = sqlquery
+                                                    returnval = cmd.ExecuteScalar
+                                                End If
+                                            Else
+                                                'no MSC available in matched sell offer, reject accept
+                                                sqlquery = "INSERT INTO transactions_processed_temp (TXID,FROMADD,TOADD,PURCHASEAMOUNT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE,MATCHINGTX) VALUES ('" & .Item(0) & "','" & .Item(1) & "','" & .Item(2) & "'," & .Item(14) & ",'rejectedoffer'," & .Item(5) & "," & .Item(6) & ",0," & .Item(8) & ",'" & matchingtx & "')"
+                                                cmd.CommandText = sqlquery
+                                                If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
+                                                returnval = cmd.ExecuteScalar
+                                            End If
+                                        Else
+                                            'error matching, reject
+                                            sqlquery = "INSERT INTO transactions_processed_temp (TXID,FROMADD,TOADD,PURCHASEAMOUNT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE,MATCHINGTX) VALUES ('" & .Item(0) & "','" & .Item(1) & "','" & .Item(2) & "'," & .Item(14) & ",'rejectedoffer'," & .Item(5) & "," & .Item(6) & ",0," & .Item(8) & ",'" & matchingtx & "')"
+                                            cmd.CommandText = sqlquery
+
+                                            returnval = cmd.ExecuteScalar
+                                        End If
+                                    Else
+                                        'already an accept for this sell, reject
+                                        sqlquery = "INSERT INTO transactions_processed_temp (TXID,FROMADD,TOADD,PURCHASEAMOUNT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE,MATCHINGTX) VALUES ('" & .Item(0) & "','" & .Item(1) & "','" & .Item(2) & "'," & .Item(14) & ",'rejectedoffer'," & .Item(5) & "," & .Item(6) & ",0," & .Item(8) & ",'" & matchingtx & "')"
+                                        cmd.CommandText = sqlquery
+                                        returnval = cmd.ExecuteScalar
+                                    End If
+                                Else
+                                    'no matching sell, reject accept
+                                    sqlquery = "INSERT INTO transactions_processed_temp (TXID,FROMADD,TOADD,PURCHASEAMOUNT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE,MATCHINGTX) VALUES ('" & .Item(0) & "','" & .Item(1) & "','" & .Item(2) & "'," & .Item(14) & ",'rejectedoffer'," & .Item(5) & "," & .Item(6) & ",0," & .Item(8) & ",'" & matchingtx & "')"
+                                    cmd.CommandText = sqlquery
+                                    returnval = cmd.ExecuteScalar
+                                End If
+                            End If
+                        End If
+
+                        If .Item(4) = "btcpayment" And .Item(6) > 265984 Then 'quickly invalidate spam payments from buymastercoins in the early days, since no sell offers before 265985 there can be no valid bitcoin payment dex messages before then
+                            'get a list of the pending accepts this from address has open
+                            sqlquery = "select txid,toadd,matchingtx,purchaseamount from transactions_processed_temp where fromadd='" & .Item(1) & "' and type='pendingoffer'"
+                            cmd.CommandText = sqlquery
+                            Dim adptSQLbtc As New SqlCeDataAdapter(cmd)
+                            Dim dsbtc As New DataSet()
+                            adptSQLbtc.Fill(dsbtc)
+                            Dim vouts As String = .Item(18)
+                            Dim paymentpaidlong As Decimal = 0
+                            Dim matched As Boolean = False
+                            Dim matchedtxid As String = ""
+                            Dim buyer As String = ""
+                            Dim seller As String = ""
+                            Dim matchedcurtype As Integer = 0
+                            Dim matchedsaleamount, matchedofferamount, matchedminfee As Decimal
+                            Dim matchedtimelimit As Integer
+                            Dim matchedreserved As Decimal
+                            Dim matchedunitprice As Decimal
+                            Dim matchingtx As String
+                            Dim purchaseamount As Decimal = 0
+                            buyer = .Item(1).ToString
+                            With dsbtc.Tables(0)
+                                For rownum As Integer = 0 To .Rows.Count - 1
+                                    With .Rows(rownum)
+                                        'match payment to accept offer - paying multiple accepts to different sellers in the same bitcoin payment currently unsupported
+                                        If InStr(vouts, .Item(1)) Then 'matched output with accept
+                                            matched = True
+                                            matchedtxid = .Item(0)
+                                            seller = .Item(1).ToString
+                                            purchaseamount = .Item(3)
+                                            matchingtx = .Item(2)
+                                            Exit For
+                                        End If
+                                    End With
+                                Next
+                            End With
+
+                            If matched = True And seller <> "" Then
+                                'is it unconfirmed?  if so flip the pendingoffer to unconfirmed temporarily
+                                If .Item(6) > 999998 Then
+                                    Dim unconfirmedpaymentcount = SQLGetSingleVal("update transactions_processed_temp set blocknum=999999 where txid='" & matchedtxid & "'")
+                                Else
                                     'matched a sell offer - get details
-                                    sqlquery = "SELECT txid,saleamount,timelimit,unitprice,minfee,offeramount FROM exchange_temp where FROMADD='" & .Item(2).ToString & "' and curtype=" & curtype
+                                    sqlquery = "SELECT txid,saleamount,timelimit,minfee,offeramount,curtype FROM transactions_processed_temp where txid='" & matchingtx & "'"   'unitprice, ,reserved
                                     cmd.CommandText = sqlquery
                                     Dim adptSQLselldetails As New SqlCeDataAdapter(cmd)
                                     Dim dsselldetails As New DataSet()
@@ -1071,229 +1215,94 @@ Public Class Form1
                                         matchingtx = dsselldetails.Tables(0).Rows(0).Item(0)
                                         matchedsaleamount = dsselldetails.Tables(0).Rows(0).Item(1)
                                         matchedtimelimit = dsselldetails.Tables(0).Rows(0).Item(2)
-                                        matchedunitprice = dsselldetails.Tables(0).Rows(0).Item(3)
-                                        matchedminfee = dsselldetails.Tables(0).Rows(0).Item(4)
-                                        matchedofferamount = dsselldetails.Tables(0).Rows(0).Item(5)
-
-                                        'check if transaction amount is over saleamount, if not set purchaseamount = saleamount
-                                        If purchaseamount > matchedsaleamount Then purchaseamount = matchedsaleamount
-
-                                        'set expiry
-                                        expiry = .Item(6) + matchedtimelimit
-
-                                        'check saleamount is not zero, if it is reject offer
-                                        If matchedsaleamount > 0 Then
-                                            'check accept transaction paid over minfee
-                                            Dim paidfee As Decimal = 0
-                                            If Not IsDBNull(.Item(17)) Then
-                                                paidfee = .Item(17)
-                                            Else
-                                                paidfee = 0
-                                            End If
-                                            If paidfee >= matchedminfee Then
-                                                'is it our unconfirmed accept?
-                                                If .Item(6) > 999998 Then
-                                                    sqlquery = "INSERT INTO transactions_processed_temp (TXID,FROMADD,TOADD,PURCHASEAMOUNT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE,MATCHINGTX) VALUES ('" & .Item(0) & "','" & .Item(1) & "','" & .Item(2) & "'," & .Item(14) & ",'pendingoffer'," & .Item(5) & ",999999,1," & .Item(8) & ",'" & matchingtx & "')"
-                                                    cmd.CommandText = sqlquery
-                                                    If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
-                                                    returnval = cmd.ExecuteScalar
-                                                    sqlquery = "UPDATE exchange_temp SET saleamount=saleamount-" & purchaseamount & " where FROMADD='" & .Item(2).ToString & "' and curtype=" & curtype
-                                                    cmd.CommandText = sqlquery
-                                                    If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
-                                                    returnval = cmd.ExecuteScalar
-                                                    sqlquery = "UPDATE exchange_temp SET reserved=reserved+" & purchaseamount & " where FROMADD='" & .Item(2).ToString & "' and curtype=" & curtype
-                                                    cmd.CommandText = sqlquery
-                                                    If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
-                                                    returnval = cmd.ExecuteScalar
-                                                Else
-                                                    'add to transactions_processed 
-                                                    sqlquery = "INSERT INTO transactions_processed_temp (TXID,FROMADD,TOADD,PURCHASEAMOUNT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE,MATCHINGTX,EXPIRY) VALUES ('" & .Item(0) & "','" & .Item(1) & "','" & .Item(2) & "'," & purchaseamount & ",'pendingoffer'," & .Item(5) & "," & .Item(6) & ",1," & .Item(8) & ",'" & matchingtx & "'," & expiry & ")"
-                                                    cmd.CommandText = sqlquery
-                                                    returnval = cmd.ExecuteScalar
-                                                    'add to pendinglist
-                                                    pendinglist.Add(.Item(0))
-                                                    sqlquery = "UPDATE exchange_temp SET saleamount=saleamount-" & purchaseamount & " where FROMADD='" & .Item(2).ToString & "' and curtype=" & curtype
-                                                    cmd.CommandText = sqlquery
-                                                    If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
-                                                    returnval = cmd.ExecuteScalar
-                                                    sqlquery = "UPDATE exchange_temp SET reserved=reserved+" & purchaseamount & " where FROMADD='" & .Item(2).ToString & "' and curtype=" & curtype
-                                                    cmd.CommandText = sqlquery
-                                                    If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
-                                                    returnval = cmd.ExecuteScalar
+                                        matchedminfee = dsselldetails.Tables(0).Rows(0).Item(3)
+                                        matchedofferamount = dsselldetails.Tables(0).Rows(0).Item(4)
+                                        matchedcurtype = dsselldetails.Tables(0).Rows(0).Item(5)
+                                        Dim paymentpaid As Double = 0
+                                        'loop through all outputs in transaction and total amount sent to reference address
+                                        Dim txn As txn = mlib.gettransaction(bitcoin_con, .Item(0))
+                                        If txn IsNot Nothing Then
+                                            For Each output As Vout In txn.result.vout
+                                                If output.scriptPubKey.type.ToString.ToLower = "pubkeyhash" And output.scriptPubKey.addresses(0) = seller Then
+                                                    paymentpaid = paymentpaid + output.value
                                                 End If
+                                            Next
+                                        End If
+                                        paymentpaidlong = paymentpaid * 100000000
+                                        matchedunitprice = (matchedofferamount / (matchedsaleamount / 100000000))
+                                        'work out total amount of units covered by payment
+                                    Dim unitspurchased As Long
+                                        If paymentpaid = 0 Then
+                                            unitspurchased = 0
+                                        Else
+                                        'unitspurchased = (paymentpaidlong / matchedunitprice) * 100000000
+                                        Dim perc As Double = paymentpaidlong / matchedofferamount
+                                        unitspurchased = matchedsaleamount * perc
+                                        End If
+                                        If unitspurchased > 0 Then
+                                            'are there more than were accepted? if so set as total accepted
+                                            If unitspurchased > purchaseamount Then unitspurchased = purchaseamount
+                                            'catch tiny fraction unit prices (eg 0.0000001)  with tiny saleamounts
+                                            If paymentpaidlong >= matchedofferamount Then unitspurchased = purchaseamount
+                                            'credit mastercoins
+                                            sqlquery = "SELECT ADDRESS FROM balances_temp where ADDRESS='" & buyer & "'"
+                                            cmd.CommandText = sqlquery
+                                            returnval = cmd.ExecuteScalar
+                                            If returnval = .Item(1).ToString Then
+                                                If matchedcurtype = 1 Then sqlquery = "UPDATE balances_temp SET CBALANCE=CBALANCE+" & unitspurchased & " where ADDRESS='" & buyer & "'"
+                                                If matchedcurtype = 2 Then sqlquery = "UPDATE balances_temp SET CBALANCET=CBALANCET+" & unitspurchased & " where ADDRESS='" & buyer & "'"
                                             Else
-                                                'minfee not sufficient, reject accept
-                                                sqlquery = "INSERT INTO transactions_processed_temp (TXID,FROMADD,TOADD,PURCHASEAMOUNT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE,MATCHINGTX) VALUES ('" & .Item(0) & "','" & .Item(1) & "','" & .Item(2) & "'," & .Item(14) & ",'rejectedoffer'," & .Item(5) & "," & .Item(6) & ",0," & .Item(8) & ",'" & matchingtx & "')"
+                                                If matchedcurtype = 1 Then sqlquery = "INSERT INTO balances_temp (ADDRESS,CBALANCE,CBALANCET, UBALANCE,UBALANCET) VALUES ('" & buyer & "'," & unitspurchased & ",0,0,0)"
+                                                If matchedcurtype = 2 Then sqlquery = "INSERT INTO balances_temp (ADDRESS,CBALANCE,CBALANCET, UBALANCE,UBALANCET) VALUES ('" & buyer & "',0," & unitspurchased & ",0,0)"
+                                            End If
+                                            cmd.CommandText = sqlquery
+                                            returnval = cmd.ExecuteScalar
+
+                                            'reduce/delete sell 
+                                            'is sell fully paid
+                                            Dim tmpsaleamount, tmpreserved
+                                            sqlquery = "SELECT saleamount FROM exchange_temp where FROMADD='" & seller & "' and curtype=" & matchedcurtype
+                                            cmd.CommandText = sqlquery
+                                            tmpsaleamount = cmd.ExecuteScalar
+                                            sqlquery = "SELECT reserved FROM exchange_temp where FROMADD='" & seller & "' and curtype=" & matchedcurtype
+                                            cmd.CommandText = sqlquery
+                                            tmpreserved = cmd.ExecuteScalar
+                                            If tmpsaleamount = 0 And tmpreserved = unitspurchased Then 'delete sell & flip offer from pending to accept
+                                                sqlquery = "DELETE FROM exchange_temp where fromadd='" & seller & "' and curtype=" & matchedcurtype
+                                                cmd.CommandText = sqlquery
+                                                returnval = cmd.ExecuteScalar
+                                                sqlquery = "update transactions_processed_temp SET type='acceptoffer' where txid='" & matchedtxid & "'"
+                                                cmd.CommandText = sqlquery
+                                                returnval = cmd.ExecuteScalar
+                                            Else
+                                                sqlquery = "UPDATE exchange_temp SET reserved=reserved-" & unitspurchased & " where fromadd='" & seller & "' and curtype=" & matchedcurtype
                                                 cmd.CommandText = sqlquery
                                                 returnval = cmd.ExecuteScalar
                                             End If
-                                        Else
-                                            'no MSC available in matched sell offer, reject accept
-                                            sqlquery = "INSERT INTO transactions_processed_temp (TXID,FROMADD,TOADD,PURCHASEAMOUNT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE,MATCHINGTX) VALUES ('" & .Item(0) & "','" & .Item(1) & "','" & .Item(2) & "'," & .Item(14) & ",'rejectedoffer'," & .Item(5) & "," & .Item(6) & ",0," & .Item(8) & ",'" & matchingtx & "')"
-                                            cmd.CommandText = sqlquery
-                                            If debuglevel > 1 Then workthread.ReportProgress(0, "[" & DateTime.Now.ToString("s") & "] DEBUG: SQL: " & cmd.CommandText)
-                                            returnval = cmd.ExecuteScalar
-                                        End If
-                                    Else
-                                        'error matching, reject
-                                        sqlquery = "INSERT INTO transactions_processed_temp (TXID,FROMADD,TOADD,PURCHASEAMOUNT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE,MATCHINGTX) VALUES ('" & .Item(0) & "','" & .Item(1) & "','" & .Item(2) & "'," & .Item(14) & ",'rejectedoffer'," & .Item(5) & "," & .Item(6) & ",0," & .Item(8) & ",'" & matchingtx & "')"
-                                        cmd.CommandText = sqlquery
 
-                                        returnval = cmd.ExecuteScalar
-                                    End If
-                                Else
-                                    'already an accept for this sell, reject
-                                    sqlquery = "INSERT INTO transactions_processed_temp (TXID,FROMADD,TOADD,PURCHASEAMOUNT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE,MATCHINGTX) VALUES ('" & .Item(0) & "','" & .Item(1) & "','" & .Item(2) & "'," & .Item(14) & ",'rejectedoffer'," & .Item(5) & "," & .Item(6) & ",0," & .Item(8) & ",'" & matchingtx & "')"
-                                    cmd.CommandText = sqlquery
-                                    returnval = cmd.ExecuteScalar
-                                End If
-                            Else
-                                'no matching sell, reject accept
-                                sqlquery = "INSERT INTO transactions_processed_temp (TXID,FROMADD,TOADD,PURCHASEAMOUNT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE,MATCHINGTX) VALUES ('" & .Item(0) & "','" & .Item(1) & "','" & .Item(2) & "'," & .Item(14) & ",'rejectedoffer'," & .Item(5) & "," & .Item(6) & ",0," & .Item(8) & ",'" & matchingtx & "')"
-                                cmd.CommandText = sqlquery
-                                returnval = cmd.ExecuteScalar
-                            End If
-                        End If
-                    End If
-
-                    If .Item(4) = "btcpayment" And .Item(6) > 265984 Then 'quickly invalidate spam payments from buymastercoins in the early days, since no sell offers before 265985 there can be no valid bitcoin payment dex messages before then
-                        'get a list of the pending accepts this from address has open
-                        sqlquery = "select txid,toadd,matchingtx,purchaseamount from transactions_processed_temp where fromadd='" & .Item(1) & "' and type='pendingoffer'"
-                        cmd.CommandText = sqlquery
-                        Dim adptSQLbtc As New SqlCeDataAdapter(cmd)
-                        Dim dsbtc As New DataSet()
-                        adptSQLbtc.Fill(dsbtc)
-                        Dim vouts As String = .Item(18)
-                        Dim paymentpaidlong As Decimal = 0
-                        Dim matched As Boolean = False
-                        Dim matchedtxid As String = ""
-                        Dim buyer As String = ""
-                        Dim seller As String = ""
-                        Dim matchedcurtype As Integer = 0
-                        Dim matchedsaleamount, matchedofferamount, matchedminfee As Decimal
-                        Dim matchedtimelimit As Integer
-                        Dim matchedreserved As Decimal
-                        Dim matchedunitprice As Decimal
-                        Dim matchingtx As String
-                        Dim purchaseamount As Decimal = 0
-                        buyer = .Item(1).ToString
-                        With dsbtc.Tables(0)
-                            For rownum As Integer = 0 To .Rows.Count - 1
-                                With .Rows(rownum)
-                                    'match payment to accept offer - paying multiple accepts to different sellers in the same bitcoin payment currently unsupported
-                                    If InStr(vouts, .Item(1)) Then 'matched output with accept
-                                        matched = True
-                                        matchedtxid = .Item(0)
-                                        seller = .Item(1).ToString
-                                        purchaseamount = .Item(3)
-                                        matchingtx = .Item(2)
-                                        Exit For
-                                    End If
-                                End With
-                            Next
-                        End With
-
-                        If matched = True And seller <> "" Then
-                            'is it unconfirmed?  if so flip the pendingoffer to unconfirmed temporarily
-                            If .Item(6) > 999998 Then
-                                Dim unconfirmedpaymentcount = SQLGetSingleVal("update transactions_processed_temp set blocknum=999999 where txid='" & matchedtxid & "'")
-                            Else
-                                'matched a sell offer - get details
-                                sqlquery = "SELECT txid,saleamount,timelimit,minfee,offeramount,curtype FROM transactions_processed_temp where txid='" & matchingtx & "'"   'unitprice, ,reserved
-                                cmd.CommandText = sqlquery
-                                Dim adptSQLselldetails As New SqlCeDataAdapter(cmd)
-                                Dim dsselldetails As New DataSet()
-                                adptSQLselldetails.Fill(dsselldetails)
-                                If dsselldetails.Tables(0).Rows.Count = 1 Then
-                                    matchingtx = dsselldetails.Tables(0).Rows(0).Item(0)
-                                    matchedsaleamount = dsselldetails.Tables(0).Rows(0).Item(1)
-                                    matchedtimelimit = dsselldetails.Tables(0).Rows(0).Item(2)
-                                    matchedminfee = dsselldetails.Tables(0).Rows(0).Item(3)
-                                    matchedofferamount = dsselldetails.Tables(0).Rows(0).Item(4)
-                                    matchedcurtype = dsselldetails.Tables(0).Rows(0).Item(5)
-                                    Dim paymentpaid As Double = 0
-                                    'loop through all outputs in transaction and total amount sent to reference address
-                                    Dim txn As txn = mlib.gettransaction(bitcoin_con, .Item(0))
-                                    If txn IsNot Nothing Then
-                                        For Each output As Vout In txn.result.vout
-                                            If output.scriptPubKey.type.ToString.ToLower = "pubkeyhash" And output.scriptPubKey.addresses(0) = seller Then
-                                                paymentpaid = paymentpaid + output.value
+                                            'is accept fully paid
+                                            If unitspurchased = purchaseamount Then 'flip pending to accept, otherwise leave pending and adjust purchaseamount on the accept/reserved on sell accordingly
+                                                sqlquery = "update transactions_processed_temp SET type='acceptoffer' where txid='" & matchedtxid & "'"
+                                                cmd.CommandText = sqlquery
+                                                returnval = cmd.ExecuteScalar
+                                            Else
+                                                sqlquery = "update transactions_processed_temp SET purchaseamount=purchaseamount-" & unitspurchased & " where txid='" & matchedtxid & "'"
+                                                cmd.CommandText = sqlquery
+                                                returnval = cmd.ExecuteScalar
+                                                sqlquery = "update exchange_temp SET reserved=reserved-" & unitspurchased & " where txid='" & matchedtxid & "'"
+                                                cmd.CommandText = sqlquery
+                                                returnval = cmd.ExecuteScalar
                                             End If
-                                        Next
-                                    End If
-                                    paymentpaidlong = paymentpaid * 100000000
-                                    matchedunitprice = (matchedofferamount / (matchedsaleamount / 100000000))
-                                    'work out total amount of units covered by payment
-                                    Dim unitspurchased As Decimal
-                                    If paymentpaid = 0 Then
-                                        unitspurchased = 0
-                                    Else
-                                        unitspurchased = (paymentpaidlong / matchedunitprice) * 100000000
-                                    End If
-                                    If unitspurchased > 0 Then
-                                        'are there more than were accepted? if so set as total accepted
-                                        If unitspurchased > purchaseamount Then unitspurchased = purchaseamount
-                                        'catch tiny fraction unit prices (eg 0.0000001)  with tiny saleamounts
-                                        If paymentpaidlong >= matchedofferamount Then unitspurchased = purchaseamount
-                                        'credit mastercoins
-                                        sqlquery = "SELECT ADDRESS FROM balances_temp where ADDRESS='" & buyer & "'"
-                                        cmd.CommandText = sqlquery
-                                        returnval = cmd.ExecuteScalar
-                                        If returnval = .Item(1).ToString Then
-                                            If matchedcurtype = 1 Then sqlquery = "UPDATE balances_temp SET CBALANCE=CBALANCE+" & unitspurchased & " where ADDRESS='" & buyer & "'"
-                                            If matchedcurtype = 2 Then sqlquery = "UPDATE balances_temp SET CBALANCET=CBALANCET+" & unitspurchased & " where ADDRESS='" & buyer & "'"
-                                        Else
-                                            If matchedcurtype = 1 Then sqlquery = "INSERT INTO balances_temp (ADDRESS,CBALANCE,CBALANCET, UBALANCE,UBALANCET) VALUES ('" & buyer & "'," & unitspurchased & ",0,0,0)"
-                                            If matchedcurtype = 2 Then sqlquery = "INSERT INTO balances_temp (ADDRESS,CBALANCE,CBALANCET, UBALANCE,UBALANCET) VALUES ('" & buyer & "',0," & unitspurchased & ",0,0)"
-                                        End If
-                                        cmd.CommandText = sqlquery
-                                        returnval = cmd.ExecuteScalar
 
-                                        'reduce/delete sell 
-                                        'is sell fully paid
-                                        Dim tmpsaleamount, tmpreserved
-                                        sqlquery = "SELECT saleamount FROM exchange_temp where FROMADD='" & seller & "' and curtype=" & matchedcurtype
-                                        cmd.CommandText = sqlquery
-                                        tmpsaleamount = cmd.ExecuteScalar
-                                        sqlquery = "SELECT reserved FROM exchange_temp where FROMADD='" & seller & "' and curtype=" & matchedcurtype
-                                        cmd.CommandText = sqlquery
-                                        tmpreserved = cmd.ExecuteScalar
-                                        If tmpsaleamount = 0 And tmpreserved = unitspurchased Then 'delete sell & flip offer from pending to accept
-                                            sqlquery = "DELETE FROM exchange_temp where fromadd='" & seller & "' and curtype=" & matchedcurtype
-                                            cmd.CommandText = sqlquery
-                                            returnval = cmd.ExecuteScalar
-                                            sqlquery = "update transactions_processed_temp SET type='acceptoffer' where txid='" & matchedtxid & "'"
-                                            cmd.CommandText = sqlquery
-                                            returnval = cmd.ExecuteScalar
-                                        Else
-                                            sqlquery = "UPDATE exchange_temp SET reserved=reserved-" & unitspurchased & " where fromadd='" & seller & "' and curtype=" & matchedcurtype
+                                            'write transaction
+                                            sqlquery = "INSERT INTO transactions_processed_temp (TXID,FROMADD,TOADD,PURCHASEAMOUNT,OFFERAMOUNT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE,MATCHINGTX) VALUES ('" & .Item(0) & "','" & seller & "','" & buyer & "'," & unitspurchased & "," & paymentpaidlong & ",'" & "purchase" & "'," & .Item(5) & "," & .Item(6).ToString & ",1," & matchedcurtype & ",'" & matchedtxid & "')"
                                             cmd.CommandText = sqlquery
                                             returnval = cmd.ExecuteScalar
                                         End If
-
-                                        'is accept fully paid
-                                        If unitspurchased = purchaseamount Then 'flip pending to accept, otherwise leave pending and adjust purchaseamount on the accept/reserved on sell accordingly
-                                            sqlquery = "update transactions_processed_temp SET type='acceptoffer' where txid='" & matchedtxid & "'"
-                                            cmd.CommandText = sqlquery
-                                            returnval = cmd.ExecuteScalar
-                                        Else
-                                            sqlquery = "update transactions_processed_temp SET purchaseamount=purchaseamount-" & unitspurchased & " where txid='" & matchedtxid & "'"
-                                            cmd.CommandText = sqlquery
-                                            returnval = cmd.ExecuteScalar
-                                            sqlquery = "update exchange_temp SET reserved=reserved-" & unitspurchased & " where txid='" & matchedtxid & "'"
-                                            cmd.CommandText = sqlquery
-                                            returnval = cmd.ExecuteScalar
-                                        End If
-
-                                        'write transaction
-                                        sqlquery = "INSERT INTO transactions_processed_temp (TXID,FROMADD,TOADD,PURCHASEAMOUNT,OFFERAMOUNT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE,MATCHINGTX) VALUES ('" & .Item(0) & "','" & seller & "','" & buyer & "'," & unitspurchased & "," & paymentpaidlong & ",'" & "purchase" & "'," & .Item(5) & "," & .Item(6).ToString & ",1," & matchedcurtype & ",'" & matchedtxid & "')"
-                                        cmd.CommandText = sqlquery
-                                        returnval = cmd.ExecuteScalar
                                     End If
                                 End If
                             End If
                         End If
-                    End If
                 End With
                 'update progress (don't go overboard - just every ten txs)
                 If (rowNumber Mod 50) = 0 Then
