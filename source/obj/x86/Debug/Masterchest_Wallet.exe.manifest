@@ -54,26 +54,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Masterchest.dll" size="43520">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Masterchest.dll" size="67584">
       <assemblyIdentity name="Masterchest" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>OVXrjEioNCXilmtRSEMfbIHhcQU=</dsig:DigestValue>
+        <dsig:DigestValue>2AB4Py3iGJqm6/Kp6d2Fi4sabZI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Masterchest_Wallet.exe" size="812032">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Masterchest_Wallet.exe" size="864256">
       <assemblyIdentity name="Masterchest_Wallet" version="0.0.0.3" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>IQqdyQif3f0ekC4sXeqCQCoNNZs=</dsig:DigestValue>
+        <dsig:DigestValue>kG2gcoLNPHLMo5UWjYTdGns2KB8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

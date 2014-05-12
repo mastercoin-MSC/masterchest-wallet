@@ -74,11 +74,12 @@ Module Module1
         Form1.pdebug.Location = New Point(27, 125)
         Form1.psend.Location = New Point(27, 125)
         Form1.paddresses.Location = New Point(27, 125)
-        Form1.pcurrencies.Location = New Point(27, 125)
+        Form1.pbalances.Location = New Point(27, 125)
         Form1.psettings.Location = New Point(27, 125)
         Form1.phistory.Location = New Point(27, 125)
         Form1.pwelcome.Location = New Point(27, 125)
         Form1.pexchange.Location = New Point(27, 125)
+        Form1.pproperties.Location = New Point(27, 125)
         Form1.psetup.Location = New Point(27, 55)
         'suggested by DexX for ,/. fix
         '-------------------------------
@@ -149,6 +150,9 @@ Module Module1
         Dim histmnucopytxid As New ToolStripMenuItem("Copy Transaction ID")
         AddHandler histmnucopytxid.Click, AddressOf histmnucopytxid_click
         histmnu.Items.AddRange(New ToolStripItem() {histmnucopytxid})
+        Dim histmnucopycurid As New ToolStripMenuItem("Copy Currency/Property ID")
+        AddHandler histmnucopycurid.Click, AddressOf histmnucopycurid_click
+        histmnu.Items.AddRange(New ToolStripItem() {histmnucopycurid})
         Form1.dgvhistory.ContextMenuStrip = histmnu
 
 
@@ -180,6 +184,23 @@ Module Module1
 
         End If
     End Sub
+    Public Sub histmnucopycurid_click()
+        If hrow >= 0 And hcol >= 0 Then
+            'Try
+            Dim curtext As String = Form1.dgvhistory.Rows(hrow).Cells(6).Value.ToString
+            Dim curstr As String = ""
+            If curtext = "Mastercoin" Then curstr = "1"
+            If curtext = "Test Mastercoin" Then curstr = "2"
+            Dim pos = InStr(curtext, "#")
+            If pos > 0 Then
+                curstr = curtext.Substring(pos, Len(curtext) - pos)
+            End If
+            Clipboard.SetData(DataFormats.Text, curstr)
+            'Catch e As Exception
+            ' End Try
+
+        End If
+    End Sub
     Public Sub mnucopy_click()
         If mrow >= 0 And mcol >= 0 Then
             Try
@@ -194,42 +215,50 @@ Module Module1
         Form1.pdebug.Visible = False
         Form1.psend.Visible = False
         Form1.paddresses.Visible = False
-        Form1.pcurrencies.Visible = False
+        Form1.pbalances.Visible = False
         Form1.psettings.Visible = False
         Form1.phistory.Visible = False
         Form1.psetup.Visible = False
         Form1.pwelcome.Visible = False
         Form1.pexchange.Visible = False
+        Form1.pproperties.Visible = False
     End Sub
     Public Sub hidelabels()
         Form1.boverview.Visible = False
-        Form1.bcurrencies.Visible = False
+        Form1.bbalances.Visible = False
         Form1.bsend.Visible = False
         Form1.baddresses.Visible = False
         Form1.bhistory.Visible = False
-        Form1.bcontracts.Visible = False
+        Form1.bproperties.Visible = False
         Form1.bdebug.Visible = False
         Form1.bexchange.Visible = False
     End Sub
     Public Sub showlabels()
         Form1.boverview.Visible = True
-        Form1.bcurrencies.Visible = True
+        Form1.bbalances.Visible = True
         Form1.bsend.Visible = True
         Form1.baddresses.Visible = True
         Form1.bhistory.Visible = True
-        Form1.bcontracts.Visible = True
+        Form1.bproperties.Visible = True
         Form1.bdebug.Visible = True
         Form1.bexchange.Visible = True
     End Sub
     Public Sub deselectlabels()
         Form1.boverview.ForeColor = Color.FromArgb(100, 100, 100)
-        Form1.bcurrencies.ForeColor = Color.FromArgb(100, 100, 100)
+        Form1.bbalances.ForeColor = Color.FromArgb(100, 100, 100)
         Form1.bsend.ForeColor = Color.FromArgb(100, 100, 100)
         Form1.baddresses.ForeColor = Color.FromArgb(100, 100, 100)
         Form1.bhistory.ForeColor = Color.FromArgb(100, 100, 100)
-        Form1.bcontracts.ForeColor = Color.FromArgb(65, 65, 65)
+        Form1.bproperties.ForeColor = Color.FromArgb(100, 100, 100)
         Form1.bdebug.ForeColor = Color.FromArgb(100, 100, 100)
         Form1.bexchange.ForeColor = Color.FromArgb(100, 100, 100)
+    End Sub
+    'workaround: focus version label, if input box is left via click on form ##credit dexX7
+    Public Sub tryunfocusinputs()
+        If Form1.txtsendamount.Focused Then
+            'version label
+            Form1.Label79.Focus()
+        End If
     End Sub
 
     '////////////////////
@@ -244,9 +273,9 @@ Module Module1
     End Sub
     Public Sub activatecurrencies()
         deselectlabels()
-        Form1.bcurrencies.ForeColor = Color.FromArgb(209, 209, 209)
+        Form1.bbalances.ForeColor = Color.FromArgb(209, 209, 209)
         hidepanels()
-        Form1.pcurrencies.Visible = True
+        Form1.pbalances.Visible = True
         curscreen = "2"
     End Sub
     Public Sub activatesend()
@@ -270,11 +299,11 @@ Module Module1
         Form1.phistory.Visible = True
         curscreen = "5"
     End Sub
-    Public Sub activatesettings()
+    Public Sub activateproperties()
         deselectlabels()
-        Form1.bcontracts.ForeColor = Color.FromArgb(209, 209, 209)
+        Form1.bproperties.ForeColor = Color.FromArgb(209, 209, 209)
         hidepanels()
-        Form1.psettings.Visible = True
+        Form1.pproperties.Visible = True
         curscreen = "6"
     End Sub
     Public Sub activateexchange()

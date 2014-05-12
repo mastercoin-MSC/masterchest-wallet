@@ -69,6 +69,10 @@ Public Class paybuyfrm
     End Sub
 
     Private Sub bsendpay_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bsendpay.Click
+        If Form1.workthread.IsBusy = True Then
+            MsgBox("The background processing thread is currently modifying the state.  Please send your transaction when processing has finished.")
+            Exit Sub
+        End If
         Form1.txtdebug.AppendText(vbCrLf & "[" & DateTime.Now.ToString("s") & "] DEBUG: Beginning send payment transaction")
         Form1.txtdebug.AppendText(vbCrLf & "===================================================================================")
         txsummary = ""

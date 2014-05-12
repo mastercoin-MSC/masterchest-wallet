@@ -107,6 +107,10 @@ Public Class sellfrm
     End Sub
 
     Private Sub bsell_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bsell.Click
+        If Form1.workthread.IsBusy = True Then
+            MsgBox("The background processing thread is currently modifying the state.  Please send your transaction when processing has finished.")
+            Exit Sub
+        End If
         Dim tmpcur
         If dexcur = "MSC" Then
             tmpcur = 1
@@ -273,7 +277,7 @@ Public Class sellfrm
         End Try
 
 
-    
+
     End Sub
 
     Private Sub bclose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bclose.Click

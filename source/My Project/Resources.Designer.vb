@@ -95,6 +95,13 @@ Namespace My.Resources
             End Get
         End Property
         
+        Friend ReadOnly Property images_6() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("images-6", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
         Friend ReadOnly Property in1() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("in1", resourceCulture)
@@ -140,6 +147,41 @@ Namespace My.Resources
         Friend ReadOnly Property redcross() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("redcross", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property search() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("search", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property search2() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("search2", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property search21() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("search21", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property search22() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("search22", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property search23() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("search23", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

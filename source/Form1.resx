@@ -270,28 +270,6 @@
   <data name="Label46.Text" xml:space="preserve">
     <value>We'll need to configure a connection to your bitcoind/qt server.  Your bitcoind/qt server needs to have transaction indexing enabled to use this software.  Please enter the details below and click 'Test' to test the connection to bitcoind/qt and confirm that the transaction index is enabled.</value>
   </data>
-  <data name="PictureBox5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAADMAAAAsCAIAAABHQxczAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAABp0RVh0U29mdHdhcmUAUGFpbnQuTkVUIHYzLjUuMTFH80I3AAADlUlEQVRYR+3W
-        908TYRgHcH9hKAJl3UuwkriIGAVl+AtBKUOgApZVCjIUipYRpgKlA1pWAyh7FEGrRUCDxBV/8Y/Da9/2
-        eO/p3fWu0YSYJp+Qy/N83/TbcS1nMu3Hp1OwmXTBZtIFm0n33zW7O/kDTPiUL/8GE5ECbIb698GED53M
-        nvgOhmIE0izD8o1+vFTjEZhzopPinwYpkGb4wcQ8XtLggSdplfyySW52ZeSQaZY29hVsASZJAyu/JDdD
-        ffsksCXJX3yi+vcZubZfICBMWrObhkPUs0ujvPJmfoIMA/V8RL0elPsvCAiT1gx1ffDoPgEy2EW6SrcT
-        SDccgpgACc2Se5xUh8Oj03vR4QAxzBXodCA3fO32HsQESGhGPd/xlTP+BcSwe5YjSvfWV9rwAUjyEdss
-        SbdDtb+hIS8Q4EM92wZAgI/YZlSbHUNt9lsDTrAVlj7opLR25LJFyx4R9Q0iqtkF7SZ6uo7l6AP5Qs81
-        HqDWDYxq3QBbTqKaoZZVLLWL47243edALWukO/0ct8X1rm30ZA3LGPB/K/hvlti0hBo9wCp/dA81Lrs0
-        cbivh19gic0rqMmteQWsfPlvhhoWMDBP0W6ghkX0WMgN3SY4xaxSdXawAvw0ozSvMHnjIjkvGzugNK9J
-        qP4ERVyXGPfIg8nNS8yKnPvy0yxBPY/Bed28eOAsVTePKYa4fz8woWYJNbPxXuS8WO90DWvFUrxk3RAJ
-        tXMMcg7wNlNPfI6tssVWzWDkKq7KxquaG+s4Mc/q5P208TaLUU0zLjexPhMxldMizJDI40g9y8xj2SsS
-        d7MK466sYpKR1s66yWWPJkWYIpHH5Zo5mWqKkdmxTm4Z3M2iyqyklGbWaxZV7l3RFywTfMjjiTW26PIJ
-        ErllcDRTmZznleMnHo7LKqxkQK620UMg0sXCKbGa9ZZFlVkiaUygzKIY4Php4Wh2rsTsC2ZKzaQIN5/h
-        GAbOeuZKFpChwWbK4XfhD4yks24gFlFics2LTX6dKzaBs/QEKjEp+rdADDYLKxzldKkO3kQg4FLEMNDC
-        Cw3hRQZw6mrDLD3kBJLsZtrF0PwRRnSpKadzlRVgCy0Y8aEngTwpr3dTpjSHFejDCj0ytKz/GFjNIgr1
-        mW3wl1tYnNIckjcUohgGYpTwTRSgGd+9Vm8LVQyTQ447IABZbQvySmu80ixXWbNapT03Pn+n2b8QbCZd
-        sJl0p7WZ/fgPrhoG3hZLN4oAAAAASUVORK5CYII=
-</value>
-  </data>
   <metadata name="nfi.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>232, 3</value>
   </metadata>
@@ -1959,6 +1937,28 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAA
+</value>
+  </data>
+  <data name="PictureBox5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADMAAAAsCAIAAABHQxczAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vAAADrwBlbxySQAAABp0RVh0U29mdHdhcmUAUGFpbnQuTkVUIHYzLjUuMTFH80I3AAADlUlEQVRYR+3W
+        908TYRgHcH9hKAJl3UuwkriIGAVl+AtBKUOgApZVCjIUipYRpgKlA1pWAyh7FEGrRUCDxBV/8Y/Da9/2
+        eO/p3fWu0YSYJp+Qy/N83/TbcS1nMu3Hp1OwmXTBZtIFm0n33zW7O/kDTPiUL/8GE5ECbIb698GED53M
+        nvgOhmIE0izD8o1+vFTjEZhzopPinwYpkGb4wcQ8XtLggSdplfyySW52ZeSQaZY29hVsASZJAyu/JDdD
+        ffsksCXJX3yi+vcZubZfICBMWrObhkPUs0ujvPJmfoIMA/V8RL0elPsvCAiT1gx1ffDoPgEy2EW6SrcT
+        SDccgpgACc2Se5xUh8Oj03vR4QAxzBXodCA3fO32HsQESGhGPd/xlTP+BcSwe5YjSvfWV9rwAUjyEdss
+        SbdDtb+hIS8Q4EM92wZAgI/YZlSbHUNt9lsDTrAVlj7opLR25LJFyx4R9Q0iqtkF7SZ6uo7l6AP5Qs81
+        HqDWDYxq3QBbTqKaoZZVLLWL47243edALWukO/0ct8X1rm30ZA3LGPB/K/hvlti0hBo9wCp/dA81Lrs0
+        cbivh19gic0rqMmteQWsfPlvhhoWMDBP0W6ghkX0WMgN3SY4xaxSdXawAvw0ozSvMHnjIjkvGzugNK9J
+        qP4ERVyXGPfIg8nNS8yKnPvy0yxBPY/Bed28eOAsVTePKYa4fz8woWYJNbPxXuS8WO90DWvFUrxk3RAJ
+        tXMMcg7wNlNPfI6tssVWzWDkKq7KxquaG+s4Mc/q5P208TaLUU0zLjexPhMxldMizJDI40g9y8xj2SsS
+        d7MK466sYpKR1s66yWWPJkWYIpHH5Zo5mWqKkdmxTm4Z3M2iyqyklGbWaxZV7l3RFywTfMjjiTW26PIJ
+        ErllcDRTmZznleMnHo7LKqxkQK620UMg0sXCKbGa9ZZFlVkiaUygzKIY4Php4Wh2rsTsC2ZKzaQIN5/h
+        GAbOeuZKFpChwWbK4XfhD4yks24gFlFics2LTX6dKzaBs/QEKjEp+rdADDYLKxzldKkO3kQg4FLEMNDC
+        Cw3hRQZw6mrDLD3kBJLsZtrF0PwRRnSpKadzlRVgCy0Y8aEngTwpr3dTpjSHFejDCj0ytKz/GFjNIgr1
+        mW3wl1tYnNIckjcUohgGYpTwTRSgGd+9Vm8LVQyTQ447IABZbQvySmu80ixXWbNapT03Pn+n2b8QbCZd
+        sJl0p7WZ/fgPrhoG3hZLN4oAAAAASUVORK5CYII=
 </value>
   </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
