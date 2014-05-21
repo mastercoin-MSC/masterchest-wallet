@@ -1577,7 +1577,7 @@ Public Class Form1
                                 If curtype < 2147483649 Then curtype = 2147483651
                             End If
                             If speco = 1 Then
-                                cmd.CommandText = "SELECT MAX(CURTYPE) WHERE CURTYPE<2147483648 FROM PROPERTIES_TEMP"
+                                cmd.CommandText = "SELECT MAX(CURTYPE) FROM PROPERTIES_TEMP WHERE CURTYPE<2147483648"
                                 returnval = cmd.ExecuteScalar
                                 curtype = returnval + 1
                             End If
