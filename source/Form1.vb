@@ -1111,7 +1111,7 @@ Public Class Form1
                         End If
                         If .Item(6) < 9999998 Or ismine = True Then
                             'get details
-                            Dim curtype As Integer = .Item(8)
+                            Dim curtype As UInteger = .Item(8)
                             Dim sellaction As Integer = 0
                             Dim sellexists As Integer = 0
                             Dim saleamount As Long = .Item(10)
@@ -1139,7 +1139,7 @@ Public Class Form1
                                 End If
                             End If
                             'drop transaction by invalidating curtype if sell is MSC before live block of 290630
-                            If .Item(6) < 290630 And curtype = 1 Then curtype = -1
+                            If .Item(6) < 290630 And curtype = 1 Then curtype = 0
                             'validate curtype (Meta DEx not yet supported, only MSC/TMSC) and ensure we have a valid action
                             If curtype > 0 And curtype < 3 And sellaction > 0 And sellaction < 4 Then
                                 'sanity check exchange table to ensure not more than one sell for address
@@ -1299,7 +1299,7 @@ Public Class Form1
                     '==================================
                     If .Item(4) = "acceptoffer" Then
                         'get currency type
-                        Dim curtype As Integer = .Item(8)
+                        Dim curtype As UInteger = .Item(8)
                         'validate curid
                         If curtype > 0 And curtype < 3 Then
                             Dim matchedunitprice As Long
