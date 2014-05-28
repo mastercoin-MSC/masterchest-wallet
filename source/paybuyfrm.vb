@@ -7,7 +7,12 @@ Public Class paybuyfrm
     Public buybtcamount As Long
 
     Private Sub paybuyfrm_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-       
+        Timer paybuyfrmcheck = new Timer(15000); 'fifteen sec
+        addhandler paybuyfrmcheck.Tick, addressof paybuyfrmhandler
+    End Sub
+
+    Private Sub buyfrmhandler()
+        paybuyfrm.paybuyfrminit() 'resets the vars displayed to latest values'
     End Sub
 
     Public Sub paybuyfrminit()
@@ -61,6 +66,8 @@ Public Class paybuyfrm
     End Sub
 
     Private Sub bclose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bclose.Click
+        paybuyfrmcheck.Enabled = false
+        paybuyfrmcheck.Close()
         Me.Close()
     End Sub
 
