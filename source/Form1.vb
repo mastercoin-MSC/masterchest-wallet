@@ -663,6 +663,8 @@ Public Class Form1
                 End Try
             Next
             'only here do we write that the block has been processed to database
+            'insert dummy transaction to ensure all triggers are processed per block
+            Dim dbwrite33 As Integer = SQLGetSingleVal("INSERT INTO transactions (TXID,FROMADD,TYPE,BLOCKNUM,BLOCKTIME,VALID,CURTYPE,VERSION) VALUES ('DUMMY','DUMMY','DUMMY'," & blocknum & "," & block.result.time & ",0,0,0)")
             Dim dbwrite3 As Integer = SQLGetSingleVal("INSERT INTO processedblocks VALUES (" & blocknum & "," & block.result.time & ",'" & block.result.hash & "')")
         Next
         workthread.ReportProgress(0, "100#")
@@ -1368,9 +1370,9 @@ Public Class Form1
                                                     sqlquery = "INSERT INTO transactions_processed_temp (TXID,FROMADD,TOADD,PURCHASEAMOUNT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE,MATCHINGTX,EXPIRY) VALUES ('" & .Item(0) & "','" & .Item(1) & "','" & .Item(2) & "'," & purchaseamount & ",'pendingoffer'," & .Item(5) & "," & .Item(6) & ",1," & .Item(8) & ",'" & matchingtx & "'," & expiry & ")"
                                                     cmd.CommandText = sqlquery
                                                     returnval = cmd.ExecuteScalar
-                                                    'add to pendinglist
-                                                    pendinglist.Add(.Item(0))
                                                 End If
+                                                'add to pendinglist
+                                                pendinglist.Add(.Item(0))
                                             Else
                                                 'minfee not sufficient, reject accept
                                                 sqlquery = "INSERT INTO transactions_processed_temp (TXID,FROMADD,TOADD,PURCHASEAMOUNT,TYPE,BLOCKTIME,BLOCKNUM,VALID,CURTYPE,MATCHINGTX) VALUES ('" & .Item(0) & "','" & .Item(1) & "','" & .Item(2) & "'," & .Item(14) & ",'rejectedoffer'," & .Item(5) & "," & .Item(6) & ",0," & .Item(8) & ",'" & matchingtx & "')"
@@ -3186,6 +3188,12 @@ Public Class Form1
             Next
             If sellrefadd <> "" Then
                 buyfrm.buyfrminit()
+                If Len(buyfrm.ltimelimit.Text) < 9 Then 'single digit timelimits will be 8
+                    Dim x = MsgBox("It is recommended that you do not attempt to trade on offers with timelimits lower than 10 blocks using this software.  This is because of the risk of your payment not being confirmed before the time limit expires." & vbCrLf & vbCrLf & "If you still wish to override and proceed anyway, click 'OK', otherwise click 'Cancel'", vbOKCancel + vbDefaultButton2 + MsgBoxStyle.Exclamation)
+                    If x = MsgBoxResult.Cancel Then
+                        Exit Sub
+                    End If
+                End If
                 buyfrm.ShowDialog()
             End If
         Catch ex As Exception

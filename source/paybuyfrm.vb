@@ -51,9 +51,19 @@ Public Class paybuyfrm
         If curtype = 1 Then lcurtype.Text = "Mastercoin"
         lbtc.Text = total.ToString("######0.00######") & " BTC"
         lcur.Text = cur.ToString("######0.00######") & " " & dexcur
-        If timeleft > 1 Then ltimeleft.Text = timeleft.ToString & " blocks"
-        If timeleft = 1 Then ltimeleft.Text = "1 block (HIGH RISK!)"
-        If timeleft < 1 Then ltimeleft.Text = "Expired"
+        If timeleft >= 5 Then
+            ltimeleft.Text = timeleft.ToString & " blocks"
+            ltimeleft.ForeColor = Color.FromArgb(209, 209, 209)
+        End If
+        If timeleft < 5 Then
+            ltimeleft.Text = timeleft.ToString & " blocks (HIGH RISK!)"
+            ltimeleft.ForeColor = Color.Orange
+        End If
+        If timeleft < 1 Then
+            ltimeleft.Text = "Expired"
+            ltimeleft.ForeColor = Color.Red
+            bsendpay.Enabled = False
+        End If
     End Sub
 
     Private Sub Form1_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles RectangleShape1.MouseDown
@@ -69,6 +79,18 @@ Public Class paybuyfrm
     End Sub
 
     Private Sub bsendpay_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bsendpay.Click
+        'reinit form to force re-update of details
+        'warn user from sending payment in high risk scenarios - less than 5 blocks to confirm since we don't do input age for priority here - that will be done for reference
+        'additional safety measure
+        paybuyfrminit()
+        If InStr(ltimeleft.Text, "Expired") Then
+            MsgBox("The accept has expired and you should not send payment.")
+            Exit Sub
+        End If
+        If InStr(ltimeleft.Text, "RISK") Then
+            Dim x = MsgBox("The accept has less than five blocks remaining increasing the risk your payment will not be confirmed before your accept expires." & vbCrLf & vbCrLf & "It is strongly recommended that you do not proceed and instead accept a trade with a longer timelimit for payment." & vbCrLf & vbCrLf & "If you still wish to proceed, click 'OK', otherwise click 'Cancel'", vbOKCancel + vbDefaultButton2 + MsgBoxStyle.Exclamation)
+            If x = MsgBoxResult.Cancel Then Exit Sub
+        End If
         If Form1.workthread.IsBusy = True Then
             MsgBox("The background processing thread is currently modifying the state.  Please send your transaction when processing has finished.")
             Exit Sub
