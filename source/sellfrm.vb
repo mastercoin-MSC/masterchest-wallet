@@ -9,7 +9,7 @@ Public Class sellfrm
     Private Sub bcancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bcancel.Click
         Me.Close()
         lnkminfee.Text = "0.0001 BTC"
-        lnktimelimit.Text = "6 blocks"
+        lnktimelimit.Text = "10 blocks"
         txtsendamount.Text = "0.00"
         txtunit.Text = "0.00"
         ltotalbtc.Text = "0.00"
@@ -43,7 +43,7 @@ Public Class sellfrm
         txtsendamount.Text = "0.00"
         txtunit.Text = "0.00"
         ltotalbtc.Text = "0.00"
-        lnktimelimit.Text = "6 blocks"
+        lnktimelimit.Text = "10 blocks"
         lnkminfee.Text = "0.0001 BTC"
         comselladdress.Items.Clear()
         comselladdress.Text = ""
@@ -180,12 +180,6 @@ Public Class sellfrm
             If lnktimelimit.Text = "20 blocks" Then timelimit = 20
             If lnktimelimit.Text = "15 blocks" Then timelimit = 15
             If lnktimelimit.Text = "10 blocks" Then timelimit = 10
-            If lnktimelimit.Text = "6 blocks" Then timelimit = 6
-            If lnktimelimit.Text = "5 blocks" Then timelimit = 5
-            If lnktimelimit.Text = "4 blocks" Then timelimit = 4
-            If lnktimelimit.Text = "3 blocks" Then timelimit = 3
-            If lnktimelimit.Text = "2 blocks" Then timelimit = 2
-            If lnktimelimit.Text = "1 block" Then timelimit = 1
             'push out to masterchest lib to encode the tx
             Form1.txtdebug.AppendText(vbCrLf & "[" & DateTime.Now.ToString("s") & "] DEBUG: Calling library: mlib.encodeselltx, bitcoin_con, " & fromadd & ", " & curtype.ToString & ", " & amountlong.ToString & ", " & offerlong.ToString & ", " & minfee.ToString & ", " & timelimit.ToString & ", " & timelimit.ToString & ", " & action.ToString)
             Dim rawtx As String = mlib.encodeselltx(bitcoin_con, fromadd, curtype, amountlong, offerlong, minfee, timelimit, action)
@@ -283,7 +277,7 @@ Public Class sellfrm
     Private Sub bclose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bclose.Click
         Me.Close()
         lnkminfee.Text = "0.0001 BTC"
-        lnktimelimit.Text = "6 blocks"
+        lnktimelimit.Text = "10 blocks"
         txtsendamount.Text = "0.00"
         txtunit.Text = "0.00"
         ltotalbtc.Text = "0.00"
@@ -303,7 +297,7 @@ Public Class sellfrm
   
     Private Sub lnktimelimit_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lnktimelimit.LinkClicked
         If lnktimelimit.Text = "250 blocks" Then
-            lnktimelimit.Text = "1 block"
+            lnktimelimit.Text = "10 blocks"
             Exit Sub
         End If
         If lnktimelimit.Text = "200 blocks" Then lnktimelimit.Text = "250 blocks"
@@ -315,12 +309,6 @@ Public Class sellfrm
         If lnktimelimit.Text = "20 blocks" Then lnktimelimit.Text = "25 blocks"
         If lnktimelimit.Text = "15 blocks" Then lnktimelimit.Text = "20 blocks"
         If lnktimelimit.Text = "10 blocks" Then lnktimelimit.Text = "15 blocks"
-        If lnktimelimit.Text = "6 blocks" Then lnktimelimit.Text = "10 blocks"
-        If lnktimelimit.Text = "5 blocks" Then lnktimelimit.Text = "6 blocks"
-        If lnktimelimit.Text = "4 blocks" Then lnktimelimit.Text = "5 blocks"
-        If lnktimelimit.Text = "3 blocks" Then lnktimelimit.Text = "4 blocks"
-        If lnktimelimit.Text = "2 blocks" Then lnktimelimit.Text = "3 blocks"
-        If lnktimelimit.Text = "1 block" Then lnktimelimit.Text = "2 blocks"
     End Sub
 
     Private Sub lnkminfee_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lnkminfee.LinkClicked
