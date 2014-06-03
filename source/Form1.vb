@@ -1203,14 +1203,20 @@ Public Class Form1
 
                                 'ACTION: UPDATE
                                 If sellaction = 2 And .Item(10) > 0 And .Item(11) > 0 And .Item(13) > 0 Then 'sanity check we have all the necessary details
+                                    'calculate update difference
+                                    Dim tmpsaleam As Long = 0
+                                    Dim tmpvalid As Boolean = False
+                                    Dim tmpdiff As Long = saleamount - tmpsaleamount
+                                    Dim tmpunitprice As Long
+                                    Try 'trap exception where unit price would exceed maximums and trigger overflow; drop transaction
+                                        tmpunitprice = (.Item(11) / (saleamount / 100000000))
+                                    Catch
+                                        'drop transaction by flipping sellexists to 0
+                                        sellexists = 0
+                                    End Try
+
                                     'check previous sell to update
                                     If sellexists = 1 Then
-                                        'calculate update difference
-                                        Dim tmpsaleam As Long = 0
-                                        Dim tmpvalid As Boolean = False
-                                        Dim tmpdiff As Long = saleamount - tmpsaleamount
-                                        Dim tmpunitprice As Long
-                                        tmpunitprice = (.Item(11) / (saleamount / 100000000))
                                         If tmpdiff > 0 Then 'new sell is higher than existing sell
                                             'get seller balance
                                             cmd.CommandText = "SELECT CBALANCE FROM balances_temp2 where CURTYPE=" & curtype & " AND ADDRESS='" & .Item(1).ToString & "'"
@@ -1255,12 +1261,17 @@ Public Class Form1
                                 If sellaction = 1 And .Item(10) > 0 And .Item(11) > 0 And .Item(13) > 0 Then 'sanity check we have all the necessary details
                                     'check there is not already an existing sell
                                     Dim tmpofferamount As Long
+                                    Dim tmpunitprice As Long
+                                    Try 'trap exception where unit price would exceed maximums and trigger overflow; drop transaction
+                                        tmpunitprice = (.Item(11) / (saleamount / 100000000))
+                                    Catch
+                                        'drop transaction by flipping sellexists to 1
+                                        sellexists = 1
+                                    End Try
                                     If sellexists = 0 Then
                                         'there is no existing sell, we can go ahead - first check sellers balance
                                         cmd.CommandText = "SELECT CBALANCE FROM balances_temp2 where CURTYPE=" & curtype & " AND ADDRESS='" & .Item(1).ToString & "'"
                                         returnval = cmd.ExecuteScalar
-                                        Dim tmpunitprice As Long
-                                        tmpunitprice = (.Item(11) / (saleamount / 100000000))
                                         'check if transaction amount is over senders balance, if not sell amount = senders balance
                                         tmpofferamount = .Item(11)
                                         If returnval > 0 And returnval < saleamount Then
